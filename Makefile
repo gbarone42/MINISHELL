@@ -21,7 +21,7 @@ SRCS =	${SRC_DIR}/main/minishell.c	\
        # Add other source files as necessary
 
 # Object files
-OBJS = ${patsubst ${SRC_DIR}/%.c,${OBJ_DIR}/%.o,${SRCS}}
+OBJS = $(patsubst ${SRC_DIR}/%.c, ${OBJ_DIR}/%.o, ${SRCS})
 
 # Compiler and flags
 CC = gcc
