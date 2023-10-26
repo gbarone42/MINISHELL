@@ -4,18 +4,20 @@ NAME = minishell
 # Directories
 SRC_DIR = src
 OBJ_DIR = obj
+INCLUDE_DIR = include
 
 # Source files
 SRCS = ${SRC_DIR}/main/minishell.c
-       # Add any other source files after this line
+       # Add other source files as necessary
 
 # Object files
-OBJS = $(patsubst ${SRC_DIR}/%.c, ${OBJ_DIR}/%.o, ${SRCS})
+OBJS = ${patsubst ${SRC_DIR}/%.c,${OBJ_DIR}/%.o,${SRCS}}
 
 # Compiler and flags
 CC = gcc
 RM = rm -rf
-FLAGS = -g -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror -I${INCLUDE_DIR}
+MAKEFLAGS += --silent
 LIBFLAGS = -lreadline
 
 # Color codes for output messages
