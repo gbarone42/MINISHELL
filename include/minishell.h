@@ -23,6 +23,8 @@
 # include <curses.h>      // for tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
 # include <sys/ioctl.h>   // for ioctl
 
+# define TRUE 1
+# define FALSE 0
 
 # define CLR_RMV "\033[0m"
 # define RED "\033[1;31m"
@@ -34,5 +36,8 @@
 
 
 int	main(int argc, char **argv);
+static void	ft_norm_signal(void);
+void	ft_sig_init(int sign);
+
 
 #endif

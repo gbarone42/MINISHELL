@@ -7,7 +7,8 @@ OBJ_DIR = obj
 INCLUDE_DIR = include
 
 # Source files
-SRCS = ${SRC_DIR}/main/minishell.c
+SRCS =	${SRC_DIR}/main/minishell.c	\
+		#	${SRC_DIR}/signal/signal.c
        # Add other source files as necessary
 
 # Object files
