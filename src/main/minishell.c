@@ -3,13 +3,12 @@
 void	ft_sig_init(int sign)
 {
 	(void)sign;
-	int	g_status = 1;
+	int	status = 130;
 
 	printf("ft_sig_init ");
 
-	if(g_status == 130)
+	if(status == 130)
 	{
-		g_status = 130;
 		write(STDOUT_FILENO, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
@@ -17,7 +16,7 @@ void	ft_sig_init(int sign)
 	}
 }
  
-void	ft_norm_signal(void)
+static	void	ft_norm_signal(void)
 {
 	printf("ft_norm_signal ");
 
@@ -53,14 +52,20 @@ int	main(int ac, char **av, char **env)
 
 	shell = (t_shell *)ft_calloc(1, sizeof(t_shell));
 	str = "okok";
-
 	(void)ac;
 	(void)av;
-
-	testprintf();
 	shell->env = ft_get_env(env);
+	testprintf();
+
+	
 	ft_norm_signal();
 	printf("%sWelcome %s!%s\n", GREEN, getenv("USER"), CLR_RMV);
+	
+	while(TRUE)  // Changed from FALSE to TRUE to keep program running
+    {
+        printf("%s\n", str);
+        add_history(str);
+    }
 	while(FALSE)
 	{
 		printf("%s\n", str);

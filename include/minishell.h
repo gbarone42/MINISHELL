@@ -43,7 +43,6 @@ typedef struct s_shell
 
 
 int main(int argc, char **argv, char **env);
-void	ft_norm_signal(void);
 void	ft_sig_init(int sign);
 char	**ft_get_env(char **env);
 
