@@ -34,10 +34,26 @@
 # define PURPLE "\033[1;35m"
 # define CYAN "\033[1;36m"
 
+typedef struct s_shell
+{
 
-int	main(int argc, char **argv);
-static void	ft_norm_signal(void);
+	char	**env;
+}	t_shell;
+
+
+
+int main(int argc, char **argv, char **env);
+void	ft_norm_signal(void);
 void	ft_sig_init(int sign);
+char	**ft_get_env(char **env);
 
+void testprintf(void);
+
+
+
+char	*ft_strdup(const char *s);
+size_t	ft_strlen(const char *str);
+void	*ft_calloc(size_t count, size_t size);
+void	ft_bzero(void *s, size_t n);
 
 #endif

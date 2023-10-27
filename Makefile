@@ -8,6 +8,8 @@ INCLUDE_DIR = include
 
 # Source files
 SRCS =	${SRC_DIR}/main/minishell.c	\
+		${SRC_DIR}/utils/utils1.c	\
+		${SRC_DIR}/test/test.c	\
 		#	${SRC_DIR}/signal/signal.c
        # Add other source files as necessary
 
