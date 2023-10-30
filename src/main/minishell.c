@@ -2,11 +2,10 @@
 
 int	g_exit = 0;
 
-
 void	signal_handler(int sig)
 {
 	(void)sig;
-	write(STDOUT_FILENO, "\n \n", 3); //for the moment is double
+	write(STDOUT_FILENO, "\n \n", 3); //for the moment is double \newline
 	g_exit = 130;
 	rl_on_new_line();
 	rl_replace_line("", 0);
@@ -19,35 +18,27 @@ static void	ft_norm_signal(void)
 	signal(SIGINT, signal_handler);
 }
 
-char	**ft_get_env(char **env)
-{
-	char	**my_env;
-	int		i;
-
-	i = 0;
-	while (env != NULL && env[i])
-		i++;
-	my_env = (char **)malloc(sizeof(char *) * (i + 1));
-	i = 0;
-	while (env[i])
-	{
-		my_env[i] = ft_strdup(env[i]);
-		i++;
-	}
-	my_env[i] = NULL;
-	return (my_env);
-}
 
 void ft_minishell_simulator(char *str)
 {
+	int	print_count = 0;
+
     while (g_exit == 0)
     {
-        printf("%s\n", str);
-        add_history(str);
+        if (print_count <= 10)
+        {
+            printf("%s\n", str);
+            add_history(str);
+            print_count++;
+            sleep(3); // Adding a sleep of 1 second between iterations.
+        }
+        else
+        {
+            sleep(3); // This will ensure that the loop doesn't run too fast after the message is printed 3 times.
+        }
     }
-
     if (g_exit == 130) {
-        printf("Program interrupted by CTRL + C\n");
+        printf("CTRL + C\n");
     }
 }
 
@@ -63,40 +54,9 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	
-	//ft_innit_shell(&shell,env);
-	//shell->exit_status;
-	//ft_norm_signal();
-	//testprintf();
-
-	
-	shell->env = ft_get_env(env);
+	ft_innit_shell(shell, env);
 	printf("%sWelcome %s!%s\n", GREEN, getenv("USER"), CLR_RMV);
 	ft_norm_signal();
 	ft_minishell_simulator(str);
     return (0);
-}
-
-//what is an enviroment variable?
-/*
-static void	ft_norm_signal(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, ft_sig_init);
-}
-
-void	ft_sig_init(int sign)
-{
-	(void)sign;
-	g_status = 130;
-	write(STDOUT_FILENO, "\n", 1);
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
-
-void	ft_sig_term(t_shell *shell)
-{
-	ft_clear_history(shell);
-	write(STDOUT_FILENO, "exit\n", 5);
-	ft_free_exit(shell);
-}*/
+}`

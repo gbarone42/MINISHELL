@@ -3,6 +3,7 @@
 
 void	ft_bzero(void *s, size_t n)
 {
+	printf("ft_bzero working properly \n");
 	size_t			i;
 	unsigned char	*r;
 

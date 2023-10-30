@@ -36,23 +36,45 @@
 
 typedef struct s_shell
 {
-	int		exit_status;
 	char	**env;
+	int		in;
+	int		out;
+	//int		pipe[2];
+	int		status;
+	int 	exit;
+	char	**paths;
+	char	**export;
+	char	*prompt;
+
 }	t_shell;
 
+extern int	g_exit;
 
-
+////main
 int main(int argc, char **argv, char **env);
+void	ft_innit_shell(t_shell *shell, char **env);
+void	shell_env(char **env, t_shell *shell);
+
+////signal
 void signal_handler(int sig);
 char	**ft_get_env(char **env);
 
+
+////tests
 void testprintf(void);
 
 
+void ft_minishell_simulator(char *str);
 
+
+////utils1
 char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *str);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *s, size_t n);
+
+////utils2
+char	*ft_strjoin(char const *s1, char const *s2);
+
 
 #endif
