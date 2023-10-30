@@ -3,7 +3,7 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	printf("ft_bzero working properly \n");
+	//printf("ft_bzero working properly \n");
 	size_t			i;
 	unsigned char	*r;
 
@@ -23,7 +23,7 @@ void	*ft_calloc(size_t count, size_t size)
 	void	*p;
 	size_t	y;
 
-	printf("calloc working properly \n");
+	//printf("calloc working properly \n");
 	y = size * count;
 	if (count != 0 && size != y / count)
 		return (NULL);

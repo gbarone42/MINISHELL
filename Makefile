@@ -11,7 +11,9 @@ SRCS =	${SRC_DIR}/main/minishell.c	\
 		${SRC_DIR}/utils/utils1.c	\
 		${SRC_DIR}/utils/utils2.c	\
 		${SRC_DIR}/test/test.c	\
+		${SRC_DIR}/simulation/simulation.c	\
 		${SRC_DIR}/init/init.c	\
+		${SRC_DIR}/signal/signal.c	\
 		#	${SRC_DIR}/signal/signal.c
        # Add other source files as necessary
 

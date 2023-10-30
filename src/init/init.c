@@ -22,11 +22,13 @@ char	**ft_get_env(char **env)
 void	shell_env(char **env, t_shell *shell)
 {	
 	int		i;
+	char	**path_env;
 
 	i = 0;
 	while (env[i])
 		i++;
 	shell->env = (char **)ft_calloc(i + 1, sizeof(char *));
+	path_env = ft_split(getenv("PATH"), ':');
 
 }
 
@@ -47,7 +49,7 @@ void	ft_innit_shell(t_shell *shell, char **env)
 	shell->paths = NULL;
 	shell->export = NULL;
 	printf("Creating prompt with user: %s\n", user);
-	shell->prompt = ft_strjoin(user, "@AshellKetchum" CLR_RMV " > ");
+	shell->prompt = ft_strjoin(user, "@ASHellKETCHUM" CLR_RMV " > ");
 	printf("Generated prompt: %s\n", shell->prompt);
 
     free(user);  
