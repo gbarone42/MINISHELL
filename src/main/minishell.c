@@ -1,27 +1,22 @@
 #include "../../include/minishell.h"
 
-void	ft_sig_init(int sign)
+int	g_exit = 0;
+
+
+void	signal_handler(int sig)
 {
-	(void)sign;
-	int	status = 130;
-
-	printf("ft_sig_init ");
-
-	if(status == 130)
-	{
-		write(STDOUT_FILENO, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
+	(void)sig;
+	write(STDOUT_FILENO, "\n \n", 3); //for the moment is double
+	g_exit = 130;
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 }
- 
-static	void	ft_norm_signal(void)
-{
-	printf("ft_norm_signal ");
 
+static void	ft_norm_signal(void)
+{
 	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, ft_sig_init);
+	signal(SIGINT, signal_handler);
 }
 
 char	**ft_get_env(char **env)
@@ -43,6 +38,19 @@ char	**ft_get_env(char **env)
 	return (my_env);
 }
 
+void ft_minishell_simulator(char *str)
+{
+    while (g_exit == 0)
+    {
+        printf("%s\n", str);
+        add_history(str);
+    }
+
+    if (g_exit == 130) {
+        printf("Program interrupted by CTRL + C\n");
+    }
+}
+
 int	main(int ac, char **av, char **env)
 {
 
@@ -54,23 +62,17 @@ int	main(int ac, char **av, char **env)
 	str = "okok";
 	(void)ac;
 	(void)av;
-	shell->env = ft_get_env(env);
-	testprintf();
+	
+	//ft_innit_shell(&shell,env);
+	//shell->exit_status;
+	//ft_norm_signal();
+	//testprintf();
 
 	
-	ft_norm_signal();
+	shell->env = ft_get_env(env);
 	printf("%sWelcome %s!%s\n", GREEN, getenv("USER"), CLR_RMV);
-	
-	while(TRUE)  // Changed from FALSE to TRUE to keep program running
-    {
-        printf("%s\n", str);
-        add_history(str);
-    }
-	while(FALSE)
-	{
-		printf("%s\n", str);
-		add_history(str);
-	}
+	ft_norm_signal();
+	ft_minishell_simulator(str);
     return (0);
 }
 

@@ -36,14 +36,14 @@
 
 typedef struct s_shell
 {
-
+	int		exit_status;
 	char	**env;
 }	t_shell;
 
 
 
 int main(int argc, char **argv, char **env);
-void	ft_sig_init(int sign);
+void signal_handler(int sig);
 char	**ft_get_env(char **env);
 
 void testprintf(void);
