@@ -36,44 +36,68 @@
 
 typedef struct s_shell
 {
-	char	**env;
+	char	*prompt;
 	int		in;
 	int		out;
+	char	**env;
 	//int		pipe[2];
-	int		status;
-	int 	exit;
-	char	**paths;
-	char	**export;
-	char	*prompt;
+	//int		status;
+	//int 	exit;
+	//char	**paths;
+	//char	**export;
 
 }	t_shell;
 
 extern int	g_exit;
 
-////main
-int main(int argc, char **argv, char **env);
+
+
+//init///////////////////////////////////////////////init
+//
 void	ft_innit_shell(t_shell *shell, char **env);
 void	shell_env(char **env, t_shell *shell);
-
-////signal
-void signal_handler(int sig);
 char	**ft_get_env(char **env);
 
 
-////tests
-void testprintf(void);
+
+//minishell//////////////////////////////////////////minishell
+//
+int main(int argc, char **argv, char **env);
 
 
+
+//signal/////////////////////////////////////////////signal
+//
+void signal_handler(int sig);
+
+
+
+//simulation/////////////////////////////////////////simulation
+//
 void ft_minishell_simulator(char *str);
 
 
-////utils1
+
+//tests////////////////////////////////////////////tests
+//
+void testprintf(void);
+//void	copy_env(char **src, char ***dst);
+//void	copy_path_and_add_slash(char **src, char ***dst);
+//void	shell_env(char **env, t_shell *shell)
+
+
+
+//utils1/////////////////////////////////////////////utils1
+//
 char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *str);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *s, size_t n);
 
-////utils2
+
+
+//utils2/////////////////////////////////////////////utils2
+//
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c);
 size_t	ft_strlcpy(char *dst, char *src, size_t size);

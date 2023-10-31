@@ -21,9 +21,8 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	printf("%sWelcome %s!%s\n", GREEN, getenv("USER"), CLR_RMV);
-	ft_innit_shell(shell, env);
-
-	ft_norm_signal();
+	ft_innit_shell(shell, env);//init
+	ft_norm_signal();//signals
 	ft_minishell_simulator(str);
     return (0);
-}
+}         

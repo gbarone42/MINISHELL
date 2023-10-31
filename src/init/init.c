@@ -37,21 +37,31 @@ void	ft_innit_shell(t_shell *shell, char **env)
     char    *user;
 
     user = ft_strjoin(PURPLE, getenv("USER"));
+	printf("user: %s\n", user);
     printf("the pc user is %s%s\n", user, CLR_RMV);
-	shell->env = ft_get_env(env);
+	
+	shell->env = ft_get_env(env);//////////getenv?
     shell->in = dup(STDIN_FILENO);
 	shell->out = dup(STDOUT_FILENO);
+	shell->prompt = ft_strjoin(user, "@ASHellKETCHUM" CLR_RMV " > ");
+	printf("prompt: %s\n", shell->prompt);
+	
 	//shell->pipe[0] = -2;
 	//shell->pipe[1] = -2;
-	shell->status = 0;
-	shell->exit = 0;
-	shell->env = NULL;
-	shell->paths = NULL;
-	shell->export = NULL;
-	printf("Creating prompt with user: %s\n", user);
-	shell->prompt = ft_strjoin(user, "@ASHellKETCHUM" CLR_RMV " > ");
-	printf("Generated prompt: %s\n", shell->prompt);
-
-    free(user);  
-
+	//shell->status = 0;
+	//shell->exit = 0;
+	//shell->env = NULL;
+	//shell->paths = NULL;
+	//shell->export = NULL;
+	//shell_env(env, shell);
+    
+	free(user);  
 }
+
+
+
+
+
+
+
+
