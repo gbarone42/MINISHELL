@@ -35,6 +35,7 @@
 # define BLUE "\033[1;34m"
 # define PURPLE "\033[1;35m"
 # define CYAN "\033[1;36m"
+# define GOLD "\033[1;94m"
 
 typedef struct s_shell
 {
@@ -76,11 +77,22 @@ void signal_handler(int sig);
 
 
 
+//exit/////////////////////////////////////////////exit
+//
+void	shell_exit(t_shell *shell);
+
+
+
+//valid////////////////////////////////////////////valid
+//
+int	ft_isvalid(char *s);
+
+
+
 //simulation/////////////////////////////////////////simulation
 //
 void ft_minishell_simulator(t_shell *shell);
-void	shell_exit(t_shell *shell); //will move this to other folder
-int	ft_isvalid(char *s);
+
 
 //tests////////////////////////////////////////////tests
 //
