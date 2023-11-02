@@ -23,6 +23,8 @@
 # include <curses.h>      // for tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
 # include <sys/ioctl.h>   // for ioctl
 
+# define INPUT_SIZE 4095
+
 # define TRUE 1
 # define FALSE 0
 
@@ -42,10 +44,11 @@ typedef struct s_shell
 	char	**env;
 	char	*input;
 	char	**paths;
+	char	**export;
 	//int		pipe[2];
 	//int		status;
 	//int 	exit;
-	//char	**export;
+	
 
 }	t_shell;
 
@@ -76,8 +79,8 @@ void signal_handler(int sig);
 //simulation/////////////////////////////////////////simulation
 //
 void ft_minishell_simulator(t_shell *shell);
-
-
+void	shell_exit(t_shell *shell); //will move this to other folder
+int	ft_isvalid(char *s);
 
 //tests////////////////////////////////////////////tests
 //
