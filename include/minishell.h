@@ -41,10 +41,10 @@ typedef struct s_shell
 	int		out;
 	char	**env;
 	char	*input;
+	char	**paths;
 	//int		pipe[2];
 	//int		status;
 	//int 	exit;
-	//char	**paths;
 	//char	**export;
 
 }	t_shell;
@@ -72,6 +72,7 @@ int main(int argc, char **argv, char **env);
 void signal_handler(int sig);
 
 
+
 //simulation/////////////////////////////////////////simulation
 //
 void ft_minishell_simulator(t_shell *shell);
@@ -92,6 +93,7 @@ void testprintf(void);
 char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *str);
 void	*ft_calloc(size_t count, size_t size);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	ft_bzero(void *s, size_t n);
 
 

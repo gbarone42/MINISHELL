@@ -42,13 +42,13 @@ void	ft_innit_shell(t_shell *shell, char **env)
 	shell->out = dup(STDOUT_FILENO);
 	shell->prompt = ft_strjoin(user, "@ASHellKETCHUM" CLR_RMV " > ");
 	printf("prompt: %s\n", shell->prompt);
-	
+	shell->paths = NULL;
+
 	//shell->pipe[0] = -2;
 	//shell->pipe[1] = -2;
 	//shell->status = 0;
 	//shell->exit = 0;
 	//shell->env = NULL;
-	//shell->paths = NULL;
 	//shell->export = NULL;
 	//shell_env(env, shell);
     
