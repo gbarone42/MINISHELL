@@ -40,6 +40,7 @@ typedef struct s_shell
 	int		in;
 	int		out;
 	char	**env;
+	char	*input;
 	//int		pipe[2];
 	//int		status;
 	//int 	exit;
@@ -71,10 +72,9 @@ int main(int argc, char **argv, char **env);
 void signal_handler(int sig);
 
 
-
 //simulation/////////////////////////////////////////simulation
 //
-void ft_minishell_simulator(char *str);
+void ft_minishell_simulator(t_shell *shell);
 
 
 

@@ -66,4 +66,9 @@ fclean: clean
 # Clean and rebuild
 re: fclean all
 
-.PHONY: all clean fclean re
+# Custom command 'makex'
+x: fclean all
+	@echo "${GREEN}Running ${CYAN}${NAME} ${CLR_RMV}..."
+	@./$(NAME)
+
+.PHONY: all clean fclean re x
