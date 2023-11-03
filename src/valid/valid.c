@@ -9,7 +9,7 @@ int	ft_isvalid(char *s)
 		return (0);
 	while (s[i])
 	{
-		if (s[i] < 32 && s[i] == 127) //should it be '||' or '&&'
+		if (s[i] < 32 && s[i] == 127) //should it be '||' or '&&' //This function's logic needs clarification.
 			return (1);
 		i++;
 	}

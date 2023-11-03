@@ -2,6 +2,10 @@
 
 int	g_exit = 0;
 
+// The code has several hard-coded values (like ANSI color codes, and prompts)
+// and magic numbers (like 130 for exit status), which would be better defined
+// as constants or configurable through the environment or arguments.
+
 int	main(int ac, char **av, char **env)
 {
 
@@ -39,7 +43,7 @@ int	main(int ac, char **av, char **env)
 
 	// ft_destroy_shell(shell);
 
-    return (0); //return(EXIT_SUCCESS);
+    return (EXIT_SUCCESS); //return(0a);
 }         
 
 

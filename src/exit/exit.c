@@ -30,3 +30,8 @@ void	shell_exit(t_shell *shell)
 	}
 	exit(g_exit);
 }
+
+// The use of exit(g_exit); in shell_exit means that the main function’s return 0;
+// is never reached. Depending on how you want to handle exit codes, this might be an issue.
+
+// freeing components of shell. This should be done in all exit paths to prevent memory leaks.

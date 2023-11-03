@@ -62,6 +62,15 @@ char	*ft_strdup(const char *s)
 	return (y);
 }
 
+
+// There is no check for the return value of malloc, ft_strdup, 
+// readline, or other system/library calls that can fail.
+// If any of these calls fail, the program should handle 
+// the error appropriately.
+
+
+
+
 // char *ft_strdup(char *s, int should_free)
 // {
 //     char    *y;
