@@ -60,7 +60,6 @@ extern int	g_exit;
 //init///////////////////////////////////////////////init
 //
 void	ft_innit_shell(t_shell *shell, char **env);
-void	shell_env(char **env, t_shell *shell);
 char	**ft_get_env(char **env);
 
 
@@ -97,6 +96,10 @@ void ft_minishell_simulator(t_shell *shell);
 //tests////////////////////////////////////////////tests
 //
 void testprintf(void);
+void testprintf1(void);
+void testprintf2(void);
+void testprintf3(void);
+void testprintf4(void);
 //void	copy_env(char **src, char ***dst);
 //void	copy_path_and_add_slash(char **src, char ***dst);
 //void	shell_env(char **env, t_shell *shell)
