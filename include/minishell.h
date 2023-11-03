@@ -95,9 +95,6 @@ void testprintf1(void);
 void testprintf2(void);
 void testprintf3(void);
 void testprintf4(void);
-//void	copy_env(char **src, char ***dst);
-//void	copy_path_and_add_slash(char **src, char ***dst);
-//void	shell_env(char **env, t_shell *shell)
 
 
 
