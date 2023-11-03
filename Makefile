@@ -17,7 +17,6 @@ SRCS =	${SRC_DIR}/main/minishell.c	\
 		${SRC_DIR}/valid/valid.c	\
 		${SRC_DIR}/exit/exit.c	\
 		${SRC_DIR}/parser/parsing.c	\
-		#	${SRC_DIR}/signal/signal.c
        # Add other source files as necessary
 
 # Object files
@@ -38,7 +37,6 @@ YELLOW = \033[1;33m
 BLUE = \033[1;34m
 CYAN = \033[1;36m
 GOLD = \033[1;33m
-LAVENDER = \033[1;94m
 
 # Rule to compile individual source files
 ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c
@@ -76,4 +74,4 @@ x: fclean all
 	@echo "${GREEN}Running ${CYAN}${NAME} ${CLR_RMV}..."
 	@./$(NAME)
 
-.PHONY: all clean fclean re x
+.PHONY: all objs clean fclean re x

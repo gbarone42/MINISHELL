@@ -5,9 +5,7 @@
 # include <stdbool.h>
 # include <readline/history.h>
 # include <readline/readline.h>
-# include <signal.h>
 # include <sys/time.h>
-# include <sys/wait.h>
 # include <stdio.h>       // for printf
 # include <stdlib.h>      // for malloc, free
 # include <unistd.h>      // for write, access, open, read, close, fork, etc.
