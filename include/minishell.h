@@ -56,6 +56,12 @@ typedef struct s_shell
 extern int	g_exit;
 
 
+//exit/////////////////////////////////////////////exit
+//
+void	shell_exit(t_shell *shell);
+
+
+
 
 //init///////////////////////////////////////////////init
 //
@@ -76,24 +82,13 @@ void signal_handler(int sig);
 
 
 
-//exit/////////////////////////////////////////////exit
-//
-void	shell_exit(t_shell *shell);
-
-
-
-//valid////////////////////////////////////////////valid
-//
-int	ft_isvalid(char *s);
-
-
 
 //simulation/////////////////////////////////////////simulation
 //
 void ft_minishell_simulator(t_shell *shell);
 
 
-//tests////////////////////////////////////////////tests
+//test////////////////////////////////////////////tests
 //
 void testprintf(void);
 void testprintf1(void);
@@ -121,6 +116,12 @@ void	ft_bzero(void *s, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c);
 size_t	ft_strlcpy(char *dst, char *src, size_t size);
+
+//valid////////////////////////////////////////////valid
+//
+int	ft_isvalid(char *s);
+
+
 
 
 #endif
