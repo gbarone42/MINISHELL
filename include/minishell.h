@@ -77,6 +77,7 @@ extern int	g_exit;
 //exit/////////////////////////////////////////////exit
 //
 void	shell_exit(t_shell *shell);
+void	freeing_my_shell(t_shell **my_shell);
 
 
 

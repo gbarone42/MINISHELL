@@ -42,8 +42,9 @@ int	main(int ac, char **av, char **env)
     // }
 
 	// ft_destroy_shell(shell);
-
-    return (EXIT_SUCCESS); //return(0a);
+	freeing_my_shell(&my_shell);
+	
+	return (EXIT_SUCCESS); //return(0a);
 }         
 
 
