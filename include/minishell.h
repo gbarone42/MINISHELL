@@ -53,6 +53,26 @@ typedef struct s_shell
 
 }	t_shell;
 
+
+typedef struct s_parser
+{
+	// int				id;
+	// char			**cmds;
+
+	// int				in;
+	// int				out;
+
+	// int				numred;
+	// int				*redirs;
+	// char			**redir_name;
+
+	// bool			exec;
+
+	// struct s_parser	*next;
+	// struct s_parser	*prev;
+}					t_pars;
+
+
 extern int	g_exit;
 
 
@@ -76,7 +96,10 @@ int main(int argc, char **argv, char **env);
 
 
 
+
 //parsing///////////////////////////////////////////parsing
+//
+void	shell_parser(t_shell *shell, t_pars **command);
 
 
 
@@ -91,6 +114,8 @@ void	ft_norm_signal(void);
 //simulation/////////////////////////////////////////simulation
 //
 void ft_minishell_simulator(t_shell *shell);
+
+
 
 
 //test////////////////////////////////////////////tests

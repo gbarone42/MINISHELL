@@ -9,6 +9,8 @@
 
 void ft_minishell_simulator(t_shell *shell)
 {
+    t_pars  *command;
+
     while (1)
     {
  
@@ -31,7 +33,7 @@ void ft_minishell_simulator(t_shell *shell)
         {
 				printf("VABENEEELOSTESSOOOOOOOOOOOOOOOO \n");
 			    add_history(shell->input);
-			    // shell_parser(shell, &command);
+			    shell_parser(shell, &command);
 			    // if (shell->exit == 0)
 				// shell_executor(&command, shell);
 	    }

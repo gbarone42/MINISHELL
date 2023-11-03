@@ -16,6 +16,7 @@ SRCS =	${SRC_DIR}/main/minishell.c	\
 		${SRC_DIR}/signal/signal.c	\
 		${SRC_DIR}/valid/valid.c	\
 		${SRC_DIR}/exit/exit.c	\
+		${SRC_DIR}/parser/parsing.c	\
 		#	${SRC_DIR}/signal/signal.c
        # Add other source files as necessary
 
