@@ -79,6 +79,7 @@ int main(int argc, char **argv, char **env);
 //signal/////////////////////////////////////////////signal
 //
 void signal_handler(int sig);
+void	ft_norm_signal(void);
 
 
 

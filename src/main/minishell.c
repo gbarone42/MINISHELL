@@ -2,19 +2,20 @@
 
 int	g_exit = 0;
 
-static void	ft_norm_signal(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, signal_handler);
-}
-
-
 int	main(int ac, char **av, char **env)
 {
 
 	//char	*str;
-	t_shell	shell;
+	t_shell	*my_shell;
 
+
+	my_shell = malloc(sizeof(t_shell));
+
+	if(my_shell == NULL)
+	{
+		printf("Error: Memory allocation for shell failed.\n");
+		return(EXIT_FAILURE);
+	}
 
 	//shell = (t_shell *)ft_calloc(1, sizeof(t_shell));
 
@@ -23,12 +24,18 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	printf("%sWelcome %s!%s\n", GREEN, getenv("USER"), CLR_RMV);
-	ft_innit_shell(&shell, env);//init
+	ft_innit_shell(my_shell, env);//init
 	ft_norm_signal();//signals
 	
 	//str = readline(str);
 	
-	ft_minishell_simulator(&shell);
+	ft_minishell_simulator(my_shell);
+
+
+	    // In case ft_minishell_simulator returns without exiting, clean up.
+    // if (my_shell != NULL) {
+    //     shell_exit(&my_shell);
+    // }
 
 	// ft_destroy_shell(shell);
 

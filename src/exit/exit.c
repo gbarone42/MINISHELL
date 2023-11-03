@@ -4,6 +4,9 @@ void	shell_exit(t_shell *shell)
 {
 	int	i;
 
+
+	testprintf1();
+
 	rl_clear_history();
 	free(shell->input);
 	free(shell->prompt);

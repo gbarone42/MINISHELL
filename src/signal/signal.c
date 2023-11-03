@@ -1,6 +1,13 @@
 #include "../../include/minishell.h"
 
 
+
+void	ft_norm_signal(void)
+{
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, signal_handler);
+}
+
 void	signal_handler(int sig)
 {
 	(void)sig;
