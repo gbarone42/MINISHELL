@@ -62,6 +62,31 @@ char	*ft_strdup(const char *s)
 	return (y);
 }
 
+// char *ft_strdup(char *s, int should_free)
+// {
+//     char    *y;
+//     size_t  f;
+
+//     f = 0;
+//     y = malloc(ft_strlen(s) + 1);
+//     if (!y)
+//         return (NULL);
+//     while (s[f] != '\0')
+//     {
+//         y[f] = s[f];
+//         f++;
+//     }
+//     y[f] = '\0';
+
+//     if (should_free)
+//     {
+//         free(s);
+//     }
+
+//     return (y);
+// }
+
+
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
