@@ -26,6 +26,29 @@ void testprintf4(void)
 {
     printf("\n🔕     This is a test_message from testprintf4()     🔕\n");
 }
+
+
+
+
+
+
+
+//#define ANSI_COLOR_GREEN "\x1b[32m"
+//#define ANSI_COLOR_RESET "\x1b[0m"
+
+// Usage in the code
+//printf("%sWelcome %s!%s\n", ANSI_COLOR_GREEN, getenv("USER"), ANSI_COLOR_RESET);
+
+
+
+
+
+
+
+
+
+
+
 /*
 void	copy_env(char **src, char ***dst)
 {
@@ -62,25 +85,5 @@ void	copy_path_and_add_slash(char **src, char ***dst)
 	}
 	*dst = tmp;
 }
-
-
-void	shell_env(char **env, t_shell *shell)
-{
-	char	**path_env;
-
-	copy_env(env, &shell->env);
-
-	path_env = ft_split(getenv("PATH"), ':');
-	copy_path_and_add_slash(path_env, &shell->paths);
-
-	int i = 0;
-	while (path_env[i])
-	{
-		free(path_env[i]);
-		i++;
-	}
-	free(path_env);
-}
-
 
 */
