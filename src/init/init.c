@@ -21,18 +21,73 @@ char	**ft_get_env(char **env)
 	return (my_env);
 }
 
+
+
+
+
+
+
+
+
+/*
+char **ft_get_env(char **env)
+{
+    char **my_env = NULL;
+    int i = 0;
+    int j = 0;
+
+    // Count the number of strings in the env array
+    while (env && env[i])
+        i++;
+
+    // Allocate memory for the duplicated environment
+    my_env = (char **)malloc(sizeof(char *) * (i + 1));
+    if (!my_env)
+    {
+        fprintf(stderr, "Memory allocation failed.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    j = 0;
+    while (env && env[j])
+    {
+        my_env[j] = ft_strdup(env[j]);
+        if (!my_env[j])
+        {
+            fprintf(stderr, "Memory allocation failed for env variable.\n");
+            exit(EXIT_FAILURE);
+        }
+        j++;
+    }
+    my_env[j] = NULL;
+
+    return my_env;
+}*/
+
+
+
+
+
+
+////////////////////////////////might want to change the function return type to int?
+
 void	ft_innit_shell(t_shell *shell, char **env)
 {
     char    *user;
 	char **env_copied;
-
+	char *prompt_suffix;
+	
     user = ft_strjoin(PURPLE, getenv("USER"));
+	env_copied = ft_get_env(env);
+	prompt_suffix = "@ASHellKETCHUM" CLR_RMV " > ";
+    if (!user || !env_copied)
+    {
+        printf("Memory allocation failed for user.\n");
+        return(EXIT_FAILURE);
+    }
 	printf("user: %s\n", user);
     printf("the pc user is %s%s\n", user, CLR_RMV);
-
-	env_copied = ft_get_env(env); // Copy the environment
-    shell->env = env_copied; 
-	
+    shell->env = env_copied; 	
 	//printf("Copied Environment Variables:\n");
     // for (int i = 0; env_copied[i] != NULL; ++i)
 	// {
@@ -40,7 +95,7 @@ void	ft_innit_shell(t_shell *shell, char **env)
     // }
     shell->in = dup(STDIN_FILENO);
 	shell->out = dup(STDOUT_FILENO);
-	shell->prompt = ft_strjoin(user, "@ASHellKETCHUM" CLR_RMV " > ");
+	shell->prompt = ft_strjoin(user, prompt_suffix);
 	printf("prompt: %s\n", shell->prompt);
 	shell->paths = NULL;
 	shell->export = NULL;
@@ -50,11 +105,11 @@ void	ft_innit_shell(t_shell *shell, char **env)
 	//shell->exit = 0;
 	//shell->env = NULL;
 	//shell_env(env, shell);
-    
 	free(user);  
 }
 
-
+//Ensure you have mechanisms in place elsewhere in your code to free shell->env, shell->prompt,
+//and other dynamically allocated members of the shell structure when you're done with them.
 
 
 
