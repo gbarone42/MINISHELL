@@ -26,6 +26,9 @@
 # define TRUE 1
 # define FALSE 0
 
+# define SINGLE_QUOTE 39
+# define DOUBLE_QUOTE 34
+
 # define CLR_RMV "\033[0m"
 # define RED "\033[1;31m"
 # define GREEN "\033[1;32m"
@@ -69,6 +72,20 @@ typedef struct s_parser
 	// struct s_parser	*next;
 	// struct s_parser	*prev;
 }					t_pars;
+
+
+
+typedef struct s_token
+{
+	// int				id;
+	// int				type;
+	// char			*token;
+
+	// struct s_token	*next;
+	// struct s_token	*prev;
+}					t_tok;
+
+
 
 
 extern int	g_exit;
