@@ -1,5 +1,5 @@
 #include "../../include/minishell.h"
-
+/*
 char	**ft_get_env(char **env)
 {
 	char	**my_env;
@@ -19,7 +19,7 @@ char	**ft_get_env(char **env)
 	}
 	my_env[i] = NULL;
 	return (my_env);
-}
+}*/
 
 
 
@@ -29,12 +29,15 @@ char	**ft_get_env(char **env)
 
 
 
-/*
+
 char **ft_get_env(char **env)
 {
     char **my_env = NULL;
     int i = 0;
     int j = 0;
+
+    testprintf4();
+    testprintf3();
 
     // Count the number of strings in the env array
     while (env && env[i])
@@ -62,7 +65,7 @@ char **ft_get_env(char **env)
     my_env[j] = NULL;
 
     return my_env;
-}*/
+}
 
 
 
@@ -83,7 +86,7 @@ void	ft_innit_shell(t_shell *shell, char **env)
     if (!user || !env_copied)
     {
         printf("Memory allocation failed for user.\n");
-        return(EXIT_FAILURE);
+        exit(1);
     }
 	printf("user: %s\n", user);
     printf("the pc user is %s%s\n", user, CLR_RMV);
