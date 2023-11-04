@@ -36,16 +36,31 @@ void	shell_exit(t_shell *shell)
 
 // freeing components of shell. This should be done in all exit paths to prevent memory leaks.
 
-
 void freeing_my_shell(t_shell **my_shell)
 {
     if (my_shell != NULL && *my_shell != NULL)
     {
-        // If t_shell contains pointers to dynamically allocated memory,
-        // free them here before freeing the structure itself.
-        // ...
+        // Free dynamically allocated members of t_shell
+        if ((*my_shell)->prompt != NULL) {
+            free((*my_shell)->prompt);
+            (*my_shell)->prompt = NULL;
+        }
 
-        free(*my_shell); // Free the allocated memory for my_shell
-        *my_shell = NULL; // Set the pointer to NULL to prevent use-after-free
+        if ((*my_shell)->env != NULL) {
+            // Assuming env is a NULL-terminated array of strings
+            int i = 0;
+            while ((*my_shell)->env[i] != NULL) {
+                free((*my_shell)->env[i]); // Free each string
+                i++;
+            }
+            free((*my_shell)->env); // Free the array of strings
+            (*my_shell)->env = NULL;
+        }
+
+        // ... Free other dynamically allocated members if any ...
+
+        // Now free the shell structure itself
+        free(*my_shell);
+        *my_shell = NULL; // Prevent use-after-free
     }
 }

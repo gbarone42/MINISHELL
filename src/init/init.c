@@ -81,13 +81,24 @@ void	ft_innit_shell(t_shell *shell, char **env)
 	char *prompt_suffix;
 	
     user = ft_strjoin(PURPLE, getenv("USER"));
-	env_copied = ft_get_env(env);
-	prompt_suffix = "@ASHellKETCHUM" CLR_RMV " > ";
-    if (!user || !env_copied)
+
+    if (!user)
     {
-        printf("Memory allocation failed for user.\n");
-        exit(1);
+        fprintf(stderr, "Failed to allocate memory for user.\n");
+        // You might want to set some flag or take some action here to handle the error.
+        return; // Exit the function early as we cannot proceed without user
     }
+	env_copied = ft_get_env(env);
+    if (!env_copied)
+    {
+        fprintf(stderr, "Failed to allocate memory for env_copied.\n");
+        free(user); // Make sure to free user before returning
+        // Again, handle the error as necessary
+        return; // Exit the function early as we cannot proceed without env_copied
+    }
+
+
+	prompt_suffix = "@ASHellKETCHUM" CLR_RMV " > ";
 	printf("user: %s\n", user);
     printf("the pc user is %s%s\n", user, CLR_RMV);
     shell->env = env_copied; 	
@@ -99,6 +110,13 @@ void	ft_innit_shell(t_shell *shell, char **env)
     shell->in = dup(STDIN_FILENO);
 	shell->out = dup(STDOUT_FILENO);
 	shell->prompt = ft_strjoin(user, prompt_suffix);
+    if (!shell->prompt)
+    {
+        fprintf(stderr, "Failed to allocate memory for prompt.\n");
+        free(user); // Free resources before returning
+        free(env_copied); // Assuming this function frees the entire env_copied array
+        return; // Exit the function early as we cannot proceed without prompt
+    }
 	printf("prompt: %s\n", shell->prompt);
 	shell->paths = NULL;
 	shell->export = NULL;

@@ -40,7 +40,6 @@ int	main(int ac, char **av, char **env)
     // if (my_shell != NULL) {
     //     shell_exit(&my_shell);
     // }
-
 	// ft_destroy_shell(shell);
 	freeing_my_shell(&my_shell);
 	

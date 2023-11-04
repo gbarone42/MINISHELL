@@ -13,26 +13,30 @@ void ft_minishell_simulator(t_shell *shell)
 
     while (1)
     {
- 
+            errno = 0;
             shell->input = readline(shell->prompt);
             //printf("%s\n", shell->prompt);
 
         if (shell->input == NULL)
         {
+
+            if (errno)  // If readline returned NULL and errno is set, an error occurred
+            {
+                perror("readline error");  // Print the system error message
+                continue;  // Optionally, decide whether to continue or exit
+            }
             // EOF received, exit the shell. EOF = end of file
             printf("\n"); // Print a newline for a clean exit after EOF.
             shell_exit(shell);
-            break; // This break is actually not necessary, as shell_exit will end the program.
         }
         if (!ft_strncmp(shell->input, "exit", 5))
         {  
             shell_exit(shell);
         }
         add_history(shell->input); //input or prompt?
-        if (!ft_isvalid(shell->input))
+        if (ft_isvalid(shell->input))
         {
 				printf("VABENEEELOSTESSOOOOOOOOOOOOOOOO \n");
-			    add_history(shell->input);
 			    shell_parser(shell, &command);
 			    // if (shell->exit == 0)
 				// shell_executor(&command, shell);
