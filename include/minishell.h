@@ -145,7 +145,7 @@ size_t	ft_strlcpy(char *dst, char *src, size_t size);
 
 //valid////////////////////////////////////////////valid
 //
-int	ft_isvalid(char *s);
+int	ft_isvalid(const char *input);
 
 
 
