@@ -107,7 +107,7 @@ void	freeing_my_shell(t_shell *my_shell);
 //
 int	ft_innit_shell(t_shell *shell, char **env);
 char	**ft_get_env(char **env);
-
+void free_myenv(char **my_env); ///to be put into another file?
 
 
 //minishell//////////////////////////////////////////minishell
@@ -163,6 +163,15 @@ void	ft_bzero(void *s, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c);
 size_t	ft_strlcpy(char *dst, char *src, size_t size);
+
+
+
+//utils3/////////////////////////////////////////////utils2
+//
+void *ft_memset(void *b, int c, size_t len);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
+
+
 
 //valid////////////////////////////////////////////valid
 //

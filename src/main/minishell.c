@@ -13,7 +13,7 @@ int	main(int ac, char **av, char **env)
 	t_shell	my_shell;
 	int output;
 
-	memset(&my_shell, 0, sizeof(t_shell));
+	ft_memset(&my_shell, 0, sizeof(t_shell));
 	
 	//shell = (t_shell *)ft_calloc(1, sizeof(t_shell));
 	//str = "okok";

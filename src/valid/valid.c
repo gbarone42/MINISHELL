@@ -27,7 +27,7 @@ int ft_isvalid(const char *input)
 	{
         return 0; // Invalid input
     }
-    size_t length = strlen(input);
+    size_t length = ft_strlen(input);
     if (length == 0 || length > INPUT_SIZE)
 	{
         return 0; // Invalid input due to length constraints

@@ -20,16 +20,6 @@ char	**ft_get_env(char **env)
 	my_env[i] = NULL;
 	return (my_env);
 }*/
-
-
-
-
-
-
-
-
-
-
 char **ft_get_env(char **env)
 {
     char **my_env = NULL;
@@ -42,22 +32,24 @@ char **ft_get_env(char **env)
 
     // Allocate memory for the duplicated environment
     my_env = (char **)malloc(sizeof(char *) * (i + 1));
-    if (!my_env)
-    {
+    if (!my_env) {
         fprintf(stderr, "Memory allocation failed.\n");
         exit(EXIT_FAILURE);
     }
 
-    j = 0;
-    while (env && env[j])
-    {
+    for (j = 0; j < i; j++) {
         my_env[j] = ft_strdup(env[j]);
         if (!my_env[j])
         {
             fprintf(stderr, "Memory allocation failed for env variable.\n");
+            // Clean up the allocated memory before exiting
+            while (j > 0) {
+                free(my_env[j - 1]);
+                j--;
+            }
+            free(my_env);
             exit(EXIT_FAILURE);
         }
-        j++;
     }
     my_env[j] = NULL;
 
@@ -65,68 +57,58 @@ char **ft_get_env(char **env)
 }
 
 
-
-
-
+void free_myenv(char **my_env)
+{
+    if (my_env)
+    {
+        for (int i = 0; my_env[i] != NULL; i++) {
+            free(my_env[i]); // Free each string in the array
+        }
+        free(my_env); // Free the array itself
+    }
+}
 
 ////////////////////////////////might want to change the function return type to int?
 
 int	ft_innit_shell(t_shell *shell, char **env)
 {
     char    *user;
-	char **env_copied;
-	char *prompt_suffix;
-	
+    char    **env_copied;
+    char    *prompt_suffix;
+    
     user = ft_strjoin(PURPLE, getenv("USER"));
 
     if (!user)
     {
         fprintf(stderr, "Failed to allocate memory for user.\n");
-        // You might want to set some flag or take some action here to handle the error.
-        return (MEM_ERROR); // Exit the function early as we cannot proceed without user
+        return (MEM_ERROR); 
     }
-	env_copied = ft_get_env(env);
+    env_copied = ft_get_env(env);
     if (!env_copied)
     {
         fprintf(stderr, "Failed to allocate memory for env_copied.\n");
-        free(user); // Make sure to free user before returning
-        // Again, handle the error as necessary
-        return(MEM_ERROR2); // Exit the function early as we cannot proceed without env_copied
+        free(user);
+        return(MEM_ERROR2);
     }
 
-	prompt_suffix = "@ASHellKETCHUM" CLR_RMV " > ";
-	printf("user: %s\n", user);
+    prompt_suffix = "@ASHellKETCHUM" CLR_RMV " > ";
+    printf("user: %s\n", user);
     printf("the pc user is %s%s\n", user, CLR_RMV);
-    shell->env = env_copied; 	
-	//printf("Copied Environment Variables:\n");
-    // for (int i = 0; env_copied[i] != NULL; ++i)
-	// {
-    // 	printf("[%d] %s\n", i, env_copied[i]); // Print each environment variable
-    // }
+    shell->env = env_copied;    
     shell->in = dup(STDIN_FILENO);
-	shell->out = dup(STDOUT_FILENO);
-	shell->prompt = ft_strjoin(user, prompt_suffix);
-
-
-    ////note: FREEING THE 'user'
+    shell->out = dup(STDOUT_FILENO);
+    shell->prompt = ft_strjoin(user, prompt_suffix);
+    free(user);
 
     if (!shell->prompt)
     {
         fprintf(stderr, "Failed to allocate memory for prompt.\n");
-        free(user); // Free resources before returning
-        free(env_copied); // Assuming this function frees the entire env_copied array
-        return(MEM_ERROR3); // Exit the function early as we cannot proceed without prompt
+        free_myenv(env_copied);
+        return(MEM_ERROR3);
     }
-	printf("prompt: %s\n", shell->prompt);
-	shell->paths = NULL;
-	shell->export = NULL;
-	//shell->pipe[0] = -2;
-	//shell->pipe[1] = -2;
-	//shell->status = 0;
-	//shell->exit = 0;
-	//shell->env = NULL;
-	//shell_env(env, shell);
-	free(user);
+    printf("prompt: %s\n", shell->prompt);
+    shell->paths = NULL;
+    shell->export = NULL;
     return(0);
 }
 

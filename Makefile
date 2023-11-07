@@ -10,6 +10,7 @@ INCLUDE_DIR = include
 SRCS =	${SRC_DIR}/main/minishell.c	\
 		${SRC_DIR}/utils/utils1.c	\
 		${SRC_DIR}/utils/utils2.c	\
+		${SRC_DIR}/utils/utils3.c	\
 		${SRC_DIR}/test/test.c	\
 		${SRC_DIR}/simulation/simulation.c	\
 		${SRC_DIR}/init/init.c	\

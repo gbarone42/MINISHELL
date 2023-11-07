@@ -44,22 +44,35 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strdup(const char *s)
-{
-	char	*y;
-	size_t	f;
+// char	*ft_strdup(const char *s)
+// {
+// 	char	*y;
+// 	size_t	f;
 
-	f = 0;
-	y = malloc(ft_strlen((char *)s) + 1);
-	if (!y)
-		return (NULL);
-	while (s[f] != '\0')
+// 	f = 0;
+// 	y = malloc(ft_strlen((char *)s) + 1);
+// 	if (!y)
+// 		return (NULL);
+// 	while (s[f] != '\0')
+// 	{
+// 		y[f] = s[f];
+// 		f++;
+// 	}
+// 	y[f] = '\0';
+// 	return (y);
+// }
+
+
+char *ft_strdup(const char *s)
+{
+    size_t len = ft_strlen(s);
+    char *y = malloc(len + 1);
+    if (!y)
 	{
-		y[f] = s[f];
-		f++;
-	}
-	y[f] = '\0';
-	return (y);
+        return NULL; // Handle allocation failure
+    }
+    ft_memcpy(y, s, len + 1); // Copy the string and the null terminator
+    return y;
 }
 
 

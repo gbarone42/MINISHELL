@@ -27,6 +27,7 @@ void ft_minishell_simulator(t_shell *shell)
             }
             // EOF received, exit the shell. EOF = end of file
             printf("\n"); // Print a newline for a clean exit after EOF.
+            free(shell->input);
             shell_exit(shell);
         }
         if (!ft_strncmp(shell->input, "exit", 5))
@@ -34,10 +35,10 @@ void ft_minishell_simulator(t_shell *shell)
             shell_exit(shell);
         }
         add_history(shell->input); //input or prompt?
-        if (!ft_strncmp(shell->input, "exit", 5))
-        {
+        // if (!ft_strncmp(shell->input, "exit", 5))
+        // {
             
-        }
+        // }
         if (ft_isvalid(shell->input))
         {
 				printf("VABENEEELOSTESSOOOOOOOOOOOOOOOO \n");
@@ -45,9 +46,9 @@ void ft_minishell_simulator(t_shell *shell)
 			    // if (shell->exit == 0)
 				// shell_executor(&command, shell);
 	    }
+        free(shell->input);
     }
 }
-
 
 
 
