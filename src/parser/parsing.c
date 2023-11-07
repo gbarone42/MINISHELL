@@ -8,7 +8,7 @@ void	shell_parser(t_shell *shell, t_pars **command)
     printf("\nPARSING IS COMING \n");
 
     char		**inputs;
-    inputs = input_split(shell);
+    inputs = input_handler(shell);
 
     //inputs = input_split(shell);
     //*inputs = NULL;
@@ -22,7 +22,7 @@ void	shell_parser(t_shell *shell, t_pars **command)
     }
 }
 
-char	**input_split(t_shell *shell)
+char	**input_handler(t_shell *shell)
 {
     int     pipes;
 
@@ -65,7 +65,7 @@ int ft_count_pipes(const char *s, char pipe)
         else if (s[i] == DOUBLE_QUOTE || s[i] == SINGLE_QUOTE)
         {
             // Assuming pipe_numstr_quote is handling the quotes appropriately
-            pipe_numstr_quote(s, &i);
+            pipe_handler_quote(s, &i);
         }
         else
         {
@@ -80,7 +80,7 @@ int ft_count_pipes(const char *s, char pipe)
     return n;
 }
 
-int pipe_numstr_quote(const char *s, size_t *i)
+int pipe_handler_quote(const char *s, size_t *i)
 {
     char quote;
 

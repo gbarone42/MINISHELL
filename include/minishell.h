@@ -122,9 +122,9 @@ int main(int argc, char **argv, char **env);
 //parsing///////////////////////////////////////////parsing
 //
 void	shell_parser(t_shell *shell, t_pars **command);
-char	**input_split(t_shell *shell);
+char	**input_handler(t_shell *shell);
 int ft_count_pipes(const char *s, char pipe);
-int pipe_numstr_quote(const char *s, size_t *i);
+int pipe_handler_quote(const char *s, size_t *i);
 
 
 
