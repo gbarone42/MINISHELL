@@ -36,9 +36,6 @@ char **ft_get_env(char **env)
     int i = 0;
     int j = 0;
 
-    testprintf4();
-    testprintf3();
-
     // Count the number of strings in the env array
     while (env && env[i])
         i++;
@@ -74,7 +71,7 @@ char **ft_get_env(char **env)
 
 ////////////////////////////////might want to change the function return type to int?
 
-void	ft_innit_shell(t_shell *shell, char **env)
+int	ft_innit_shell(t_shell *shell, char **env)
 {
     char    *user;
 	char **env_copied;
@@ -86,7 +83,7 @@ void	ft_innit_shell(t_shell *shell, char **env)
     {
         fprintf(stderr, "Failed to allocate memory for user.\n");
         // You might want to set some flag or take some action here to handle the error.
-        return; // Exit the function early as we cannot proceed without user
+        return (MEM_ERROR); // Exit the function early as we cannot proceed without user
     }
 	env_copied = ft_get_env(env);
     if (!env_copied)
@@ -94,9 +91,8 @@ void	ft_innit_shell(t_shell *shell, char **env)
         fprintf(stderr, "Failed to allocate memory for env_copied.\n");
         free(user); // Make sure to free user before returning
         // Again, handle the error as necessary
-        return; // Exit the function early as we cannot proceed without env_copied
+        return(MEM_ERROR2); // Exit the function early as we cannot proceed without env_copied
     }
-
 
 	prompt_suffix = "@ASHellKETCHUM" CLR_RMV " > ";
 	printf("user: %s\n", user);
@@ -110,12 +106,16 @@ void	ft_innit_shell(t_shell *shell, char **env)
     shell->in = dup(STDIN_FILENO);
 	shell->out = dup(STDOUT_FILENO);
 	shell->prompt = ft_strjoin(user, prompt_suffix);
+
+
+    ////note: FREEING THE 'user'
+
     if (!shell->prompt)
     {
         fprintf(stderr, "Failed to allocate memory for prompt.\n");
         free(user); // Free resources before returning
         free(env_copied); // Assuming this function frees the entire env_copied array
-        return; // Exit the function early as we cannot proceed without prompt
+        return(MEM_ERROR3); // Exit the function early as we cannot proceed without prompt
     }
 	printf("prompt: %s\n", shell->prompt);
 	shell->paths = NULL;
@@ -126,7 +126,8 @@ void	ft_innit_shell(t_shell *shell, char **env)
 	//shell->exit = 0;
 	//shell->env = NULL;
 	//shell_env(env, shell);
-	free(user);  
+	free(user);
+    return(0);
 }
 
 //Ensure you have mechanisms in place elsewhere in your code to free shell->env, shell->prompt,

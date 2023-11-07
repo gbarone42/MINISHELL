@@ -10,30 +10,28 @@ int	main(int ac, char **av, char **env)
 {
 
 	//char	*str;
-	t_shell	*my_shell;
+	t_shell	my_shell;
+	int output;
 
-
-	my_shell = malloc(sizeof(t_shell));
-
-	if(my_shell == NULL)
-	{
-		printf("Error: Memory allocation for shell failed.\n");
-		return(EXIT_FAILURE);
-	}
-
+	memset(&my_shell, 0, sizeof(t_shell));
+	
 	//shell = (t_shell *)ft_calloc(1, sizeof(t_shell));
-
 	//str = "okok";
 	
 	(void)ac;
 	(void)av;
 	printf("%sWelcome %s!%s\n", GREEN, getenv("USER"), CLR_RMV);
-	ft_innit_shell(my_shell, env);//init
+	output = ft_innit_shell(&my_shell, env);//init
+	if(output != 0)
+	{
+		//free();
+		exit(output);
+	}
 	ft_norm_signal();//signals
 	
 	//str = readline(str);
 	
-	ft_minishell_simulator(my_shell);
+	ft_minishell_simulator(&my_shell);
 
 
 	    // In case ft_minishell_simulator returns without exiting, clean up.
@@ -41,8 +39,7 @@ int	main(int ac, char **av, char **env)
     //     shell_exit(&my_shell);
     // }
 	// ft_destroy_shell(shell);
-	freeing_my_shell(&my_shell);
-	
+
 	return (EXIT_SUCCESS); //return(0a);
 }         
 

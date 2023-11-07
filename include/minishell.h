@@ -25,6 +25,10 @@
 
 # define TRUE 1
 # define FALSE 0
+# define MEM_ERROR 42
+# define MEM_ERROR2 43
+# define MEM_ERROR3 44
+
 
 # define SINGLE_QUOTE 39
 # define DOUBLE_QUOTE 34
@@ -94,14 +98,14 @@ extern int	g_exit;
 //exit/////////////////////////////////////////////exit
 //
 void	shell_exit(t_shell *shell);
-void	freeing_my_shell(t_shell **my_shell);
+void	freeing_my_shell(t_shell *my_shell);
 
 
 
 
 //init///////////////////////////////////////////////init
 //
-void	ft_innit_shell(t_shell *shell, char **env);
+int	ft_innit_shell(t_shell *shell, char **env);
 char	**ft_get_env(char **env);
 
 

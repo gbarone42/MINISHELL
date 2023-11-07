@@ -74,4 +74,11 @@ x: fclean all
 	@echo "${GREEN}Running ${CYAN}${NAME} ${CLR_RMV}..."
 	@./$(NAME)
 
-.PHONY: all objs clean fclean re x
+clear:
+		clear
+
+mem: clear all
+	valgrind --leak-check=full --suppressions=readline.supp ./minishell
+
+
+.PHONY: all objs clean fclean re x clear mem
