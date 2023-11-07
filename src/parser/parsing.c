@@ -27,13 +27,14 @@ char	**input_split(t_shell *shell)
     int     pipes;
 
     pipes = ft_count_pipes(shell->input,'|');
+    printf("Number of substrings: %d\n", pipes); 
     if (pipes == -1)
 	{
 		write(STDERR_FILENO, "syntax error near unexpected token: \"|\"\n", 41);
 		return (NULL);
 	}
 
-    
+
     return NULL;
 
 }
