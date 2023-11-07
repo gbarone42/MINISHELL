@@ -30,8 +30,14 @@
 # define MEM_ERROR3 44
 
 
-# define SINGLE_QUOTE 39
-# define DOUBLE_QUOTE 34
+
+# define DOUBLE_QUOTE '\"'
+# define SINGLE_QUOTE '\''
+
+//
+// # define SINGLE_QUOTE 39
+// # define DOUBLE_QUOTE 34
+
 
 # define CLR_RMV "\033[0m"
 # define RED "\033[1;31m"
@@ -77,8 +83,6 @@ typedef struct s_parser
 	// struct s_parser	*prev;
 }					t_pars;
 
-
-
 typedef struct s_token
 {
 	// int				id;
@@ -88,8 +92,6 @@ typedef struct s_token
 	// struct s_token	*next;
 	// struct s_token	*prev;
 }					t_tok;
-
-
 
 
 extern int	g_exit;
@@ -120,6 +122,9 @@ int main(int argc, char **argv, char **env);
 //parsing///////////////////////////////////////////parsing
 //
 void	shell_parser(t_shell *shell, t_pars **command);
+char	**input_split(t_shell *shell);
+int ft_count_pipes(const char *s, char pipe);
+int pipe_numstr_quote(const char *s, size_t *i);
 
 
 
