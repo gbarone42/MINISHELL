@@ -30,9 +30,13 @@
 # define MEM_ERROR3 44
 
 
-
+# define PIPE '|'
 # define DOUBLE_QUOTE '\"'
 # define SINGLE_QUOTE '\''
+# define REDIRECTION_OUTPUT '>'
+# define REDIRECTION_INPUT '<'
+# define HERE_DOCUMENT '<<'
+# define APPEND_OUTPUT '>>'
 
 //
 // # define SINGLE_QUOTE 39

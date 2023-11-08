@@ -26,7 +26,7 @@ char	**input_handler(t_shell *shell)
 {
     int     pipes;
 
-    pipes = ft_count_pipes(shell->input,'|');
+    pipes = ft_count_pipes(shell->input, PIPE);
     printf("Number of substrings: %d\n", pipes); 
     if (pipes == -1)
 	{
