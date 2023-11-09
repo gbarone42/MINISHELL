@@ -1,0 +1,36 @@
+create a new branch :
+git checkout -b <branch_name>
+
+
+add and commit the new branch:
+git add .
+git commit -m "Your commit message"
+
+
+push the new branch to the remote repository:
+git push origin <branch_name>
+
+
+switch back to the main branch:
+git checkout main
+
+
+pull the latest changes from the remote main branch:
+git pull origin main
+
+
+merge the <branch_name> into the main branch:
+git merge <branch_name>
+
+
+delete a remote branch 
+git push origin --delete <branch_name>
+
+
+delete a local branch 
+git branch -d <branch_name>
+
+
+if branch 'origin' is not fully merged
+git branch -D <branch_name>
+
