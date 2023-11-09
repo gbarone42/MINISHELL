@@ -3,8 +3,8 @@ NAME = minishell
 
 # Directories
 SRC_DIR = src
-OBJ_DIR = obj
-INCLUDE_DIR = include
+OBJ_DIR = build
+INCLUDE_DIR = build
 
 # Source files
 SRCS =	${SRC_DIR}/main/minishell.c	\

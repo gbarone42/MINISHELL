@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "../../build/minishell.h"
 
 int	g_exit = 0;
 

@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "../../build/minishell.h"
 
 
 

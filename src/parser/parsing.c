@@ -1,4 +1,4 @@
-#include "../../include/minishell.h"
+#include "../../build/minishell.h"
 
 void	shell_parser(t_shell *shell, t_pars **command)
 {
