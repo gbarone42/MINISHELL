@@ -60,7 +60,7 @@ objs:
 # Clean object files
 clean:
 	@echo "${RED}Deleting ${LAVENDER}${NAME}'s ${CLR_RMV}objs"
-	@${RM} ${OBJ_DIR}
+	@${RM} ${OBJ_DIR}/*/*.o
 
 # Clean all files
 fclean: clean
