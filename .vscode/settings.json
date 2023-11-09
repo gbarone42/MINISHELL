@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "signal.h": "c",
-        "minishell.h": "c",
-        "stdbool.h": "c",
-        "unistd.h": "c",
-        "wait.h": "c"
-    }
-}
