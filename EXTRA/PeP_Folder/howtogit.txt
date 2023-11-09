@@ -21,6 +21,9 @@ git pull origin main
 
 merge the <branch_name> into the main branch:
 git merge <branch_name>
+While you are in the main branch, git will attempt to merge the changes from the <branch_name> into the main branch.
+
+
 
 
 delete a remote branch 
