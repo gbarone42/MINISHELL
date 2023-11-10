@@ -4,7 +4,7 @@ void	shell_exit(t_shell *shell)
 {
 	int	i;
 
-	rl_clear_history();
+	clear_history();
 	free(shell->input);
 	free(shell->prompt);
 	free(shell->env);
