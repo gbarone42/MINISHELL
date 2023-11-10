@@ -80,35 +80,47 @@ int	ft_innit_shell(t_shell *shell, char **env)
 
     if (!user)
     {
-        fprintf(stderr, "Failed to allocate memory for user.\n");
+        write(STDERR_FILENO, "Failed to allocate memory for user.\n", 37 );
         return (MEM_ERROR); 
     }
     env_copied = ft_get_env(env);
     if (!env_copied)
     {
-        fprintf(stderr, "Failed to allocate memory for env_copied.\n");
+        write(STDERR_FILENO, "Failed to allocate memory for env_copied.\n", 43 );
         free(user);
         return(MEM_ERROR2);
     }
-
-    prompt_suffix = "@ASHellKETCHUM" CLR_RMV " > ";
-    printf("user: %s\n", user);
-    printf("the pc user is %s%s\n", user, CLR_RMV);
-    shell->env = env_copied;    
+    shell->env = env_copied; 
     shell->in = dup(STDIN_FILENO);
     shell->out = dup(STDOUT_FILENO);
+
+    if (shell->in == -1 || shell->out == -1)
+    {
+        write(STDERR_FILENO, "Failed to duplicate file descriptors\n", 38);
+        free_myenv(env_copied);
+        free(shell->prompt);
+        return MEM_ERROR; // or another appropriate error code
+    }
+
+
+    prompt_suffix = "@ASHellKETCHUM" CLR_RMV " > ";
     shell->prompt = ft_strjoin(user, prompt_suffix);
+
     free(user);
 
     if (!shell->prompt)
     {
-        fprintf(stderr, "Failed to allocate memory for prompt.\n");
+        write(STDERR_FILENO, "Failed to allocate memory for prompt.\n", 38);
         free_myenv(env_copied);
         return(MEM_ERROR3);
     }
+    // printf("user: %s\n", user);
+    // printf("the pc user is %s%s\n", user, CLR_RMV);
     printf("prompt: %s\n", shell->prompt);
     shell->paths = NULL;
     shell->export = NULL;
+    free_myenv(env_copied);
+    
     return(0);
 }
 

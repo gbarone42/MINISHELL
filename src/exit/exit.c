@@ -6,8 +6,19 @@ void	shell_exit(t_shell *shell)
 
 	rl_clear_history();
 	free(shell->input);
-	free(shell->prompt);
-	free(shell->env);
+
+	if (shell->prompt) //if its not NULL
+	{
+        free(shell->prompt);
+    }
+    if (shell->env)
+	{
+        i = 0;
+        while (shell->env[i])
+            free(shell->env[i++]);
+        free(shell->env);
+    }
+
 	i = 0;
 	if (shell->paths)
 	{
