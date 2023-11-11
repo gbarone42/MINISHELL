@@ -42,4 +42,3 @@ int	main(int ac, char **av, char **env)
 
 	return (EXIT_SUCCESS); //return(0a);
 }         
-
