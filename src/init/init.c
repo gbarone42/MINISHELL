@@ -13,7 +13,7 @@ char **ft_get_env(char **env)
     // Allocate memory for the duplicated environment
     my_env = (char **)malloc(sizeof(char *) * (i + 1));
     if (!my_env) {
-        write(STDERR_FILENO, "Memory allocation failed.\n", 26);
+        fprintf(stderr, "Memory allocation failed.\n");
         exit(EXIT_FAILURE);
     }
 
@@ -21,7 +21,7 @@ char **ft_get_env(char **env)
         my_env[j] = ft_strdup(env[j]);
         if (!my_env[j])
         {
-            write(STDERR_FILENO, "Memory allocation failed for env variable.\n", 42);
+            fprintf(stderr, "Memory allocation failed for env variable.\n");
             // Clean up the allocated memory before exiting
             for (int k = 0; k < j; k++)
             {
@@ -79,8 +79,7 @@ int ft_innit_shell(t_shell *shell, char **env)
 
     if (!user)
     {
-        write(STDERR_FILENO, "Failed to allocate memory for user.\n", 37 );
-        free(user);
+        fprintf(stderr, "Failed to allocate memory for user.\n");
         return (MEM_ERROR); 
     }
 
@@ -93,35 +92,28 @@ int ft_innit_shell(t_shell *shell, char **env)
         return(MEM_ERROR2);
     }
 
-    //shell->env = env_copied;    
+    prompt_suffix = "@ASHellKETCHUM" CLR_RMV " > ";
+    printf("user: %s\n", user);
+    printf("the pc user is %s%s\n", user, CLR_RMV);
+    shell->env = env_copied;    
     shell->in = dup(STDIN_FILENO);
     shell->out = dup(STDOUT_FILENO);
-
-    if (shell->in == -1 || shell->out == -1)
-    {
-        write(STDERR_FILENO, "Failed to duplicate file descriptors\n", 38);
-        free_all_memory(shell, env_copied);
-        return MEM_ERROR; // or another appropriate error code
-    }
-
-    prompt_suffix = "@ASHellKETCHUM" CLR_RMV " > ";
     shell->prompt = ft_strjoin(user, prompt_suffix);
+
     free(user);
 
     if (!shell->prompt)
     {
-        write(STDERR_FILENO, "Failed to allocate memory for prompt.\n", 38);
-        free_all_memory(shell, env_copied);
+        fprintf(stderr, "Failed to allocate memory for prompt.\n");
+        free_myenv(env_copied);
         return(MEM_ERROR3);
     }
-
     printf("prompt: %s\n", shell->prompt);
 
     // Initialize other members of shell if needed
     free_myenv(env_copied);
     shell->paths = NULL;
     shell->export = NULL;
-
     return(0);
 }
 
