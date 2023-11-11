@@ -33,7 +33,7 @@ char **ft_get_env(char **env)
     // Allocate memory for the duplicated environment
     my_env = (char **)malloc(sizeof(char *) * (i + 1));
     if (!my_env) {
-        fprintf(stderr, "Memory allocation failed.\n");
+        write(STDERR_FILENO, "Memory allocation failed.\n", 27);
         exit(EXIT_FAILURE);
     }
 
@@ -41,7 +41,7 @@ char **ft_get_env(char **env)
         my_env[j] = ft_strdup(env[j]);
         if (!my_env[j])
         {
-            fprintf(stderr, "Memory allocation failed for env variable.\n");
+            write(STDERR_FILENO, "Memory allocation failed for env variable.\n", 44);
             // Clean up the allocated memory before exiting
             while (j > 0) {
                 free(my_env[j - 1]);
@@ -119,7 +119,7 @@ int	ft_innit_shell(t_shell *shell, char **env)
     printf("prompt: %s\n", shell->prompt);
     shell->paths = NULL;
     shell->export = NULL;
-    free_myenv(env_copied);
+    //free_myenv(env_copied);
     
     return(0);
 }
