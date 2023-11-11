@@ -54,8 +54,6 @@ int	main(int ac, char **av, char **env)
 //	they are both defined in <stdlib.h>
 
 
-//what is an enviroment variable?
-
 
 // void ft_destroy_shell(t_shell *shell) {
 //     if (shell->env) {

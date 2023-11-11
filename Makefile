@@ -3,11 +3,22 @@ NAME = build/minishell
 
 # Directories
 SRC_DIR = src
-OBJ_DIR = obj
+OBJ_DIR = build
+INCLUDE_DIR = build
 
 # Source files
-SRCS = ${SRC_DIR}/main/minishell.c
-       # Add any other source files after this line
+SRCS =	${SRC_DIR}/main/minishell.c	\
+		${SRC_DIR}/utils/utils1.c	\
+		${SRC_DIR}/utils/utils2.c	\
+		${SRC_DIR}/utils/utils3.c	\
+		${SRC_DIR}/test/test.c	\
+		${SRC_DIR}/simulation/simulation.c	\
+		${SRC_DIR}/init/init.c	\
+		${SRC_DIR}/signal/signal.c	\
+		${SRC_DIR}/valid/valid.c	\
+		${SRC_DIR}/exit/exit.c	\
+		${SRC_DIR}/parser/parsing.c	\
+       # Add other source files as necessary
 
 # Object files
 OBJS = ${patsubst ${SRC_DIR}/%.c,${OBJ_DIR}/%.o,${SRCS}}
