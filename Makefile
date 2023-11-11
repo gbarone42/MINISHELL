@@ -7,17 +7,17 @@ OBJ_DIR = build
 INCLUDE_DIR = build
 
 # Source files
-SRCS =	${SRC_DIR}/main/minishell.c	\
-		${SRC_DIR}/utils/utils1.c	\
-		${SRC_DIR}/utils/utils2.c	\
-		${SRC_DIR}/utils/utils3.c	\
-		${SRC_DIR}/test/test.c	\
-		${SRC_DIR}/simulation/simulation.c	\
-		${SRC_DIR}/init/init.c	\
-		${SRC_DIR}/signal/signal.c	\
-		${SRC_DIR}/valid/valid.c	\
-		${SRC_DIR}/exit/exit.c	\
-		${SRC_DIR}/parser/parsing.c	\
+SRCS =	${SRC_DIR}/minishell.c	\
+		${SRC_DIR}/utils1.c	\
+		${SRC_DIR}/utils2.c	\
+		${SRC_DIR}/utils3.c	\
+		${SRC_DIR}/test.c	\
+		${SRC_DIR}/simulation.c	\
+		${SRC_DIR}/init.c	\
+		${SRC_DIR}/signal.c	\
+		${SRC_DIR}/valid.c	\
+		${SRC_DIR}/exit.c	\
+		${SRC_DIR}/parsing.c	\
        # Add other source files as necessary
 
 # Object files
@@ -56,7 +56,7 @@ all: ${NAME}
 # Clean object files
 clean:
 	@echo "${RED}Deleting ${LAVENDER}${NAME}'s ${CLR_RMV}objs"
-	@${RM} ${OBJ_DIR}/*/*.o
+	@${RM} ${OBJ_DIR}/*.o
 
 # Clean all files
 fclean: clean
