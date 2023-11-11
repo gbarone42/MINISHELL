@@ -1,3 +1,9 @@
 -*-
 
-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=leak_info.txt ./minishell
+valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=leak_info.txt build/./minishell
+
+
+The error seems to be related to memory leaks, specifically in the function ft_strdup at line 69 of utils1.c.
+This memory leak occurred in the ft_get_env function at line 41 of init.c and the ft_innit_shell function at line 86 of init.c,
+ultimately stemming from minishell.c at line 24.
+

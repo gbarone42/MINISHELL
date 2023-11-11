@@ -1,5 +1,5 @@
 # Define the target executable name
-NAME = minishell
+NAME = build/minishell
 
 # Directories
 SRC_DIR = src
@@ -53,10 +53,6 @@ ${NAME}: ${OBJS}
 # Build all
 all: ${NAME}
 
-# Create the object directory if it doesn't exist
-objs:
-	@mkdir -p ${OBJ_DIR}
-
 # Clean object files
 clean:
 	@echo "${RED}Deleting ${LAVENDER}${NAME}'s ${CLR_RMV}objs"
@@ -79,7 +75,7 @@ clear:
 		clear
 
 mem: clear all
-	valgrind --leak-check=full --suppressions=readline.supp ./minishell
+	valgrind --leak-check=full --suppressions=EXTRA/readline.supp ./build/minishell
 
 
-.PHONY: all objs clean fclean re x clear mem
+.PHONY: all clean fclean re x clear mem

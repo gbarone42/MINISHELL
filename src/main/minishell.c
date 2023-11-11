@@ -43,31 +43,3 @@ int	main(int ac, char **av, char **env)
 	return (EXIT_SUCCESS); //return(0a);
 }         
 
-
-//while (!shell->exit)
-//
-
-
-// EXIT_SUCCESS is defined as 0
-// EXIT_FAILURE is defined as 1
-// 
-//	they are both defined in <stdlib.h>
-
-
-
-// void ft_destroy_shell(t_shell *shell) {
-//     if (shell->env) {
-//         for (int i = 0; shell->env[i] != NULL; ++i) {
-//             free(shell->env[i]); // Free each string
-//         }
-//         free(shell->env); // Free the array
-//     }
-//
-//     if (shell->prompt) {
-//         free(shell->prompt); // Free the prompt string if it was allocated
-//     }
-//
-//     // ...free any other dynamically allocated fields within `shell`...
-//
-//     free(shell); // Finally, free the shell structure itself
-// }
