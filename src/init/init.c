@@ -1,5 +1,25 @@
 #include "../../build/minishell.h"
+/*
+char	**ft_get_env(char **env)
+{
+	char	**my_env;
+	int		i;
 
+
+	//printf("ft_get_env called correctly \n");
+	i = 0;
+	while (env != NULL && env[i])
+		i++;
+	my_env = (char **)malloc(sizeof(char *) * (i + 1));
+	i = 0;
+	while (env[i])
+	{
+		my_env[i] = ft_strdup(env[i]);
+		i++;
+	}
+	my_env[i] = NULL;
+	return (my_env);
+}*/
 char **ft_get_env(char **env)
 {
     char **my_env = NULL;
@@ -13,7 +33,7 @@ char **ft_get_env(char **env)
     // Allocate memory for the duplicated environment
     my_env = (char **)malloc(sizeof(char *) * (i + 1));
     if (!my_env) {
-        fprintf(stderr, "Memory allocation failed.\n");
+        write(STDERR_FILENO, "Memory allocation failed.\n", 27);
         exit(EXIT_FAILURE);
     }
 
@@ -21,14 +41,13 @@ char **ft_get_env(char **env)
         my_env[j] = ft_strdup(env[j]);
         if (!my_env[j])
         {
-            fprintf(stderr, "Memory allocation failed for env variable.\n");
+            write(STDERR_FILENO, "Memory allocation failed for env variable.\n", 44);
             // Clean up the allocated memory before exiting
-            for (int k = 0; k < j; k++)
-            {
-                free(my_env[k]);
+            while (j > 0) {
+                free(my_env[j - 1]);
+                j--;
             }
             free(my_env);
-            //free(env);
             exit(EXIT_FAILURE);
         }
     }
@@ -37,21 +56,6 @@ char **ft_get_env(char **env)
     return my_env;
 }
 
-
-void free_all_memory(t_shell *shell, char **env_copied)
-{
-    // Free duplicated environment variables
-    free_myenv(env_copied);
-
-    // Free prompt
-    free(shell->prompt);
-
-    // Add more free calls for other dynamically allocated memory in your structure
-
-    // Close duplicated file descriptors if needed
-    close(shell->in);
-    close(shell->out);
-}
 
 void free_myenv(char **my_env)
 {
@@ -66,54 +70,57 @@ void free_myenv(char **my_env)
 
 ////////////////////////////////might want to change the function return type to int?
 
-int ft_innit_shell(t_shell *shell, char **env)
+int	ft_innit_shell(t_shell *shell, char **env)
 {
     char    *user;
     char    **env_copied;
     char    *prompt_suffix;
     
-    // Initialize prompt to NULL
-    shell->prompt = NULL;
-
     user = ft_strjoin(PURPLE, getenv("USER"));
 
     if (!user)
     {
-        fprintf(stderr, "Failed to allocate memory for user.\n");
+        write(STDERR_FILENO, "Failed to allocate memory for user.\n", 37 );
         return (MEM_ERROR); 
     }
-
     env_copied = ft_get_env(env);
     if (!env_copied)
     {
         write(STDERR_FILENO, "Failed to allocate memory for env_copied.\n", 43 );
         free(user);
-        free_myenv(env_copied);
         return(MEM_ERROR2);
     }
-
-    prompt_suffix = "@ASHellKETCHUM" CLR_RMV " > ";
-    printf("user: %s\n", user);
-    printf("the pc user is %s%s\n", user, CLR_RMV);
-    shell->env = env_copied;    
+    shell->env = env_copied; 
     shell->in = dup(STDIN_FILENO);
     shell->out = dup(STDOUT_FILENO);
+
+    if (shell->in == -1 || shell->out == -1)
+    {
+        write(STDERR_FILENO, "Failed to duplicate file descriptors\n", 38);
+        free_myenv(env_copied);
+        free(shell->prompt);
+        return MEM_ERROR; // or another appropriate error code
+    }
+
+
+    prompt_suffix = "@ASHellKETCHUM" CLR_RMV " > ";
     shell->prompt = ft_strjoin(user, prompt_suffix);
 
     free(user);
 
     if (!shell->prompt)
     {
-        fprintf(stderr, "Failed to allocate memory for prompt.\n");
+        write(STDERR_FILENO, "Failed to allocate memory for prompt.\n", 38);
         free_myenv(env_copied);
         return(MEM_ERROR3);
     }
+    // printf("user: %s\n", user);
+    // printf("the pc user is %s%s\n", user, CLR_RMV);
     printf("prompt: %s\n", shell->prompt);
-
-    // Initialize other members of shell if needed
-    free_myenv(env_copied);
     shell->paths = NULL;
     shell->export = NULL;
+    //free_myenv(env_copied);
+    
     return(0);
 }
 

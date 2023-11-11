@@ -63,38 +63,17 @@ size_t	ft_strlen(const char *str)
 // }
 
 
-
-
-char	*ft_strdup(const char *s)
+char *ft_strdup(const char *s)
 {
-	int		i;
-	int		len;
-	char	*str;
-
-	len = 0;
-	while (s[len])
-		len++;
-	str = (char*)malloc(sizeof(*str) * (len + 1));
-	i = 0;
-	while (i < len)
+    size_t len = ft_strlen(s);
+    char *y = malloc(len + 1);
+    if (!y)
 	{
-		str[i] = s[i];
-		i++;
-	}
-	return (str);
+        return NULL; // Handle allocation failure
+    }
+    ft_memcpy(y, s, len + 1); // Copy the string and the null terminator
+    return y;
 }
-
-// char *ft_strdup(const char *s)
-// {
-//     size_t len = ft_strlen(s);
-//     char *y = malloc(len + 1);
-//     if (!y)
-// 	{
-//         return NULL; // Handle allocation failure
-//     }
-//     ft_memcpy(y, s, len + 1); // Copy the string and the null terminator
-//     return y;
-// }
 
 
 // There is no check for the return value of malloc, ft_strdup, 
