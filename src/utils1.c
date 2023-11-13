@@ -1,6 +1,5 @@
 
-#include "../build/minishell.h"
-
+#include "../include/minishell.h"
 void	ft_bzero(void *s, size_t n)
 {
 	//printf("ft_bzero working properly \n");

@@ -1,5 +1,4 @@
-#include "../build/minishell.h"
-
+#include "../include/minishell.h"
 
 
 void	ft_norm_signal(void)

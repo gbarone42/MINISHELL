@@ -4,7 +4,7 @@ NAME = build/minishell
 # Directories
 SRC_DIR = src
 OBJ_DIR = build
-INCLUDE_DIR = build
+INCLUDE_DIR = include  # Change this to the appropriate folder for header files
 
 # Source files
 SRCS =	${SRC_DIR}/minishell.c	\
@@ -19,6 +19,9 @@ SRCS =	${SRC_DIR}/minishell.c	\
 		${SRC_DIR}/exit.c	\
 		${SRC_DIR}/parsing.c	\
        # Add other source files as necessary
+
+# Header files
+HDRS = ${wildcard ${INCLUDE_DIR}/*.h}
 
 # Object files
 OBJS = ${patsubst ${SRC_DIR}/%.c,${OBJ_DIR}/%.o,${SRCS}}
@@ -40,7 +43,7 @@ CYAN = \033[1;36m
 GOLD = \033[1;33m
 
 # Rule to compile individual source files
-${OBJ_DIR}/%.o: ${SRC_DIR}/%.c
+${OBJ_DIR}/%.o: ${SRC_DIR}/%.c ${HDRS}
 	@mkdir -p ${@D}
 	${CC} ${FLAGS} -c $< -o $@
 
@@ -76,6 +79,5 @@ clear:
 
 mem: clear all
 	valgrind --leak-check=full --suppressions=EXTRA/readline.supp ./build/minishell
-
 
 .PHONY: all clean fclean re x clear mem

@@ -1,5 +1,4 @@
-#include "../build/minishell.h"
-
+#include "../include/minishell.h"
 // static void	ft_norm_signall(void)
 // {
 // 	signal(SIGQUIT, SIG_IGN);

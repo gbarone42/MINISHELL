@@ -1,5 +1,4 @@
-#include "../build/minishell.h"
-
+#include "../include/minishell.h"
 int	g_exit = 0;
 
 // The code has several hard-coded values (like ANSI color codes, and prompts)

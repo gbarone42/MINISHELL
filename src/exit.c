@@ -1,4 +1,4 @@
-#include "../build/minishell.h"
+#include "../include/minishell.h"
 
 void shell_exit(t_shell *shell)
 {
