@@ -1,4 +1,5 @@
 #include "../include/minishell.h"
+
 int	g_exit = 0;
 
 // The code has several hard-coded values (like ANSI color codes, and prompts)
@@ -8,14 +9,12 @@ int	g_exit = 0;
 int	main(int ac, char **av, char **env)
 {
 
-	//char	*str;
 	t_shell	my_shell;
 	int output;
 
 	ft_memset(&my_shell, 0, sizeof(t_shell));
 	
 	//shell = (t_shell *)ft_calloc(1, sizeof(t_shell));
-	//str = "okok";
 	
 	(void)ac;
 	(void)av;
