@@ -15,6 +15,8 @@ void ft_minishell_simulator(t_shell *shell)
             errno = 0;
             shell->input = readline(shell->prompt);
             //printf("%s\n", shell->prompt);
+        if (shell->input == NULL)
+{
         if (errno)  // If readline returned NULL and errno is set, an error occurred
         {
             write(STDERR_FILENO, "readline error: ", 17);  // Print the system error message
@@ -22,8 +24,9 @@ void ft_minishell_simulator(t_shell *shell)
         }
         // EOF received, exit the shell. EOF = end of file
         printf("\n"); // Print a newline for a clean exit after EOF.
-        //free(shell->input);
+        free(shell->input);
         shell_exit(shell);
+}
         if (!ft_strncmp(shell->input, "exit", 5))
         {  
             shell_exit(shell);
