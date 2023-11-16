@@ -41,4 +41,3 @@ git branch -D <branch_name>
 
 when current branch "test" does not have an upstream branch set;
 git push --set-upstream origin test
-
