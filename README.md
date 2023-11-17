@@ -23,14 +23,19 @@
         2. [💼 malloc](#malloc)
         3. [🗑️ free](#free)
 
-    3- [📥 Input/Output](#input-output)
+3. [📥 Input/Output](#input-output)
+
+    - [💾 Memory Allocation](#memory-allocation)
+
         4. [📝 write](#write)
         5. [🔍 access](#access)
         6. [🔓 open](#open)
         7. [📖 read](#read)
         8. [🔒 close](#close)
 
-    4- [🔄 Process Management](#process-management)
+4. [🔄 Process Management](#process-management)
+    - [💾 Memory Allocation](#memory-allocation)
+
         9. [🔄 fork](#fork)
         10. [⌛ wait](#wait)
         11. [⌛ waitpid](#waitpid)
@@ -43,7 +48,9 @@
         18. [🔫 kill](#kill)
         19. [⛔ exit](#exit)
 
-    5- [📁 File and Directory Management](#file-and-directory-management)
+5. [📁 File and Directory Management](#file-and-directory-management)
+    - [💾 Memory Allocation](#memory-allocation)
+
         20. [📂 getcwd](#getcwd)
         21. [📁 chdir](#chdir)
         22. [📊 stat](#stat)
@@ -52,30 +59,42 @@
         25. [🚮 unlink](#unlink)
         26. [💼 execve](#execve)
 
-    6- [🔄 Process Duplication](#process-duplication)
+6. [🔄 Process Duplication](#process-duplication)
+    - [💾 Memory Allocation](#memory-allocation)
+
         27. [🔀 dup](#dup)
         28. [🔀 dup2](#dup2)
         29. [🔧 pipe](#pipe)
 
-    7- [📂 Directory Handling](#directory-handling)
+7. [📂 Directory Handling](#directory-handling)
+    - [💾 Memory Allocation](#memory-allocation)
+
         30. [🚪 opendir](#opendir)
         31. [📖 readdir](#readdir)
         32. [🚪 closedir](#closedir)
 
-    8- [📚 Error Handling](#error-handling)
+8. [📚 Error Handling](#error-handling)
+    - [💾 Memory Allocation](#memory-allocation)
+
         33. [🚨 strerror](#strerror)
         34. [🚨 perror](#perror)
 
-    9- [🔄 Terminal I/O](#terminal-io)
+9. [🔄 Terminal I/O](#terminal-io)
+    - [💾 Memory Allocation](#memory-allocation)
+
         35. [🔍 isatty](#isatty)
         36. [📛 ttyname](#ttyname)
         37. [📛 ttyslot](#ttyslot)
         38. [🔧 ioctl](#ioctl)
 
-    10- [🌐 Environment Variables](#environment-variables)
+10. [🌐 Environment Variables](#environment-variables)
+    - [💾 Memory Allocation](#memory-allocation)
+
         39. [🔄 getenv](#getenv)
 
-    11- [🔧 Termcap Functions](#termcap-functions)
+11. [🔧 Termcap Functions](#termcap-functions)
+    - [💾 Memory Allocation](#memory-allocation)
+    
         40. [🔒 tgetent](#tgetent)
         41. [🔒 tgetflag](#tgetflag)
         42. [🔢 tgetnum](#tgetnum)
