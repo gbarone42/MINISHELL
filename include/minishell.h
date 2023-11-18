@@ -20,6 +20,7 @@
 # include <termios.h>     // for termios functions (e.g., tcsetattr, tcgetattr)
 # include <curses.h>      // for tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
 # include <sys/ioctl.h>   // for ioctl
+//# include <limits.h>	//for PATHMAX
 
 # define INPUT_SIZE 4095
 

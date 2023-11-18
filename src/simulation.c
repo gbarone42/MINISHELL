@@ -1,9 +1,71 @@
 #include "../include/minishell.h"
+#include <time.h>
 // static void	ft_norm_signall(void)
 // {
 // 	signal(SIGQUIT, SIG_IGN);
 // 	signal(SIGINT, signal_handler);
 // }
+
+#ifndef PATH_MAX
+#define PATH_MAX 4096 // You can choose a value that makes sense for your application
+
+#endif
+
+void clear_screen(void)
+{
+    write(STDOUT_FILENO, "\033[H\033[J", 7);
+}
+
+void print_current_directory(void)
+{
+    char current_directory[PATH_MAX];
+    if (getcwd(current_directory, sizeof(current_directory)) != NULL) {
+        printf("%s\n", current_directory);
+    } else {
+        perror("getcwd");
+    }
+}
+
+void print_current_directory_contents(void)
+{
+    DIR *dir = opendir(".");
+    struct dirent *entry;
+
+    if (dir == NULL) {
+        perror("opendir");
+        return;
+    }
+
+    while ((entry = readdir(dir)) != NULL) {
+        printf("%s\n", entry->d_name);
+    }
+
+    closedir(dir);
+}
+
+void print_current_time(void)
+{
+    time_t current_time;
+    struct tm *time_info;
+
+    time(&current_time);
+    time_info = localtime(&current_time);
+
+    char time_str[50];
+    strftime(time_str, sizeof(time_str), "%c", time_info);
+
+    printf("%s\n", time_str);
+}
+
+void whoami_command()
+{
+    char username[1024];
+    if (getlogin_r(username, sizeof(username)) == 0) {
+        printf("super%s\n", username);
+    } else {
+        perror("getlogin_r");
+    }
+}
 
 
 void ft_minishell_simulator(t_shell *shell)
@@ -31,6 +93,26 @@ void ft_minishell_simulator(t_shell *shell)
         {  
             shell_exit(shell);
         }
+        else if (!ft_strncmp(shell->input, "clear", 5))
+        {
+            clear_screen();
+        } 
+        else if (!ft_strncmp(shell->input, "pwd", 3))
+        {
+            print_current_directory();
+        }
+        else if (!ft_strncmp(shell->input, "ls", 2))
+        {
+            print_current_directory_contents();
+        }
+        else if (!ft_strncmp(shell->input, "time", 4))
+        {
+            print_current_time();
+        }
+        else if (!ft_strncmp(shell->input, "whoami", 6))
+        {
+            whoami_command();
+        }
         add_history(shell->input); //input or prompt?
         // if (!ft_strncmp(shell->input, "exit", 5))
         // {
@@ -38,7 +120,7 @@ void ft_minishell_simulator(t_shell *shell)
         // }
         if (ft_isvalid(shell->input))
         {
-				printf("VABENEEELOSTESSOOOOOOOOOOOOOOOO \n");
+				printf("42\n");
 			    shell_parser(shell, &command);
 			    // if (shell->exit == 0)
 				// shell_executor(&command, shell);
