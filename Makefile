@@ -74,7 +74,7 @@ x: fclean all
 
 
 	@echo "${GREEN}Running ${CYAN}${NAME} ${CLR_RMV}..."
-	@./$(NAME)
+	-@./$(NAME)
 #i've added '-' in front of @./$(NAME) because i wanted to silence this error "make: *** [Makefile:75: x] Error 130".
 #i've havent solved the problem at the root, i just silenced this problem that only happens if im compiling with "make x"
 

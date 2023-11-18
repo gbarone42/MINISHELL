@@ -9,7 +9,7 @@ Contents
    2. [🔓 `tcgetattr`](#tcgetattr)
 
 ### 1.2 [📜 Readline Functions](#readline-functions)
-   1. [🚀 `readline`](#readline)
+   1. [🚀 `readline`](https://man7.org/linux/man-pages/man3/readline.3.html)
    2. [🧹 `rl_clear_history`](#rl_clear_history)
    3. [🎉 `rl_on_new_line`](#rl_on_new_line)
    4. [✨ `rl_replace_line`](#rl_replace_line)
@@ -82,7 +82,7 @@ Contents
 
 ## 10. [🌐 Environment Variables](#environment-variables)
    1. [🔄 Environment Variable Operations](#environment-variable-operations)
-      1. [🔄 `getenv`](#getenv)
+      1. [🔄 `getenv`](https://man7.org/linux/man-pages/man3/getenv.3.html)
 
 ## 11. [🔧 Termcap Functions](#termcap-functions)
    1. [🔒 Termcap Database Initialization](#termcap-database-initialization)
