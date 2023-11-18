@@ -6,6 +6,7 @@ SRC_DIR = src
 OBJ_DIR = build
 INCLUDE_DIR = include  # Change this to the appropriate folder for header files
 
+
 # Source files
 SRCS =	${SRC_DIR}/minishell.c	\
 		${SRC_DIR}/utils1.c	\
@@ -16,7 +17,7 @@ SRCS =	${SRC_DIR}/minishell.c	\
 		${SRC_DIR}/init.c	\
 		${SRC_DIR}/signal.c	\
 		${SRC_DIR}/valid.c	\
-		${SRC_DIR}/exit.c	\
+		${SRC_DIR}/builtins/exit.c	\
 		${SRC_DIR}/parsing.c	\
        # Add other source files as necessary
 
