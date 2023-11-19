@@ -6,98 +6,68 @@
 // 	signal(SIGINT, signal_handler);
 // }
 
-#ifndef PATH_MAX
-#define PATH_MAX 4096 // You can choose a value that makes sense for your application
+// #ifndef PATH_MAX
+// #define PATH_MAX 4096 // You can choose a value that makes sense for your application
 
-#endif
+// #endif
+
+// #define HISTORY_SIZE 100
+
+// char* history[HISTORY_SIZE];
+// int history_count = 0;
+
+// void add_to_history(char* command)
+// {
+//     if (history_count < HISTORY_SIZE)
+//     {
+//         history[history_count++] = strdup(command);
+//     }
+//     else
+//     {
+//         free(history[0]);
+//         for (int i = 0; i < history_count - 1; ++i)
+//         {
+//             history[i] = history[i + 1];
+//         }
+//         history[history_count - 1] = strdup(command);
+//     }
+// }
+
+// void display_history(void)
+// {
+//     for (int i = 0; i < history_count; ++i)
+//     {
+//         printf("%d: %s\n", i + 1, history[i]);
+//     }
+// }
 
 
+// void print_current_directory(void)
+// {
+//     char current_directory[PATH_MAX];
+//     if (getcwd(current_directory, sizeof(current_directory)) != NULL) {
+//         printf("%s\n", current_directory);
+//     } else {
+//         perror("getcwd");
+//     }
+// }
 
-#define HISTORY_SIZE 100
+// void print_current_directory_contents(void)
+// {
+//     DIR *dir = opendir(".");
+//     struct dirent *entry;
 
-char* history[HISTORY_SIZE];
-int history_count = 0;
+//     if (dir == NULL) {
+//         perror("opendir");
+//         return;
+//     }
 
-void add_to_history(char* command)
-{
-    if (history_count < HISTORY_SIZE)
-    {
-        history[history_count++] = strdup(command);
-    }
-    else
-    {
-        free(history[0]);
-        for (int i = 0; i < history_count - 1; ++i)
-        {
-            history[i] = history[i + 1];
-        }
-        history[history_count - 1] = strdup(command);
-    }
-}
+//     while ((entry = readdir(dir)) != NULL) {
+//         printf("%s\n", entry->d_name);
+//     }
 
-void display_history(void)
-{
-    for (int i = 0; i < history_count; ++i)
-    {
-        printf("%d: %s\n", i + 1, history[i]);
-    }
-}
-
-void clear_screen(void)
-{
-    write(STDOUT_FILENO, "\033[H\033[J", 7);
-}
-
-void print_current_directory(void)
-{
-    char current_directory[PATH_MAX];
-    if (getcwd(current_directory, sizeof(current_directory)) != NULL) {
-        printf("%s\n", current_directory);
-    } else {
-        perror("getcwd");
-    }
-}
-
-void print_current_directory_contents(void)
-{
-    DIR *dir = opendir(".");
-    struct dirent *entry;
-
-    if (dir == NULL) {
-        perror("opendir");
-        return;
-    }
-
-    while ((entry = readdir(dir)) != NULL) {
-        printf("%s\n", entry->d_name);
-    }
-
-    closedir(dir);
-}
-
-void print_current_time(void)
-{
-    time_t current_time;
-    struct tm *time_info;
-
-    time(&current_time);
-    time_info = localtime(&current_time);
-
-    char time_str[50];
-    strftime(time_str, sizeof(time_str), "%c", time_info);
-
-    printf("%s\n", time_str);
-}
-
-void whoami_command()
-{
-    char username[1024];
-    if (getlogin_r(username, sizeof(username)) == 0) {
-        printf("super%s\n", username);
-    } else {
-        perror("getlogin_r");
-    }
-}
+//     closedir(dir);
+// }
 
 
 void ft_minishell_simulator(t_shell *shell)

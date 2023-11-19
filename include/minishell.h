@@ -188,6 +188,13 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 int	ft_isvalid(const char *input);
 
 
-
+//timet
+void print_current_time(void);
+void display_history(void);
+void add_to_history(char* command);
+void whoami_command();
+void clear_screen(void);
+void print_current_directory_contents(void);
+void print_current_directory(void);
 
 #endif
