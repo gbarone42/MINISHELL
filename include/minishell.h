@@ -196,5 +196,6 @@ void whoami_command();
 void clear_screen(void);
 void print_current_directory_contents(void);
 void print_current_directory(void);
+void handle_echo(char *input);
 
 #endif
