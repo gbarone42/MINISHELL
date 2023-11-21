@@ -115,17 +115,17 @@ void ft_minishell_simulator(t_shell *shell)
             shell->input = readline(shell->prompt);
             //printf("%s\n", shell->prompt);
         if (shell->input == NULL)
-{
-        if (errno)  // If readline returned NULL and errno is set, an error occurred
         {
-            write(STDERR_FILENO, "readline error: ", 17);  // Print the system error message
-            continue;  // Optionally, decide whether to continue or exit
-        }
+            if (errno)  // If readline returned NULL and errno is set, an error occurred
+            {
+                write(STDERR_FILENO, "readline error: ", 17);  // Print the system error message
+                continue;  // Optionally, decide whether to continue or exit
+            }
         // EOF received, exit the shell. EOF = end of file
         printf("\n"); // Print a newline for a clean exit after EOF.
         free(shell->input);
         shell_exit(shell);
-}
+        }
         builtins_call(shell);
         add_to_history(shell->input); 
         if (ft_isvalid(shell->input))
@@ -138,7 +138,7 @@ void ft_minishell_simulator(t_shell *shell)
                 // of the input, you can move it inside the block.
                 // so should i put builtins_call(shell) here or not?
 
-				printf("42\n");
+				printf("\n\n                     42\n");
 			    shell_parser(shell, &command);
 			    // if (shell->exit == 0)
 				// shell_executor(&command, shell);

@@ -4,7 +4,7 @@ void	shell_parser(t_shell *shell, t_pars **command)
     (void)shell;
     (void)command;
     //char		**inputs;
-    printf("\nPARSING IS COMING \n");
+    //printf("\nPARSING IS COMING \n");
 
     char		**inputs;
     inputs = input_handler(shell);
