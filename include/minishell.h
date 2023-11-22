@@ -197,5 +197,10 @@ void clear_screen(void);
 void print_current_directory_contents(void);
 void print_current_directory(void);
 void handle_echo(char *input);
+void handle_echo_n(char *input);
+
+ void builtins_call(t_shell *shell);
+//  void handle_builtins(t_shell *shell)
+//  void handle_builtins_extra(t_shell *shell)
 
 #endif

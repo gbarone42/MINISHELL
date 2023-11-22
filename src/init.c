@@ -1,25 +1,5 @@
 #include "../include/minishell.h"
-/*
-char	**ft_get_env(char **env)
-{
-	char	**my_env;
-	int		i;
 
-
-	//printf("ft_get_env called correctly \n");
-	i = 0;
-	while (env != NULL && env[i])
-		i++;
-	my_env = (char **)malloc(sizeof(char *) * (i + 1));
-	i = 0;
-	while (env[i])
-	{
-		my_env[i] = ft_strdup(env[i]);
-		i++;
-	}
-	my_env[i] = NULL;
-	return (my_env);
-}*/
 char **ft_get_env(char **env)
 {
     char **my_env = NULL;
