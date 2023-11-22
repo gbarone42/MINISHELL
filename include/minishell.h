@@ -203,7 +203,8 @@ void handle_echo_n(char *input);
 //  void handle_builtins(t_shell *shell)
 //  void handle_builtins_extra(t_shell *shell)
 
-void change_directory(t_shell *shell);
+
+void change_directory(t_shell *shell, char *path);
 void update_prompt(t_shell *shell);
 
 #endif

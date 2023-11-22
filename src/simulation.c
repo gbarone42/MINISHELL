@@ -6,39 +6,30 @@
 
 #endif
 
-void change_directory(t_shell *shell)
+void change_directory(t_shell *shell, char *path)
 {
-    char *path; // should be used to store the path to the target directory
+    // Use path to change the directory
+    // If path is NULL, go to the home directory
 
-    // Skip the "cd" part
-    path = shell->input + 2;
-
-    // Skip leading whitespaces
-    while (*path && (*path == ' ' || *path == '\t'))
-    {
-        path++;
-    }
-
-    if (*path == '\0')
+    if (path == NULL)
     {
         // No path provided, default to home directory
         path = getenv("HOME");
     }
 
     // Implement the logic for changing the directory
-    if (chdir(path) != 0)
-    {
-        perror("cd"); // Print an error message if chdir fails
+    if (chdir(path) == 0)
+    {   
+        printf("Changed to directory: %s\n", path);
     }
     else
     {
-        printf("Changed to directory: %s\n", path);
+         perror("cd"); // Print an error message if chdir fails
     }
-
     // Optionally, update the prompt to show the new directory
     update_prompt(shell);
-    printf("Prompt: %s\n", shell->prompt);
 }
+
 
 void update_prompt(t_shell *shell)
 {
@@ -46,20 +37,21 @@ void update_prompt(t_shell *shell)
     // For example, you can use getcwd() to get the current working directory
 
     char cwd[PATH_MAX];
-    if (getcwd(cwd, sizeof(cwd)) != NULL)
-    {
-        // Update the prompt with the new current working directory
-        free(shell->prompt); // Free the old prompt
-        shell->prompt = ft_strjoin(PURPLE, getenv("USER")); // You can customize this part
-        shell->prompt = ft_strjoin(shell->prompt, "@");
-        shell->prompt = ft_strjoin(shell->prompt, cwd);
-        shell->prompt = ft_strjoin(shell->prompt, CLR_RMV);
-        shell->prompt = ft_strjoin(shell->prompt, " > ");
-    }
-    else
+    if (getcwd(cwd, sizeof(cwd)) == NULL)
     {
         perror("getcwd");
+        fprintf(stderr, "Error: Unable to get current working directory\n");
+        return;
     }
+
+    // Update the prompt with the new current working directory
+    free(shell->prompt); // Free the old prompt
+    shell->prompt = ft_strjoin(PURPLE, getenv("USER")); // You can customize this part
+    shell->prompt = ft_strjoin(shell->prompt, "@");
+    shell->prompt = ft_strjoin(shell->prompt, cwd);
+    shell->prompt = ft_strjoin(shell->prompt, CLR_RMV);
+    shell->prompt = ft_strjoin(shell->prompt, " > ");
+    printf("Updated prompt: %s\n", shell->prompt);
 }
 
 // void change_directory(t_shell *shell)
@@ -95,7 +87,19 @@ void handle_basic_builtins(t_shell *shell)
     }
     else if (!ft_strncmp(shell->input, "cd", 3))
     {
-        change_directory(shell);
+        char **args = ft_split(shell->input, ' ');
+
+        if (args && args[1])
+        {
+            // cd has arguments, attempt to change directory
+            change_directory(shell, args[1]);
+            free(args);
+        }
+        else
+        {
+            // cd without arguments, go to the home directory
+            change_directory(shell, NULL);
+        }
     }
     else if (!ft_strncmp(shell->input, "echo -n", 7))
     {
