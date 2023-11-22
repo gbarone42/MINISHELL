@@ -34,6 +34,11 @@ void shell_exit(t_shell *shell)
             free(shell->export[i++]);
         free(shell->export);
     }
+    // Free history
+    for (i = 0; i < history_count; ++i)
+    {
+        free(history[i]);
+    }
     exit(g_exit);
 }
 

@@ -1,4 +1,6 @@
 -*-
 
-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=leak_info.txt build/./minishell
+valgrind --leak-check=full --show-leak-kinds=all --suppressions=EXTRA/readline.supp --track-origins=yes --verbose --log-file=leak_info.txt build/./minishell
+valgrind --leak-check=full --show-leak-kinds=all --suppressions=EXTRA/readline.supp --log-file=leak_info.txt build/./minishell
+
 

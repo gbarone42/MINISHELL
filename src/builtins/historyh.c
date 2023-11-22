@@ -4,9 +4,10 @@
 
 char* history[HISTORY_SIZE];
 int history_count = 0;
-
+//manca il free
 void add_to_history(char* command)
 {
+    add_history(command);
     if (history_count < HISTORY_SIZE)
     {
         history[history_count++] = strdup(command);

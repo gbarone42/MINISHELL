@@ -54,31 +54,6 @@ void update_prompt(t_shell *shell)
     printf("Updated prompt: %s\n", shell->prompt);
 }
 
-// void change_directory(t_shell *shell)
-// {
-//     char *path;
-
-//     // Skip the "cd" part
-//     path = shell->input + 2;
-
-//     // Skip leading whitespaces
-//     while (*path && (*path == ' ' || *path == '\t'))
-//     {
-//         path++;
-//     }
-
-//     // Implement the logic for changing the directory
-//     // You can use chdir() function to change the current working directory
-
-//     if (chdir(path) != 0)
-//     {
-//         perror("cd"); // Print an error message if chdir fails
-//     }
-
-//     // Optionally, update the prompt to show the new directory
-//     // For example, you can update shell->prompt here
-// }
-
 void handle_basic_builtins(t_shell *shell)
 {
     if (!ft_strncmp(shell->input, "exit", 5))

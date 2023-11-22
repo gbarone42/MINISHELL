@@ -4,6 +4,7 @@
    ...
    ...
    fun:readline
+   fun:ft_minishell_simulator
    fun:main
 }
 
