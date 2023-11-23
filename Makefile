@@ -25,6 +25,11 @@ SRCS =	${SRC_DIR}/minishell.c	\
 		${SRC_DIR}/builtins/pwds.c	\
 		${SRC_DIR}/builtins/lss.c	\
 		${SRC_DIR}/builtins/echos.c	\
+		${SRC_DIR}/builtins/cdd.c	\
+		${SRC_DIR}/builtins/handlebuiltins.c	\
+		${SRC_DIR}/builtins/envv.c	\
+		${SRC_DIR}/builtins/suspend.c	\
+		${SRC_DIR}/builtins/export_unset.c	\
 		${SRC_DIR}/parsing.c	\
        # Add other source files as necessary
 

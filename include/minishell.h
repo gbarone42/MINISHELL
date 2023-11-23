@@ -153,6 +153,10 @@ void handle_echo_n(char *input);
 void builtins_call(t_shell *shell);
 void change_directory(t_shell *shell, char *path);
 void update_prompt(t_shell *shell);
+void handle_unset(t_shell *shell);
+void handle_env(t_shell *shell);
+void handle_suspend(void);
+void handle_export(t_shell *shell);
 
 #endif // HISTORY_H
 
