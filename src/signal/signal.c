@@ -1,5 +1,7 @@
 #include "../../build/minishell.h"
 
+
+
 void clearCurrentLine()
 {
     printf("\r\033[K");
