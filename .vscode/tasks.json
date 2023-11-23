@@ -11,16 +11,9 @@
 				"-g",
 				"-lreadline",
 				"*.c",
-				"builtins/clears.c",
-				"builtins/echos.c",
-				"builtins/exit.c",
-				"builtins/historyh.c",
-				"builtins/lss.c",
-				"builtins/pwds.c",
-				"builtins/timet.c",
-				"builtins/whoami.c",
+				"builtins/*.c",
 				"-o",
-				"${fileDirname}/${fileBasenameNoExtension}"
+				"${fileDirname}/minishell"
 			],
 			"options": {
 				"cwd": "${fileDirname}"

@@ -94,6 +94,32 @@ void handle_other_builtins(t_shell *shell)
 
 void builtins_call(t_shell *shell)
 {
-    handle_basic_builtins(shell);
-    handle_other_builtins(shell);
+    // if (!ft_strncmp(shell->input, "exit", 5)
+    //     || !ft_strncmp(shell->input, "cd", 3)
+    //     || !ft_strncmp(shell->input, "echo -n", 7)
+    //     || !ft_strncmp(shell->input, "echo", 4)
+    //     || !ft_strncmp(shell->input, "pwd", 3)
+    //     || !ft_strncmp(shell->input, "history", 7)
+    //     || !ft_strncmp(shell->input, "export", 6)
+    //     || !ft_strncmp(shell->input, "unset", 5)
+    //     || !ft_strncmp(shell->input, "env", 3)
+    //     || !ft_strncmp(shell->input, "clear", 5)
+    //     || !ft_strncmp(shell->input, "ls", 2)
+    //     || !ft_strncmp(shell->input, "time", 4)
+    //     || !ft_strncmp(shell->input, "whoami", 6)
+    //     || !ft_strncmp(shell->input, "suspend", 7))
+    //{
+        // The input matches a built-in command
+        handle_basic_builtins(shell);
+        handle_other_builtins(shell);
+    //}
+    // else
+    // {
+    //     // The input doesn't match any built-in commands, try to execute it
+    //     t_pars *command;
+    //     shell_parser(shell, &command);
+    //     // Add additional conditions or error handling as needed
+    //     if (shell->exit == 0)
+    //         shell_executor(&command, shell);
+    // }
 }
