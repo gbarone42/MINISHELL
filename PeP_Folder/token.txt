@@ -9,3 +9,6 @@ git remote set-url origin https://gbarone42:ghp_OZ9LZNiV54o224nUM1dk2eVwwuDYFR27
 
 
 Markdown Preview Marr Bierner
+
+
+//check if strcmp has a 0 at the l

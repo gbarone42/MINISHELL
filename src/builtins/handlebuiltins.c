@@ -2,11 +2,11 @@
 
 void handle_basic_builtins(t_shell *shell)
 {
-    if (!ft_strncmp(shell->input, "exit", 5))
+    if (!ft_strncmp(shell->input, "exit", 4))
     {
         shell_exit(shell);
     }
-    else if (!ft_strncmp(shell->input, "cd", 3))
+    else if (!ft_strncmp(shell->input, "cd", 2))
     {
         char **args = ft_split(shell->input, ' ');
 
