@@ -53,6 +53,85 @@ void update_prompt(t_shell *shell)
     shell->prompt = ft_strjoin(shell->prompt, " > ");
     printf("Updated prompt: %s\n", shell->prompt);
 }
+void handle_unset(t_shell *shell)
+{
+    // Check if there are arguments after 'unset'
+    if (shell->input && shell->input[0] != '\0') {
+        // Unset the environment variable
+        unsetenv(shell->input);
+    } else {
+        // If no arguments provided, print an error message
+        printf("Usage: unset VARIABLE_NAME\n");
+    }
+}
+
+void handle_env(t_shell *shell)
+{
+    // Print the list of environment variables
+    char **env = shell->env;
+    while (*env) {
+        printf("%s\n", *env);
+        env++;
+    }
+}
+
+void handle_suspend(void)
+{
+    // Send a SIGTSTP signal to suspend the shell
+    if (kill(getpid(), SIGTSTP) == -1) {
+        perror("suspend");
+    }
+}
+
+
+void handle_export(t_shell *shell)
+{
+    // Check if there are arguments after 'export'
+    if (shell->input && shell->input[0] != '\0')
+    {
+        // Split the input into variable and value
+        char **args = ft_split(shell->input, '=');
+
+        // Check if the split was successful and contains at least one element
+        if (args && args[0])
+        {
+            // Set the environment variable
+            if (args[1])
+                setenv(args[0], args[1], 1);
+            else
+                setenv(args[0], "", 1);
+        }
+
+        // Free the allocated memory
+        free(args);
+    }
+    else
+    {
+        // If no arguments provided, print the list of environment variables
+        char **env = shell->env;
+        while (*env) {
+            printf("%s\n", *env);
+            env++;
+        }
+    }
+}
+
+// void find_files(char *path, char *filename)
+// {
+//     DIR *dir;
+//     struct dirent *entry;
+
+//     if ((dir = opendir(path)) != NULL) {
+//         while ((entry = readdir(dir)) != NULL) {
+//             if (strcmp(entry->d_name, filename) == 0) {
+//                 printf("%s/%s\n", path, entry->d_name);
+//             }
+//         }
+//         closedir(dir);
+//     } else {
+//         perror("opendir() error");
+//     }
+// }
 
 void handle_basic_builtins(t_shell *shell)
 {
@@ -92,6 +171,19 @@ void handle_basic_builtins(t_shell *shell)
     {
         display_history();
     }
+    else if (!ft_strncmp(shell->input, "export", 6))
+    {
+        handle_export(shell);
+    }
+    else if (!ft_strncmp(shell->input, "unset", 5))
+    {
+        handle_unset(shell);
+    }
+    else if (!ft_strncmp(shell->input, "env", 3))
+    {
+        handle_env(shell);
+    }
+
 }
 
 // Function to handle other built-in commands (clear, ls, time, whoami)
@@ -113,6 +205,24 @@ void handle_other_builtins(t_shell *shell)
     {
         whoami_command();
     }
+    else if (!ft_strncmp(shell->input, "suspend", 7))
+    {
+        handle_suspend();
+    }
+    // else if (!ft_strncmp(shell->input, "find", 4))
+    // {
+    //     char **args = ft_split(shell->input, ' ');
+
+    //     if (args && args[1])
+    //     {
+    //         find_files(".", args[1]);  // Assuming you want to search in the current directory
+    //         free(args);
+    //     }
+    //     else
+    //     {
+    //         printf("Usage: find FILENAME\n");
+    //     }
+    // }
 }
 
 void builtins_call(t_shell *shell)
