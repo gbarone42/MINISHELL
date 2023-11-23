@@ -130,7 +130,7 @@ void ft_bzero(void *s, size_t n);
 //utils2
 char *ft_strjoin(char const *s1, char const *s2);
 char **ft_split(char const *s, char c);
-size_t ft_strlcpy(char *dst, char *src, size_t size);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 
 //utils3
 void *ft_memset(void *b, int c, size_t len);
