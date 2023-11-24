@@ -1,51 +1,94 @@
-==106937== Memcheck, a memory error detector
-==106937== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==106937== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==106937== Command: build/./minishell
-==106937== Parent PID: 106408
-==106937== 
---106937-- WARNING: Serious error when reading debug info
---106937-- When reading debug info from /nfs/homes/everonel/Desktop/GBARONE/MINISHELL/build/minishell:
---106937-- Ignoring non-Dwarf2/3/4 block in .debug_info
---106937-- WARNING: Serious error when reading debug info
---106937-- When reading debug info from /nfs/homes/everonel/Desktop/GBARONE/MINISHELL/build/minishell:
---106937-- Ignoring non-Dwarf2/3/4 block in .debug_info
---106937-- WARNING: Serious error when reading debug info
---106937-- When reading debug info from /nfs/homes/everonel/Desktop/GBARONE/MINISHELL/build/minishell:
---106937-- Ignoring non-Dwarf2/3/4 block in .debug_info
---106937-- WARNING: Serious error when reading debug info
---106937-- When reading debug info from /nfs/homes/everonel/Desktop/GBARONE/MINISHELL/build/minishell:
---106937-- Ignoring non-Dwarf2/3/4 block in .debug_info
---106937-- WARNING: Serious error when reading debug info
---106937-- When reading debug info from /nfs/homes/everonel/Desktop/GBARONE/MINISHELL/build/minishell:
---106937-- Ignoring non-Dwarf2/3/4 block in .debug_info
---106937-- WARNING: Serious error when reading debug info
---106937-- When reading debug info from /nfs/homes/everonel/Desktop/GBARONE/MINISHELL/build/minishell:
---106937-- Ignoring non-Dwarf2/3/4 block in .debug_info
---106937-- WARNING: Serious error when reading debug info
---106937-- When reading debug info from /nfs/homes/everonel/Desktop/GBARONE/MINISHELL/build/minishell:
---106937-- Ignoring non-Dwarf2/3/4 block in .debug_info
---106937-- WARNING: Serious error when reading debug info
---106937-- When reading debug info from /nfs/homes/everonel/Desktop/GBARONE/MINISHELL/build/minishell:
---106937-- parse_CU_Header: is neither DWARF2 nor DWARF3 nor DWARF4
-==106937== 
-==106937== HEAP SUMMARY:
-==106937==     in use at exit: 200,649 bytes in 215 blocks
-==106937==   total heap usage: 499 allocs, 284 frees, 224,545 bytes allocated
-==106937== 
-==106937== 5 bytes in 1 blocks are still reachable in loss record 1 of 58
-==106937==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==106937==    by 0x495238E: strdup (strdup.c:42)
-==106937==    by 0x10A8B0: add_to_history (in /nfs/homes/everonel/Desktop/GBARONE/MINISHELL/build/minishell)
-==106937==    by 0x10A101: ft_minishell_simulator (simulation.c:146)
-==106937==    by 0x109569: main (minishell.c:32)
-==106937== 
-==106937== LEAK SUMMARY:
-==106937==    definitely lost: 0 bytes in 0 blocks
-==106937==    indirectly lost: 0 bytes in 0 blocks
-==106937==      possibly lost: 0 bytes in 0 blocks
-==106937==    still reachable: 5 bytes in 1 blocks
-==106937==         suppressed: 200,644 bytes in 214 blocks
-==106937== 
-==106937== For lists of detected and suppressed errors, rerun with: -s
-==106937== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==884387== Memcheck, a memory error detector
+==884387== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==884387== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==884387== Command: build/./minishell
+==884387== Parent PID: 864460
+==884387== 
+==884387== 
+==884387== HEAP SUMMARY:
+==884387==     in use at exit: 204,821 bytes in 223 blocks
+==884387==   total heap usage: 510 allocs, 287 frees, 228,789 bytes allocated
+==884387== 
+==884387== 3 bytes in 1 blocks are indirectly lost in loss record 1 of 66
+==884387==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==884387==    by 0x109A4D: ft_newsub (utils2.c:67)
+==884387==    by 0x109B40: ft_split (utils2.c:89)
+==884387==    by 0x10AAB5: handle_basic_builtins (handlebuiltins.c:6)
+==884387==    by 0x10AE2A: builtins_call (handlebuiltins.c:120)
+==884387==    by 0x109D51: ft_minishell_simulator (simulation.c:51)
+==884387==    by 0x109609: main (minishell.c:32)
+==884387== 
+==884387== 5 bytes in 1 blocks are still reachable in loss record 2 of 66
+==884387==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==884387==    by 0x109A4D: ft_newsub (utils2.c:67)
+==884387==    by 0x109B40: ft_split (utils2.c:89)
+==884387==    by 0x10AAB5: handle_basic_builtins (handlebuiltins.c:6)
+==884387==    by 0x10AE2A: builtins_call (handlebuiltins.c:120)
+==884387==    by 0x109D51: ft_minishell_simulator (simulation.c:51)
+==884387==    by 0x109609: main (minishell.c:32)
+==884387== 
+==884387== 16 bytes in 1 blocks are still reachable in loss record 9 of 66
+==884387==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==884387==    by 0x109B07: ft_split (utils2.c:84)
+==884387==    by 0x10AAB5: handle_basic_builtins (handlebuiltins.c:6)
+==884387==    by 0x10AE2A: builtins_call (handlebuiltins.c:120)
+==884387==    by 0x109D51: ft_minishell_simulator (simulation.c:51)
+==884387==    by 0x109609: main (minishell.c:32)
+==884387== 
+==884387== 16 bytes in 1 blocks are definitely lost in loss record 10 of 66
+==884387==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==884387==    by 0x10985B: ft_strjoin (utils2.c:11)
+==884387==    by 0x10A9A7: update_prompt (cdd.c:48)
+==884387==    by 0x10A8FF: change_directory (cdd.c:29)
+==884387==    by 0x10ABE9: handle_basic_builtins (handlebuiltins.c:29)
+==884387==    by 0x10AE2A: builtins_call (handlebuiltins.c:120)
+==884387==    by 0x109D51: ft_minishell_simulator (simulation.c:51)
+==884387==    by 0x109609: main (minishell.c:32)
+==884387== 
+==884387== 17 bytes in 1 blocks are definitely lost in loss record 11 of 66
+==884387==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==884387==    by 0x10985B: ft_strjoin (utils2.c:11)
+==884387==    by 0x10A9CA: update_prompt (cdd.c:49)
+==884387==    by 0x10A8FF: change_directory (cdd.c:29)
+==884387==    by 0x10ABE9: handle_basic_builtins (handlebuiltins.c:29)
+==884387==    by 0x10AE2A: builtins_call (handlebuiltins.c:120)
+==884387==    by 0x109D51: ft_minishell_simulator (simulation.c:51)
+==884387==    by 0x109609: main (minishell.c:32)
+==884387== 
+==884387== 19 (16 direct, 3 indirect) bytes in 1 blocks are definitely lost in loss record 12 of 66
+==884387==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==884387==    by 0x109B07: ft_split (utils2.c:84)
+==884387==    by 0x10AAB5: handle_basic_builtins (handlebuiltins.c:6)
+==884387==    by 0x10AE2A: builtins_call (handlebuiltins.c:120)
+==884387==    by 0x109D51: ft_minishell_simulator (simulation.c:51)
+==884387==    by 0x109609: main (minishell.c:32)
+==884387== 
+==884387== 36 bytes in 1 blocks are definitely lost in loss record 16 of 66
+==884387==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==884387==    by 0x10985B: ft_strjoin (utils2.c:11)
+==884387==    by 0x10A9F0: update_prompt (cdd.c:50)
+==884387==    by 0x10A8FF: change_directory (cdd.c:29)
+==884387==    by 0x10ABE9: handle_basic_builtins (handlebuiltins.c:29)
+==884387==    by 0x10AE2A: builtins_call (handlebuiltins.c:120)
+==884387==    by 0x109D51: ft_minishell_simulator (simulation.c:51)
+==884387==    by 0x109609: main (minishell.c:32)
+==884387== 
+==884387== 40 bytes in 1 blocks are definitely lost in loss record 17 of 66
+==884387==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==884387==    by 0x10985B: ft_strjoin (utils2.c:11)
+==884387==    by 0x10AA13: update_prompt (cdd.c:51)
+==884387==    by 0x10A8FF: change_directory (cdd.c:29)
+==884387==    by 0x10ABE9: handle_basic_builtins (handlebuiltins.c:29)
+==884387==    by 0x10AE2A: builtins_call (handlebuiltins.c:120)
+==884387==    by 0x109D51: ft_minishell_simulator (simulation.c:51)
+==884387==    by 0x109609: main (minishell.c:32)
+==884387== 
+==884387== LEAK SUMMARY:
+==884387==    definitely lost: 125 bytes in 5 blocks
+==884387==    indirectly lost: 3 bytes in 1 blocks
+==884387==      possibly lost: 0 bytes in 0 blocks
+==884387==    still reachable: 21 bytes in 2 blocks
+==884387==         suppressed: 204,672 bytes in 215 blocks
+==884387== 
+==884387== For lists of detected and suppressed errors, rerun with: -s
+==884387== ERROR SUMMARY: 5 errors from 5 contexts (suppressed: 0 from 0)

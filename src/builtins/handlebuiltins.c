@@ -58,7 +58,7 @@ void handle_basic_builtins(t_shell *shell)
         handle_env(shell);
     }
 
-}
+} ///freeeare la speppa appena peppata
 
 // Function to handle other built-in commands (clear, ls, time, whoami)
 void handle_other_builtins(t_shell *shell)
