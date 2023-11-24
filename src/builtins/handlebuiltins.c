@@ -1,15 +1,22 @@
 #include "../../include/minishell.h"
 
 void handle_basic_builtins(t_shell *shell)
-{
-    if (!ft_strncmp(shell->input, "exit", 4))
+{   
+    printf("Input before comparison: %s\n", shell->input);
+    char **args = ft_split(shell->input, ' ');
+    printf("First command of Input after comparison: %s\n", args[0]);
+    for (int i = 0; args[i]; i++)
+    {
+        printf("Arg[%d]: %s\n", i, args[i]);
+    }
+    
+    if (!ft_strncmp(shell->input, "exit", 5))
     {
         shell_exit(shell);
     }
-    else if (!ft_strncmp(shell->input, "cd", 2))
+    else if (!ft_strncmp(args[0], "cd", 3))
     {
-        char **args = ft_split(shell->input, ' ');
-
+        printf("Input: %s\n", shell->input);
         if (args && args[1])
         {
             // cd has arguments, attempt to change directory
@@ -22,31 +29,31 @@ void handle_basic_builtins(t_shell *shell)
             change_directory(shell, NULL);
         }
     }
-    else if (!ft_strncmp(shell->input, "echo -n", 7))
+    else if (!ft_strncmp(shell->input, "echo -n", 8))
     {
         handle_echo_n(shell->input);
     }
-    else if (!ft_strncmp(shell->input, "echo", 4))
+    else if (!ft_strncmp(shell->input, "echo", 5))
     {
         handle_echo(shell->input);
     }
-    else if (!ft_strncmp(shell->input, "pwd", 3))
+    else if (!ft_strncmp(shell->input, "pwd", 4))
     {
         print_current_directory();
     }
-    else if (!ft_strncmp(shell->input, "history", 7))
+    else if (!ft_strncmp(shell->input, "history", 8))
     {
         display_history();
     }
-    else if (!ft_strncmp(shell->input, "export", 6))
+    else if (!ft_strncmp(shell->input, "export", 7))
     {
         handle_export(shell);
     }
-    else if (!ft_strncmp(shell->input, "unset", 5))
+    else if (!ft_strncmp(shell->input, "unset", 6))
     {
         handle_unset(shell);
     }
-    else if (!ft_strncmp(shell->input, "env", 3))
+    else if (!ft_strncmp(shell->input, "env", 4))
     {
         handle_env(shell);
     }
@@ -56,23 +63,23 @@ void handle_basic_builtins(t_shell *shell)
 // Function to handle other built-in commands (clear, ls, time, whoami)
 void handle_other_builtins(t_shell *shell)
 {
-    if (!ft_strncmp(shell->input, "clear", 5))
+    if (!ft_strncmp(shell->input, "clear", 6))
     {
         clear_screen();
     }
-    else if (!ft_strncmp(shell->input, "ls", 2))
+    else if (!ft_strncmp(shell->input, "ls", 3))
     {
         print_current_directory_contents();
     }
-    else if (!ft_strncmp(shell->input, "time", 4))
+    else if (!ft_strncmp(shell->input, "time", 5))
     {
         print_current_time();
     }
-    else if (!ft_strncmp(shell->input, "whoami", 6))
+    else if (!ft_strncmp(shell->input, "whoami", 7))
     {
         whoami_command();
     }
-    else if (!ft_strncmp(shell->input, "suspend", 7))
+    else if (!ft_strncmp(shell->input, "suspend", 8))
     {
         handle_suspend();
     }

@@ -5,7 +5,6 @@
 
 #endif
 
-
 void change_directory(t_shell *shell, char *path)
 {
     // Use path to change the directory

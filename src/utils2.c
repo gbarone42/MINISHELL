@@ -69,7 +69,7 @@ char	*ft_newsub(char **str, char c)
 		return (NULL);
 	ft_strlcpy(unptr, *str, i + 1);
 	*str = *str + i + ((*str)[i] == c ? 1 : 0);
-	printf("%s\n", unptr);
+	//printf("%s\n", unptr);
 	return (unptr);
 }
 
