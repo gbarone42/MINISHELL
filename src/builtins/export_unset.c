@@ -1,6 +1,5 @@
 #include "../../include/minishell.h"
 
-
 void handle_unset(t_shell *shell)
 {
     // Check if there are arguments after 'unset'

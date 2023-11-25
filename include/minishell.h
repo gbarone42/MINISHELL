@@ -108,6 +108,7 @@ int pipe_handler_quote(const char *s, size_t *i);
 
 //signal
 void signal_handler(int sig);
+void ft_ctrld(t_shell *shell);
 void ft_norm_signal(void);
 
 //simulation

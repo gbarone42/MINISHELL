@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/nfs/homes/everonel/Desktop/GBARONE/MINISHELL/src",
-      "program": "/nfs/homes/everonel/Desktop/GBARONE/MINISHELL/build/minishell",
+      "cwd": "/home/badph/Desktop/ooo/MINISHELL/src",
+      "program": "/home/badph/Desktop/ooo/MINISHELL/build/minishell",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

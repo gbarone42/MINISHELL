@@ -1,25 +1,29 @@
 #include "../include/minishell.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char *ft_strjoin(char const *s1, char const *s2)
 {
-	unsigned int	i;
-	char			*p;
-	int				l;
-	int				j;
+    unsigned int i;
+    char *p;
+    int l;
+    int j;
 
-	l = ft_strlen(s1) + ft_strlen(s2) + 1;
-	p = malloc(l);
-	if (!p)
-		return (0);
-	j = 0;
-	i = 0;
-	while (s1[i] != 0)
-		p[j++] = s1[i++];
-	i = 0;
-	while (s2[i] != 0)
-		p[j++] = s2[i++];
-	p[j] = 0;
-	return (p);
+    l = ft_strlen(s1) + ft_strlen(s2) + 1;
+    p = malloc(l);
+    if (!p)
+        return (0);
+    j = 0;
+    i = 0;
+    while (s1[i] != 0)
+        p[j++] = s1[i++];
+    i = 0;
+    while (s2[i] != 0)
+        p[j++] = s2[i++];
+    p[j] = 0;
+
+    // Free the allocated memory before returning
+    free(p);
+
+    return (p);
 }
 
 
@@ -56,21 +60,24 @@ int	ft_countdel(const char *str, char del)
 	return (countdel + 1);
 }
 
-char	*ft_newsub(char **str, char c)
+char *ft_newsub(char **str, char c)
 {
-	int		i;
-	char	*unptr;
+    int i;
+    char *unptr;
 
-	i = 0;
-	while ((*str)[i] != '\0' && (*str)[i] != c)
-		i++;
-	unptr = malloc(sizeof(char) * (i + 1));
-	if (unptr == NULL)
-		return (NULL);
-	ft_strlcpy(unptr, *str, i + 1);
-	*str = *str + i + ((*str)[i] == c ? 1 : 0);
-	//printf("%s\n", unptr);
-	return (unptr);
+    i = 0;
+    while ((*str)[i] != '\0' && (*str)[i] != c)
+        i++;
+    unptr = malloc(sizeof(char) * (i + 1));
+    if (unptr == NULL)
+        return (NULL);
+    ft_strlcpy(unptr, *str, i + 1);
+    *str = *str + i + ((*str)[i] == c ? 1 : 0);
+
+    // Free the allocated memory before returning
+    free(unptr);
+
+    return (unptr);
 }
 
 char	**ft_split(const char *s, char c)

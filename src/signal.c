@@ -1,5 +1,14 @@
 #include "../include/minishell.h"
 
+void ft_ctrld(t_shell *shell)
+{
+    if (errno) {
+        write(STDERR_FILENO, "readline error: ", 17);
+    }
+    printf("\n");
+    free(shell->input);
+    shell_exit(shell);
+}
 
 void	ft_norm_signal(void)
 {

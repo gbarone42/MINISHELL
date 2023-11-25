@@ -12,7 +12,11 @@ void handle_basic_builtins(t_shell *shell)
     
     if (!ft_strncmp(shell->input, "exit", 5))
     {
+        
+                free(args);
+
         shell_exit(shell);
+        free(args);
     }
     else if (!ft_strncmp(args[0], "cd", 3))
     {
@@ -21,7 +25,6 @@ void handle_basic_builtins(t_shell *shell)
         {
             // cd has arguments, attempt to change directory
             change_directory(shell, args[1]);
-            free(args);
         }
         else
         {
@@ -58,7 +61,9 @@ void handle_basic_builtins(t_shell *shell)
         handle_env(shell);
     }
 
-} ///freeeare la speppa appena peppata
+    // Free the memory allocated for args
+    free(args);
+} 
 
 // Function to handle other built-in commands (clear, ls, time, whoami)
 void handle_other_builtins(t_shell *shell)

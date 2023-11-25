@@ -69,3 +69,32 @@ int	main(int ac, char **av, char **env)
 //
 //     free(shell); // Finally, free the shell structure itself
 // }
+
+
+
+
+
+// {
+//   "version": "0.2.0",
+//   "configurations": [
+//     {
+//       "name": "C/C++ Runner: Debug Session",
+//       "type": "cppdbg",
+//       "request": "launch",
+//       "args": [],
+//       "stopAtEntry": false,
+//       "externalConsole": false,
+//       "cwd": "/nfs/homes/everonel/Desktop/GBARONE/MINISHELL/src",
+//       "program": "/nfs/homes/everonel/Desktop/GBARONE/MINISHELL/build/minishell",
+//       "MIMode": "gdb",
+//       "miDebuggerPath": "gdb",
+//       "setupCommands": [
+//         {
+//           "description": "Enable pretty-printing for gdb",
+//           "text": "-enable-pretty-printing",
+//           "ignoreFailures": true
+//         }
+//       ]
+//     }
+//   ]
+// }
