@@ -158,6 +158,7 @@ void handle_unset(t_shell *shell);
 void handle_env(t_shell *shell);
 void handle_suspend(void);
 void handle_export(t_shell *shell);
+void ft_handle_cd(t_shell *shell, char **args);
 
 #endif // HISTORY_H
 

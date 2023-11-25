@@ -11,6 +11,7 @@ char *ft_strjoin(char const *s1, char const *s2)
     p = malloc(l);
     if (!p)
         return (0);
+
     j = 0;
     i = 0;
     while (s1[i] != 0)
@@ -19,9 +20,6 @@ char *ft_strjoin(char const *s1, char const *s2)
     while (s2[i] != 0)
         p[j++] = s2[i++];
     p[j] = 0;
-
-    // Free the allocated memory before returning
-    free(p);
 
     return (p);
 }
@@ -73,9 +71,6 @@ char *ft_newsub(char **str, char c)
         return (NULL);
     ft_strlcpy(unptr, *str, i + 1);
     *str = *str + i + ((*str)[i] == c ? 1 : 0);
-
-    // Free the allocated memory before returning
-    free(unptr);
 
     return (unptr);
 }

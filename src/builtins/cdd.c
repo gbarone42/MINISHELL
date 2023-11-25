@@ -5,6 +5,21 @@
 
 #endif
 
+void ft_handle_cd(t_shell *shell, char **args)
+{
+    printf("Input: %s\n", shell->input);
+    if (args && args[1])
+    {
+        // cd has arguments, attempt to change directory
+        change_directory(shell, args[1]);
+    }
+    else
+    {
+        // cd without arguments, go to the home directory
+        change_directory(shell, NULL);
+    }
+}
+
 void change_directory(t_shell *shell, char *path)
 {
     // Use path to change the directory

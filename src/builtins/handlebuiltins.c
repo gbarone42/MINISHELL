@@ -1,5 +1,12 @@
 #include "../../include/minishell.h"
 
+void free_args(char **args) {
+    for (int i = 0; args[i]; i++) {
+        free(args[i]);
+    }
+    free(args);
+}
+
 void handle_basic_builtins(t_shell *shell)
 {   
     printf("Input before comparison: %s\n", shell->input);
@@ -11,26 +18,13 @@ void handle_basic_builtins(t_shell *shell)
     }
     
     if (!ft_strncmp(shell->input, "exit", 5))
-    {
-        
-                free(args);
-
+    { 
+        free_args(args);
         shell_exit(shell);
-        free(args);
     }
     else if (!ft_strncmp(args[0], "cd", 3))
     {
-        printf("Input: %s\n", shell->input);
-        if (args && args[1])
-        {
-            // cd has arguments, attempt to change directory
-            change_directory(shell, args[1]);
-        }
-        else
-        {
-            // cd without arguments, go to the home directory
-            change_directory(shell, NULL);
-        }
+        ft_handle_cd(shell, args);
     }
     else if (!ft_strncmp(shell->input, "echo -n", 8))
     {
@@ -60,7 +54,10 @@ void handle_basic_builtins(t_shell *shell)
     {
         handle_env(shell);
     }
-
+    for (int i = 0; args[i]; i++)
+    {
+        free(args[i]);
+    }
     // Free the memory allocated for args
     free(args);
 } 
