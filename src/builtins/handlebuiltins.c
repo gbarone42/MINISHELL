@@ -22,9 +22,13 @@ void handle_basic_builtins(t_shell *shell)
         free_args(args);
         shell_exit(shell);
     }
-    else if (!ft_strncmp(args[0], "cd", 3))
-    {
+    //else if (!ft_strncmp(args[0], "cd", 3))
+    else if (!ft_strncmp(shell->input, "cd", 3))
+    {   
+        
         ft_handle_cd(shell, args);
+        //free(args[0]);
+        
     }
     else if (!ft_strncmp(shell->input, "echo -n", 8))
     {
@@ -54,12 +58,7 @@ void handle_basic_builtins(t_shell *shell)
     {
         handle_env(shell);
     }
-    for (int i = 0; args[i]; i++)
-    {
-        free(args[i]);
-    }
-    // Free the memory allocated for args
-    free(args);
+    free_args(args);
 } 
 
 // Function to handle other built-in commands (clear, ls, time, whoami)

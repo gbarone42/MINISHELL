@@ -30,18 +30,19 @@ void change_directory(t_shell *shell, char *path)
         // No path provided, default to home directory
         path = getenv("HOME");
     }
-
     // Implement the logic for changing the directory
     if (chdir(path) == 0)
     {   
         printf("Changed to directory: %s\n", path);
+        update_prompt(shell);
     }
     else
     {
          perror("cd"); // Print an error message if chdir fails
     }
     // Optionally, update the prompt to show the new directory
-    update_prompt(shell);
+    
+    //free(old_prompt);
 }
 
 
@@ -54,16 +55,26 @@ void update_prompt(t_shell *shell)
     if (getcwd(cwd, sizeof(cwd)) == NULL)
     {
         perror("getcwd");
-        fprintf(stderr, "Error: Unable to get current working directory\n");
+        fprintf(stderr, "Error: Unable to get the current working directory\n");
         return;
     }
 
-    // Update the prompt with the new current working directory
-    free(shell->prompt); // Free the old prompt
+    // Free the old prompt
+    free(shell->prompt);
+
+    // Allocate memory for the new prompt
     shell->prompt = ft_strjoin(PURPLE, getenv("USER")); // You can customize this part
     shell->prompt = ft_strjoin(shell->prompt, "@");
     shell->prompt = ft_strjoin(shell->prompt, cwd);
     shell->prompt = ft_strjoin(shell->prompt, CLR_RMV);
     shell->prompt = ft_strjoin(shell->prompt, " > ");
+
+    if (shell->prompt == NULL)
+    {
+        fprintf(stderr, "Error: Unable to allocate memory for the new prompt\n");
+        // Handle the error as needed
+        return;
+    }
+
     printf("Updated prompt: %s\n", shell->prompt);
 }
