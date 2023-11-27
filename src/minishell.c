@@ -2,22 +2,29 @@
 
 int	g_exit = 0;
 
+void initialize_runshell(char **env)
+{
+    t_shell my_shell;
+    int output;
+
+    memset(&my_shell, 0, sizeof(t_shell));
+    printf("%sWelcome %s!%s\n", GREEN, getenv("USER"), CLR_RMV);
+    output = ft_innit_shell(&my_shell, env);
+    if (output != 0)
+	{
+        perror("Error initializing shell");
+        exit(output);
+    }
+    ft_norm_signal();
+    ft_minishell_simulator(&my_shell);
+}
+
+
 int	main(int ac, char **av, char **env)
 {
-	t_shell	my_shell;
-	int output;
-
-	ft_memset(&my_shell, 0, sizeof(t_shell));
 	(void)ac;
 	(void)av;
-	printf("%sWelcome %s!%s\n", GREEN, getenv("USER"), CLR_RMV);
-	output = ft_innit_shell(&my_shell, env);
-	if(output != 0)
-	{
-		exit(output);
-	}
-	ft_norm_signal();
-	ft_minishell_simulator(&my_shell);
+	initialize_runshell(env);
 
 	return (EXIT_SUCCESS);
 }         
