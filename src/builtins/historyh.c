@@ -4,7 +4,7 @@
 
 char* history[HISTORY_SIZE];
 int history_count = 0;
-//manca il free
+
 void add_to_history(char* command)
 {
     add_history(command);

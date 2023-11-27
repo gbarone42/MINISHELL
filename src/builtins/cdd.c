@@ -59,15 +59,39 @@ void update_prompt(t_shell *shell)
         return;
     }
 
-    // Free the old prompt
-    free(shell->prompt);
 
-    // Allocate memory for the new prompt
-    shell->prompt = ft_strjoin(PURPLE, getenv("USER")); // You can customize this part
-    shell->prompt = ft_strjoin(shell->prompt, "@");
-    shell->prompt = ft_strjoin(shell->prompt, cwd);
-    shell->prompt = ft_strjoin(shell->prompt, CLR_RMV);
-    shell->prompt = ft_strjoin(shell->prompt, " > ");
+
+
+
+
+// HERE IS THE MEMORY LEAK
+
+    // // Free the old prompt
+    // free(shell->prompt);
+
+    // // // Allocate memory for the new prompt
+
+
+
+
+
+
+
+
+
+    // shell->prompt = ft_strjoin(PURPLE, getenv("USER")); // You can customize this part
+    // shell->prompt = ft_strjoin(shell->prompt, "@");
+    // shell->prompt = ft_strjoin(shell->prompt, cwd);
+    // shell->prompt = ft_strjoin(shell->prompt, CLR_RMV);
+    // shell->prompt = ft_strjoin(shell->prompt, " > ");
+
+
+
+
+
+
+
+
 
     if (shell->prompt == NULL)
     {
@@ -77,4 +101,7 @@ void update_prompt(t_shell *shell)
     }
 
     printf("Updated prompt: %s\n", shell->prompt);
+    //free(shell->prompt);
+    // Set shell->prompt to NULL to avoid accessing freed memory accidentally
+   // shell->prompt = NULL;
 }
