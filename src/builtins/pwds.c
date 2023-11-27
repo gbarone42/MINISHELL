@@ -2,7 +2,7 @@
 
 
 #ifndef PATH_MAX
-#define PATH_MAX 4096 // You can choose a value that makes sense for your application
+#define PATH_MAX 4096
 
 #endif
 

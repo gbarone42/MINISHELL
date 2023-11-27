@@ -43,25 +43,6 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-// char	*ft_strdup(const char *s)
-// {
-// 	char	*y;
-// 	size_t	f;
-
-// 	f = 0;
-// 	y = malloc(ft_strlen((char *)s) + 1);
-// 	if (!y)
-// 		return (NULL);
-// 	while (s[f] != '\0')
-// 	{
-// 		y[f] = s[f];
-// 		f++;
-// 	}
-// 	y[f] = '\0';
-// 	return (y);
-// }
-
-
 char *ft_strdup(const char *s)
 {
     size_t len = ft_strlen(s);
@@ -73,40 +54,6 @@ char *ft_strdup(const char *s)
     ft_memcpy(y, s, len + 1); // Copy the string and the null terminator
     return y;
 }
-
-
-// There is no check for the return value of malloc, ft_strdup, 
-// readline, or other system/library calls that can fail.
-// If any of these calls fail, the program should handle 
-// the error appropriately.
-
-
-
-
-// char *ft_strdup(char *s, int should_free)
-// {
-//     char    *y;
-//     size_t  f;
-
-//     f = 0;
-//     y = malloc(ft_strlen(s) + 1);
-//     if (!y)
-//         return (NULL);
-//     while (s[f] != '\0')
-//     {
-//         y[f] = s[f];
-//         f++;
-//     }
-//     y[f] = '\0';
-
-//     if (should_free)
-//     {
-//         free(s);
-//     }
-
-//     return (y);
-// }
-
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {

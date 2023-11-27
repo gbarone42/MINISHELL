@@ -44,11 +44,9 @@ void free_myenv(char **my_env)
         for (int i = 0; my_env[i] != NULL; i++) {
             free(my_env[i]); // Free each string in the array
         }
-        free(my_env); // Free the array itself
+        free(my_env);
     }
 }
-
-////////////////////////////////might want to change the function return type to int?
 
 int	ft_innit_shell(t_shell *shell, char **env)
 {
@@ -79,23 +77,18 @@ int	ft_innit_shell(t_shell *shell, char **env)
         write(STDERR_FILENO, "Failed to duplicate file descriptors\n", 38);
         free_myenv(env_copied);
         free(shell->prompt);
-        return MEM_ERROR; // or another appropriate error code
+        return MEM_ERROR;
     }
-
-
     prompt_suffix = "@ASHellKETCHUM" CLR_RMV " > ";
     shell->prompt = ft_strjoin(user, prompt_suffix);
 
     free(user);
-
     if (!shell->prompt)
     {
         write(STDERR_FILENO, "Failed to allocate memory for prompt.\n", 38);
         free_myenv(env_copied);
         return(MEM_ERROR3);
     }
-    // printf("user: %s\n", user);
-    // printf("the pc user is %s%s\n", user, CLR_RMV);
     printf("prompt: %s\n", shell->prompt);
     shell->paths = NULL;
     shell->export = NULL;
@@ -103,11 +96,6 @@ int	ft_innit_shell(t_shell *shell, char **env)
     
     return(0);
 }
-
-//Ensure you have mechanisms in place elsewhere in your code to free shell->env, shell->prompt,
-//and other dynamically allocated members of the shell structure when you're done with them.
-
-
 
 
 

@@ -1,7 +1,7 @@
 #include "../../include/minishell.h"
 
 #ifndef PATH_MAX
-#define PATH_MAX 4096 // You can choose a value that makes sense for your application
+#define PATH_MAX 4096
 
 #endif
 
@@ -22,15 +22,11 @@ void ft_handle_cd(t_shell *shell, char **args)
 
 void change_directory(t_shell *shell, char *path)
 {
-    // Use path to change the directory
-    // If path is NULL, go to the home directory
-
     if (path == NULL)
     {
         // No path provided, default to home directory
         path = getenv("HOME");
     }
-    // Implement the logic for changing the directory
     if (chdir(path) == 0)
     {   
         printf("Changed to directory: %s\n", path);
@@ -40,17 +36,11 @@ void change_directory(t_shell *shell, char *path)
     {
          perror("cd"); // Print an error message if chdir fails
     }
-    // Optionally, update the prompt to show the new directory
-    
-    //free(old_prompt);
 }
 
 
 void update_prompt(t_shell *shell)
 {
-    // Update the prompt based on the new current working directory
-    // For example, you can use getcwd() to get the current working directory
-
     char cwd[PATH_MAX];
     if (getcwd(cwd, sizeof(cwd)) == NULL)
     {
@@ -60,24 +50,12 @@ void update_prompt(t_shell *shell)
     }
 
 
-
-
-
-
 // HERE IS THE MEMORY LEAK
 
     // // Free the old prompt
     // free(shell->prompt);
 
     // // // Allocate memory for the new prompt
-
-
-
-
-
-
-
-
 
     // shell->prompt = ft_strjoin(PURPLE, getenv("USER")); // You can customize this part
     // shell->prompt = ft_strjoin(shell->prompt, "@");
@@ -86,22 +64,12 @@ void update_prompt(t_shell *shell)
     // shell->prompt = ft_strjoin(shell->prompt, " > ");
 
 
-
-
-
-
-
-
-
     if (shell->prompt == NULL)
     {
         fprintf(stderr, "Error: Unable to allocate memory for the new prompt\n");
         // Handle the error as needed
         return;
     }
-
     printf("Updated prompt: %s\n", shell->prompt);
-    //free(shell->prompt);
-    // Set shell->prompt to NULL to avoid accessing freed memory accidentally
-   // shell->prompt = NULL;
+
 }
