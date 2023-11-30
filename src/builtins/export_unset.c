@@ -14,37 +14,32 @@ void handle_unset(t_shell *shell)
         printf("Usage: unset VARIABLE_NAME\n");
     }
 }
+char *ft_strtok(char *str, char sep)
+{
+    static char *last = NULL;
 
-// Function to set or modify an environment variable
-void set_or_modify_env_variable(const char *name, const char *value) {
-    // Find the variable in the environment
-    char **current = environ;
-    while (*current) {
-        if (strncmp(*current, name, strlen(name)) == 0 && (*current)[strlen(name)] == '=') {
-            // Variable found, modify it
-            char *modified_var = (char *)malloc(strlen(name) + strlen(value) + 2);
-            sprintf(modified_var, "%s=%s", name, value);
-            free(*current); // Free the existing string
-            *current = modified_var;
-            return;
-        }
-        current++;
+    if (str != NULL) {
+        last = str;
+    } else if (last == NULL || *last == '\0') {
+        return NULL;
     }
 
-    // If the variable wasn't found, create a new one
-    int env_size = 0;
-    while (environ[env_size]) {
-        env_size++;
+    char *token_start = last;
+
+    while (*last != '\0' && *last != sep) {
+        last++;
     }
 
-    environ = (char **)realloc(environ, (env_size + 2) * sizeof(char *));
-    environ[env_size] = (char *)malloc(strlen(name) + strlen(value) + 2);
-    sprintf(environ[env_size], "%s=%s", name, value);
-    environ[env_size + 1] = NULL;
+    if (*last != '\0') {
+        *last = '\0';
+        last++;
+    }
+
+    return token_start;
 }
 
-// Function to print the current environment variables
-void print_environment() {
+void print_environment()\
+{
     char **env = environ;
     while (*env) {
         printf("%s\n", *env);
@@ -52,25 +47,123 @@ void print_environment() {
     }
 }
 
-// Minishell handle_export function
+
+bool contains_invalid_characters(const char *str)
+{
+    if (!((str[0] >= 'a' && str[0] <= 'z') || (str[0] >= 'A' && str[0] <= 'Z') || str[0] == '_'))
+    {
+        return true;
+    }
+
+    // Check the rest of the characters
+    for (int i = 1; str[i] != '\0'; ++i)
+    {
+        // Check if the character is a letter, number, or underscore
+        if (!((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') || str[i] == '_'))
+        {
+            return true; // Invalid character found
+        }
+    }
+
+    return false; // No invalid characters found
+}
+
 void handle_export(char **args)
 {
     if (args[1] == NULL) {
         // Print the environment if no arguments provided
         print_environment();
-    } else {
+    }
+    else
+    {
         // Parse and set or modify environment variables
-        char *name = strtok(args[1], "=");
-        char *value = strtok(NULL, "=");
-
-        if (name != NULL && value != NULL) {
-            set_or_modify_env_variable(name, value);
-        } else {
+    char *name  = ft_strtok(args[1], '=');
+    char *value = ft_strtok(NULL, '=');
+        if (name != NULL && value != NULL)
+        {
+            if (contains_invalid_characters(name))
+            {
+                printf("Invalid variable name: %s\n", name);
+            }
+            else
+            {
+                printf("Name: %s\n", name);
+                printf("Value: %s\n", value);
+                //set_or_modify_env_variable(name, value);
+            }
+        }
+        else
+        {
             // Handle error or print a message
             printf("Invalid export syntax: %s\n", args[1]);
         }
     }
 }
+
+
+
+
+
+
+
+
+
+// // Function to set or modify an environment variable
+// void set_or_modify_env_variable(const char *name, const char *value) {
+//     // Find the variable in the environment
+//     char **current = environ;
+//     while (*current) {
+//         if (strncmp(*current, name, strlen(name)) == 0 && (*current)[strlen(name)] == '=') {
+//             // Variable found, modify it
+//             char *modified_var = (char *)malloc(strlen(name) + strlen(value) + 2);
+//             sprintf(modified_var, "%s=%s", name, value);
+//             free(*current); // Free the existing string
+//             *current = modified_var;
+//             return;
+//         }
+//         current++;
+//     }
+
+//     // If the variable wasn't found, create a new one
+//     int env_size = 0;
+//     while (environ[env_size]) {
+//         env_size++;
+//     }
+
+//     environ = (char **)realloc(environ, (env_size + 2) * sizeof(char *));
+//     environ[env_size] = (char *)malloc(strlen(name) + strlen(value) + 2);
+//     sprintf(environ[env_size], "%s=%s", name, value);
+//     environ[env_size + 1] = NULL;
+// }
+
+// // Function to print the current environment variables
+// void print_environment() {
+//     char **env = environ;
+//     while (*env) {
+//         printf("%s\n", *env);
+//         env++;
+//     }
+// }
+
+// // Minishell handle_export function
+// void handle_export(char **args)
+// {
+//     if (args[1] == NULL) {
+//         // Print the environment if no arguments provided
+//         print_environment();
+//     } else {
+//         // Parse and set or modify environment variables
+//         char *name = strtok(args[1], "=");
+//         char *value = strtok(NULL, "=");
+
+//         if (name != NULL && value != NULL) {
+//             set_or_modify_env_variable(name, value);
+//         } else {
+//             // Handle error or print a message
+//             printf("Invalid export syntax: %s\n", args[1]);
+//         }
+//     }
+// }
 
 
 
