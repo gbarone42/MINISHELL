@@ -68,6 +68,22 @@ bool contains_invalid_characters(const char *str)
     return false; // No invalid characters found
 }
 
+void add_env_variable(const char *name, const char *value)
+{
+    // Check if the variable name is valid
+    // if (contains_invalid_characters(name)) {
+    //     fprintf(stderr, "Invalid variable name: %s\n", name);
+    //     return;
+    // }
+    // Create the new variable string
+    char *new_variable = (char *)malloc(strlen(name) + strlen(value) + 2);
+    if (!new_variable)
+    {
+        printf("Memory allocation failed for env variable.\n");
+        exit(EXIT_FAILURE);
+    }
+}
+
 void handle_export(char **args)
 {
     if (args[1] == NULL) {
@@ -89,6 +105,7 @@ void handle_export(char **args)
             {
                 printf("Name: %s\n", name);
                 printf("Value: %s\n", value);
+                add_env_variable(name, value);
                 //set_or_modify_env_variable(name, value);
             }
         }
