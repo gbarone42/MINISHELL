@@ -55,7 +55,7 @@ void handle_basic_builtin2(t_shell *shell, char **args)
     else if (args && args[0] && !ft_strcmp(args[0], "export")) 
     { 
         //handle_export(shell, args);
-        handle_export(args);
+        handle_export(shell, args);
     }
     else if (!ft_strncmp(shell->input, "unset", 6))
     {

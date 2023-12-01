@@ -157,8 +157,11 @@ void update_prompt(t_shell *shell);
 void handle_unset(t_shell *shell);
 void handle_env(t_shell *shell);
 void handle_suspend(void);
-void handle_export(char **args);
+void handle_export(t_shell *shell, char **args);
 void ft_handle_cd(t_shell *shell, char **args);
+
+
+void add_env_variable(t_shell *shell, const char *name, const char *value);
 
 #endif // HISTORY_H
 
