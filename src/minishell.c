@@ -24,38 +24,6 @@ int main(int ac, char **av, char **env)
     return EXIT_SUCCESS;
 }
 
-// void initialize_runshell(char **env)
-// {
-//     t_shell my_shell;
-//     int output;
-
-//     memset(&my_shell, 0, sizeof(t_shell));
-//     printf("%sWelcome %s!%s\n", GREEN, getenv("USER"), CLR_RMV);
-//     output = ft_innit_shell(&my_shell, env);
-//     if (output != 0)
-// 	{
-//         perror("Error initializing shell");
-//         exit(output);
-//     }
-//     ft_norm_signal();
-//     ft_minishell_simulator(&my_shell);
-// }
-
-
-// int	main(int ac, char **av, char **env)
-// {
-// 	(void)ac;
-// 	(void)av;
-// 	initialize_runshell(env);
-
-// 	return (EXIT_SUCCESS);
-// }         
-
-
-// EXIT_SUCCESS is defined as 0
-// EXIT_FAILURE is defined as 1
-// 
-//	they are both defined in <stdlib.h>
 
 
 //debug

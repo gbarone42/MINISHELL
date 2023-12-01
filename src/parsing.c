@@ -1,4 +1,5 @@
 #include "../include/minishell.h"
+
 void	shell_parser(t_shell *shell, t_pars **command)
 {
     (void)shell;
@@ -32,6 +33,8 @@ char	**input_handler(t_shell *shell)
 		write(STDERR_FILENO, "syntax error near unexpected token: \"|\"\n", 41);
 		return (NULL);
 	}
+
+    printf("Number of pipes: %d\n", pipes);
 
 
     return NULL;
