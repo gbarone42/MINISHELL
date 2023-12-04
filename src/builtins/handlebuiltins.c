@@ -31,16 +31,6 @@ void handle_basic_builtin1(t_shell *shell, char **args)
     }
 }
 
-int	ft_strcmp(char *s1, char *s2)
-{
-	int i;
-
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
-		i++;
-	return (s1[i] - s2[i]);
-}
-
 
 void handle_basic_builtin2(t_shell *shell, char **args)
 {
@@ -59,7 +49,7 @@ void handle_basic_builtin2(t_shell *shell, char **args)
     }
     else if (!ft_strncmp(shell->input, "unset", 6))
     {
-        handle_unset(shell);
+        handle_unset(shell, args);
     }
     else if (!ft_strncmp(shell->input, "env", 4))
     {

@@ -2,15 +2,38 @@
 
 extern char **environ;  // External variable holding the environment
 
-void handle_unset(t_shell *shell)
+void print_environment()
 {
-    // Check if there are arguments after 'unset'
-    if (shell->input && shell->input[0] != '\0') {
-        // Unset the environment variable
-        unsetenv(shell->input);
-    } else {
-        // If no arguments provided, print an error message
-        printf("Usage: unset VARIABLE_NAME\n");
+    char **env = environ;
+    while (*env) {
+        printf("%s\n", *env);
+        env++;
+    }
+}
+
+void handle_unset(t_shell *shell, char **args)
+{
+    if (args[1] == NULL)
+    {
+        // Handle error or print a message when no arguments are provided
+        printf("Usage: unset <variable>\n");
+        return;
+    }
+    for (int i = 1; args[i] != NULL; ++i)
+    {
+        for (int j = 0; shell->env[j] != NULL; ++j)
+        {
+            if (strstr(shell->env[j], args[i]) == shell->env[j])
+            {
+                printf("Unsetting: %s\n", shell->env[j]);
+                free(shell->env[j]);
+                while (shell->env[j] != NULL)
+                {
+                    shell->env[j] = shell->env[j + 1];
+                    ++j;
+                }
+            }
+        }
     }
 }
 char *ft_strtok(char *str, char sep)
@@ -37,14 +60,7 @@ char *ft_strtok(char *str, char sep)
     return token_start;
 }
 
-void print_environment()\
-{
-    char **env = environ;
-    while (*env) {
-        printf("%s\n", *env);
-        env++;
-    }
-}
+
 
 bool contains_invalid_characters(const char *str)
 {
@@ -59,11 +75,11 @@ bool contains_invalid_characters(const char *str)
         // Check if the character is a letter, number, or underscore
         if (!((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') || str[i] == '_'))
         {
-            return true; // Invalid character found
+            return true;
         }
     }
 
-    return false; // No invalid characters found
+    return false;
 }
 
 void add_env_variable(t_shell *shell, const char *name, const char *value)

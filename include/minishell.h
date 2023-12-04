@@ -136,32 +136,68 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 //utils3
 void *ft_memset(void *b, int c, size_t len);
 void *ft_memcpy(void *dst, const void *src, size_t n);
+int	ft_strcmp(char *s1, char *s2);
 
 //valid
 int ft_isvalid(const char *input);
 
-//timet
-void print_current_time(void);
-void display_history(void);
-void add_to_history(char *command);
-void whoami_command(void);
+///BUILDins
+
+//cdd
+void ft_handle_cd(t_shell *shell, char **args);
+void change_directory(t_shell *shell, char *path);
+void update_prompt(t_shell *shell);
+
+//clears
 void clear_screen(void);
-void print_current_directory_contents(void);
-void print_current_directory(void);
+
+//echos
 void handle_echo(char *input);
 void handle_echo_n(char *input);
 
-void builtins_call(t_shell *shell);
-void change_directory(t_shell *shell, char *path);
-void update_prompt(t_shell *shell);
-void handle_unset(t_shell *shell);
+//envv
 void handle_env(t_shell *shell);
-void handle_suspend(void);
-void handle_export(t_shell *shell, char **args);
-void ft_handle_cd(t_shell *shell, char **args);
+
+//exit
+void shell_exit(t_shell *shell);
+
+//export_unset
+void handle_unset(t_shell *shell, char **args);
 
 
+char *ft_strtok(char *str, char sep);
+void print_environment();
+bool contains_invalid_characters(const char *str);
 void add_env_variable(t_shell *shell, const char *name, const char *value);
+void handle_export(t_shell *shell, char **args);
+
+
+//history
+void free_args(char **args);
+void handle_basic_builtin1(t_shell *shell, char **args);
+void handle_basic_builtin2(t_shell *shell, char **args);
+void handle_basic_builtins(t_shell *shell);
+void handle_other_builtins(t_shell *shell);
+void builtins_call(t_shell *shell);
+
+//history
+void add_to_history(char* command);
+void display_history(void);
+
+//lss
+void print_current_directory_contents(void);
+
+//pwds
+void print_current_directory(void);
+
+//suspend
+void handle_suspend(void);
+
+//timet
+void print_current_time(void);
+
+//whoami
+void whoami_command();
 
 #endif // HISTORY_H
 
