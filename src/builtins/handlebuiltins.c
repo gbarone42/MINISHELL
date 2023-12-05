@@ -102,7 +102,7 @@ void builtins_call(t_shell *shell)
 {
 
         handle_basic_builtins(shell);
-        handle_other_builtins(shell);
+        handle_other_builtins(shell);//utile per il test
 
 }
 

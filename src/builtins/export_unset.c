@@ -19,6 +19,7 @@ void handle_unset(t_shell *shell, char **args)
         printf("Usage: unset <variable>\n");
         return;
     }
+
     for (int i = 1; args[i] != NULL; ++i)
     {
         for (int j = 0; shell->env[j] != NULL; ++j)
@@ -27,11 +28,14 @@ void handle_unset(t_shell *shell, char **args)
             {
                 printf("Unsetting: %s\n", shell->env[j]);
                 free(shell->env[j]);
-                while (shell->env[j] != NULL)
+
+                // Shift the remaining elements in the array
+                for (int k = j; shell->env[k] != NULL; ++k)
                 {
-                    shell->env[j] = shell->env[j + 1];
-                    ++j;
+                    shell->env[k] = shell->env[k + 1];
                 }
+
+                break; // Break after freeing and shifting
             }
         }
     }
