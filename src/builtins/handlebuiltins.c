@@ -44,10 +44,8 @@ void handle_basic_builtin2(t_shell *shell, char **args)
     }
     else if (args && args[0] && !ft_strcmp(args[0], "export")) 
     { 
-        //handle_export(shell, args);
         handle_export(shell, args);
     }
-    //else if (!ft_strncmp(shell->input, "unset", 6))
     else if (args && args[0] && !ft_strcmp(args[0], "unset"))
 
     {
@@ -102,7 +100,7 @@ void builtins_call(t_shell *shell)
 {
 
         handle_basic_builtins(shell);
-        handle_other_builtins(shell);//utile per il test
+        handle_other_builtins(shell);//utile solamente per il testing FINCHE' NON IMPLEMENTIAMO il resto
 
 }
 

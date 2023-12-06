@@ -1,7 +1,7 @@
 #include "../../include/minishell.h"
 
 
-
+//here i use rl_clear_history(), free(), exit()
 
 void shell_exit(t_shell *shell)
 {

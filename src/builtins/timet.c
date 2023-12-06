@@ -1,5 +1,7 @@
 #include "../../include/minishell.h"
 
+//here i use time(), localtime(), strftime()
+
 void print_current_time(void)
 {
     time_t current_time;

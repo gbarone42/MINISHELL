@@ -2,7 +2,6 @@
 #include "../include/minishell.h"
 void	ft_bzero(void *s, size_t n)
 {
-	//printf("ft_bzero working properly \n");
 	size_t			i;
 	unsigned char	*r;
 
@@ -22,7 +21,6 @@ void	*ft_calloc(size_t count, size_t size)
 	void	*p;
 	size_t	y;
 
-	//printf("calloc working properly \n");
 	y = size * count;
 	if (count != 0 && size != y / count)
 		return (NULL);
@@ -49,9 +47,9 @@ char *ft_strdup(const char *s)
     char *y = malloc(len + 1);
     if (!y)
 	{
-        return NULL; // Handle allocation failure
+        return NULL;
     }
-    ft_memcpy(y, s, len + 1); // Copy the string and the null terminator
+    ft_memcpy(y, s, len + 1);
     return y;
 }
 

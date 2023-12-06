@@ -1,5 +1,7 @@
 #include "../../include/minishell.h"
 
+//here i use getlogin_r()
+
 void whoami_command()
 {
     char username[1024];

@@ -2,6 +2,8 @@
 
 extern char **environ;
 
+//strstr() function in C is used to find the first occurrence of a substring within another string
+
 void print_environment()
 {
     char **env = environ;
@@ -81,6 +83,29 @@ bool contains_invalid_characters(const char *str)
     return false;
 }
 
+void *ft_realloc(void *ptr, size_t old_size, size_t new_size)
+{
+    void *new_ptr;
+
+    if (ptr == NULL)
+        return malloc(new_size);
+    if (!new_size)
+    {
+        free(ptr);
+        return NULL;
+    }
+    new_ptr = malloc(new_size);
+    if (!new_ptr)
+    {
+        perror("Memory allocation failed for realloc.\n");
+        exit(EXIT_FAILURE);
+    }
+    size_t copy_size = (old_size < new_size) ? old_size : new_size;
+    ft_memcpy(new_ptr, ptr, copy_size);
+    free(ptr);
+    return new_ptr;
+}
+
 void add_env_variable(t_shell *shell, const char *name, const char *value)
 {
     char *new_variable = (char *)malloc(strlen(name) + strlen(value) + 2);
@@ -112,9 +137,10 @@ void add_env_variable(t_shell *shell, const char *name, const char *value)
             env_size++;
         }
 
-        shell->env = (char **)realloc(shell->env, (env_size + 2) * sizeof(char *));
-        if (!shell->env) {
-            fprintf(stderr, "Memory allocation failed for env array.\n");
+        shell->env = (char **)ft_realloc(shell->env, env_size * sizeof(char *), (env_size + 2) * sizeof(char *));
+        if (!shell->env)
+        {
+            perror("Memory allocation failed for env array.\n");
             exit(EXIT_FAILURE);
         }
 

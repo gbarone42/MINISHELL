@@ -1,6 +1,8 @@
 #include "../../include/minishell.h"
 #include <time.h>
 
+//here i use readdir()
+
 void print_current_directory_contents(void)
 {
     DIR *dir = opendir(".");
