@@ -29,7 +29,7 @@ int main(int ac, char **av, char **env)
 //debug
 //
 
-
+//school pre ste
 // {
 //   "version": "0.2.0",
 //   "configurations": [
@@ -56,6 +56,40 @@ int main(int ac, char **av, char **env)
 // }
 
 
+
+
+//school
+// {
+//   "version": "0.2.0",
+//   "configurations": [
+//     {
+//       "name": "C/C++ Runner: Debug Session",
+//       "type": "cppdbg",
+//       "request": "launch",
+//       "args": [],
+//       "stopAtEntry": false,
+//       "externalConsole": false,
+//       "cwd": "${fileDirname}",
+//       "program": "${workspaceFolder}/build/minishell",
+//       "MIMode": "gdb",
+//       "miDebuggerPath": "gdb",
+//       "setupCommands": [
+//         {
+//           "description": "Enable pretty-printing for gdb",
+//           "text": "-enable-pretty-printing",
+//           "ignoreFailures": true
+//         }
+//       ]
+//     }
+//   ]
+// }
+
+
+
+
+
+
+//CASA
 
 // {
 //   "version": "0.2.0",
