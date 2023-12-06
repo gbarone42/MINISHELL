@@ -17,9 +17,13 @@ void handle_basic_builtin1(t_shell *shell, char **args)
         free_args(args);
         shell_exit(shell);
     } 
-    else if (!ft_strncmp(shell->input, "cd", 3))
+    // else if (!ft_strncmp(shell->input, "cd", 3))
+    // {
+    //     ft_handle_cd(shell, args);
+    // }
+    else if (args && args[0] && !ft_strcmp(args[0], "cd")) 
     {
-        ft_handle_cd(shell, args);
+            ft_handle_cd(shell, args);
     }
     else if (!ft_strncmp(shell->input, "echo -n", 8))
     {

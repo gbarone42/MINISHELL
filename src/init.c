@@ -87,7 +87,6 @@ int	ft_innit_shell(t_shell *shell, char **env)
     shell->paths = NULL;
     shell->export = NULL;
     //free_myenv(env_copied);
-    
     return(0);
 }
 
