@@ -48,26 +48,9 @@ void update_prompt(t_shell *shell)
         fprintf(stderr, "Error: Unable to get the current working directory\n");
         return;
     }
-
-
-// HERE IS THE MEMORY LEAK
-
-    // // Free the old prompt
-    // free(shell->prompt);
-
-    // // // Allocate memory for the new prompt
-
-    // shell->prompt = ft_strjoin(PURPLE, getenv("USER")); // You can customize this part
-    // shell->prompt = ft_strjoin(shell->prompt, "@");
-    // shell->prompt = ft_strjoin(shell->prompt, cwd);
-    // shell->prompt = ft_strjoin(shell->prompt, CLR_RMV);
-    // shell->prompt = ft_strjoin(shell->prompt, " > ");
-
-
     if (shell->prompt == NULL)
     {
         fprintf(stderr, "Error: Unable to allocate memory for the new prompt\n");
-        // Handle the error as needed
         return;
     }
     printf("Updated prompt: %s\n", shell->prompt);

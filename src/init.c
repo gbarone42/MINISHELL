@@ -6,23 +6,18 @@ char **ft_get_env(char **env)
     int i = 0;
     int j = 0;
 
-    // Count the number of strings in the env array
     while (env && env[i])
         i++;
-
-    // Allocate memory for the duplicated environment
     my_env = (char **)malloc(sizeof(char *) * (i + 1));
     if (!my_env) {
         write(STDERR_FILENO, "Memory allocation failed.\n", 27);
         exit(EXIT_FAILURE);
     }
-
     for (j = 0; j < i; j++) {
         my_env[j] = ft_strdup(env[j]);
         if (!my_env[j])
         {
             write(STDERR_FILENO, "Memory allocation failed for env variable.\n", 44);
-            // Clean up the allocated memory before exiting
             while (j > 0) {
                 free(my_env[j - 1]);
                 j--;
@@ -32,7 +27,6 @@ char **ft_get_env(char **env)
         }
     }
     my_env[j] = NULL;
-
     return my_env;
 }
 

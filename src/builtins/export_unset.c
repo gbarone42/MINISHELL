@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-extern char **environ;  // External variable holding the environment
+extern char **environ;
 
 void print_environment()
 {
@@ -15,7 +15,6 @@ void handle_unset(t_shell *shell, char **args)
 {
     if (args[1] == NULL)
     {
-        // Handle error or print a message when no arguments are provided
         printf("Usage: unset <variable>\n");
         return;
     }
@@ -28,14 +27,12 @@ void handle_unset(t_shell *shell, char **args)
             {
                 printf("Unsetting: %s\n", shell->env[j]);
                 free(shell->env[j]);
-
-                // Shift the remaining elements in the array
                 for (int k = j; shell->env[k] != NULL; ++k)
                 {
                     shell->env[k] = shell->env[k + 1];
                 }
 
-                break; // Break after freeing and shifting
+                break;
             }
         }
     }
@@ -73,10 +70,8 @@ bool contains_invalid_characters(const char *str)
         return true;
     }
 
-    // Check the rest of the characters
     for (int i = 1; str[i] != '\0'; ++i)
     {
-        // Check if the character is a letter, number, or underscore
         if (!((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') || str[i] == '_'))
         {
             return true;
@@ -88,7 +83,6 @@ bool contains_invalid_characters(const char *str)
 
 void add_env_variable(t_shell *shell, const char *name, const char *value)
 {
-    // Create the new variable string
     char *new_variable = (char *)malloc(strlen(name) + strlen(value) + 2);
     if (!new_variable)
     {
@@ -104,16 +98,14 @@ void add_env_variable(t_shell *shell, const char *name, const char *value)
 
     int found = 0;
     for (int i = 0; shell->env[i] != NULL; ++i) {
-        if (strncmp(shell->env[i], name, strlen(name)) == 0 && shell->env[i][strlen(name)] == '=') {
-            // Variable found, modify it
-            free(shell->env[i]);  // Free the old value
+        if (strncmp(shell->env[i], name, strlen(name)) == 0 && shell->env[i][strlen(name)] == '=')
+        {
+            free(shell->env[i]);
             shell->env[i] = new_variable;
             found = 1;
             break;
         }
     }
-
-    // If the variable wasn't found, add it to the end of the environment
     if (!found) {
         int env_size = 0;
         while (shell->env[env_size] != NULL) {
@@ -133,13 +125,12 @@ void add_env_variable(t_shell *shell, const char *name, const char *value)
 
 void handle_export(t_shell *shell, char **args)
 {
-    if (args[1] == NULL) {
-        // Print the environment if no arguments provided
+    if (args[1] == NULL)
+    {
         print_environment();
     }
     else
     {
-        // Parse and set or modify environment variables
     char *name  = ft_strtok(args[1], '=');
     char *value = ft_strtok(NULL, '=');
         if (name != NULL && value != NULL)
@@ -153,12 +144,10 @@ void handle_export(t_shell *shell, char **args)
                 printf("Name: %s\n", name);
                 printf("Value: %s\n", value);
                 add_env_variable(shell, name, value);
-                //set_or_modify_env_variable(name, value);
             }
         }
         else
         {
-            // Handle error or print a message
             printf("Invalid export syntax: %s\n", args[1]);
         }
     }

@@ -4,20 +4,11 @@ void	shell_parser(t_shell *shell, t_pars **command)
 {
     (void)shell;
     (void)command;
-    //char		**inputs;
-    //printf("\nPARSING IS COMING \n");
 
     char		**inputs;
     inputs = input_handler(shell);
-
-    //inputs = input_split(shell);
-    //*inputs = NULL;
-   
-    // if (inputs == NULL)
-	// return ;
     if (inputs == NULL)
     {
-        // Handle the case when inputs is NULL
         return;
     }
 }
@@ -34,7 +25,7 @@ char	**input_handler(t_shell *shell)
 		return (NULL);
 	}
 
-    printf("Number of pipes: %d\n", pipes);
+    printf("Number of substring: %d\n", pipes);
 
 
     return NULL;
@@ -50,23 +41,20 @@ int ft_count_pipes(const char *s, char pipe)
 
     while (1)
     {
-        if (s[i] == pipe || s[i] == '\0') //check if the current character at index i in the input string s is equal to the delimiter character pipe or the null terminator '\0'.
+        if (s[i] == pipe || s[i] == '\0')
         {
             if (len > 0)
             {
                 n++;
-                len = 0; //indicates that a non-empty substring was found
+                len = 0;
             }
             else if (n == 0 && s[i] == pipe)
             {
-                return -1; //means that if the first character in the string is the delimiter pipe
+                return -1;
             }
         }
-        //If the current character is not the delimiter pipe or the null terminator,
-        //it continues to the next step.
         else if (s[i] == DOUBLE_QUOTE || s[i] == SINGLE_QUOTE)
         {
-            // Assuming pipe_numstr_quote is handling the quotes appropriately
             pipe_handler_quote(s, &i);
         }
         else
@@ -88,18 +76,16 @@ int pipe_handler_quote(const char *s, size_t *i)
 
     if (!s || !i || *i >= ft_strlen(s)) //*i >= ft_strlen(s) suggerito da GPT i dont undderstand
     {
-        // Error handling for invalid inputs or incomplete string
         return -1;
     }
 
     quote = s[*i];
     (*i)++;
-    while (s[*i] && s[*i] != quote)//as long as the current character is not the null terminator and not the same as the starting quote character.
+    while (s[*i] && s[*i] != quote)
     {
-        // Consider handling escaped quotes and special cases within the quoted section
         if (s[*i] == '\\' && s[*i + 1] == quote)
         {
-            (*i) += 2; // Skip escaped quotes
+            (*i) += 2;
         }
         else 
         {
@@ -108,7 +94,6 @@ int pipe_handler_quote(const char *s, size_t *i)
     }
     if (s[*i] == '\0')
     {
-        // Error handling for incomplete quoted section
         return -1;
     }
 
