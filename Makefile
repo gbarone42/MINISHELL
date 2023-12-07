@@ -72,7 +72,7 @@ all: ${NAME}
 # Clean object files
 clean:
 	@echo "${RED}Deleting ${LAVENDER}${NAME}'s ${CLR_RMV}objs"
-	@${RM} ${OBJ_DIR}/*.o
+	@find ${OBJ_DIR} -name "*.o" -type f -delete
 
 # Clean all files
 fclean: clean
