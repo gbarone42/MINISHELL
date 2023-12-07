@@ -9,7 +9,7 @@
       "stopAtEntry": false,
       "externalConsole": false,
       "cwd": "/nfs/homes/everonel/Desktop/GBARONE/MINISHELL/src",
-      "program": "/nfs/homes/everonel/Desktop/GBARONE/MINISHELL/build/minishell",
+      "program": "/nfs/homes/everonel/Desktop/GBARONE/MINISHELL/src/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
