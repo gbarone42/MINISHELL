@@ -42,7 +42,7 @@ void change_directory(t_shell *shell, char *path)
 void update_prompt(t_shell *shell)
 {
     char cwd[PATH_MAX];
-    
+
     // Get the current working directory
     if (getcwd(cwd, sizeof(cwd)) == NULL)
     {
@@ -54,17 +54,73 @@ void update_prompt(t_shell *shell)
     // Free the previous prompt if it exists
     free(shell->prompt);
 
-    // Create a new prompt with the current directory
-    shell->prompt = (char *)malloc(strlen(cwd) + strlen(" > ") + 1);
+    // Get the user name
+    char *user = ft_strjoin(PURPLE, getenv("USER"));
+    if (!user)
+    {
+        perror("Error: Unable to allocate memory for user\n");
+        exit(EXIT_FAILURE); // or return if you want to handle the error
+    }
+
+    // Get the prompt suffix
+    char *prompt_suffix = ft_strjoin("@ASHellKETCHUM" CLR_RMV " > ", "");
+    if (!prompt_suffix)
+    {
+        perror("Error: Unable to allocate memory for prompt_suffix\n");
+        free(user);
+        exit(EXIT_FAILURE); // or return if you want to handle the error
+    }
+
+    // Create a new prompt with the user name, prompt suffix, and current directory
+    shell->prompt = (char *)malloc(strlen(user) + strlen(prompt_suffix) + strlen(cwd) + 1);
     if (!shell->prompt)
     {
         perror("Error: Unable to allocate memory for the new prompt\n");
+        free(user);
+        free(prompt_suffix);
         exit(EXIT_FAILURE); // or return if you want to handle the error
     }
 
     // Construct the new prompt
-    strcpy(shell->prompt, cwd);
-    strcat(shell->prompt, " > ");
+    strcpy(shell->prompt, user);
+    strcat(shell->prompt, cwd);
+    strcat(shell->prompt, prompt_suffix);
 
     printf("Updated prompt: %s\n", shell->prompt);
+
+    // Free temporary strings
+    free(user);
+    free(prompt_suffix);
 }
+
+
+
+// void update_prompt(t_shell *shell)
+// {
+//     char cwd[PATH_MAX];
+    
+//     // Get the current working directory
+//     if (getcwd(cwd, sizeof(cwd)) == NULL)
+//     {
+//         perror("getcwd");
+//         printf("Error: Unable to get the current working directory\n");
+//         return;
+//     }
+
+//     // Free the previous prompt if it exists
+//     free(shell->prompt);
+
+//     // Create a new prompt with the current directory
+//     shell->prompt = (char *)malloc(strlen(cwd) + strlen(" > ") + 1);
+//     if (!shell->prompt)
+//     {
+//         perror("Error: Unable to allocate memory for the new prompt\n");
+//         exit(EXIT_FAILURE); // or return if you want to handle the error
+//     }
+
+//     // Construct the new prompt
+//     strcpy(shell->prompt, cwd);
+//     strcat(shell->prompt, " > ");
+
+//     printf("Updated prompt: %s\n", shell->prompt);
+// }

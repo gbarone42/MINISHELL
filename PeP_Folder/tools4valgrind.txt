@@ -4,3 +4,6 @@ valgrind --leak-check=full --show-leak-kinds=all --suppressions=EXTRA/readline.s
 valgrind --leak-check=full --show-leak-kinds=all --suppressions=EXTRA/readline.supp --log-file=leak_info.txt build/./minishell
 
 
+
+Correction SHIT
+https://github.com/rizky/42-corrections/blob/master/minishell.pdf
