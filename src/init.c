@@ -73,7 +73,7 @@ int	ft_innit_shell(t_shell *shell, char **env)
         free(shell->prompt);
         return MEM_ERROR;
     }
-    prompt_suffix = "@ASHellKETCHUM" CLR_RMV " > ";
+    prompt_suffix = "@ASHellKETCHUM" CLR_RMV "$ ";
     shell->prompt = ft_strjoin(user, prompt_suffix);
 
     free(user);
