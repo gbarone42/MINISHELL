@@ -7,3 +7,6 @@ valgrind --leak-check=full --show-leak-kinds=all --suppressions=EXTRA/readline.s
 
 Correction SHIT
 https://github.com/rizky/42-corrections/blob/master/minishell.pdf
+
+
+https://rphlr.github.io/42-Evals/Cursus/Minishell/
