@@ -38,60 +38,6 @@ void change_directory(t_shell *shell, char *path)
     }
 }
 
-
-// void update_prompt(t_shell *shell) {
-//     char cwd[PATH_MAX];
-
-//     if (getcwd(cwd, sizeof(cwd)) == NULL) {
-//         perror("getcwd");
-//         printf("Error: Unable to get the current working directory\n");
-//         return;
-//     }
-
-//     char *user = ft_strjoin(PURPLE, getenv("USER"));
-//     if (!user) {
-//         perror("Error: Unable to allocate memory for user\n");
-//         exit(EXIT_FAILURE);
-//     }
-
-//     // Find the position of the user's home directory in the current path
-//     char *home = getenv("HOME");
-//     size_t home_len = strlen(home);
-//     char *cwd_relative = (strncmp(cwd, home, home_len) == 0) ? cwd + home_len : cwd;
-
-//     char *prompt_suffix = ft_strjoin("@ASHellKETCHUM" CLR_RMV ":", "");
-//     if (!prompt_suffix) {
-//         perror("Error: Unable to allocate memory for prompt_suffix\n");
-//         free(user);
-//         exit(EXIT_FAILURE);
-//     }
-
-//     // Calculate the required memory size for shell->prompt
-//     size_t prompt_size = strlen(user) + strlen(prompt_suffix) + strlen(cwd_relative) + 2;
-
-//     // Allocate memory for shell->prompt
-//     shell->prompt = (char *)malloc(prompt_size);
-//     if (!shell->prompt) {
-//         perror("Error: Unable to allocate memory for the new prompt\n");
-//         free(user);
-//         free(prompt_suffix);
-//         exit(EXIT_FAILURE);
-//     }
-
-//     // Concatenate strings and color codes
-//     strcpy(shell->prompt, user);
-//     strcat(shell->prompt, prompt_suffix);
-//     strcat(shell->prompt, PURPLE);
-//     strcat(shell->prompt, cwd_relative);
-//     strcat(shell->prompt, CLR_RMV);
-//     strcat(shell->prompt, "$ ");
-
-//     printf("Updated prompt: %s\n", shell->prompt);
-
-//     free(user);
-//     free(prompt_suffix);
-// }
-
 void update_prompt(t_shell *shell)
 {
     char cwd[PATH_MAX];
@@ -102,36 +48,72 @@ void update_prompt(t_shell *shell)
         printf("Error: Unable to get the current working directory\n");
         return;
     }
+
     free(shell->prompt);
+
+    // Getting the user and formatting it with color
     char *user = ft_strjoin(PURPLE, getenv("USER"));
     if (!user)
     {
         perror("Error: Unable to allocate memory for user\n");
         exit(EXIT_FAILURE);
     }
-    char *prompt_suffix = ft_strjoin("@ASHellKETCHUM" CLR_RMV "$ ", "");
+
+    // Creating user with @ASHellKETCHUM
+    char *user_at = ft_strjoin(user, "@ASHellKETCHUM");
+    if (!user_at)
+    {
+        perror("Error: Unable to allocate memory for user_at\n");
+        free(user);
+        exit(EXIT_FAILURE);
+    }
+
+    // Adding a colon and space after @ASHellKETCHUM
+    char *user_at_colon = ft_strjoin(user_at, ":");
+    if (!user_at_colon)
+    {
+        perror("Error: Unable to allocate memory for user_at_colon\n");
+        free(user);
+        free(user_at);
+        exit(EXIT_FAILURE);
+    }
+
+    // Creating the prompt suffix with color removal and dollar sign
+    char *prompt_suffix = ft_strjoin(CLR_RMV, "$ ");
     if (!prompt_suffix)
     {
         perror("Error: Unable to allocate memory for prompt_suffix\n");
         free(user);
+        free(user_at);
+        free(user_at_colon);
         exit(EXIT_FAILURE);
     }
-    shell->prompt = (char *)malloc(strlen(user) + strlen(prompt_suffix) + strlen(cwd) + 1);
+
+    // Allocating memory for the complete prompt
+    shell->prompt = (char *)malloc(strlen(user_at_colon) + strlen(cwd) + strlen(prompt_suffix) + 1);
     if (!shell->prompt)
     {
         perror("Error: Unable to allocate memory for the new prompt\n");
         free(user);
+        free(user_at);
+        free(user_at_colon);
         free(prompt_suffix);
         exit(EXIT_FAILURE);
     }
-    strcpy(shell->prompt, user);
+
+    // Concatenating the strings to form the prompt
+    strcpy(shell->prompt, user_at_colon);
     strcat(shell->prompt, cwd);
     strcat(shell->prompt, prompt_suffix);
+
     printf("Updated prompt: %s\n", shell->prompt);
+
+    // Freeing the allocated memory
     free(user);
+    free(user_at);
+    free(user_at_colon);
     free(prompt_suffix);
 }
-
 // void update_prompt(t_shell *shell)
 // {
 //     char cwd[PATH_MAX];
