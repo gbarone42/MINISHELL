@@ -1,100 +1,90 @@
-# Define the target executable name
-NAME = build/minishell
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: filippo <marvin@42.fr>                     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/12/11 19:41:53 by filippo           #+#    #+#              #
+#    Updated: 2023/12/11 20:29:20 by filippo          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-# Directories
-SRC_DIR = src
-OBJ_DIR = build
-INCLUDE_DIR = include  # Change this to the appropriate folder for header files
+NAME			=	$(BUILD_DIR)/minishell
+ARGS			=	
 
+VALGRIND-TOOL	=	memcheck
+VALGRIND-OPTIONS=	
 
-# Source files
-SRCS =	${SRC_DIR}/minishell.c	\
-		${SRC_DIR}/utils1.c	\
-		${SRC_DIR}/utils2.c	\
-		${SRC_DIR}/utils3.c	\
-		${SRC_DIR}/test.c	\
-		${SRC_DIR}/simulation.c	\
-		${SRC_DIR}/init.c	\
-		${SRC_DIR}/signal.c	\
-		${SRC_DIR}/valid.c	\
-		${SRC_DIR}/builtins/exit.c	\
-		${SRC_DIR}/builtins/timet.c	\
-		${SRC_DIR}/builtins/whoami.c	\
-		${SRC_DIR}/builtins/historyh.c	\
-		${SRC_DIR}/builtins/clears.c	\
-		${SRC_DIR}/builtins/pwds.c	\
-		${SRC_DIR}/builtins/lss.c	\
-		${SRC_DIR}/builtins/echos.c	\
-		${SRC_DIR}/builtins/cdd.c	\
-		${SRC_DIR}/builtins/handlebuiltins.c	\
-		${SRC_DIR}/builtins/envv.c	\
-		${SRC_DIR}/builtins/suspend.c	\
-		${SRC_DIR}/builtins/export_unset.c	\
-		${SRC_DIR}/parsing.c	\
-       # Add other source files as necessary
+CFLAGS			=	-g
+REQUIRED_CFLAGS	=	$(CFLAGS) -Wall -Wextra -Werror
+CPPFLAGS		=	$(addprefix -I, $(LIBFT_DIR)/$(INC_DIR) /usr/local/include)
+LDFLAGS			=	$(addprefix -L, $(LIBFT_DIR)/$(BUILD_DIR) /usr/local/lib)
+LDLIBS			=	$(addprefix -l, ft readline)
 
-# Header files
-HDRS = ${wildcard ${INCLUDE_DIR}/*.h}
+BUILD_DIR		=	build
+INC_DIR			=	$(BUILD_DIR)/inc
+OBJS_DIR		=	$(BUILD_DIR)/obj
+LIBFT_DIR		=	libft
+SRCS_DIR		=	src
+P_HEADER		=	$(SRCS_DIR)/minishell_p.h
 
-# Object files
-OBJS = ${patsubst ${SRC_DIR}/%.c,${OBJ_DIR}/%.o,${SRCS}}
+SRCS			=	$(SRCS_DIR)/main.c \
+					$(SRCS_DIR)/init.c \
+					$(SRCS_DIR)/parse.c \
+					$(SRCS_DIR)/pipe.c \
+					$(SRCS_DIR)/signal.c \
+					$(SRCS_DIR)/simulation.c \
+					$(SRCS_DIR)/valid.c
 
-# Compiler and flags
-CC = gcc
-RM = rm -rf
-FLAGS = -g -Wall -Wextra -Werror -I${INCLUDE_DIR}
-MAKEFLAGS += --silent
-LIBFLAGS = -lreadline
+OBJS			=	$(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o)
 
-# Color codes for output messages
-CLR_RMV = \033[0m
-RED = \033[1;31m
-GREEN = \033[1;32m
-YELLOW = \033[1;33m
-BLUE = \033[1;34m
-CYAN = \033[1;36m
-GOLD = \033[1;33m
+RM				=	rm -fr
 
-# Rule to compile individual source files
-${OBJ_DIR}/%.o: ${SRC_DIR}/%.c ${HDRS}
-	@mkdir -p ${@D}
-	${CC} ${FLAGS} -c $< -o $@
+all: $(NAME)
 
-# Build the executable
-${NAME}: ${OBJS}
-	@echo "${GREEN}Compiling ${CLR_RMV} ${GOLD}${NAME} ${CLR_RMV}..."
-	${CC} ${FLAGS} ${OBJS} ${LIBFLAGS} -o ${NAME}
-	@echo "${GOLD}${NAME} created[0m "
+$(NAME): $(LIBFT_DIR)/$(BUILD_DIR)/libft.a $(OBJS)
+	$(CC) $(OBJS) $(REQUIRED_CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
 
-# Build all
-all: ${NAME}
+$(LIBFT_DIR)/$(BUILD_DIR)/libft.a:
+	make -C $(LIBFT_DIR)
 
-# Clean object files
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(P_HEADER)
+	@mkdir -p $(@D)
+	$(CC) -c $< $(REQUIRED_CFLAGS) $(CPPFLAGS) -o $@
+
 clean:
-	@echo "${RED}Deleting ${LAVENDER}${NAME}'s ${CLR_RMV}objs"
-	@find ${OBJ_DIR} -name "*.o" -type f -delete
+	$(RM) $(OBJS)
 
-# Clean all files
 fclean: clean
-	@echo "${RED}Deleting ${CYAN}${NAME}'s ${CLR_RMV}objs and executable"
-	@${RM} ${NAME}
+	$(RM) $(NAME)
 
-# Clean and rebuild
 re: fclean all
 
-# Custom command 'makex'
-x: fclean all
-
-
-	@echo "${GREEN}Running ${CYAN}${NAME} ${CLR_RMV}..."
-	-@./$(NAME)
-#i've added '-' in front of @./$(NAME) because i wanted to silence this error "make: *** [Makefile:75: x] Error 130".
-#i've havent solved the problem at the root, i just silenced this problem that only happens if im compiling with "make x"
-
 clear:
-		clear
+	clear
 
-mem:clear all
-	valgrind --leak-check=full --suppressions=EXTRA/readline.supp ./build/minishell
+run: clear all
+	$(NAME) $(ARGS)
 
-.PHONY: all clean fclean re x clear mem
+mem: clear all
+	valgrind --tool=$(VALGRIND-TOOL) $(VALGRIND-OPTIONS) $(NAME) $(ARGS)
+
+vgdb: clear all
+	valgrind --tool=$(VALGRIND-TOOL) $(VALGRIND-OPTIONS) --vgdb-error=0 $(NAME) $(ARGS)
+
+gdb: clear all
+	echo "target remote | vgdb\nc" > .gdbinit
+	gdb --args $(NAME) $(ARGS)
+
+debug: clear all
+	gdb --args $(NAME) $(ARGS)
+
+debugf: clear all
+	vi .gdbinit && gdb --args $(NAME) $(ARGS)
+
+norme:
+	while [ 1 ] ; do sleep 2 ; clear ; norminette $(SRCS_DIR) ; done
+
+compile:
+	while [ 1 ] ; do sleep 2 ; clear ; make ; done

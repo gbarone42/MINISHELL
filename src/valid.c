@@ -1,8 +1,6 @@
 #include "../include/minishell.h"
 
-
-
-int ft_isvalid(const char *input)
+int ft_is_valid(const char *input)
 {
     if (input == NULL)
 	{

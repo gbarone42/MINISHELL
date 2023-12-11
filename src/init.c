@@ -1,4 +1,4 @@
-#include "../include/minishell.h"
+#include "minishell_p.h"
 
 char **ft_get_env(char **env)
 {
