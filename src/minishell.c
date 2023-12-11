@@ -14,7 +14,8 @@ int main(int ac, char **av, char **env)
     memset(&my_shell, 0, sizeof(t_shell));
     printf("%sWelcome %s!%s\n", GREEN, getenv("USER"), CLR_RMV);
     output = ft_innit_shell(&my_shell, env);
-    if (output != 0) {
+    if (output != 0)
+    {
         perror("Error initializing shell");
         exit(output);
     }
