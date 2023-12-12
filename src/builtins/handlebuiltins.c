@@ -25,9 +25,9 @@ void handle_basic_builtin1(t_shell *shell, char **args)
     {
             ft_handle_cd(shell, args);
     }
-    if (strncmp(args[0], "echo", 5) == 0)
+    if (args && args[0] && strcmp(args[0], "echo") == 0)
     {
-        handle_echo(*args);
+        handle_echo(args);
     }
 }
 

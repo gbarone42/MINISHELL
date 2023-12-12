@@ -152,8 +152,7 @@ void update_prompt(t_shell *shell);
 void clear_screen(void);
 
 //echos
-void handle_echo(char *input);
-void handle_echo_n(char *input);
+void handle_echo(char **args);
 
 //envv
 void handle_env(t_shell *shell);

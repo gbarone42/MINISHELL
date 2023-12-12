@@ -1,41 +1,26 @@
 #include "../../include/minishell.h"
 
 
-void handle_echo(char *input)
+void handle_echo(char **args)
 {
-    char *text;
-    int suppress_newline = 0;
+    int newline = 1;  // By default, echo prints a newline at the end.
 
-    text = input + 4;
-    while (*text && (*text == ' ' || *text == '\t'))
-    {
-        text++;
+    // Check if the first argument is '-n', which suppresses the newline.
+    if (args[1] && strcmp(args[1], "-n") == 0) {
+        newline = 0;  // Do not print the newline at the end.
+        args++;       // Skip the '-n' argument.
     }
-    if (ft_strncmp(text, "-n", 2) == 0) {
-        suppress_newline = 1;
-        text += 2;
-        while (*text && (*text == ' ' || *text == '\t')) {
-            text++;
+
+    // Start from the first or second argument based on the presence of '-n'.
+    for (int i = 1; args[i]; i++) {
+        printf("%s", args[i]);
+        if (args[i + 1] != NULL) {
+            printf(" ");  // Print spaces between arguments.
         }
     }
-    printf("%s", text);
-    if (!suppress_newline) {
-        printf("\n");
-    }
-}
 
-void handle_echo_n(char *input)
-{
-    char *text;
-    int suppress_newline = 1;
-
-    text = input + 7;
-    while (*text && (*text == ' ' || *text == '\t'))
-    {
-        text++;
-    }
-    printf("%s", text);
-    if (!suppress_newline) {
+    // Print a newline if not suppressed.
+    if (newline) {
         printf("\n");
     }
 }
