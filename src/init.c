@@ -72,7 +72,6 @@ int ft_innit_user_and_prompt(t_shell *shell, char **env)
         return(MEM_ERROR3);
     }
     printf("prompt: %s\n", shell->prompt);
-
     return 0;
 }
 
@@ -104,8 +103,5 @@ int ft_innit_shell(t_shell *shell, char **env)
 
     result = ft_duplicate_std_fds(shell);
     if (result != 0) return result;
-
-    // Additional initialization if needed...
-
     return 0;
 }

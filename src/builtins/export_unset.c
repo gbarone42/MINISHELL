@@ -7,7 +7,8 @@ extern char **environ;
 void print_environment()
 {
     char **env = environ;
-    while (*env) {
+    while (*env)
+    {
         printf("%s\n", *env);
         env++;
     }
@@ -43,27 +44,25 @@ char *ft_strtok(char *str, char sep)
 {
     static char *last = NULL;
 
-    if (str != NULL) {
+    if (str != NULL)
+    {
         last = str;
-    } else if (last == NULL || *last == '\0') {
+    } else if (last == NULL || *last == '\0')
+    {
         return NULL;
     }
-
     char *token_start = last;
-
-    while (*last != '\0' && *last != sep) {
+    while (*last != '\0' && *last != sep)
+    {
         last++;
     }
-
-    if (*last != '\0') {
+    if (*last != '\0')
+    {
         *last = '\0';
         last++;
     }
-
     return token_start;
 }
-
-
 
 bool contains_invalid_characters(const char *str)
 {
@@ -118,11 +117,10 @@ void add_env_variable(t_shell *shell, const char *name, const char *value)
     strcpy(new_variable, name);
     strcat(new_variable, "=");
     strcat(new_variable, value);
-
     printf("New variable: %s\n", new_variable);
-
     int found = 0;
-    for (int i = 0; shell->env[i] != NULL; ++i) {
+    for (int i = 0; shell->env[i] != NULL; ++i)
+    {
         if (strncmp(shell->env[i], name, strlen(name)) == 0 && shell->env[i][strlen(name)] == '=')
         {
             free(shell->env[i]);
@@ -131,9 +129,11 @@ void add_env_variable(t_shell *shell, const char *name, const char *value)
             break;
         }
     }
-    if (!found) {
+    if (!found)
+    {
         int env_size = 0;
-        while (shell->env[env_size] != NULL) {
+        while (shell->env[env_size] != NULL)
+        {
             env_size++;
         }
 

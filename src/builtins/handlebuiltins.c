@@ -42,7 +42,6 @@ void handle_basic_builtin2(t_shell *shell, char **args)
         handle_export(shell, args);
     }
     else if (args && args[0] && !ft_strcmp(args[0], "unset"))
-
     {
         handle_unset(shell, args);
     }
@@ -58,7 +57,8 @@ void handle_basic_builtins(t_shell *shell)
     printf("Input before comparison: %s\n", shell->input);
     char **args = ft_split(shell->input, ' ');
     printf("First command of Input after comparison: %s\n", args[0]);
-    for (int i = 0; args[i]; i++) {
+    for (int i = 0; args[i]; i++)
+    {
         printf("Arg[%d]: %s\n", i, args[i]);
     }
 
