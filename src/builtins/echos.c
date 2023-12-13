@@ -1,26 +1,43 @@
 #include "../../include/minishell.h"
 
-
-void handle_echo(char **args)
+void echo_no_arguments()
 {
-    int newline = 1;  // By default, echo prints a newline at the end.
+    printf("\n");
+}
 
-    // Check if the first argument is '-n', which suppresses the newline.
-    if (args[1] && strcmp(args[1], "-n") == 0) {
-        newline = 0;  // Do not print the newline at the end.
-        args++;       // Skip the '-n' argument.
-    }
-
-    // Start from the first or second argument based on the presence of '-n'.
+// Function for echo with arguments but without '-n'.
+void echo_with_arguments(char **args) {
     for (int i = 1; args[i]; i++) {
         printf("%s", args[i]);
         if (args[i + 1] != NULL) {
-            printf(" ");  // Print spaces between arguments.
+            printf(" ");
         }
     }
+    printf("\n");
+}
 
-    // Print a newline if not suppressed.
-    if (newline) {
-        printf("\n");
+// Function for echo with '-n' argument.
+void echo_with_n_argument(char **args) {
+    args++;  // Skip the '-n' argument.
+    for (int i = 1; args[i]; i++) {
+        printf("%s", args[i]);
+        if (args[i + 1] != NULL) {
+            printf(" ");
+        }
+    }
+    // No newline printed.
+}
+
+// Main function to decide which echo function to call.
+void handle_echo(char **args) {
+    if (args[1] == NULL) {
+        // No arguments provided.
+        echo_no_arguments();
+    } else if (strcmp(args[1], "-n") == 0) {
+        // '-n' argument is provided.
+        echo_with_n_argument(args);
+    } else {
+        // Other arguments are provided.
+        echo_with_arguments(args);
     }
 }
