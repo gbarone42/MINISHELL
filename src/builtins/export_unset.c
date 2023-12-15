@@ -4,9 +4,19 @@ extern char **environ;
 
 //strstr() function in C is used to find the first occurrence of a substring within another string
 
-void print_environment()
+//void print_environment()
+//{
+//    char **env = environ;
+//    while (*env)
+//    {
+//        printf("%s\n", *env);
+//        env++;
+//    }
+//}
+
+void handle_envv(t_shell *shell)
 {
-    char **env = environ;
+    char **env = shell->env;
     while (*env)
     {
         printf("%s\n", *env);
@@ -153,7 +163,7 @@ void handle_export(t_shell *shell, char **args)
 {
     if (args[1] == NULL)
     {
-        print_environment();
+        handle_envv(shell);
     }
     else
     {
