@@ -17,45 +17,15 @@ void handle_basic_builtin1(t_shell *shell, char **args)
         free_args(args);
         shell_exit(shell);
     } 
-    // else if (!ft_strncmp(shell->input, "cd", 3))
-    // {
-    //     ft_handle_cd(shell, args);
-    // }
     else if (args && args[0] && !ft_strcmp(args[0], "cd")) 
     {
             ft_handle_cd(shell, args);
     }
-    if (strncmp(args[0], "echo", 5) == 0)
+    if (args && args[0] && strcmp(args[0], "echo") == 0)
     {
-        handle_echo(*args);
+        handle_echo(args);
     }
 }
-
-// void handle_basic_builtin1(t_shell *shell, char **args)
-// {
-//     if (!ft_strncmp(shell->input, "exit", 5))
-//     { 
-//         free_args(args);
-//         shell_exit(shell);
-//     } 
-//     // else if (!ft_strncmp(shell->input, "cd", 3))
-//     // {
-//     //     ft_handle_cd(shell, args);
-//     // }
-//     else if (args && args[0] && !ft_strcmp(args[0], "cd")) 
-//     {
-//             ft_handle_cd(shell, args);
-//     }
-//     else if (!ft_strncmp(shell->input, "echo -n", 8))
-//     {
-//         handle_echo_n(shell->input);
-//     }
-//     else if (!ft_strncmp(shell->input, "echo", 5))
-//     {
-//         handle_echo(shell->input);
-//     }
-// }
-
 
 void handle_basic_builtin2(t_shell *shell, char **args)
 {
@@ -72,7 +42,6 @@ void handle_basic_builtin2(t_shell *shell, char **args)
         handle_export(shell, args);
     }
     else if (args && args[0] && !ft_strcmp(args[0], "unset"))
-
     {
         handle_unset(shell, args);
     }
@@ -88,7 +57,8 @@ void handle_basic_builtins(t_shell *shell)
     printf("Input before comparison: %s\n", shell->input);
     char **args = ft_split(shell->input, ' ');
     printf("First command of Input after comparison: %s\n", args[0]);
-    for (int i = 0; args[i]; i++) {
+    for (int i = 0; args[i]; i++)
+    {
         printf("Arg[%d]: %s\n", i, args[i]);
     }
 

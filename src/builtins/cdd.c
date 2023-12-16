@@ -38,28 +38,37 @@ void change_directory(t_shell *shell, char *path)
     }
 }
 
-void update_prompt(t_shell *shell)
+void free_memory(char *user, char *user_at, char *user_at_colon, char *prompt_suffix)
 {
-    char cwd[PATH_MAX];
+    free(user);
+    free(user_at);
+    free(user_at_colon);
+    free(prompt_suffix);
+}
 
-    if (getcwd(cwd, sizeof(cwd)) == NULL)
+void get_current_directory(char *cwd)
+{
+    if (getcwd(cwd, PATH_MAX) == NULL)
     {
         perror("getcwd");
         printf("Error: Unable to get the current working directory\n");
-        return;
+        exit(EXIT_FAILURE);
     }
+}
 
-    free(shell->prompt);
-
-    // Getting the user and formatting it with color
+char* build_user_string(void)
+{
     char *user = ft_strjoin(PURPLE, getenv("USER"));
     if (!user)
     {
         perror("Error: Unable to allocate memory for user\n");
         exit(EXIT_FAILURE);
     }
+    return user;
+}
 
-    // Creating user with @ASHellKETCHUM
+char* build_user_at_string(char *user)
+{
     char *user_at = ft_strjoin(user, "@ASHellKETCHUM");
     if (!user_at)
     {
@@ -67,79 +76,61 @@ void update_prompt(t_shell *shell)
         free(user);
         exit(EXIT_FAILURE);
     }
+    return user_at;
+}
 
-    // Adding a colon and space after @ASHellKETCHUM
+char* build_user_at_colon_string(char *user_at)
+{
     char *user_at_colon = ft_strjoin(user_at, ":");
     if (!user_at_colon)
     {
         perror("Error: Unable to allocate memory for user_at_colon\n");
-        free(user);
-        free(user_at);
+        free_memory(NULL, user_at, NULL, NULL);
         exit(EXIT_FAILURE);
     }
+    return user_at_colon;
+}
 
-    // Creating the prompt suffix with color removal and dollar sign
+char* build_prompt_suffix(void)
+{
     char *prompt_suffix = ft_strjoin(CLR_RMV, "$ ");
     if (!prompt_suffix)
     {
         perror("Error: Unable to allocate memory for prompt_suffix\n");
-        free(user);
-        free(user_at);
-        free(user_at_colon);
         exit(EXIT_FAILURE);
     }
+    return prompt_suffix;
+}
 
-    // Allocating memory for the complete prompt
+void create_prompt(t_shell *shell, char *user_at_colon, char *cwd, char *prompt_suffix)
+{
     shell->prompt = (char *)malloc(strlen(user_at_colon) + strlen(cwd) + strlen(prompt_suffix) + 1);
     if (!shell->prompt)
     {
         perror("Error: Unable to allocate memory for the new prompt\n");
-        free(user);
-        free(user_at);
-        free(user_at_colon);
-        free(prompt_suffix);
         exit(EXIT_FAILURE);
     }
 
-    // Concatenating the strings to form the prompt
     strcpy(shell->prompt, user_at_colon);
     strcat(shell->prompt, cwd);
     strcat(shell->prompt, prompt_suffix);
 
     printf("Updated prompt: %s\n", shell->prompt);
-
-    // Freeing the allocated memory
-    free(user);
-    free(user_at);
-    free(user_at_colon);
-    free(prompt_suffix);
 }
-// void update_prompt(t_shell *shell)
-// {
-//     char cwd[PATH_MAX];
-    
-//     // Get the current working directory
-//     if (getcwd(cwd, sizeof(cwd)) == NULL)
-//     {
-//         perror("getcwd");
-//         printf("Error: Unable to get the current working directory\n");
-//         return;
-//     }
 
-//     // Free the previous prompt if it exists
-//     free(shell->prompt);
+void update_prompt(t_shell *shell)
+{
+    char cwd[PATH_MAX];
+    get_current_directory(cwd);
 
-//     // Create a new prompt with the current directory
-//     shell->prompt = (char *)malloc(strlen(cwd) + strlen(" > ") + 1);
-//     if (!shell->prompt)
-//     {
-//         perror("Error: Unable to allocate memory for the new prompt\n");
-//         exit(EXIT_FAILURE); // or return if you want to handle the error
-//     }
+    free(shell->prompt);
 
-//     // Construct the new prompt
-//     strcpy(shell->prompt, cwd);
-//     strcat(shell->prompt, " > ");
+    char *user = build_user_string();
+    char *user_at = build_user_at_string(user);
+    char *user_at_colon = build_user_at_colon_string(user_at);
+    char *prompt_suffix = build_prompt_suffix();
 
-//     printf("Updated prompt: %s\n", shell->prompt);
-// }
+    create_prompt(shell, user_at_colon, cwd, prompt_suffix);
+
+    free_memory(user, user_at, user_at_colon, prompt_suffix);
+}

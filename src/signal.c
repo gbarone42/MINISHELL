@@ -7,6 +7,7 @@ void ft_ctrld(t_shell *shell)
     }
     printf("\n");
     free(shell->input);
+	// if $SHLVL == 1
     shell_exit(shell);
 }
 
