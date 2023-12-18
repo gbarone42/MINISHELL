@@ -6,7 +6,7 @@
 #    By: filippo <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 19:41:53 by filippo           #+#    #+#              #
-#    Updated: 2023/12/16 20:09:50 by filippo          ###   ########.fr        #
+#    Updated: 2023/12/18 23:12:38 by filippo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ P_HEADER		=	$(SRCS_DIR)/minishell_p.h
 
 SRCS			=	$(SRCS_DIR)/main.c \
 					$(SRCS_DIR)/init.c \
+					$(SRCS_DIR)/utils.c \
+					$(SRCS_DIR)/string.c \
 				#	$(SRCS_DIR)/parse.c \
 					$(SRCS_DIR)/pipe.c \
 					$(SRCS_DIR)/signal.c \
@@ -83,8 +85,9 @@ debug: clear all
 debugf: clear all
 	vi .gdbinit && gdb --args $(NAME) $(ARGS)
 
+arg_norme	?=	
 norme:
-	while [ 1 ] ; do sleep 2 ; clear ; norminette $(SRCS_DIR) ; done
+	while [ 1 ] ; do sleep 2 ; clear ; norminette $(SRCS_DIR)/$(notdir $(arg_norme)) ; done
 
 compile:
 	while [ 1 ] ; do sleep 2 ; clear ; make ; done
