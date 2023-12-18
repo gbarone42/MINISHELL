@@ -20,6 +20,8 @@
 #include <termios.h>
 #include <unistd.h>
 
+# include "libft/libft.h"
+
 #define INPUT_SIZE 4095
 #define HISTORY_SIZE 100
 #define TRUE 1
@@ -45,37 +47,13 @@
 typedef struct s_shell
 {
     char *prompt;
-    int in;
-    int out;
     char **env;
     char *input;
     char **paths;
     char **export;
 } t_shell;
 
-typedef struct s_parser
-{
-    // int id;
-    // char **cmds;
-    // int in;
-    // int out;
-    // int numred;
-    // int *redirs;
-    // char **redir_name;
-    // bool exec;
-    // struct s_parser *next;
-    // struct s_parser *prev;
-} t_pars;
-
-typedef struct s_token
-{
-    // int id;
-    // int type;
-    // char *token;
-    // struct s_token *next;
-    // struct s_token *prev;
-} t_tok;
-
+/*
 extern int	g_exit;
 extern char	*history[HISTORY_SIZE];
 extern int	history_count;
@@ -83,10 +61,11 @@ extern int	history_count;
 void	ft_exit_shell(t_shell *shell);
 void	ft_free_shell(t_shell *my_shell);
 void	ft_free_env(char **my_env);
+*/
 
 int		ft_init_shell(t_shell *shell, char **env);
-char	**ft_copy_env(char **env);
 
+/*
 //parsing
 void	ft_parse(t_shell *shell, t_pars **command);
 char	**ft_handle_input(t_shell *shell);
@@ -145,5 +124,6 @@ void	ft_display_history(void);
 
 //pwd
 void	ft_print_current_directory(void);
+*/
 
 #endif // MINISHELL_H

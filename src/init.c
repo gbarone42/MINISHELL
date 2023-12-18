@@ -1,6 +1,6 @@
 #include "minishell_p.h"
 
-char **ft_get_env(char **env)
+static char **ft_get_env(char **env)
 {
     char **my_env = NULL;
     int i = 0;
@@ -32,50 +32,25 @@ char **ft_get_env(char **env)
     return my_env;
 }
 
-void free_myenv(char **my_env)
-{
-    if (my_env)
-    {
-        for (int i = 0; my_env[i] != NULL; i++)
-        {
-            free(my_env[i]);
-        }
-        free(my_env);
-    }
-}
-
-int ft_innit_user_and_prompt(t_shell *shell, char **env)
+static void	ft_init_user_and_prompt(t_shell *shell, char **env)
 {
     char *user;
     char **env_copied = ft_get_env(env);
+    char *prompt_suffix = "@ASHellKETCHUM" CLR_RMV "$ ";
 
     if (!env_copied)
-    {
-        write(STDERR_FILENO, "Failed to allocate memory for env_copied.\n", 43);
-        return(MEM_ERROR2);
-    }
+		ft_error("ft_gen_env", "Failed to allocate memory for env_copied.");
     shell->env = env_copied;
     user = ft_strjoin(PURPLE, getenv("USER"));
     if (!user)
-    {
-        write(STDERR_FILENO, "Failed to allocate memory for user.\n", 37);
-        free_myenv(env_copied);
-        return (MEM_ERROR);
-    }
-    char *prompt_suffix = "@ASHellKETCHUM" CLR_RMV "$ ";
+		ft_free_and_error(env_copied, "ft_strjoin", "Failed to allocate memory for user.");
     shell->prompt = ft_strjoin(user, prompt_suffix);
     free(user);
     if (!shell->prompt)
-    {
-        write(STDERR_FILENO, "Failed to allocate memory for prompt.\n", 38);
-        free_myenv(env_copied);
-        return(MEM_ERROR3);
-    }
-    printf("prompt: %s\n", shell->prompt);
-    return 0;
+		ft_free_and_error(env_copied, "ft_strjoin", "Failed to allocate memory for user.");
 }
 
-int ft_duplicate_std_fds(t_shell *shell)
+static int ft_duplicate_std_fds(t_shell *shell)
 {
     shell->in = dup(STDIN_FILENO);
     shell->out = dup(STDOUT_FILENO);
@@ -94,14 +69,10 @@ int ft_duplicate_std_fds(t_shell *shell)
     return 0;
 }
 
-int ft_innit_shell(t_shell *shell, char **env)
+void	ft_init_shell(t_shell *shell, char **env)
 {
-    int result;
+	int result;
 
-    result = ft_innit_user_and_prompt(shell, env);
-    if (result != 0) return result;
-
-    result = ft_duplicate_std_fds(shell);
-    if (result != 0) return result;
-    return 0;
+    ft_init_user_and_prompt(shell, env);
+    ft_duplicate_std_fds(shell);
 }

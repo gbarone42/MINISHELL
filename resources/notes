@@ -1,0 +1,8 @@
+ls -a . << EOF >> output < input # comment
+
+command:	ls -a
+in:			input
+out:
+append:		output
+arg:		.
+heredoc:	EOF
