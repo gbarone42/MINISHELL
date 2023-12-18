@@ -35,7 +35,7 @@
 #define HERE_DOCUMENT '<<'
 #define APPEND_OUTPUT '>>'
 
-#define CLR_RMV "\033[0m"
+#define WHITE "\033[0m"
 #define RED "\033[1;31m"
 #define GREEN "\033[1;32m"
 #define YELLOW "\033[1;33m"
@@ -46,11 +46,8 @@
 
 typedef struct s_shell
 {
-    char *prompt;
-    char **env;
-    char *input;
-    char **paths;
-    char **export;
+	char	**env;
+	char	*prompt;
 } t_shell;
 
 /*
@@ -60,10 +57,16 @@ extern int	history_count;
 
 void	ft_exit_shell(t_shell *shell);
 void	ft_free_shell(t_shell *my_shell);
-void	ft_free_env(char **my_env);
 */
 
-int		ft_init_shell(t_shell *shell, char **env);
+void	ft_err(char *caller, int error);
+void	ft_free_and_err(t_shell *shell, char *caller, int error);
+void	ft_free_and_exit(t_shell *shell, int status);
+
+void	ft_init_shell(t_shell *shell, char **env);
+
+char	*ft_strjoin_decorator(char *first, char *second);
+char	*ft_set_prompt(char *tmp);
 
 /*
 //parsing

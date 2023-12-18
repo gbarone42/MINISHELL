@@ -1,14 +1,9 @@
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include "testing_p.h"
 
 int main(void)
 {
-	char *buf = NULL;
-	chdir("..");
-	char *cwd = getcwd(buf, 0);
+	char *cwd = getcwd(NULL, 0);
 	printf("%s\n", cwd);
 	free(cwd);
 	return (0);
 }
-

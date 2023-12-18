@@ -1,17 +1,30 @@
-#include "../include/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signal.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/18 23:15:30 by filippo           #+#    #+#             */
+/*   Updated: 2023/12/18 23:18:27 by filippo          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell_p.h"
 
 void ft_ctrld(t_shell *shell)
 {
-    if (errno) {
+    if (errno)
+	{
         write(STDERR_FILENO, "readline error: ", 17);
     }
     printf("\n");
     free(shell->input);
-	// if $SHLVL == 1
-    shell_exit(shell);
+	// if $SHLVL == 0
+    ft_free_and_exit(shell, EXIT_SUCCESS);
 }
 
-void	ft_norm_signal(void)
+void	ft_set_signals(void)
 {
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, signal_handler);

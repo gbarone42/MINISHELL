@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/11 19:44:51 by filippo           #+#    #+#             */
-/*   Updated: 2023/12/18 23:26:20 by filippo          ###   ########.fr       */
+/*   Created: 2023/12/18 20:18:17 by filippo           #+#    #+#             */
+/*   Updated: 2023/12/18 23:22:12 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_p.h"
 
-int	main(int argc, char **argv, char **env)
+void	ft_err(char *caller, int error)
 {
-	t_shell	shell;
-
-	if (argc != 1)
-		ft_err(*argv, errno = EINVAL);
-	ft_init_shell(&shell, env);
-	//ft_set_signals();
-	//ft_minishell_simulator(&my_shell);
-	ft_printf("%s\n", shell.prompt);
-	ft_free_and_exit(&shell, EXIT_SUCCESS);
+	(void) error;
+	perror(caller);
+	exit(EXIT_FAILURE);
 }

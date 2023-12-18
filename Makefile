@@ -6,7 +6,7 @@
 #    By: filippo <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 19:41:53 by filippo           #+#    #+#              #
-#    Updated: 2023/12/18 23:12:38 by filippo          ###   ########.fr        #
+#    Updated: 2023/12/18 23:30:39 by filippo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			=	$(BUILD_DIR)/minishell
 ARGS			=	
 
 VALGRIND-TOOL	=	memcheck
-VALGRIND-OPTIONS=	
+VALGRIND-OPTIONS=	--leak-check=full --show-leak-kinds=all
 
 CFLAGS			=	-g
 REQUIRED_CFLAGS	=	$(CFLAGS) -Wall -Wextra -Werror
@@ -32,6 +32,7 @@ P_HEADER		=	$(SRCS_DIR)/minishell_p.h
 SRCS			=	$(SRCS_DIR)/main.c \
 					$(SRCS_DIR)/init.c \
 					$(SRCS_DIR)/utils.c \
+					$(SRCS_DIR)/free.c \
 					$(SRCS_DIR)/string.c \
 				#	$(SRCS_DIR)/parse.c \
 					$(SRCS_DIR)/pipe.c \
@@ -76,7 +77,7 @@ vgdb: clear all
 	valgrind --tool=$(VALGRIND-TOOL) $(VALGRIND-OPTIONS) --vgdb-error=0 $(NAME) $(ARGS)
 
 gdb: clear all
-	echo "target remote | vgdb\nc" > .gdbinit
+	echo "target remote | vgdb\nb main\nc" > .gdbinit
 	gdb --args $(NAME) $(ARGS)
 
 debug: clear all
