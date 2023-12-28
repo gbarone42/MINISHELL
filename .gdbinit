@@ -1,3 +1,2 @@
-target remote | vgdb
-b main
-c
+b ft_lexer
+r

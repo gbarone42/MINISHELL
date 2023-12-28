@@ -6,7 +6,7 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 20:18:13 by filippo           #+#    #+#             */
-/*   Updated: 2023/12/18 23:40:12 by filippo          ###   ########.fr       */
+/*   Updated: 2023/12/25 19:44:32 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,28 @@ char	*ft_strjoin_decorator(char *first, char *second)
 	return (output);
 }
 
-char	*ft_set_prompt(char *user)
+void	ft_set_prompt(t_shell *shell)
 {
 	char	*output;
 	char	*tmp;
 
-	output = ft_strjoin(GREEN, user);
+	output = ft_strjoin(GREEN, getenv("USER"));
+	if (!output)
+		ft_free_and_err(shell, "ft_strjoin", errno = ENOMEM);
 	output = ft_strjoin_decorator(output, "@");
+	if (!output)
+		ft_free_and_err(shell, "ft_strjoin", errno = ENOMEM);
 	output = ft_strjoin_decorator(output, BLUE);
+	if (!output)
+		ft_free_and_err(shell, "ft_strjoin", errno = ENOMEM);
 	tmp = getcwd(NULL, 0);
 	output = ft_strjoin_decorator(output, tmp);
 	free(tmp);
+	if (!output)
+		ft_free_and_err(shell, "ft_strjoin", errno = ENOMEM);
 	output = ft_strjoin_decorator(output, WHITE "$ ");
-	return (output);
+	if (!output)
+		ft_free_and_err(shell, "ft_strjoin", errno = ENOMEM);
+	shell->prompt = output;
 }
+

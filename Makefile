@@ -6,7 +6,7 @@
 #    By: filippo <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 19:41:53 by filippo           #+#    #+#              #
-#    Updated: 2023/12/18 23:30:39 by filippo          ###   ########.fr        #
+#    Updated: 2023/12/27 20:15:49 by filippo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			=	$(BUILD_DIR)/minishell
 ARGS			=	
 
 VALGRIND-TOOL	=	memcheck
-VALGRIND-OPTIONS=	--leak-check=full --show-leak-kinds=all
+VALGRIND-OPTIONS=	--track-origins=yes --leak-check=full --show-leak-kinds=all --suppressions=./resources/readline.supp
 
 CFLAGS			=	-g
 REQUIRED_CFLAGS	=	$(CFLAGS) -Wall -Wextra -Werror
@@ -31,14 +31,14 @@ P_HEADER		=	$(SRCS_DIR)/minishell_p.h
 
 SRCS			=	$(SRCS_DIR)/main.c \
 					$(SRCS_DIR)/init.c \
+					$(SRCS_DIR)/executor.c \
+					$(SRCS_DIR)/lexer.c \
+					$(SRCS_DIR)/parser.c \
+					$(SRCS_DIR)/tlist.c \
+					$(SRCS_DIR)/vlist.c \
 					$(SRCS_DIR)/utils.c \
 					$(SRCS_DIR)/free.c \
 					$(SRCS_DIR)/string.c \
-				#	$(SRCS_DIR)/parse.c \
-					$(SRCS_DIR)/pipe.c \
-					$(SRCS_DIR)/signal.c \
-					$(SRCS_DIR)/simulation.c \
-					$(SRCS_DIR)/valid.c
 
 OBJS			=	$(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o)
 
