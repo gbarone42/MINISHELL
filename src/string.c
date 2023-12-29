@@ -6,7 +6,7 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 20:18:13 by filippo           #+#    #+#             */
-/*   Updated: 2023/12/25 19:44:32 by filippo          ###   ########.fr       */
+/*   Updated: 2023/12/29 11:55:45 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,3 @@ void	ft_set_prompt(t_shell *shell)
 		ft_free_and_err(shell, "ft_strjoin", errno = ENOMEM);
 	shell->prompt = output;
 }
-

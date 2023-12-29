@@ -6,7 +6,7 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 23:21:55 by filippo           #+#    #+#             */
-/*   Updated: 2023/12/28 01:23:35 by filippo          ###   ########.fr       */
+/*   Updated: 2023/12/29 11:54:41 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,3 @@ void	ft_free_and_exit(t_shell *shell, int status)
 	ft_free_shell(shell);
 	exit(status);
 }
-

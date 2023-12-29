@@ -6,11 +6,18 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 19:44:51 by filippo           #+#    #+#             */
-/*   Updated: 2023/12/27 20:21:30 by filippo          ###   ########.fr       */
+/*   Updated: 2023/12/29 11:54:05 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_p.h"
+
+static void	ft_prepare_for_next_input(t_shell *shell)
+{
+	free(shell->input);
+	ft_free_tlist(shell->tokens);
+	shell->ntokens = 0;
+}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -26,9 +33,11 @@ int	main(int argc, char **argv, char **env)
 			break ;
 		shell.input_len = ft_strlen(shell.input);
 		ft_parser(&shell);
+		/*
 		if (shell.commands)
 			ft_execute(&shell);
-		free(shell.input);
+		*/
+		ft_prepare_for_next_input(&shell);
 	}
 	ft_free_and_exit(&shell, EXIT_SUCCESS);
 }

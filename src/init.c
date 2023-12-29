@@ -6,7 +6,7 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 22:42:17 by filippo           #+#    #+#             */
-/*   Updated: 2023/12/27 16:23:47 by filippo          ###   ########.fr       */
+/*   Updated: 2023/12/29 11:53:23 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	ft_init_env(t_shell *shell, char **env)
 {
-	t_vlist *last;
+	t_vlist	*last;
 
 	if (!env || !*env)
 		ft_err("ft_copy_env", errno = ENOENT);
@@ -33,8 +33,10 @@ static void	ft_init_env(t_shell *shell, char **env)
 
 void	ft_init_shell(t_shell *shell, char **env)
 {
+	ft_ret_shell(shell);
 	ft_init_env(shell, env);
 	//! come settiamo il prompt?
 	ft_set_prompt(shell);
 	//ft_set_signals();
+	shell->ntokens = 0;
 }

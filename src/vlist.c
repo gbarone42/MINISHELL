@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vlist.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/29 11:56:34 by filippo           #+#    #+#             */
+/*   Updated: 2023/12/29 11:56:51 by filippo          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell_p.h"
 
 t_vlist	*ft_new_vlnode(char *value)
@@ -28,7 +40,7 @@ t_vlist	*ft_append_vlist(t_vlist *last, char *value)
 		return (NULL);
 	last->next = new;
 	new->prev = last;
-	return new;
+	return (new);
 }
 
 void	ft_free_vlist(t_vlist *head)
