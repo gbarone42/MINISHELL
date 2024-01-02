@@ -6,7 +6,7 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:52:44 by filippo           #+#    #+#             */
-/*   Updated: 2023/12/29 11:52:47 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/04 19:57:42 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_tlist	*ft_new_tlnode(size_t len)
 	*value = '\0';
 	output->data = value;
 	output->type = NULL_TOKEN;
+	output->expand = 0;
 	output->next = NULL;
 	return (output);
 }
@@ -49,7 +50,6 @@ size_t	ft_app_tlist(size_t j, t_tlist **p_last, size_t len)
 			ft_free_and_err(shell, "FT_NEW_TLNODE", errno = ENOMEM);
 		last->next = new;
 		*p_last = new;
-		shell->ntokens++;
 	}
 	return (0);
 }

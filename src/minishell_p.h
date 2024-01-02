@@ -6,7 +6,7 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:55:20 by filippo           #+#    #+#             */
-/*   Updated: 2023/12/29 11:58:18 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/02 20:09:27 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct var_node
 	char			*value;
 	struct var_node	*next;
 	struct var_node	*prev;
-}	t_vlist;
+}	t_evlist;
 
 enum
 {
@@ -56,14 +56,15 @@ enum
 {
 	NULL_STATE,
 	GENERAL_STATE,
-	QUOTE_STATE,
-	DQUOTE_STATE
+	QUOTE_STATE = '\'',
+	DQUOTE_STATE = '\"'
 };
 
 typedef struct token_node
 {
 	char				*data;
 	int					type;
+	int					expand;
 	struct token_node	*next;
 }	t_tlist;
 
@@ -88,13 +89,11 @@ typedef struct command_node
 
 typedef struct shell
 {
-	t_vlist	*first_envv;
-	t_vlist	*last_envv;
+	t_evlist	*first_envv;
+	t_evlist	*last_envv;
 	char	*prompt;
 	char	*input;
 	size_t	input_len;
-	t_tlist	*tokens;
-	int		ntokens;
 	t_clist	*commands;
 }	t_shell;
 
@@ -104,13 +103,12 @@ void	ft_free_and_err(t_shell *shell, char *caller, int error);
 void	ft_free_and_exit(t_shell *shell, int status);
 
 void	ft_init_shell(t_shell *shell, char **env);
-void	ft_lexer(t_shell *shell, char *input, size_t input_len, int state);
-void	ft_parser(t_shell *shell);
-//void	ft_execute(t_shell *shell);
+t_tlist	*ft_lexer(t_shell *shell, char *input, size_t input_len, int state);
+t_clist	*ft_parser(t_shell *shell);
 
-t_vlist	*ft_new_vlnode(char *value);
-t_vlist	*ft_append_vlist(t_vlist *last, char *value);
-void	ft_free_vlist(t_vlist *head);
+t_evlist	*ft_new_evlnode(char *value);
+t_evlist	*ft_append_evlist(t_evlist *last, char *value);
+void	ft_free_evlist(t_evlist *head);
 
 t_tlist	*ft_new_tlnode(size_t len);
 size_t	ft_app_tlist(size_t j, t_tlist **p_last, size_t len);

@@ -6,7 +6,7 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 22:42:17 by filippo           #+#    #+#             */
-/*   Updated: 2023/12/29 11:53:23 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/02 20:12:02 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 static void	ft_init_env(t_shell *shell, char **env)
 {
-	t_vlist	*last;
+	t_evlist	*last;
 
 	if (!env || !*env)
 		ft_err("ft_copy_env", errno = ENOENT);
-	last = ft_new_vlnode(*env++);
+	last = ft_new_evlnode(*env++);
 	if (!last)
 		ft_err("ft_new_slnode", errno = ENOMEM);
 	shell->first_envv = last;
 	while (*env)
 	{
-		last = ft_append_vlist(last, *env++);
+		last = ft_append_evlist(last, *env++);
 		if (!last)
 			ft_free_and_err(shell, "FT_APPEND_VLIST", errno = ENOMEM);
 	}
@@ -38,5 +38,4 @@ void	ft_init_shell(t_shell *shell, char **env)
 	//! come settiamo il prompt?
 	ft_set_prompt(shell);
 	//ft_set_signals();
-	shell->ntokens = 0;
 }

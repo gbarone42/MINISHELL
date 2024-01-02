@@ -1,0 +1,2 @@
+cat f < i > o >> a << e | wc -l ; ls
+echo "ciao '"!

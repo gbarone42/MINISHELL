@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vlist.c                                            :+:      :+:    :+:   */
+/*   evlist.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:56:34 by filippo           #+#    #+#             */
-/*   Updated: 2023/12/29 11:56:51 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/02 19:21:37 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_p.h"
 
-t_vlist	*ft_new_vlnode(char *value)
+t_evlist	*ft_new_evlnode(char *value)
 {
-	t_vlist	*output;
+	t_evlist	*output;
 
 	value = ft_strdup(value);
 	if (!value)
@@ -31,11 +31,11 @@ t_vlist	*ft_new_vlnode(char *value)
 	return (output);
 }
 
-t_vlist	*ft_append_vlist(t_vlist *last, char *value)
+t_evlist	*ft_append_evlist(t_evlist *last, char *value)
 {
-	t_vlist	*new;
+	t_evlist	*new;
 
-	new = ft_new_vlnode(value);
+	new = ft_new_evlnode(value);
 	if (!new)
 		return (NULL);
 	last->next = new;
@@ -43,9 +43,9 @@ t_vlist	*ft_append_vlist(t_vlist *last, char *value)
 	return (new);
 }
 
-void	ft_free_vlist(t_vlist *head)
+void	ft_free_evlist(t_evlist *head)
 {
-	t_vlist	*tmp;
+	t_evlist	*tmp;
 
 	while (head)
 	{

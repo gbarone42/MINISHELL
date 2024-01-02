@@ -6,7 +6,7 @@
 #    By: filippo <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 19:41:53 by filippo           #+#    #+#              #
-#    Updated: 2023/12/27 20:15:49 by filippo          ###   ########.fr        #
+#    Updated: 2024/01/02 18:15:31 by fcorri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,11 +31,10 @@ P_HEADER		=	$(SRCS_DIR)/minishell_p.h
 
 SRCS			=	$(SRCS_DIR)/main.c \
 					$(SRCS_DIR)/init.c \
-					$(SRCS_DIR)/executor.c \
 					$(SRCS_DIR)/lexer.c \
 					$(SRCS_DIR)/parser.c \
 					$(SRCS_DIR)/tlist.c \
-					$(SRCS_DIR)/vlist.c \
+					$(SRCS_DIR)/evlist.c \
 					$(SRCS_DIR)/utils.c \
 					$(SRCS_DIR)/free.c \
 					$(SRCS_DIR)/string.c \
