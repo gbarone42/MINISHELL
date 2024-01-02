@@ -6,7 +6,7 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 19:44:51 by filippo           #+#    #+#             */
-/*   Updated: 2023/12/29 11:54:05 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/02 19:08:13 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 static void	ft_prepare_for_next_input(t_shell *shell)
 {
 	free(shell->input);
-	ft_free_tlist(shell->tokens);
-	shell->ntokens = 0;
 }
 
 int	main(int argc, char **argv, char **env)
