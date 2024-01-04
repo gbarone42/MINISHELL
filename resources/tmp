@@ -1,9 +1,0 @@
-ls -a . << EOF >> output < input
-
-command:	ls -a
-in:			input
-out:		output
-arg:		.
-heredoc:	EOF
-flag:		12
-
