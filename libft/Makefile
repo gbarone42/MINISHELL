@@ -6,7 +6,7 @@
 #    By: fcorri <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 15:29:43 by fcorri            #+#    #+#              #
-#    Updated: 2023/12/18 20:07:59 by filippo          ###   ########.fr        #
+#    Updated: 2024/01/04 23:45:01 by filippo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,9 +84,9 @@ BONUS_SRCS		=	$(BONUS_DIR)/ft_lstadd_back.c \
 					$(BONUS_DIR)/ft_lstnew.c \
 					$(BONUS_DIR)/ft_lstsize.c \
 
-LIBS			=	$(BUILD_DIR)/libftprintf.a \
+LIBS			=	$(BUILD_DIR)/libftprintf.a
 
-LIBS_DIR		=	$(SRCS_DIR)/printf \
+LIBS_DIR		=	$(SRCS_DIR)/printf
 
 OBJS			=	$(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o) \
 					$(BONUS_SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o) \
@@ -98,8 +98,6 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(foreach LIB_DIR, $(LIBS_DIR), $(MAKE) -C $(LIB_DIR);)
-	$(foreach LIB_DIR, $(LIBS_DIR), $(MAKE) -C $(LIB_DIR);)
-	$(foreach LIB, $(LIBS), ar -x $(LIB))
 	$(foreach LIB, $(LIBS), ar -x $(LIB))
 	$(AR) $(NAME) $(OBJS) ./*.o
 	$(RM) ./*.o

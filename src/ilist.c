@@ -1,55 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   evlist.c                                           :+:      :+:    :+:   */
+/*   ilist.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:56:34 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/04 23:23:51 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/04 23:51:31 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_p.h"
 
-t_evlist	*ft_new_evlnode(char *value)
+t_ilist	*ft_new_ilnode(size_t index)
 {
-	t_evlist	*output;
+	t_ilist	*output;
 
-	value = ft_strdup(value);
-	if (!value)
-		return (NULL);
 	output = malloc(sizeof(*output));
 	if (!output)
-	{
-		free(value);
 		return (NULL);
-	}
-	output->value = value;
+	output->index = index;
 	output->next = NULL;
-	output->prev = NULL;
 	return (output);
 }
 
-t_evlist	*ft_app_evlist(t_evlist *last, char *value)
+void	ft_app_ilist(t_ilist **p_last, size_t index)
 {
-	t_evlist	*new;
+	t_ilist	*last;
+	t_ilist	*new;
 
-	new = ft_new_evlnode(value);
+	new = ft_new_ilnode(index);
 	if (!new)
-		return (NULL);
-	last->next = new;
-	new->prev = last;
-	return (new);
+		ft_free_and_err(ft_ret_shell(NULL), "FT_NEW_ILNODE", errno = ENOMEM);
+	last = *p_last;
+	if (!last)
+		*p_last = new;
+	else
+	{
+		while (last->next)
+			last = last->next;
+		last->next = new;
+	}
 }
 
-void	ft_free_evlist(t_evlist *head)
+void	ft_free_ilist(t_ilist *head)
 {
-	t_evlist	*tmp;
+	t_ilist	*tmp;
 
 	while (head)
 	{
-		free(head->value);
 		tmp = head;
 		head = head->next;
 		free(tmp);

@@ -6,7 +6,7 @@
 #    By: filippo <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 19:41:53 by filippo           #+#    #+#              #
-#    Updated: 2024/01/02 18:15:31 by fcorri           ###   ########.fr        #
+#    Updated: 2024/01/04 23:39:03 by filippo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS			=	$(SRCS_DIR)/main.c \
 					$(SRCS_DIR)/parser.c \
 					$(SRCS_DIR)/tlist.c \
 					$(SRCS_DIR)/evlist.c \
+					$(SRCS_DIR)/ilist.c \
 					$(SRCS_DIR)/utils.c \
 					$(SRCS_DIR)/free.c \
 					$(SRCS_DIR)/string.c \
@@ -87,7 +88,7 @@ debugf: clear all
 
 arg_norme	?=	
 norme:
-	while [ 1 ] ; do sleep 2 ; clear ; norminette $(SRCS_DIR)/$(notdir $(arg_norme)) ; done
+	while [ 1 ] ; do sleep 1 ; clear ; norminette $(SRCS_DIR)/$(notdir $(arg_norme)) ; done
 
 compile:
-	while [ 1 ] ; do sleep 2 ; clear ; make ; done
+	while [ 1 ] ; do sleep 1 ; clear ; make ; done

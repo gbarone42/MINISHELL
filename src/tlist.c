@@ -6,7 +6,7 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:52:44 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/04 19:57:42 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/04 23:52:54 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,24 @@ t_tlist	*ft_new_tlnode(size_t len)
 	*value = '\0';
 	output->data = value;
 	output->type = NULL_TOKEN;
-	output->expand = 0;
+	output->expand = NULL;
 	output->next = NULL;
 	return (output);
 }
 
 size_t	ft_app_tlist(size_t j, t_tlist **p_last, size_t len)
 {
-	t_shell	*shell;
 	t_tlist	*last;
 	t_tlist	*new;
 
 	if (j)
 	{
-		shell = ft_ret_shell(NULL);
 		last = *p_last;
 		last->data[j] = '\0';
 		new = ft_new_tlnode(len);
 		if (!new)
-			ft_free_and_err(shell, "FT_NEW_TLNODE", errno = ENOMEM);
+			ft_free_and_err(ft_ret_shell(NULL), \
+				"FT_NEW_TLNODE", errno = ENOMEM);
 		last->next = new;
 		*p_last = new;
 	}
@@ -61,19 +60,38 @@ void	ft_free_tlist(t_tlist *head)
 	while (head)
 	{
 		free(head->data);
+		ft_free_ilist(head->expand);
 		tmp = head;
 		head = head->next;
 		free(tmp);
 	}
 }
 
-size_t	ft_app_tlist_decorator(size_t j, t_tlist **p_last, char c, size_t len)
+size_t	ft_app_tlist_decorator(t_dsize_t *i_j, t_tlist **p_last, \
+	char c, size_t len)
 {
-	t_tlist	*last;
+	static t_shell	*shell;
+	t_tlist			*last;
+	char			next;
+	int				index;
+	int				type;
 
-	ft_app_tlist(j, p_last, len);
+	if (!shell)
+		shell = ft_ret_shell(NULL);
+	ft_app_tlist(i_j->y, p_last, len);
 	last = *p_last;
 	last->data[0] = c;
-	last->type = c;
-	return (ft_app_tlist(1, p_last, len - 1));
+	type = c;
+	index = 1;
+	next = shell->input[i_j->x++];
+	while (next == c)
+	{
+		last->data[index++] = c;
+		if (c != '|')
+			type++;
+		next = shell->input[i_j->x++];
+	}
+	i_j->x--;
+	last->type = type;
+	return (ft_app_tlist(index, p_last, len - 1));
 }

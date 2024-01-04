@@ -6,7 +6,7 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 22:42:17 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/02 20:12:02 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/01/04 23:21:07 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	ft_init_env(t_shell *shell, char **env)
 	shell->first_envv = last;
 	while (*env)
 	{
-		last = ft_append_evlist(last, *env++);
+		last = ft_app_evlist(last, *env++);
 		if (!last)
 			ft_free_and_err(shell, "FT_APPEND_VLIST", errno = ENOMEM);
 	}

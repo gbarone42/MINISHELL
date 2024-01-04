@@ -6,7 +6,7 @@
 /*   By: fcorri <fcorri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 09:17:48 by fcorri            #+#    #+#             */
-/*   Updated: 2023/10/10 16:19:42 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/01/04 23:43:51 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ int	ft_printf(const char *format, ...)
 
 	va_start(g_ap, format);
 	args = ft_count_args(format);
+	g_printer = NULL;
+	g_specification = NULL;
 	if (args)
 	{
 		g_printer = ft_malloc_soul(sizeof(*g_printer));
