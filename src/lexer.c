@@ -6,11 +6,12 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 16:26:35 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/05 00:08:54 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/05 00:28:30 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_p.h"
+#include "lexer_p.h"
 
 static void	ft_print_lexer(t_tlist *token)
 {
@@ -27,7 +28,7 @@ static void	ft_print_lexer(t_tlist *token)
 		if (!expand)
 		{
 			ft_printf("\n\n");
-			continue;
+			continue ;
 		}
 		while (expand->next)
 		{

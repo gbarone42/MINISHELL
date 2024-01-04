@@ -6,11 +6,12 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:52:44 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/04 23:52:54 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/05 00:28:47 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_p.h"
+#include "lexer_p.h"
 
 t_tlist	*ft_new_tlnode(size_t len)
 {

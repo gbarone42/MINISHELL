@@ -6,7 +6,7 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 20:16:03 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/02 19:20:28 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/01/05 00:28:39 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
  */
 
 #include "minishell_p.h"
+#include "lexer_p.h"
 
 t_clist	*ft_parser(t_shell *shell)
 {
