@@ -1,7 +1,5 @@
 #include "../include/minishell.h"
 
-
-
 int ft_isvalid(const char *input)
 {
     if (input == NULL)
@@ -24,4 +22,3 @@ int ft_isvalid(const char *input)
     }
     return 1;
 }
-

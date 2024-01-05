@@ -32,7 +32,6 @@ char	**input_handler(t_shell *shell)
 
 }
 
-
 int ft_count_pipes(const char *s, char pipe)
 {
     size_t i = 0; //per iterare la stringa INPUT
@@ -99,4 +98,3 @@ int pipe_handler_quote(const char *s, size_t *i)
 
     return 0;
 }
-

@@ -9,7 +9,6 @@ void free_args(char **args)
     free(args);
 }
 
-
 void handle_basic_builtin1(t_shell *shell, char **args)
 {
     if (!ft_strncmp(shell->input, "exit", 5))
@@ -76,19 +75,6 @@ void handle_other_builtins(t_shell *shell)
     {
         print_current_directory_contents();
     }
-    // else if (!ft_strncmp(shell->input, "time", 5))
-    // {
-    //     print_current_time();
-    // }
-    // else if (!ft_strncmp(shell->input, "whoami", 7))
-    // {
-    //     whoami_command();
-    // }
-    // else if (!ft_strncmp(shell->input, "suspend", 8))
-    // {
-    //     handle_suspend();
-    // }
-
 }
 
 void builtins_call(t_shell *shell)

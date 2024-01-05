@@ -2,12 +2,12 @@
 
 void ft_ctrld(t_shell *shell)
 {
-    if (errno) {
+    if (errno)
+	{
         write(STDERR_FILENO, "readline error: ", 17);
     }
     printf("\n");
     free(shell->input);
-	// if $SHLVL == 1
     shell_exit(shell);
 }
 
@@ -26,4 +26,3 @@ void	signal_handler(int sig)
 	rl_replace_line("", 0);
 	rl_redisplay();
 }
-

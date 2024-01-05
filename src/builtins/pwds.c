@@ -1,7 +1,6 @@
 #include "../../include/minishell.h"
 
 //here i use getcwd()
-
 #ifndef PATH_MAX
 #define PATH_MAX 4096
 

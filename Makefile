@@ -18,8 +18,6 @@ SRCS =	${SRC_DIR}/minishell.c	\
 		${SRC_DIR}/signal.c	\
 		${SRC_DIR}/valid.c	\
 		${SRC_DIR}/builtins/exit.c	\
-		${SRC_DIR}/builtins/timet.c	\
-		${SRC_DIR}/builtins/whoami.c	\
 		${SRC_DIR}/builtins/historyh.c	\
 		${SRC_DIR}/builtins/clears.c	\
 		${SRC_DIR}/builtins/pwds.c	\
@@ -28,7 +26,6 @@ SRCS =	${SRC_DIR}/minishell.c	\
 		${SRC_DIR}/builtins/cdd.c	\
 		${SRC_DIR}/builtins/handlebuiltins.c	\
 		${SRC_DIR}/builtins/envv.c	\
-		${SRC_DIR}/builtins/suspend.c	\
 		${SRC_DIR}/builtins/export_unset.c	\
 		${SRC_DIR}/parsing.c	\
        # Add other source files as necessary

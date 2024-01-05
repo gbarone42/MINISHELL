@@ -1,6 +1,5 @@
 #include "../include/minishell.h"
 
-
 void testprintf(void)
 {
     printf("\n🚨     This is a test_message from testprintf()     🚨\n");
@@ -25,7 +24,3 @@ void testprintf4(void)
 {
     printf("\n🔕     This is a test_message from testprintf4()     🔕\n");
 }
-
-
-
-

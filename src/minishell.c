@@ -2,7 +2,6 @@
 
 int	g_exit = 0;
 
-
 int main(int ac, char **av, char **env)
 {
     (void)ac;
@@ -25,11 +24,8 @@ int main(int ac, char **av, char **env)
     return EXIT_SUCCESS;
 }
 
-
-
 //debug
 //
-
 //school pre ste
 // {
 //   "version": "0.2.0",
@@ -56,9 +52,6 @@ int main(int ac, char **av, char **env)
 //   ]
 // }
 
-
-
-
 //school
 // {
 //   "version": "0.2.0",
@@ -84,11 +77,6 @@ int main(int ac, char **av, char **env)
 //     }
 //   ]
 // }
-
-
-
-
-
 
 //CASA
 
