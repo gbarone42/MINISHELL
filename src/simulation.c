@@ -4,6 +4,7 @@
 void ft_minishell_simulator(t_shell *shell)
 {
     t_pars *command;
+    t_history history = {0};
 
     while (1)
     {
@@ -14,10 +15,10 @@ void ft_minishell_simulator(t_shell *shell)
         {
             shell_parser(shell, &command);
             builtins_call(shell);
-            add_to_history(shell->input);
+            add_to_history(&history, shell->input);
         }
         else
          printf("Invalid input detected!\n");
-        free(shell->input);
     }
+        free(shell->input);
 }

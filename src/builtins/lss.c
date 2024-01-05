@@ -1,7 +1,8 @@
 #include "../../include/minishell.h"
 #include <time.h>
 
-//here i use readdir()
+//no builtin
+//here i use readdir(), its ookay
 
 void print_current_directory_contents(void)
 {

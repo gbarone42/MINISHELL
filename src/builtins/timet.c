@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-//here i use time(), localtime(), strftime()
+//here i use time(), localtime(), strftime(), no builtin
 
 void print_current_time(void)
 {

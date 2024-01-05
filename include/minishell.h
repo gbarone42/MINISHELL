@@ -26,6 +26,7 @@
 #define MEM_ERROR 42
 #define MEM_ERROR2 43
 #define MEM_ERROR3 44
+#define HISTORY_SIZE 100
 
 #define PIPE '|'
 #define DOUBLE_QUOTE '\"'
@@ -44,8 +45,15 @@
 #define CYAN "\033[1;36m"
 #define GOLD "\033[1;94m"
 
+typedef struct s_history
+{
+    char *entries[HISTORY_SIZE];
+    int count;
+} t_history;
+
 typedef struct s_shell
 {
+    t_history history;
     char *prompt;
     int in;
     int out;
@@ -180,8 +188,9 @@ void handle_other_builtins(t_shell *shell);
 void builtins_call(t_shell *shell);
 
 //history
-void add_to_history(char* command);
-void display_history(void);
+void add_to_history(t_history *history, char* command);
+//void display_history(void);
+void display_history(const t_history *history);
 
 //lss
 void print_current_directory_contents(void);

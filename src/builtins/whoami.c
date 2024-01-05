@@ -1,6 +1,6 @@
 #include "../../include/minishell.h"
 
-//here i use getlogin_r()
+//here i use getlogin_r(), no builtin
 
 void whoami_command()
 {

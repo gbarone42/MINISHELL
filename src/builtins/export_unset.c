@@ -1,19 +1,5 @@
 #include "../../include/minishell.h"
 
-extern char **environ;
-
-//strstr() function in C is used to find the first occurrence of a substring within another string
-
-//void print_environment()
-//{
-//    char **env = environ;
-//    while (*env)
-//    {
-//        printf("%s\n", *env);
-//        env++;
-//    }
-//}
-
 void handle_envv(t_shell *shell)
 {
     char **env = shell->env;

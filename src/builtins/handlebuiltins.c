@@ -33,10 +33,10 @@ void handle_basic_builtin2(t_shell *shell, char **args)
     {
         print_current_directory();
     }
-    else if (!ft_strncmp(shell->input, "history", 8))
-    {
-        display_history();
-    }
+    // else if (!ft_strncmp(shell->input, "history", 8))
+    // {
+    // display_history(&(shell->history));
+    // }
     else if (args && args[0] && !ft_strcmp(args[0], "export")) 
     { 
         handle_export(shell, args);
@@ -76,18 +76,18 @@ void handle_other_builtins(t_shell *shell)
     {
         print_current_directory_contents();
     }
-    else if (!ft_strncmp(shell->input, "time", 5))
-    {
-        print_current_time();
-    }
-    else if (!ft_strncmp(shell->input, "whoami", 7))
-    {
-        whoami_command();
-    }
-    else if (!ft_strncmp(shell->input, "suspend", 8))
-    {
-        handle_suspend();
-    }
+    // else if (!ft_strncmp(shell->input, "time", 5))
+    // {
+    //     print_current_time();
+    // }
+    // else if (!ft_strncmp(shell->input, "whoami", 7))
+    // {
+    //     whoami_command();
+    // }
+    // else if (!ft_strncmp(shell->input, "suspend", 8))
+    // {
+    //     handle_suspend();
+    // }
 
 }
 

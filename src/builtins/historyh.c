@@ -1,32 +1,22 @@
 #include "../../include/minishell.h"
 
-#define HISTORY_SIZE 100
-
-char* history[HISTORY_SIZE];
-int history_count = 0;
-
-void add_to_history(char* command)
+void add_to_history(t_history *history, char* command)
 {
-    add_history(command);
-    if (history_count < HISTORY_SIZE)
+    add_history(command); // Assuming add_history is a function from a library
+    if (history->count < HISTORY_SIZE)
     {
-        history[history_count++] = strdup(command);
+        history->entries[history->count++] = strdup(command);
+        //free(history->entries[0]);
+        
     }
     else
     {
-        free(history[0]);
-        for (int i = 0; i < history_count - 1; ++i)
-        {
-            history[i] = history[i + 1];
+        free(history->entries[0]);
+        for (int i = 0; i < history->count - 1; ++i) {
+            history->entries[i] = history->entries[i + 1];
         }
-        history[history_count - 1] = strdup(command);
+        history->entries[history->count - 1] = strdup(command);
     }
+     free(command);
 }
-
-void display_history(void)
-{
-    for (int i = 0; i < history_count; ++i)
-    {
-        printf("%d: %s\n", i + 1, history[i]);
-    }
-}
+//some memory issue here
