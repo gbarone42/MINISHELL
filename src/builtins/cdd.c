@@ -71,7 +71,7 @@ char*	build_user_at_string(char *user)
 {
 	char	*user_at = ft_strjoin(user, "@ASHellKETCHUM");
 
-    if (!user_at)
+	if (!user_at)
 	{
 		perror("Error: Unable to allocate memory for user_at\n");
 		free(user);
