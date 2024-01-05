@@ -3,26 +3,26 @@
 
 char *ft_strjoin(char const *s1, char const *s2)
 {
-    unsigned int i;
-    char *p;
-    int l;
-    int j;
+	unsigned int i;
+	char *p;
+	int l;
+	int j;
 
-    l = ft_strlen(s1) + ft_strlen(s2) + 1;
-    p = malloc(l);
-    if (!p)
-        return (0);
+	l = ft_strlen(s1) + ft_strlen(s2) + 1;
+	p = malloc(l);
+	if (!p)
+		return (0);
 
-    j = 0;
-    i = 0;
-    while (s1[i] != 0)
-        p[j++] = s1[i++];
-    i = 0;
-    while (s2[i] != 0)
-        p[j++] = s2[i++];
-    p[j] = 0;
+	j = 0;
+	i = 0;
+	while (s1[i] != 0)
+		p[j++] = s1[i++];
+	i = 0;
+	while (s2[i] != 0)
+		p[j++] = s2[i++];
+	p[j] = 0;
 
-    return (p);
+	return (p);
 }
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
@@ -60,19 +60,19 @@ int	ft_countdel(const char *str, char del)
 
 char *ft_newsub(char **str, char c)
 {
-    int i;
-    char *unptr;
+	int i;
+	char *unptr;
 
-    i = 0;
-    while ((*str)[i] != '\0' && (*str)[i] != c)
-        i++;
-    unptr = malloc(sizeof(char) * (i + 1));
-    if (unptr == NULL)
-        return (NULL);
-    ft_strlcpy(unptr, *str, i + 1);
-    *str = *str + i + ((*str)[i] == c ? 1 : 0);
+	i = 0;
+	while ((*str)[i] != '\0' && (*str)[i] != c)
+		i++;
+	unptr = malloc(sizeof(char) * (i + 1));
+	if (unptr == NULL)
+		return (NULL);
+	ft_strlcpy(unptr, *str, i + 1);
+	*str = *str + i + ((*str)[i] == c ? 1 : 0);
 
-    return (unptr);
+	return (unptr);
 }
 
 char	**ft_split(const char *s, char c)

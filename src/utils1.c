@@ -43,14 +43,14 @@ size_t	ft_strlen(const char *str)
 
 char *ft_strdup(const char *s)
 {
-    size_t len = ft_strlen(s);
-    char *y = malloc(len + 1);
-    if (!y)
+	size_t len = ft_strlen(s);
+	char *y = malloc(len + 1);
+	if (!y)
 	{
-        return NULL;
-    }
-    ft_memcpy(y, s, len + 1);
-    return y;
+		return NULL;
+	}
+	ft_memcpy(y, s, len + 1);
+	return y;
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
