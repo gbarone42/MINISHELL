@@ -2,9 +2,12 @@
 
 char **ft_get_env(char **env)
 {
-	char **my_env = NULL;
-	int i = 0;
+	char **my_env;
+	int i;
+	int j;
 
+	my_env = NULL;
+	i = 0;
 	while (env && env[i])
 		i++;
 	my_env = (char **)malloc(sizeof(char *) * (i + 1));
@@ -13,7 +16,7 @@ char **ft_get_env(char **env)
 		write(STDERR_FILENO, "Memory allocation failed.\n", 27);
 		exit(EXIT_FAILURE);
 	}
-	for (int j = 0; j < i; j++)
+	for (j = 0; j < i; j++)
 	{
 		my_env[j] = ft_strdup(env[j]);
 		if (!my_env[j])
@@ -47,8 +50,10 @@ void free_myenv(char **my_env)
 int ft_innit_user_and_prompt(t_shell *shell, char **env)
 {
 	char *user;
-	char **env_copied = ft_get_env(env);
+	char **env_copied;
+	char *prompt_suffix;
 
+	env_copied = ft_get_env(env);
 	if (!env_copied)
 	{
 		write(STDERR_FILENO, "Failed to allocate memory for env_copied.\n", 43);
@@ -62,7 +67,7 @@ int ft_innit_user_and_prompt(t_shell *shell, char **env)
 		free_myenv(env_copied);
 		return (MEM_ERROR);
 	}
-	char *prompt_suffix = "@ASHellKETCHUM" CLR_RMV "$ ";
+	prompt_suffix = "@ASHellKETCHUM" CLR_RMV "$ ";
 	shell->prompt = ft_strjoin(user, prompt_suffix);
 	free(user);
 	if (!shell->prompt)

@@ -2,7 +2,9 @@
 
 void free_args(char **args)
 {
-	for (int i = 0; args[i]; i++)
+    int i;
+
+	for (i = 0; args[i]; i++)
 	{
 		free(args[i]);
 	}

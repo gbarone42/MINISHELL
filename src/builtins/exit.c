@@ -42,9 +42,9 @@ void free_array_memory(t_shell *shell)
 void clear_shell_history(t_history *history)
 {
 	if (history != NULL)
-    {
+	{
 		for (int i = 0; i < history->count; ++i)
-        {
+		{
 			free(history->entries[i]);
 		}
 		history->count = 0;

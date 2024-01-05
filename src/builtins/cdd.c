@@ -57,8 +57,9 @@ void	get_current_directory(char *cwd)
 
 char*	build_user_string(void)
 {
-	char	*user = ft_strjoin(PURPLE, getenv("USER"));
+	char	*user;
 
+	user = ft_strjoin(PURPLE, getenv("USER"));
 	if (!user)
 	{
 		perror("Error: Unable to allocate memory for user\n");
@@ -69,8 +70,9 @@ char*	build_user_string(void)
 
 char*	build_user_at_string(char *user)
 {
-	char	*user_at = ft_strjoin(user, "@ASHellKETCHUM");
+	char	*user_at;
 
+	user_at = ft_strjoin(user, "@ASHellKETCHUM");
 	if (!user_at)
 	{
 		perror("Error: Unable to allocate memory for user_at\n");
@@ -82,8 +84,9 @@ char*	build_user_at_string(char *user)
 
 char*	build_user_at_colon_string(char *user_at)
 {
-	char	*user_at_colon = ft_strjoin(user_at, ":");
+	char	*user_at_colon;
 
+	user_at_colon = ft_strjoin(user_at, ":");
 	if (!user_at_colon)
 	{
 		perror("Error: Unable to allocate memory for user_at_colon\n");
@@ -95,8 +98,9 @@ char*	build_user_at_colon_string(char *user_at)
 
 char*	build_prompt_suffix(void)
 {
-	char	*prompt_suffix = ft_strjoin(CLR_RMV, "$ ");
+	char	*prompt_suffix;
 
+	prompt_suffix = ft_strjoin(CLR_RMV, "$ ");
 	if (!prompt_suffix)
 	{
 		perror("Error: Unable to allocate memory for prompt_suffix\n");
@@ -122,13 +126,17 @@ void	create_prompt(t_shell *shell, char *user_at_colon, char *cwd, char *prompt_
 void	update_prompt(t_shell *shell)
 {
 	char	cwd[PATH_MAX];
+	char	*user;
+	char	*user_at;
+	char	*user_at_colon;
+	char	*prompt_suffix;
 
 	get_current_directory(cwd);
 	free(shell->prompt);
-	char	*user = build_user_string();
-	char	*user_at = build_user_at_string(user);
-	char	*user_at_colon = build_user_at_colon_string(user_at);
-	char	*prompt_suffix = build_prompt_suffix();
+	user = build_user_string();
+	user_at = build_user_at_string(user);
+	user_at_colon = build_user_at_colon_string(user_at);
+	prompt_suffix = build_prompt_suffix();
 	create_prompt(shell, user_at_colon, cwd, prompt_suffix);
 	free_memory(user, user_at, user_at_colon, prompt_suffix);
 }

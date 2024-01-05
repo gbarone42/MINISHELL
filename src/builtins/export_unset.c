@@ -2,7 +2,9 @@
 
 void handle_envv(t_shell *shell)
 {
-	char **env = shell->env;
+	char **env;
+
+	env = shell->env;
 	while (*env)
 	{
 		printf("%s\n", *env);
