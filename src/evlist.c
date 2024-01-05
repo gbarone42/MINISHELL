@@ -6,7 +6,7 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:56:34 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/04 23:23:51 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/05 19:04:19 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,13 @@ void	ft_free_evlist(t_evlist *head)
 		head = head->next;
 		free(tmp);
 	}
+}
+
+char	*ft_get_value_of(char *key)
+{
+	char	*output = NULL;
+
+	output = getenv(key);
+	free(key);
+	return (output);
 }

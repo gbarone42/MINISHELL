@@ -6,14 +6,14 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:56:34 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/05 00:28:16 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/05 19:09:47 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_p.h"
 #include "lexer_p.h"
 
-t_ilist	*ft_new_ilnode(size_t index)
+t_ilist	*ft_new_ilnode(char *index)
 {
 	t_ilist	*output;
 
@@ -25,7 +25,7 @@ t_ilist	*ft_new_ilnode(size_t index)
 	return (output);
 }
 
-void	ft_app_ilist(t_ilist **p_last, size_t index)
+void	ft_app_ilist(t_ilist **p_last, char *index)
 {
 	t_ilist	*last;
 	t_ilist	*new;

@@ -6,12 +6,48 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 16:26:35 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/05 00:28:30 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/05 20:06:36 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_p.h"
 #include "lexer_p.h"
+
+static void	ft_expand_env_variables(t_shell *shell, t_tlist *token)
+{
+	t_ilist	*expand;
+	char	*first;
+	char	*last;
+	char	c;
+	char	*expanded;
+
+	while (token->next)
+	{
+		expand = token->expand;
+		if (token->type == GENERAL_TOKEN)
+		{
+			while (expand)
+			{
+				first = expand->index;
+				*first++ = '\0';
+				last = first;
+				c = *last++;
+				while (ft_isalnum(c) || c == '_')
+					c = *last++;
+				if (c == '?')
+					expanded = ft_itoa(shell->exit_status);
+				else
+					expanded = ft_strdup_decorator(ft_get_value_of(ft_substr(first, 0, last - first - 1)));
+				expanded = ft_strjoin_and_free_second(token->data, expanded);
+				expanded = ft_strjoin_and_free_first(expanded, last - 1);
+				free(token->data);
+				token->data = expanded;
+				expand = expand->next;
+			}
+		}
+		token = token->next;
+	}
+}
 
 static void	ft_print_lexer(t_tlist *token)
 {
@@ -32,7 +68,7 @@ static void	ft_print_lexer(t_tlist *token)
 		}
 		while (expand->next)
 		{
-			ft_printf("%d, ", expand->index);
+			ft_printf("%p, ", expand->index);
 			expand = expand->next;
 		}
 		ft_printf("%d\n\n", expand->index);
@@ -42,9 +78,12 @@ static void	ft_print_lexer(t_tlist *token)
 
 static int	ft_case(t_tlist *token, char c, size_t index, int state)
 {
-	token->data[index] = c;
+	char	*data;
+
+	data = token->data;
+	data[index] = c;
 	if (state != QUOTE_STATE && c == '$')
-		ft_app_ilist(&token->expand, index);
+		ft_app_ilist(&token->expand, data + index);
 	if (!index)
 		token->type = GENERAL_TOKEN;
 	return (state);
@@ -52,19 +91,19 @@ static int	ft_case(t_tlist *token, char c, size_t index, int state)
 
 static int	ft_case_decorator(t_tlist *token, char c, size_t *index, int state)
 {
-	if (c == state)
+	if (c == ft_case(token, c, (*index)++, state))
 		return (GENERAL_STATE);
-	return (ft_case(token, c, (*index)++, state));
+	return (state);
 }
 
 static int	ft_switch(size_t input_len, t_tlist **token, char c, \
 	t_dsize_t *i_j)
 {
 	if (c == '\'' || c == '\"')
-		return (c);
+		return (ft_case(*token, c, i_j->y++, c));
 	else if (c == ' ' || c == '\t')
 		i_j->y = ft_app_tlist(i_j->y, token, input_len - i_j->x);
-	else if (c == '<' || c == '>' || c == '|')
+	else if (c == '<' || c == '>' || c == '|' || c == '\n')
 		i_j->y = ft_app_tlist_decorator(i_j, token, c, input_len - i_j->x);
 	else
 		ft_case(*token, c, i_j->y++, GENERAL_STATE);
@@ -93,7 +132,7 @@ t_tlist	*ft_lexer(t_shell *shell, char *input, size_t input_len, int state)
 		else if (state == QUOTE_STATE || state == DQUOTE_STATE)
 			state = ft_case_decorator(token, c, &i_j.y, state);
 	}
-//	ft_expand_variables(first);
+	ft_expand_env_variables(shell, first);
 	ft_print_lexer(first);
 	return (first);
 }
