@@ -6,7 +6,7 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 19:44:51 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/04 23:40:35 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/06 17:20:33 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,24 @@ static void	ft_prepare_for_next_input(t_shell *shell)
 	free(shell->input);
 }
 
+void	ft_test(t_shell *shell, char *arg)
+{
+	shell->input_len = ft_strlen(arg);
+	shell->input = arg;
+	ft_parser(shell);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_shell	shell;
 
-	if (argc != 1)
-		ft_err(*argv, errno = EINVAL);
 	ft_init_shell(&shell, env);
+	if (argc != 1)
+	{
+		ft_test(&shell, argv[1]);
+		ft_free_and_exit(&shell, EXIT_SUCCESS);
+	}
+//		ft_err(*argv, errno = EINVAL);
 	while (1)
 	{
 		shell.input = readline(shell.prompt);
