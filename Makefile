@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: filippo <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: badph <badph@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/11 19:41:53 by filippo           #+#    #+#              #
-#    Updated: 2024/01/04 23:39:03 by filippo          ###   ########.fr        #
+#    Updated: 2024/01/06 21:03:34 by badph            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,3 +92,8 @@ norme:
 
 compile:
 	while [ 1 ] ; do sleep 1 ; clear ; make ; done
+
+test:
+	@tests/run_tests.sh
+
+.PHONY: all clean fclean re clear run mem vgdb gdb debug debugf test
