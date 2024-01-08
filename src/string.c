@@ -6,7 +6,7 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 20:18:13 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/05 19:45:17 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/08 17:52:52 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,4 @@ void	ft_set_prompt(t_shell *shell)
 	if (!output)
 		ft_free_and_err(shell, "ft_strjoin", errno = ENOMEM);
 	shell->prompt = output;
-}
-
-char	*ft_strdup_decorator(char *str)
-{
-	if (!str)
-		return (NULL);
-	return (ft_strdup(str));
 }

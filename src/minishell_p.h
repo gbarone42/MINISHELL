@@ -6,7 +6,7 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 19:55:20 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/05 19:41:27 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/08 17:53:10 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,10 @@ t_clist		*ft_parser(t_shell *shell);
 t_evlist	*ft_new_evlnode(char *value);
 t_evlist	*ft_app_evlist(t_evlist *last, char *value);
 void		ft_free_evlist(t_evlist *head);
-char		*ft_get_value_of(char *key);
+char		*ft_get_value_of(t_shell *shell, char *key, size_t len);
 
 char		*ft_strjoin_and_free_first(char *first, char *second);
 char		*ft_strjoin_and_free_second(char *first, char *second);
 void		ft_set_prompt(t_shell *shell);
-char		*ft_strdup_decorator(char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 00:19:35 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/05 19:10:41 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/08 17:26:44 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ enum
 
 typedef struct index_node
 {
-	char				*index;
+	size_t				index;
 	struct index_node	*next;
 }	t_ilist;
 
@@ -61,8 +61,8 @@ size_t		ft_app_tlist_decorator(t_dsize_t *i_j, t_tlist **p_last, \
 	char c, size_t len);
 void		ft_free_tlist(t_tlist *head);
 
-t_ilist		*ft_new_ilnode(char *index);
-void		ft_app_ilist(t_ilist **p_last, char *index);
+t_ilist		*ft_new_ilnode(size_t index);
+void		ft_app_ilist(t_ilist **p_last, size_t index);
 void		ft_free_ilist(t_ilist *head);
 
 t_tlist		*ft_lexer(t_shell *shell, char *input, size_t input_len, int state);

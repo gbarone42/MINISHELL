@@ -6,18 +6,19 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 16:26:35 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/05 20:06:36 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/08 18:04:38 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_p.h"
 #include "lexer_p.h"
 
-static void	ft_expand_env_variables(t_shell *shell, t_tlist *token)
+static void	ft_expand_env_variables(t_shell *shell, t_tlist *token, \
+	size_t original_index)
 {
 	t_ilist	*expand;
-	char	*first;
-	char	*last;
+	char	*data;
+	size_t	index;
 	char	c;
 	char	*expanded;
 
@@ -25,26 +26,28 @@ static void	ft_expand_env_variables(t_shell *shell, t_tlist *token)
 	{
 		expand = token->expand;
 		if (token->type == GENERAL_TOKEN)
-		{
 			while (expand)
 			{
-				first = expand->index;
-				*first++ = '\0';
-				last = first;
-				c = *last++;
+				original_index = expand->index;
+				data = token->data;
+				index = original_index;
+				c = data[++index];
 				while (ft_isalnum(c) || c == '_')
-					c = *last++;
+					c = data[++index];
+				if (index == original_index + 1)
+					break;
+				data[original_index++] = '\0';
 				if (c == '?')
 					expanded = ft_itoa(shell->exit_status);
 				else
-					expanded = ft_strdup_decorator(ft_get_value_of(ft_substr(first, 0, last - first - 1)));
-				expanded = ft_strjoin_and_free_second(token->data, expanded);
-				expanded = ft_strjoin_and_free_first(expanded, last - 1);
-				free(token->data);
+					expanded = ft_get_value_of(shell, \
+						data + original_index, index - original_index);
+				expanded = ft_strjoin_and_free_second(data, expanded);
+				expanded = ft_strjoin_and_free_first(expanded, data + index);
+				free(data);
 				token->data = expanded;
 				expand = expand->next;
 			}
-		}
 		token = token->next;
 	}
 }
@@ -83,7 +86,7 @@ static int	ft_case(t_tlist *token, char c, size_t index, int state)
 	data = token->data;
 	data[index] = c;
 	if (state != QUOTE_STATE && c == '$')
-		ft_app_ilist(&token->expand, data + index);
+		ft_app_ilist(&token->expand, index);
 	if (!index)
 		token->type = GENERAL_TOKEN;
 	return (state);
@@ -132,7 +135,7 @@ t_tlist	*ft_lexer(t_shell *shell, char *input, size_t input_len, int state)
 		else if (state == QUOTE_STATE || state == DQUOTE_STATE)
 			state = ft_case_decorator(token, c, &i_j.y, state);
 	}
-	ft_expand_env_variables(shell, first);
+	ft_expand_env_variables(shell, first, 0);
 	ft_print_lexer(first);
 	return (first);
 }

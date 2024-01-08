@@ -6,7 +6,7 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:56:34 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/05 19:04:19 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/08 18:06:25 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,16 @@ void	ft_free_evlist(t_evlist *head)
 	}
 }
 
-char	*ft_get_value_of(char *key)
+char	*ft_get_value_of(t_shell *shell, char *key, size_t len)
 {
-	char	*output = NULL;
+	t_evlist	*envv;
 
-	output = getenv(key);
-	free(key);
-	return (output);
+	envv = shell->first_envv;
+	while (envv)
+	{
+		if (!ft_strncmp(envv->value, key, len))
+			return (ft_strdup(envv->value + len + 1));
+		envv = envv->next;
+	}
+	return (ft_strdup(""));
 }
