@@ -6,7 +6,7 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 00:19:35 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/08 17:26:44 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/01/08 18:32:33 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void		ft_free_tlist(t_tlist *head);
 t_ilist		*ft_new_ilnode(size_t index);
 void		ft_app_ilist(t_ilist **p_last, size_t index);
 void		ft_free_ilist(t_ilist *head);
+void		ft_update_ilist(t_ilist *expand, int diff);
 
 t_tlist		*ft_lexer(t_shell *shell, char *input, size_t input_len, int state);
 

@@ -6,7 +6,7 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 16:26:35 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/08 18:04:38 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/01/08 18:40:21 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,12 @@ static void	ft_expand_env_variables(t_shell *shell, t_tlist *token, \
 				else
 					expanded = ft_get_value_of(shell, \
 						data + original_index, index - original_index);
+				expand = expand->next;
+				ft_update_ilist(expand, ft_strlen(expanded) - (index - original_index + 1));
 				expanded = ft_strjoin_and_free_second(data, expanded);
 				expanded = ft_strjoin_and_free_first(expanded, data + index);
 				free(data);
 				token->data = expanded;
-				expand = expand->next;
 			}
 		token = token->next;
 	}
@@ -71,7 +72,7 @@ static void	ft_print_lexer(t_tlist *token)
 		}
 		while (expand->next)
 		{
-			ft_printf("%p, ", expand->index);
+			ft_printf("%d, ", expand->index);
 			expand = expand->next;
 		}
 		ft_printf("%d\n\n", expand->index);

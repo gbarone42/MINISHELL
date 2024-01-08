@@ -6,7 +6,7 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 19:44:51 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/06 17:20:33 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/08 18:18:01 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		shell.input = readline(shell.prompt);
-		if (!shell.input)
+		if (!ft_strncmp(shell.input, "exit", 4))
 			break ;
 		shell.input_len = ft_strlen(shell.input);
 		ft_parser(&shell);

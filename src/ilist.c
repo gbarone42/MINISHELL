@@ -6,7 +6,7 @@
 /*   By: filippo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:56:34 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/08 17:27:56 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/01/08 18:39:47 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,14 @@ void	ft_free_ilist(t_ilist *head)
 		tmp = head;
 		head = head->next;
 		free(tmp);
+	}
+}
+
+void	ft_update_ilist(t_ilist *expand, int diff)
+{
+	while (expand)
+	{
+		expand->index += diff;
+		expand = expand->next;
 	}
 }
