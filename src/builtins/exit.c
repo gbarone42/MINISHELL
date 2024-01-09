@@ -43,9 +43,12 @@ void clear_shell_history(t_history *history)
 {
 	if (history != NULL)
 	{
-		for (int i = 0; i < history->count; ++i)
+		for (int i = 0; i <= history->count; ++i)
 		{
+			//printf("freeing history->entries[%d]\n", i);
+			//printf("history->entries[%d] = %s\n", i, history->entries[i]);
 			free(history->entries[i]);
+		
 		}
 		history->count = 0;
 	}
@@ -57,9 +60,9 @@ void exit_shell()
 }
 
 void shell_exit(t_shell *shell)
-{
+{	
+	clear_shell_history(&shell->history);
 	free_basic_memory(shell);
 	free_array_memory(shell);
-	clear_shell_history(&shell->history);
 	exit_shell();
 }

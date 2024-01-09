@@ -2,12 +2,10 @@
 
 void add_to_history(t_history *history, char* command)
 {
-	add_history(command); // Assuming add_history is a function from a library
+	add_history(command);
 	if (history->count < HISTORY_SIZE)
 	{
 		history->entries[history->count++] = strdup(command);
-		//free(history->entries[0]);
-		
 	}
 	else
 	{
@@ -19,4 +17,3 @@ void add_to_history(t_history *history, char* command)
 	}
 	 free(command);
 }
-//some memory issue here

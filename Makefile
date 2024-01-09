@@ -92,6 +92,6 @@ clear:
 		clear
 
 mem:clear all
-	valgrind --leak-check=full --suppressions=EXTRA/readline.supp ./build/minishell
+	valgrind --leak-check=full --show-leak-kinds=all --suppressions=EXTRA/readline.supp ./build/minishell
 
 .PHONY: all clean fclean re x clear mem
