@@ -2,12 +2,10 @@
 
 void handle_env(t_shell *shell)
 {
-	char	**env;
-
-	env = shell->env;
-	while (*env)
-	{
-		printf("%s\n", *env);
-		env++;
-	}
+    t_evlist *current = shell->env_list; // Use env_list instead of env
+    while (current)
+    {
+        printf("%s\n", current->value);
+        current = current->next;
+    }
 }

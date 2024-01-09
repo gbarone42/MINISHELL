@@ -14,30 +14,34 @@ void free_basic_memory(t_shell *shell)
 
 void free_array_memory(t_shell *shell)
 {
-	int i;
+    // Free the environment variables linked list
+    if (shell->env_list)
+    {
+        free_env_list(shell->env_list);
+        shell->env_list = NULL; // Set to NULL after freeing
+    }
 
-	if (shell->env)
-	{
-		i = 0;
-		while (shell->env[i])
-			free(shell->env[i++]);
-		free(shell->env);
-	}
-	if (shell->paths)
-	{
-		i = 0;
-		while (shell->paths[i])
-			free(shell->paths[i++]);
-		free(shell->paths);
-	}
-	if (shell->export)
-	{
-		i = 0;
-		while (shell->export[i])
-			free(shell->export[i++]);
-		free(shell->export);
-	}
+    // Free paths array
+    if (shell->paths)
+    {
+        int i = 0;
+        while (shell->paths[i])
+            free(shell->paths[i++]);
+        free(shell->paths);
+        shell->paths = NULL; // Set to NULL after freeing
+    }
+
+    // Free export array
+    if (shell->export)
+    {
+        int i = 0;
+        while (shell->export[i])
+            free(shell->export[i++]);
+        free(shell->export);
+        shell->export = NULL; // Set to NULL after freeing
+    }
 }
+
 
 void clear_shell_history(t_history *history)
 {

@@ -16,4 +16,4 @@ void add_to_history(t_history *history, char* command)
 		history->entries[history->count - 1] = strdup(command);
 	}
 	 free(command);
-}
+} 

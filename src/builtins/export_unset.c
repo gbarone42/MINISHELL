@@ -2,42 +2,44 @@
 
 void handle_envv(t_shell *shell)
 {
-	char **env;
-
-	env = shell->env;
-	while (*env)
-	{
-		printf("%s\n", *env);
-		env++;
-	}
+    t_evlist *current = shell->env_list; // Assuming env_list is a pointer to the first node of the linked list
+    while (current)
+    {
+        printf("%s\n", current->value);
+        current = current->next;
+    }
 }
-
 void handle_unset(t_shell *shell, char **args)
 {
-	if (args[1] == NULL)
-	{
-		printf("Usage: unset <variable>\n");
-		return;
-	}
+    if (args[1] == NULL)
+    {
+        printf("Usage: unset <variable>\n");
+        return;
+    }
+    for (int i = 1; args[i] != NULL; ++i)
+    {
+        t_evlist *current = shell->env_list;
+        while (current != NULL)
+        {
+            if (strstr(current->value, args[i]) == current->value)
+            {
+                printf("Unsetting: %s\n", current->value);
+                if (current->prev)
+                    current->prev->next = current->next;
+                if (current->next)
+                    current->next->prev = current->prev;
 
-	for (int i = 1; args[i] != NULL; ++i)
-	{
-		for (int j = 0; shell->env[j] != NULL; ++j)
-		{
-			if (strstr(shell->env[j], args[i]) == shell->env[j])
-			{
-				printf("Unsetting: %s\n", shell->env[j]);
-				free(shell->env[j]);
-				for (int k = j; shell->env[k] != NULL; ++k)
-				{
-					shell->env[k] = shell->env[k + 1];
-				}
-
-				break;
-			}
-		}
-	}
+                if (current == shell->env_list) // Update the head of the list if necessary
+                    shell->env_list = current->next;
+                free(current->value);
+                free(current);
+                break;
+            }
+            current = current->next;
+        }
+    }
 }
+
 char *ft_strtok(char *str, char sep)
 {
 	static char *last = NULL;
@@ -80,71 +82,73 @@ bool contains_invalid_characters(const char *str)
 	return false;
 }
 
-void *ft_realloc(void *ptr, size_t old_size, size_t new_size)
-{
-	void *new_ptr;
+// void *ft_realloc(void *ptr, size_t old_size, size_t new_size)
+// {
+// 	void *new_ptr;
 
-	if (ptr == NULL)
-		return malloc(new_size);
-	if (!new_size)
-	{
-		free(ptr);
-		return NULL;
-	}
-	new_ptr = malloc(new_size);
-	if (!new_ptr)
-	{
-		perror("Memory allocation failed for realloc.\n");
-		exit(EXIT_FAILURE);
-	}
-	size_t copy_size = (old_size < new_size) ? old_size : new_size;
-	ft_memcpy(new_ptr, ptr, copy_size);
-	free(ptr);
-	return new_ptr;
-}
+// 	if (ptr == NULL)
+// 		return malloc(new_size);
+// 	if (!new_size)
+// 	{
+// 		free(ptr);
+// 		return NULL;
+// 	}
+// 	new_ptr = malloc(new_size);
+// 	if (!new_ptr)
+// 	{
+// 		perror("Memory allocation failed for realloc.\n");
+// 		exit(EXIT_FAILURE);
+// 	}
+// 	size_t copy_size = (old_size < new_size) ? old_size : new_size;
+// 	ft_memcpy(new_ptr, ptr, copy_size);
+// 	free(ptr);
+// 	return new_ptr;
+// }
 
 void add_env_variable(t_shell *shell, const char *name, const char *value)
 {
-	char *new_variable = (char *)malloc(strlen(name) + strlen(value) + 2);
-	if (!new_variable)
-	{
-		printf("Memory allocation failed for env variable.\n");
-		exit(EXIT_FAILURE);
-	}
+    char *new_variable = (char *)malloc(strlen(name) + strlen(value) + 2);
+    if (!new_variable)
+    {
+        printf("Memory allocation failed for env variable.\n");
+        exit(EXIT_FAILURE);
+    }
 
-	strcpy(new_variable, name);
-	strcat(new_variable, "=");
-	strcat(new_variable, value);
-	printf("New variable: %s\n", new_variable);
-	int found = 0;
-	for (int i = 0; shell->env[i] != NULL; ++i)
-	{
-		if (strncmp(shell->env[i], name, strlen(name)) == 0 && shell->env[i][strlen(name)] == '=')
-		{
-			free(shell->env[i]);
-			shell->env[i] = new_variable;
-			found = 1;
-			break;
-		}
-	}
-	if (!found)
-	{
-		int env_size = 0;
-		while (shell->env[env_size] != NULL)
-		{
-			env_size++;
-		}
+    strcpy(new_variable, name);
+    strcat(new_variable, "=");
+    strcat(new_variable, value);
 
-		shell->env = (char **)ft_realloc(shell->env, env_size * sizeof(char *), (env_size + 2) * sizeof(char *));
-		if (!shell->env)
-		{
-			perror("Memory allocation failed for env array.\n");
-			exit(EXIT_FAILURE);
-		}
+    t_evlist *current = shell->env_list;
+    int found = 0;
+    while (current != NULL)
+    {
+        if (strncmp(current->value, name, strlen(name)) == 0 && current->value[strlen(name)] == '=')
+        {
+            free(current->value);
+            current->value = new_variable;
+            found = 1;
+            break;
+        }
+        current = current->next;
+    }
 
-		shell->env[env_size] = new_variable;
-		shell->env[env_size + 1] = NULL;
-	}
+    if (!found)
+    {
+        t_evlist *new_node = (t_evlist *)malloc(sizeof(t_evlist));
+        if (!new_node)
+        {
+            perror("Memory allocation failed for new env node.\n");
+            exit(EXIT_FAILURE);
+        }
+        new_node->value = new_variable;
+        new_node->next = shell->env_list;
+        new_node->prev = NULL;
+        if (shell->env_list)
+            shell->env_list->prev = new_node;
+        shell->env_list = new_node;
+    }
+
+    printf("New variable: %s\n", new_variable);
 }
 
 void handle_export(t_shell *shell, char **args)

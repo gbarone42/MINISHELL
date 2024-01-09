@@ -45,6 +45,12 @@
 #define CYAN "\033[1;36m"
 #define GOLD "\033[1;94m"
 
+typedef struct env_var_node
+{
+	char				*value;
+	struct env_var_node	*next;
+	struct env_var_node	*prev;
+}	t_evlist;
 typedef struct s_history
 {
     char *entries[HISTORY_SIZE];
@@ -57,7 +63,7 @@ typedef struct s_shell
     char *prompt;
     int in;
     int out;
-    char **env;
+    t_evlist *env_list;
     char *input;
     char **paths;
     char **export;
@@ -93,8 +99,10 @@ extern int g_exit;
 
 #define HISTORY_SIZE 100
 
-extern char *history[HISTORY_SIZE];
-extern int history_count;
+//extern char *history[HISTORY_SIZE];
+//extern int history_count;
+
+void free_env_list(t_evlist *env_list);
 
 //exit
 void shell_exit(t_shell *shell);
