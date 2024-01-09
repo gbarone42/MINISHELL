@@ -9,6 +9,7 @@ void handle_envv(t_shell *shell)
         current = current->next;
     }
 }
+
 void handle_unset(t_shell *shell, char **args)
 {
     if (args[1] == NULL)
@@ -16,26 +17,35 @@ void handle_unset(t_shell *shell, char **args)
         printf("Usage: unset <variable>\n");
         return;
     }
+
     for (int i = 1; args[i] != NULL; ++i)
     {
         t_evlist *current = shell->env_list;
+        t_evlist *next_node;
+
         while (current != NULL)
         {
+            next_node = current->next;
+
             if (strstr(current->value, args[i]) == current->value)
             {
                 printf("Unsetting: %s\n", current->value);
+
                 if (current->prev)
                     current->prev->next = current->next;
                 if (current->next)
                     current->next->prev = current->prev;
 
-                if (current == shell->env_list) // Update the head of the list if necessary
+                if (current == shell->env_list)
                     shell->env_list = current->next;
+
                 free(current->value);
                 free(current);
-                break;
+
+                // Non rompere il ciclo qui, continua con il nodo successivo
             }
-            current = current->next;
+            
+            current = next_node;
         }
     }
 }
@@ -153,31 +163,33 @@ void add_env_variable(t_shell *shell, const char *name, const char *value)
 
 void handle_export(t_shell *shell, char **args)
 {
-	if (args[1] == NULL)
-	{
-		handle_envv(shell);
-	}
-	else
-	{
-	char *name  = ft_strtok(args[1], '=');
-	char *value = ft_strtok(NULL, '=');
-		if (name != NULL && value != NULL)
-		{
-			if (contains_invalid_characters(name))
-			{
-				printf("Invalid variable name: %s\n", name);
-			}
-			else
-			{
-				printf("Name: %s\n", name);
-				printf("Value: %s\n", value);
-				add_env_variable(shell, name, value);
-			}
-		}
-		else
-		{
-			printf("Invalid export syntax: %s\n", args[1]);
-		}
-	}
-}
+    if (args[1] == NULL)
+    {
+        handle_envv(shell);
+    }
+    else
+    {
+        for (int i = 1; args[i] != NULL; ++i)
+        {
+            char *name  = ft_strtok(args[i], '=');
+            char *value = ft_strtok(NULL, '=');
 
+            if (name != NULL && value != NULL)
+            {
+                if (contains_invalid_characters(name))
+                {
+                    printf("Invalid variable name: %s\n", name);
+                }
+                else
+                {
+                    printf("Setting: %s=%s\n", name, value);
+                    add_env_variable(shell, name, value);
+                }
+            }
+            else
+            {
+                printf("Invalid export syntax: %s\n", args[i]);
+            }
+        }
+    }
+}
