@@ -169,6 +169,10 @@ int ft_isvalid(const char *input);
 void ft_handle_cd(t_shell *shell, char **args);
 void change_directory(t_shell *shell, char *path);
 void update_prompt(t_shell *shell);
+void	get_current_directory(char *cwd);
+char*	build_user_string(void);
+char*	build_user_at_string(char *user);
+
 
 //clears
 void clear_screen(void);

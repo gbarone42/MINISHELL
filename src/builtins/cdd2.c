@@ -1,0 +1,80 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cdd2.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
+/*   Updated: 2024/01/11 19:21:50 by gbarone          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../include/minishell.h"
+
+void	ft_handle_cd(t_shell *shell, char **args)
+{
+	printf("Input for 'cd': %s\n", shell->input);
+	if (args && args[1])
+	{
+		change_directory(shell, args[1]);
+	}
+	else
+	{
+		change_directory(shell, NULL);
+	}
+}
+
+void	change_directory(t_shell *shell, char *path)
+{
+	if (path == NULL)
+	{
+		path = getenv("HOME");
+	}
+	if (chdir(path) == 0)
+	{
+		printf("Changed to directory: %s\n", path);
+		update_prompt(shell);
+	}
+	else
+	{
+		perror("cd");
+	}
+}
+
+void	get_current_directory(char *cwd)
+{
+	if (getcwd(cwd, PATH_MAX) == NULL)
+	{
+		perror("getcwd");
+		printf("Error: Unable to get the current working directory\n");
+		exit(EXIT_FAILURE);
+	}
+}
+
+char*	build_user_string(void)
+{
+	char	*user;
+
+	user = ft_strjoin(PURPLE, getenv("USER"));
+	if (!user)
+	{
+		perror("Error: Unable to allocate memory for user\n");
+		exit(EXIT_FAILURE);
+	}
+	return (user);
+}
+
+char*	build_user_at_string(char *user)
+{
+	char	*user_at;
+
+	user_at = ft_strjoin(user, "@ASHellKETCHUM");
+	if (!user_at)
+	{
+		perror("Error: Unable to allocate memory for user_at\n");
+		free(user);
+		exit(EXIT_FAILURE);
+	}
+	return (user_at);
+}

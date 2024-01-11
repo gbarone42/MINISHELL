@@ -24,6 +24,7 @@ SRCS =	${SRC_DIR}/minishell.c	\
 		${SRC_DIR}/builtins/lss.c	\
 		${SRC_DIR}/builtins/echos.c	\
 		${SRC_DIR}/builtins/cdd.c	\
+		${SRC_DIR}/builtins/cdd2.c	\
 		${SRC_DIR}/builtins/handlebuiltins.c	\
 		${SRC_DIR}/builtins/envv.c	\
 		${SRC_DIR}/builtins/export_unset.c	\
