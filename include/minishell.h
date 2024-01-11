@@ -99,6 +99,12 @@ extern int g_exit;
 
 #define HISTORY_SIZE 100
 
+#ifndef PATH_MAX
+#define PATH_MAX 4096
+
+#endif
+
+
 //extern char *history[HISTORY_SIZE];
 //extern int history_count;
 

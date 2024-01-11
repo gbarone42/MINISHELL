@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/11 17:22:16 by gbarone           #+#    #+#             */
+/*   Updated: 2024/01/11 18:23:40 by gbarone          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
 
-void free_basic_memory(t_shell *shell)
+void	free_basic_memory(t_shell *shell)
 {
 	if (shell->input)
 	{
@@ -12,59 +24,56 @@ void free_basic_memory(t_shell *shell)
 	}
 }
 
-void free_array_memory(t_shell *shell)
+void	free_array_memory(t_shell *shell)
 {
-    // Free the environment variables linked list
-    if (shell->env_list)
-    {
-        free_env_list(shell->env_list);
-        shell->env_list = NULL; // Set to NULL after freeing
-    }
+	int	i;
 
-    // Free paths array
-    if (shell->paths)
-    {
-        int i = 0;
-        while (shell->paths[i])
-            free(shell->paths[i++]);
-        free(shell->paths);
-        shell->paths = NULL; // Set to NULL after freeing
-    }
-
-    // Free export array
-    if (shell->export)
-    {
-        int i = 0;
-        while (shell->export[i])
-            free(shell->export[i++]);
-        free(shell->export);
-        shell->export = NULL; // Set to NULL after freeing
-    }
+	i = 0;
+	if (shell->env_list)
+	{
+		free_env_list(shell->env_list);
+		shell->env_list = NULL;
+	}
+	if (shell->paths)
+	{
+		while (shell->paths[i])
+			free(shell->paths[i++]);
+		free(shell->paths);
+		shell->paths = NULL;
+	}
+	if (shell->export)
+	{
+		i = 0;
+		while (shell->export[i])
+			free(shell->export[i++]);
+		free(shell->export);
+		shell->export = NULL;
+	}
 }
 
-
-void clear_shell_history(t_history *history)
+void	clear_shell_history(t_history *history)
 {
+	int	i;
+
+	i = 0;
 	if (history != NULL)
 	{
-		for (int i = 0; i <= history->count; ++i)
+		while (i < history->count)
 		{
-			//printf("freeing history->entries[%d]\n", i);
-			//printf("history->entries[%d] = %s\n", i, history->entries[i]);
 			free(history->entries[i]);
-		
+			i++;
 		}
 		history->count = 0;
 	}
 }
 
-void exit_shell()
+void	exit_shell(void)
 {
 	exit(g_exit);
 }
 
-void shell_exit(t_shell *shell)
-{	
+void	shell_exit(t_shell *shell)
+{
 	clear_shell_history(&shell->history);
 	free_basic_memory(shell);
 	free_array_memory(shell);

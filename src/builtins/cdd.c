@@ -1,11 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cdd.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
+/*   Updated: 2024/01/10 17:17:09 by gbarone          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minishell.h"
-
-//here i use 
-//getenv(), chdir(), getcwd(), perror()
-#ifndef PATH_MAX
-#define PATH_MAX 4096
-
-#endif
 
 void	ft_handle_cd(t_shell *shell, char **args)
 {
@@ -27,7 +32,7 @@ void	change_directory(t_shell *shell, char *path)
 		path = getenv("HOME");
 	}
 	if (chdir(path) == 0)
-	{ 
+	{
 		printf("Changed to directory: %s\n", path);
 		update_prompt(shell);
 	}
@@ -37,12 +42,13 @@ void	change_directory(t_shell *shell, char *path)
 	}
 }
 
-void	free_memory(char *user, char *user_at, char *user_at_colon, char *prompt_suffix)
+void	free_memory(char *usr, char *usr_at, \
+	char *useratcolon, char *promsufx)
 {
-	free(user);
-	free(user_at);
-	free(user_at_colon);
-	free(prompt_suffix);
+	free(usr);
+	free(usr_at);
+	free(useratcolon);
+	free(promsufx);
 }
 
 void	get_current_directory(char *cwd)
@@ -109,9 +115,11 @@ char*	build_prompt_suffix(void)
 	return (prompt_suffix);
 }
 
-void	create_prompt(t_shell *shell, char *user_at_colon, char *cwd, char *prompt_suffix)
+void	create_prompt(t_shell *shell, char *user_at_colon, \
+	char *cwd, char *prompt_suffix)
 {
-	shell->prompt = (char *)malloc(strlen(user_at_colon) + strlen(cwd) + strlen(prompt_suffix) + 1);
+	shell->prompt = (char *)malloc(strlen(user_at_colon) +\
+					strlen(cwd) + strlen(prompt_suffix) + 1);
 	if (!shell->prompt)
 	{
 		perror("Error: Unable to allocate memory for the new prompt\n");
