@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   simulation.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: badph <badph@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/12 03:10:35 by badph             #+#    #+#             */
+/*   Updated: 2024/01/12 03:12:03 by badph            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/minishell.h"
 #include <time.h>
 
-void ft_minishell_simulator(t_shell *shell)
+void	ft_minishell_simulator(t_shell *shell)
 {
-	t_pars *command;
+	t_pars	*command;
 
 	while (1)
 	{
@@ -17,7 +29,7 @@ void ft_minishell_simulator(t_shell *shell)
 			add_to_history(&(shell->history), shell->input);
 		}
 		else
-		 printf("Invalid input detected!\n");
+			printf("Invalid input detected!\n");
 	}
-		free(shell->input);
+	free(shell->input);
 }

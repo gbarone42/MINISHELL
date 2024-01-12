@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handlebuiltins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: badph <badph@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:01:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/11 19:23:24 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/12 03:11:10 by badph            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	handle_basic_builtins(t_shell *shell)
 	printf("First command of Input after comparison: %s\n", args[0]);
 	while (args[i])
 	{
-		printf("Arg[%d]: %s\n", i, args[i]);
+		printf("arg[%d]: %s\n", i, args[i]);
 		i++;
 	}
 	handle_basic_builtin1(shell, args);
