@@ -1,8 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/19 16:34:15 by sdel-gra          #+#    #+#             */
+/*   Updated: 2024/01/19 16:43:40 by sdel-gra         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CMD_H
+# define CMD_H
+
 # define OUTPUT 20
 # define APPEND 21
 # define INPUT 22
 # define HEREDOC 23
 # define PRIOROUTPUT 24
+
+# include "minishell.h"
 
 typedef struct s_list_node
 {
@@ -47,3 +64,5 @@ t_redir	*ft_lstlast_red(t_redir *head);
 
 void	ft_lstadd_back_redir(t_redir **l, t_redir *new);
 t_redir	*ft_lstnew_redir(char *s, int t);
+
+#endif

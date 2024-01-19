@@ -6,11 +6,11 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 17:31:23 by sdel-gra          #+#    #+#             */
-/*   Updated: 2023/12/06 13:32:22 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/19 16:40:53 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../include/minishell.h"
 
 /*
 	Function from libft updated

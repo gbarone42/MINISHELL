@@ -1,7 +1,7 @@
 #include "../include/minishell.h"
 
 int	g_exit = 0;
-
+/*
 int	main(int ac, char **av, char **env)
 {
 	int		output;
@@ -20,7 +20,7 @@ int	main(int ac, char **av, char **env)
 	ft_norm_signal();
 	ft_minishell_simulator(&my_shell);
 	return (EXIT_SUCCESS);
-}
+}*/
 
 //debug
 //

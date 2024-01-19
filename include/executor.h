@@ -1,15 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   executor.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/19 16:34:07 by sdel-gra          #+#    #+#             */
+/*   Updated: 2024/01/19 16:44:33 by sdel-gra         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef EXECUTOR_H
 # define EXECUTOR_H
 
-typedef struct s_list_node
+# include "minishell.h"
+
+typedef struct s_cmd	t_cmd;
+
+typedef struct s_mshell
 {
-	char				*s_node;
-	int					type_node;
-	struct s_list_node	*next;
-}				t_list_node;
+	pid_t		pid_child;
+	int			fd_pipe[2];
+	int			tmp_fd;
+	int			outfile;
+	int			infile;
+	char		**path;
+	char		**cmd_path;
+	char		**env;
+	char		*cmd_args;
+	int			exit_stat;
+	t_cmd		*c_l;
+}				t_mshell;
 
-
-void ft_prio_cmd(t_mshell *ms, t_cmd **cmds);
+void	ft_prio_cmd(t_mshell *ms, t_cmd **cmds);
 
 void	ft_exec(t_mshell *ms, char *envp[]);
 

@@ -1,4 +1,16 @@
-#include "../includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   priority.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/19 16:41:18 by sdel-gra          #+#    #+#             */
+/*   Updated: 2024/01/19 16:50:30 by sdel-gra         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../include/minishell.h"
 
 
 void	excve_core_prio(t_mshell *ms, char *cmd_path, char **cmd)
@@ -44,15 +56,15 @@ int	ft_compare_file(char *filename1, char *filename2)
 
 	out = 1;
 	fd[0] = open(filename1, O_RDONLY);
-	fd[1] = open(filename1, O_RDONLY);
+	fd[1] = open(filename2, O_RDONLY);
 	f_line[0] = get_next_line(fd[0]);
 	f_line[1] = get_next_line(fd[1]);
 	while (f_line[0] != NULL || f_line[1] != NULL)
 	{
 		if (!strcmp(f_line[0], f_line[1]) == 0)
 			out = 0;
-		f_line[0] = ft_free(f_line[0]);
-		f_line[1] = ft_free(f_line[1]);
+		f_line[0] = ft_free(f_line + 0);
+		f_line[1] = ft_free(f_line + 1);
 		f_line[0] = get_next_line(fd[0]);
 		f_line[1] = get_next_line(fd[1]);
 	}
@@ -73,7 +85,7 @@ int	ft_isprio_cmd(t_mshell *ms, t_cmd *cmd)
 	outf =  open(".tmp_testnull", O_TRUNC | O_CREAT | O_RDWR, 0644);
 	pid1 = fork();
 	if (pid1 == 0)
-		first_child(ms, cmd, inf, outf);
+		ft_child_prio(ms, cmd, inf, outf);
 	waitpid(pid1, NULL, 0);
 	close(inf);
 	close(outf);
@@ -81,7 +93,7 @@ int	ft_isprio_cmd(t_mshell *ms, t_cmd *cmd)
 	outf =  open(".tmp_testfull", O_TRUNC | O_CREAT | O_RDWR, 0644);
 	pid1 = fork();
 	if (pid1 == 0)
-		first_child(ms, cmd, inf, outf);
+		ft_child_prio(ms, cmd, inf, outf);
 	waitpid(pid1, NULL, 0);
 	close(inf);
 	close(outf);
@@ -111,10 +123,10 @@ void ft_prio_cmd(t_mshell *ms, t_cmd **cmds)
 	tmp_prev = NULL;
 	while (iter)
 	{
-		if (ft_isprio_cmd)
+		if (ft_isprio_cmd(ms, iter))
 		{
 			if (!ft_redir_out_exist(iter->redirs) || iter->next)
-				ft_lstadd_back(iter->redirs, ft_lstnew_redir("", PRIOROUTPUT));
+				ft_lstadd_back_redir(&iter->redirs, ft_lstnew_redir("", PRIOROUTPUT));
 			/* muovi il comando all'inizio*/
 			if (tmp_prev)
 			{
