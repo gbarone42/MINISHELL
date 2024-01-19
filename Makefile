@@ -49,7 +49,7 @@ HDRS = ${wildcard ${INCLUDE_DIR}/*.h}
 OBJS = ${patsubst ${SRC_DIR}/%.c,${OBJ_DIR}/%.o,${SRCS}}
 
 # Compiler and flags
-CC = gcc
+CC = cc
 RM = rm -rf
 FLAGS = -g -Wall -Wextra -Werror -I${INCLUDE_DIR}
 MAKEFLAGS += --silent

@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:34:19 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/19 17:10:37 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/19 19:55:15 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,17 @@ int	main(int argc, char *argv[], char *envp[])
 		tmpcmd = NULL;
 		i++;
 	}
-	//ft_prio_cmd(&ms, &ms.c_l);
-	//ms.env = envp;
+	path_finder(&ms, envp);
+	ft_prio_cmd(&ms, &ms.c_l);
+	i = 0;
+	tmpcmd = ms.c_l;
+	while (tmpcmd)
+	{
+		printf("%s", tmpcmd->cmd_str);
+		tmpcmd = tmpcmd ->next;
+	}
+	ms.env = envp;
+
 	//envp = NULL;
 /*
 	while (ms.c_l)
@@ -81,8 +90,8 @@ int	main(int argc, char *argv[], char *envp[])
 		ms.c_l=ms.c_l->next;
 	}*/
 
-	ft_exec_cmd(&ms, envp);
-	ft_lstclear(&ms.c_l);
+	//ft_exec_cmd(&ms, envp);
+	//ft_lstclear(&ms.c_l);
 }
 /*
 void	command_handler(t_mshell *px, char **envp)

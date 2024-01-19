@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:40:59 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/19 16:41:00 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/19 18:42:35 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,11 @@ void	ft_lstdelone(t_cmd *lst)
 {
 	if (lst != NULL)
 	{
-		lst->cmd_str = ft_free(&(lst->cmd_str));
+		if (lst->cmd_str)
+		{
+			free(lst->cmd_str);
+			lst->cmd_str = NULL;
+		}
 		ft_lstclear_redir(&lst->redirs);
 		lst->redirs = NULL;
 		free(lst);

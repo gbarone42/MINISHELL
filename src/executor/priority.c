@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:41:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/19 16:50:30 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/19 19:51:34 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_child_prio(t_mshell *ms, t_cmd *cmd, int inf, int outf)
 	while (ms->cmd_path[i])
 	{
 		cmd_path = ft_strjoin(ms->cmd_path[i], cmd_sp[0]);
+		write(1, ms->cmd_path[i], ft_strlen(ms->cmd_path[i]));
 		excve_core_prio(ms, cmd_path, cmd_sp);
 		free(cmd_path);
 		i++;
@@ -61,14 +62,14 @@ int	ft_compare_file(char *filename1, char *filename2)
 	f_line[1] = get_next_line(fd[1]);
 	while (f_line[0] != NULL || f_line[1] != NULL)
 	{
-		if (!strcmp(f_line[0], f_line[1]) == 0)
+		if (strcmp(f_line[0], f_line[1]) != 0)
 			out = 0;
 		f_line[0] = ft_free(f_line + 0);
 		f_line[1] = ft_free(f_line + 1);
 		f_line[0] = get_next_line(fd[0]);
 		f_line[1] = get_next_line(fd[1]);
 	}
-	if (!strcmp(f_line[0], f_line[1]) == 0)
+	if (*f_line && strcmp(f_line[0], f_line[1]) != 0)
 		out = 0;
 	close_fd(fd[0]);
 	close_fd(fd[1]);
@@ -118,20 +119,22 @@ void ft_prio_cmd(t_mshell *ms, t_cmd **cmds)
 {
 	t_cmd	*iter;
 	t_cmd	*tmp_prev;
+	int		isfirst;
 
+	isfirst = 1;
 	iter = *cmds;
 	tmp_prev = NULL;
 	while (iter)
 	{
-		if (ft_isprio_cmd(ms, iter))
+		if (ft_isprio_cmd(ms, iter) && !isfirst)
 		{
 			if (!ft_redir_out_exist(iter->redirs) || iter->next)
 				ft_lstadd_back_redir(&iter->redirs, ft_lstnew_redir("", PRIOROUTPUT));
 			/* muovi il comando all'inizio*/
-			if (tmp_prev)
-			{
-				/* code */
-			}
+			tmp_prev->next = NULL;
+			tmp_prev = ft_lstlast(iter);
+			tmp_prev ->next = ms->c_l;
+			ms->c_l = iter;
 		}
 		tmp_prev = iter;
 		iter = iter->next;
