@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:34:19 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/19 19:55:15 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:43:08 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ int	main(int argc, char *argv[], char *envp[])
 		if(i == 0)
 		{
 			tmpcmd->is_first = 1;
-			ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("1", INPUT));
-			ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("11", OUTPUT));
-			ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("2", INPUT));
-			ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("13", OUTPUT));
+			//ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("1", INPUT));
+			//ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("11", OUTPUT));
+			//ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("2", INPUT));
+			//ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("13", OUTPUT));
 		}
 		else
 			tmpcmd->is_first = 0;
@@ -77,7 +77,7 @@ int	main(int argc, char *argv[], char *envp[])
 	tmpcmd = ms.c_l;
 	while (tmpcmd)
 	{
-		printf("%s", tmpcmd->cmd_str);
+		printf("%s\n", tmpcmd->cmd_str);
 		tmpcmd = tmpcmd ->next;
 	}
 	ms.env = envp;

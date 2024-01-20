@@ -1,0 +1,12 @@
+/nfs/homes/sdel-gra/bin//nfs/homes/sdel-gra/bin//nfs/homes/sdel-gra/bin//usr/local/sbin//usr/local/bin//usr/sbin//usr/bin/builtins
+executor
+init.c
+minishell.c
+parsing.c
+signal.c
+simulation.c
+test.c
+utils1.c
+utils2.c
+utils3.c
+valid.c

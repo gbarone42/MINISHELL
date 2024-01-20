@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:41:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/19 19:51:34 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/20 21:41:49 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ void	ft_child_prio(t_mshell *ms, t_cmd *cmd, int inf, int outf)
 	int		i;
 
 	i = 0;
-	dup2(inf, 0);
-	dup2(outf, 1);
-	dup2(outf, 2);
+	dup2(inf, STDIN_FILENO);
+	dup2(outf, STDOUT_FILENO);
+	//dup2(outf, 2);
 	cmd_sp = ft_split(cmd->cmd_str, ' ');
 	excve_core_prio(ms, cmd_sp[0], cmd_sp);
 	while (ms->cmd_path[i])
@@ -55,22 +55,23 @@ int	ft_compare_file(char *filename1, char *filename2)
 	int		fd[2];
 	int		out;
 
-	out = 1;
+	out = 0;
 	fd[0] = open(filename1, O_RDONLY);
 	fd[1] = open(filename2, O_RDONLY);
 	f_line[0] = get_next_line(fd[0]);
 	f_line[1] = get_next_line(fd[1]);
 	while (f_line[0] != NULL || f_line[1] != NULL)
 	{
-		if (strcmp(f_line[0], f_line[1]) != 0)
-			out = 0;
+		out = ft_strcmp(f_line[0], f_line[1]);
+		printf("f1:%s\n",f_line[0]);
+		printf("f2:%s\n",f_line[1]);
 		f_line[0] = ft_free(f_line + 0);
 		f_line[1] = ft_free(f_line + 1);
+		if (out != 0)
+			break ;
 		f_line[0] = get_next_line(fd[0]);
 		f_line[1] = get_next_line(fd[1]);
 	}
-	if (*f_line && strcmp(f_line[0], f_line[1]) != 0)
-		out = 0;
 	close_fd(fd[0]);
 	close_fd(fd[1]);
 	return (out);
@@ -126,7 +127,7 @@ void ft_prio_cmd(t_mshell *ms, t_cmd **cmds)
 	tmp_prev = NULL;
 	while (iter)
 	{
-		if (ft_isprio_cmd(ms, iter) && !isfirst)
+		if (ft_isprio_cmd(ms, iter) == 0 && !isfirst)
 		{
 			if (!ft_redir_out_exist(iter->redirs) || iter->next)
 				ft_lstadd_back_redir(&iter->redirs, ft_lstnew_redir("", PRIOROUTPUT));
@@ -135,8 +136,10 @@ void ft_prio_cmd(t_mshell *ms, t_cmd **cmds)
 			tmp_prev = ft_lstlast(iter);
 			tmp_prev ->next = ms->c_l;
 			ms->c_l = iter;
+			break;
 		}
 		tmp_prev = iter;
 		iter = iter->next;
+		isfirst = 0;
 	}
 }
