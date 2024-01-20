@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:41:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/20 21:41:49 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/20 22:13:46 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	ft_child_prio(t_mshell *ms, t_cmd *cmd, int inf, int outf)
 	while (ms->cmd_path[i])
 	{
 		cmd_path = ft_strjoin(ms->cmd_path[i], cmd_sp[0]);
-		write(1, ms->cmd_path[i], ft_strlen(ms->cmd_path[i]));
 		excve_core_prio(ms, cmd_path, cmd_sp);
 		free(cmd_path);
 		i++;
@@ -88,17 +87,17 @@ int	ft_isprio_cmd(t_mshell *ms, t_cmd *cmd)
 	pid1 = fork();
 	if (pid1 == 0)
 		ft_child_prio(ms, cmd, inf, outf);
-	waitpid(pid1, NULL, 0);
 	close(inf);
 	close(outf);
+	waitpid(pid1, NULL, 0);
 	inf = open("/etc/passwd", O_RDONLY);
 	outf =  open(".tmp_testfull", O_TRUNC | O_CREAT | O_RDWR, 0644);
 	pid1 = fork();
 	if (pid1 == 0)
 		ft_child_prio(ms, cmd, inf, outf);
-	waitpid(pid1, NULL, 0);
 	close(inf);
 	close(outf);
+	waitpid(pid1, NULL, 0);
 	return (ft_compare_file(".tmp_testnull", ".tmp_testfull"));
 }
 
@@ -136,7 +135,7 @@ void ft_prio_cmd(t_mshell *ms, t_cmd **cmds)
 			tmp_prev = ft_lstlast(iter);
 			tmp_prev ->next = ms->c_l;
 			ms->c_l = iter;
-			break;
+			break ;
 		}
 		tmp_prev = iter;
 		iter = iter->next;
