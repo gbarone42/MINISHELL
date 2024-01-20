@@ -59,13 +59,16 @@ typedef struct s_history
 
 typedef struct s_shell
 {
-    t_history history;
+	pid_t		pid_child;
+	t_history	history;
+	int			fd_pipe[2];
+	int			tmp_fd;
     char *prompt;
-    int in;
-    int out;
+	int			outfile;
+	int			infile;
     t_evlist *env_list;
     char *input;
-    char **paths;
+	char		**cmd_path;
     char **export;
 } t_shell;
 
