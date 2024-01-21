@@ -64,11 +64,11 @@ typedef struct s_shell
 	int			fd_pipe[2];
 	int			tmp_fd;
     char *prompt;
-	int			outfile;
-	int			infile;
+	int			in;
+	int			out;
     t_evlist *env_list;
     char *input;
-	char		**cmd_path;
+	char		**paths;
     char **export;
 } t_shell;
 

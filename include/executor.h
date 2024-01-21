@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:34:07 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/19 16:44:33 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/21 18:29:58 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ typedef struct s_mshell
 	int			tmp_fd;
 	int			outfile;
 	int			infile;
-	char		**path;
-	char		**cmd_path;
 	char		**env;
+	char		**cmd_path;
 	char		*cmd_args;
 	int			exit_stat;
 	t_cmd		*c_l;

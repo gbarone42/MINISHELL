@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:53:11 by sdel-gra          #+#    #+#             */
-/*   Updated: 2023/10/15 17:03:56 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/21 18:55:58 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_free(char **ptr)
 	strchr but return the index of the character instead the pointer
 	-1 means that we did not found the char
 */
-/*int	ft_strchr_i(const char *s, char c)
+int	ft_strchr_i(const char *s, char c)
 {
 	int	i;
 
@@ -48,7 +48,7 @@ char	*ft_free(char **ptr)
 	if (s && s[i] == c)
 		return (i);
 	return (-1);
-}*/
+}
 
 // alloc mem and assign \0 to all the string 
 char	*ft_calloc_char(size_t nmemb)
@@ -101,7 +101,7 @@ char	*ft_strjoin_free(char *s1, char const *s2)
 	split from s to len and from (s + len) to end of str
 	return from s to len 
 */
-char	*ft_substr_split(char **s, int len)
+char	*ft_substr_s(char **s, int len)
 {
 	char	*out;
 	int		i;
@@ -110,7 +110,9 @@ char	*ft_substr_split(char **s, int len)
 	j = 0;
 	i = 0;
 	if (len == 0)
+	{
 		return (*s);
+	}
 	out = ft_calloc_char(len + 1);
 	while (*s && (*s)[i] && i < len)
 	{

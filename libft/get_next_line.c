@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdel-gra <sdel-gra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:53:43 by sdel-gra          #+#    #+#             */
-/*   Updated: 2023/02/13 18:56:53 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/21 18:56:02 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,27 @@
 char	*get_next_line(int fd)
 {
 	char		*out;
-	static char	*buffer;
+	static char	*buffer[1024];
 	int			read_out;
 
 	read_out = 1;
-	while (ft_strchr_i(buffer, '\n') == -1)
+	while (ft_strchr_i(buffer[fd], '\n') == -1)
 	{
 		out = ft_calloc_char(BUFFER_SIZE + 1);
 		read_out = read(fd, out, BUFFER_SIZE);
 		if (read_out > 0)
 		{
-			buffer = ft_strjoin_free(buffer, out);
+			buffer[fd] = ft_strjoin_free(buffer[fd], out);
 			ft_free(&out);
 		}
 		else
 		{
 			out = ft_free(&out);
-			if (read_out == -1 || (buffer && !buffer[0] && read_out == 0))
-				return (ft_free(&buffer));
-			return (ft_substr_split(&buffer, ft_strchr_i(buffer, '\0')));
+			if (read_out == -1 || (buffer[fd] && !*buffer[fd] && read_out == 0))
+				return (ft_free(buffer + fd));
+			return (ft_substr_s(buffer + fd, ft_strchr_i(buffer[fd], '\0')));
 		}
 	}
-	out = ft_substr_split(&buffer, ft_strchr_i(buffer, '\n') + 1);
+	out = ft_substr_s(buffer + fd, ft_strchr_i(buffer[fd], '\n') + 1);
 	return (out);
 }
