@@ -209,7 +209,7 @@ void handle_other_builtins(t_shell *shell);
 void builtins_call(t_shell *shell);
 
 //history
-void add_to_history(t_history *history, char* command);
+void add_to_history(t_history *history, char *command);
 //void display_history(void);
 void display_history(const t_history *history);
 

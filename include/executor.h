@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:34:07 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/21 18:29:58 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/22 19:21:19 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_exec(t_mshell *ms, char *envp[]);
 
 void	ft_redir(t_mshell *ms, t_cmd *cmd);
 
-void    close_fd(int fd);
+void	close_fd(int fd);
 
 void	path_finder(t_mshell *px, char **envp);
 

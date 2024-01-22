@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:40:40 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/19 16:40:44 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:35:50 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	parent_handler(t_mshell *ms)
 void	child_handler(t_mshell *ms, t_cmd *cmd)
 {
 	printf("\e[1;31mChild (PID: %d) executed cmd:\e[0m\n", getpid());
-	//printf("%s\n", get_next_line(ms->tmp_fd));
 	if (cmd->is_first)
 	{
 		dup2(open("1", O_RDONLY), STDIN_FILENO);

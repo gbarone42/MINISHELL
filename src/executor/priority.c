@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:41:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/21 20:31:12 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/22 15:51:38 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	ft_child_prio(t_mshell *ms, t_cmd *cmd, int inf, int outf)
 	i = 0;
 	dup2(inf, STDIN_FILENO);
 	dup2(outf, STDOUT_FILENO);
-	//dup2(outf, 2);
 	cmd_sp = ft_split(cmd->cmd_str, ' ');
 	excve_core_prio(ms, cmd_sp[0], cmd_sp);
 	while (ms->cmd_path[i])
@@ -62,8 +61,8 @@ int	ft_compare_file(char *filename1, char *filename2)
 	f_line[1] = get_next_line(fd2);
 	while (f_line[0] != NULL || f_line[1] != NULL)
 	{
-		printf("f1:%s\n",f_line[0]);
-		printf("f2:%s\n",f_line[1]);
+		//printf("f1:%s\n",f_line[0]);
+		//printf("f2:%s\n",f_line[1]);
 		out = ft_strcmp(f_line[0], f_line[1]);
 		f_line[0] = ft_free(f_line + 0);
 		f_line[1] = ft_free(f_line + 1);
@@ -118,6 +117,19 @@ int	ft_redir_out_exist(t_redir *redirs)
 	return (0);
 }
 
+
+/*
+void	ft_catchange(t_cmd *cmds, char *cmd_name)
+{
+	t_cmd	*iter;
+
+	iter = cmds;
+	while (iter && iter->cmd_str)
+	{
+		iter = iter -> next;
+	}
+}*/
+
 void ft_prio_cmd(t_mshell *ms, t_cmd **cmds)
 {
 	t_cmd	*iter;
@@ -131,9 +143,9 @@ void ft_prio_cmd(t_mshell *ms, t_cmd **cmds)
 	{
 		if (ft_isprio_cmd(ms, iter) == 0 && !isfirst)
 		{
+			//ft_catchange();	
 			if (!ft_redir_out_exist(iter->redirs) || iter->next)
 				ft_lstadd_back_redir(&iter->redirs, ft_lstnew_redir("", PRIOROUTPUT));
-			/* muovi il comando all'inizio*/
 			tmp_prev->next = NULL;
 			tmp_prev = ft_lstlast(iter);
 			tmp_prev ->next = ms->c_l;

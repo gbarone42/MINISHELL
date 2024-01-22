@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badph <badph@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 03:12:42 by badph             #+#    #+#             */
-/*   Updated: 2024/01/12 03:12:48 by badph            ###   ########.fr       */
+/*   Updated: 2024/01/22 11:46:38 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_ctrld(t_shell *shell)
 		write(STDERR_FILENO, "readline error: ", 17);
 	}
 	printf("\n");
-	free(shell->input);
+	//free all
 	shell_exit(shell);
 }
 
