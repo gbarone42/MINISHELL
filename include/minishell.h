@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:44:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/23 16:28:23 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/23 17:41:15 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@
 
 enum
 {
+	ND = -1,
 	INPUT = 0,
 	OUTPUT = 1,
 	APPEND = 2,
 	HEREDOC = 3,
-	PRIOR_OUTPUT = 4,
 	PRIOROUTPUT = 24
 };
 

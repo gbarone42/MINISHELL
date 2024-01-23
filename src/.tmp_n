@@ -1,0 +1,13 @@
+builtins
+executor
+init.c
+minishell.c
+parser
+parsing.c
+signal.c
+simulation.c
+test.c
+utils1.c
+utils2.c
+utils3.c
+valid.c

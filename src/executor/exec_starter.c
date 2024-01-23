@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:34:19 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/23 16:19:04 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/23 17:35:26 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_exec_cmd(t_mshell *ms, char *envp[])
 	ft_exec(ms, envp);
 }
 
-int	main(int argc, char *argv[], char *envp[])
+int	main_2(int argc, char *argv[], char *envp[])
 {
 	t_mshell	ms;
 	int			i;
@@ -59,6 +59,7 @@ int	main(int argc, char *argv[], char *envp[])
 		//tmpcmd->redirs = ft_lstnew_redir("12", APPEND);
 		tmpcmd->in = -2;
 		tmpcmd->out = -2;
+		tmpcmd->redirs = ft_lstnew_redir(NULL, ND);
 		if(i == 0)
 		{
 			//tmpcmd->is_first = 1;
@@ -95,8 +96,9 @@ int	main(int argc, char *argv[], char *envp[])
 
 	ft_exec_cmd(&ms, envp);
 
-	main_1(argc, argv, envp);
+	//main_1(argc, argv, envp);
 	//ft_lstclear(&ms.c_l);
+	return (1);
 }
 /*
 void	command_handler(t_mshell *px, char **envp)

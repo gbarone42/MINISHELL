@@ -44,11 +44,9 @@ SRCS =	${SRC_DIR}/minishell.c	\
 		${SRC_DIR}/${PARSER_DIR}/clist.c \
 		${SRC_DIR}/${PARSER_DIR}/env.c \
 		${SRC_DIR}/${PARSER_DIR}/free.c \
-		${SRC_DIR}/${PARSER_DIR}/grammar.txt \
 		${SRC_DIR}/${PARSER_DIR}/ilist.c \
 		${SRC_DIR}/${PARSER_DIR}/init.c \
 		${SRC_DIR}/${PARSER_DIR}/lexer.c \
-		${SRC_DIR}/${PARSER_DIR}/main.c \
 		${SRC_DIR}/${PARSER_DIR}/minishell_p.h \
 		${SRC_DIR}/${PARSER_DIR}/parser.c \
 		${SRC_DIR}/${PARSER_DIR}/parser_io_lists.c \

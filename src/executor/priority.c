@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:41:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/23 16:03:41 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/23 17:21:28 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void ft_prio_cmd(t_mshell *ms, t_cmd **cmds)
 	{
 		if (ft_isprio_cmd(ms, iter) == 0 && !isfirst)
 		{
-			//ft_catchange();	
+			//ft_catchange();
 			if (!ft_redir_out_exist(iter->redirs) || iter->next)
 				ft_lstadd_back_redir(&iter->redirs, ft_lstnew_redir("", PRIOROUTPUT));
 			tmp_prev->next = NULL;
