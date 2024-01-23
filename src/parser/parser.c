@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 20:16:03 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/23 15:17:48 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/23 18:07:26 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static void	ft_simple_command(t_tlist **token, t_clist *cmd)
 {
-	char	*pathname;
+	//char	*pathname;
 	char	**args;
 
-	if (!ft_term(token, GENERAL_TOKEN, &pathname))
+	/*if (!ft_term(token, GENERAL_TOKEN, &pathname))
 		return ;
-	cmd->pathname = pathname;
+	cmd->pathname = pathname;*/
 	args = ft_args(token);
 	if (!args)
 		return ;

@@ -105,5 +105,6 @@ int	ft_innit_shell(t_shell *shell, char **env)
 	result = ft_duplicate_std_fds(shell);
 	if (result != 0)
 		return (result);
+	ft_ret_shell(shell);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 03:10:35 by badph             #+#    #+#             */
-/*   Updated: 2024/01/23 17:57:55 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/23 18:07:20 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include <time.h>
 
 int	main_2(int argc, char *argv[], char *envp[]);
-
+/*
 static void	ft_prepare_for_next_input(t_shell *shell)
 {
 	free(shell->input);
 	ft_free_clist(shell->commands);
-}
+}*/
 
 int	ft_count_space(char *str)
 {
@@ -54,7 +54,7 @@ void	ft_minishell_simulator(t_shell *shell)//remove envp
 			}
 //			builtins_call(shell);
 			add_to_history(&(shell->history), shell->input);
-			ft_prepare_for_next_input(shell);
+//			ft_prepare_for_next_input(shell);
 		}
 		else
 			printf("Invalid input detected!\n");
