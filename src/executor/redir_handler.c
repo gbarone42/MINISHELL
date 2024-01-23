@@ -6,20 +6,20 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:41:24 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/23 11:21:26 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:24:34 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../include/minishell.h"
 
-int	heredoc_handler(t_mshell *shell, char *delim)
+int	heredoc_handler(t_shell *shell, char *delim)
 {
 	char	*line;
 	int		heredoc_fd;
 
 	write(1, ">", 1);
-	line = get_next_line(shell->infile);
+	line = get_next_line(shell->in);
 	heredoc_fd = open("./.here_doc", O_CREAT | O_WRONLY | O_TRUNC, 0666);
 	if (heredoc_fd < 0)
 		perror("heredoc");
@@ -36,57 +36,57 @@ int	heredoc_handler(t_mshell *shell, char *delim)
 		write(1, ">", 1);
 		ft_putstr_fd(line, heredoc_fd);
 		free(line);
-		line = get_next_line(shell->infile);
+		line = get_next_line(shell->in);
 	}
 	return (-1);
 }
 
-int	out_handler(t_cmd *cmd)
+int	out_handler(t_clist *cmd)
 {
 	int	tmp;
 
 	tmp = -1;
-	if (cmd->redirs->type == OUTPUT)
-		tmp = open(cmd->redirs->str, O_CREAT | O_WRONLY | O_TRUNC, 0666);
-	else if (cmd->redirs->type == APPEND)
-		tmp = open(cmd->redirs->str, O_CREAT | O_WRONLY | O_APPEND, 0666);
-	else if (cmd->redirs->type == PRIOROUTPUT)
+	if (cmd->redirections->type == OUTPUT)
+		tmp = open(cmd->redirections->filename, O_CREAT | O_WRONLY | O_TRUNC, 0666);
+	else if (cmd->redirections->type == APPEND)
+		tmp = open(cmd->redirections->filename, O_CREAT | O_WRONLY | O_APPEND, 0666);
+	else if (cmd->redirections->type == PRIOROUTPUT)
 		tmp = STDOUT_FILENO;
 	if (tmp < 0)
-		perror(cmd->redirs->str);
+		perror(cmd->redirections->filename);
 	return (tmp);
 }
 
 
-int	in_handler(t_mshell *ms, t_cmd *cmd)
+int	in_handler(t_shell *ms, t_clist *cmd)
 {
 	int	tmp;
 
 	tmp = -1;
-	if (cmd->redirs->type == INPUT)
-		tmp = open(cmd->redirs->str, O_RDONLY);
-	else if (cmd->redirs->type == HEREDOC)
-		tmp = heredoc_handler(ms, ft_strjoin(cmd->redirs->str, "\n"));
+	if (cmd->redirections->type == INPUT)
+		tmp = open(cmd->redirections->filename, O_RDONLY);
+	else if (cmd->redirections->type == HEREDOC)
+		tmp = heredoc_handler(ms, ft_strjoin(cmd->redirections->filename, "\n"));
 	if (tmp < 0)
-		perror(cmd->redirs->str);
+		perror(cmd->redirections->filename);
 	return (tmp);
 }
 
-void	ft_redir(t_mshell *ms, t_cmd *cmd)
+void	ft_redir(t_shell *ms, t_clist *cmd)
 {
-	while (cmd->redirs)
+	while (cmd->redirections)
 	{
-		if (cmd->redirs->type == OUTPUT || cmd->redirs->type == APPEND
-			|| cmd->redirs->type == PRIOROUTPUT)
+		if (cmd->redirections->type == OUTPUT || cmd->redirections->type == APPEND
+			|| cmd->redirections->type == PRIOROUTPUT)
 		{
 			close_fd(cmd->out);
 			cmd->out = out_handler(cmd);
 		}
-		else if (cmd->redirs->type == INPUT || cmd->redirs->type == HEREDOC)
+		else if (cmd->redirections->type == INPUT || cmd->redirections->type == HEREDOC)
 		{
 			close_fd(cmd->in);
 			cmd->in = in_handler(ms, cmd);
 		}
-		cmd->redirs = cmd->redirs->next;
+		cmd->redirections = cmd->redirections->next;
 	}
 }

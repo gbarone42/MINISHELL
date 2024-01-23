@@ -31,12 +31,10 @@ SRCS =	${SRC_DIR}/minishell.c	\
 		${SRC_DIR}/builtins/envv.c	\
 		${SRC_DIR}/builtins/export_unset.c	\
 		${SRC_DIR}/parsing.c	\
+		${SRC_DIR}/${EXEC_DIR}/clist_utils.c \
 		${SRC_DIR}/${EXEC_DIR}/exec_starter.c \
 		${SRC_DIR}/${EXEC_DIR}/execution.c \
 		${SRC_DIR}/${EXEC_DIR}/free.c \
-		${SRC_DIR}/${EXEC_DIR}/list_base.c \
-		${SRC_DIR}/${EXEC_DIR}/list_clear.c \
-		${SRC_DIR}/${EXEC_DIR}/lst_base_redir.c \
 		${SRC_DIR}/${EXEC_DIR}/priority.c \
 		${SRC_DIR}/${EXEC_DIR}/redir_handler.c \
 		${SRC_DIR}/${EXEC_DIR}/redir.c \

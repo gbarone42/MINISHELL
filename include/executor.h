@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:34:07 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/23 16:01:10 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:58:33 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,42 +15,33 @@
 
 # include "minishell.h"
 
-typedef struct s_cmd	t_cmd;
+typedef struct command_node	t_clist;
+typedef struct s_shell		t_shell;
+typedef struct redirection	t_rlist;
 
-typedef struct s_mshell
-{
-	pid_t		pid_child;
-	int			fd_pipe[2];
-	int			tmp_fd;
-	int			outfile;
-	int			infile;
-	char		**env;
-	char		**cmd_path;
-	char		*cmd_args;
-	int			exit_stat;
-	t_cmd		*c_l;
-}				t_mshell;
 
-void	ft_prio_cmd(t_mshell *ms, t_cmd **cmds);
+void	ft_exec_cmd(t_shell *ms);
 
-void	ft_exec(t_mshell *ms, char *envp[]);
+void	ft_prio_cmd(t_shell *ms, t_clist **cmds);
 
-void	ft_redir(t_mshell *ms, t_cmd *cmd);
+void	ft_exec(t_shell *ms);
+
+void	ft_rlist(t_shell *ms, t_clist *cmd);
 
 void	close_fd(int fd);
 
-void	path_finder(t_mshell *px, char **envp);
+void	path_finder(t_shell *px, char **envp);
 
-t_cmd	*ft_lstnew_cmd(char *s);
-int		ft_lstsize_cmd(t_cmd *lst);
-t_cmd	*ft_lstlast_cmd(t_cmd *head);
-void	ft_lstadd_front_cmd(t_cmd **l, t_cmd *new_head);
-void	ft_lstadd_back_cmd(t_cmd **l, t_cmd *new);
+t_clist	*ft_lstnew_cmd(char *s);
+int		ft_lstsize_cmd(t_clist *lst);
+t_clist	*ft_last_clist(t_clist *head);
+void	ft_lstadd_front_clist(t_clist **l, t_clist *new_head);
+void	ft_lstadd_back_cmd(t_clist **l, t_clist *new);
 
 char	*ft_free_char(char **ptr);
-void	ft_free_tutto(t_mshell *px, char ***cmd, char **cmd_path);
+void	ft_free_tutto(t_shell *px, char ***cmd, char **cmd_path);
 
-void	ft_lstclear_redir(t_redir **lst);
-void	ft_lstclear_cmd(t_cmd **lst);
+void	ft_lstclear_redir(t_rlist **lst);
+void	ft_lstclear_cmd(t_clist **lst);
 
 #endif

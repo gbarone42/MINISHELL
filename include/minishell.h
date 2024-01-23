@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:44:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/23 17:41:15 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:20:23 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include <sys/wait.h>
 # include "../libft/build/inc/libft/libft.h"
 # include "../libft/src/gnl/get_next_line.h"
-# include "cmd.h"
 # include "executor.h"
 # include "builtin.h"
 # include "parser_p.h"
@@ -69,6 +68,7 @@ typedef struct command_node
 	char				**args;
 	int					in;
 	int					out;
+	int					is_first;
 	t_rlist				*redirections;
 	struct command_node	*next;
 }	t_clist;

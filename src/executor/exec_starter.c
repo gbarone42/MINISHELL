@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:34:19 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/23 17:35:26 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:00:21 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main_1(int argc, char **argv, char **env);
 
-void	path_finder(t_mshell *px, char **envp)
+void	path_finder(t_shell *px, char **envp)
 {
 	char	**tmp;
 	char	*tofree;
@@ -24,31 +24,32 @@ void	path_finder(t_mshell *px, char **envp)
 	tmp = envp;
 	while (tmp && ft_strncmp("PATH=", *tmp, 5))
 		tmp++;
-	px->cmd_path = ft_split((*tmp) + 5, ':');
-	while (px->cmd_path[i])
+	px->paths = ft_split((*tmp) + 5, ':');
+	while (px->paths[i])
 	{
-		tofree = px->cmd_path[i];
-		px->cmd_path[i] = ft_strjoin(px->cmd_path[i], "/");
+		tofree = px->paths[i];
+		px->paths[i] = ft_strjoin(px->paths[i], "/");
 		ft_free_char(&tofree);
 		i++;
 	}
 }
 
-void	ft_exec_cmd(t_mshell *ms, char *envp[])
+void	ft_exec_cmd(t_shell *ms)
 {
+	ft_prio_cmd(ms, &ms->commands);
 	pipe(ms->fd_pipe);
-	ft_exec(ms, envp);
+	ft_exec(ms);
 }
-
+/*
 int	main_2(int argc, char *argv[], char *envp[])
 {
-	t_mshell	ms;
+	t_shell	ms;
 	int			i;
-	t_cmd		*tmpcmd;
+	t_clist		*tmpcmd;
 	char *str = "PATH=/home/simo/.local/bin:/home/simo/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/WindowsApps/MicrosoftCorporationII.WindowsSubsystemForLinux_1.2.5.0_x64__8wekyb3d8bbwe:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/Microsoft/jdk-11.0.12.7-hotspot/bin:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/Microsoft SQL Server/150/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files (x86)/Microsoft SQL Server/150/DTS/Binn/:/mnt/c/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/160/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/160/DTS/Binn/:/mnt/c/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/Program Files/MySQL/MySQL Shell 8.0/bin/:/mnt/c/Users/S/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/S/.dotnet/tools:/mnt/c/Users/S/AppData/Local/GitHubDesktop/bin:/mnt/c/Program Files/Azure Data Studio/bin:/mnt/c/Users/S/AppData/Local/Programs/Microsoft VS Code/bin:/snap/bin";
 
 	i = 0;
-	ms.c_l = NULL;
+	ms.commands = NULL;
 	ms.infile = STDIN_FILENO;
 	ms.outfile = STDOUT_FILENO;
 	ms.env = &str;
@@ -75,72 +76,72 @@ int	main_2(int argc, char *argv[], char *envp[])
 		
 		else
 			tmpcmd->is_first = 0;
-		ft_lstadd_back_cmd(&(ms.c_l), tmpcmd);
+		ft_lstadd_back_cmd(&(ms.commands), tmpcmd);
 		tmpcmd = NULL;
 		i++;
 	}
-	path_finder(&ms, envp);
-	ft_prio_cmd(&ms, &ms.c_l);
+//	path_finder(&ms, envp);
+//	ft_prio_cmd(&ms, &ms.commands);
 	i = 0;
-	tmpcmd = ms.c_l;
+	tmpcmd = ms.commands;
 	while (tmpcmd)
 	{
 		printf("%s\n", tmpcmd->cmd_str);
 		tmpcmd = tmpcmd ->next;
 	}
-	ms.c_l->is_first = 1;
+	ms.commands->is_first = 1;
 	//ms.env = envp;
 
 	//envp = NULL;
 
 
-	ft_exec_cmd(&ms, envp);
+//	ft_exec_cmd(&ms, envp);
 
 	//main_1(argc, argv, envp);
-	//ft_lstclear(&ms.c_l);
+	//ft_lstclear(&ms.commands);
 	return (1);
-}
+}*/
 /*
-void	command_handler(t_mshell *px, char **envp)
+void	command_handler(t_shell *px, char **envp)
 {
 	char	**cmd;
-	char	*cmd_path;
+	char	*paths;
 	int		i;
 
 	i = 0;
-	cmd = ft_split(px->c_l->cmd, ' ');
-	while (px->cmd_path[i])
+	cmd = ft_split(px->commands->cmd, ' ');
+	while (px->paths[i])
 	{
-		cmd_path = ft_strjoin(px->cmd_path[i], cmd[0]);
-		if (access(cmd_path, F_OK | X_OK) == 0)
+		paths = ft_strjoin(px->paths[i], cmd[0]);
+		if (access(paths, F_OK | X_OK) == 0)
 			break ;
 		else
-			ft_free_char(&cmd_path);
+			ft_free_char(&paths);
 		i++;
 	}
-	if (!cmd_path)
-		ft_free_tutto(px, &cmd, &cmd_path);
-	if (execve(cmd_path, cmd, envp) == -1)
+	if (!paths)
+		ft_free_tutto(px, &cmd, &paths);
+	if (execve(paths, cmd, envp) == -1)
 		write(1, "errore execve\n", 14);
 }
 
 
-void	child_handler(t_mshell *ms, char *envp[], int fd_in)
+void	child_handler(t_shell *ms, char *envp[], int fd_in)
 {
 	printf("\e[1;31mChild (PID: %d) executed cmd:\e[0m\n", getpid());
 	if (1)//se ci sono redirection entra qua
 		ft_redir(ms, fd_in);
 
-	if (ms->c_l->next)
+	if (ms->commands->next)
     	dup2(ms->fd_pipe[1], 1);
 	else
-		dup2(ms->c_l->out, 1);
+		dup2(ms->commands->out, 1);
 	close(ms->fd_pipe[0]);
 	command_handler(ms, envp);
 
 }
 
-void	ft_exec(t_mshell *ms, char *envp[])
+void	ft_exec(t_shell *ms, char *envp[])
 {
 	pid_t	child_pid;
 	int		i;
@@ -149,7 +150,7 @@ void	ft_exec(t_mshell *ms, char *envp[])
 	fd_in = 0;
 	i = 0;
 	path_finder(ms, envp);
-	while (ms->c_l)
+	while (ms->commands)
 	{
 		pipe(ms->fd_pipe);
 		child_pid = fork();
@@ -163,7 +164,7 @@ void	ft_exec(t_mshell *ms, char *envp[])
 			fd_in = ms->fd_pipe[0];
 			waitpid(child_pid, 0, 0);
 		}
-		ms->c_l = ms->c_l->next;
+		ms->commands = ms->commands->next;
 		i++;
 	}
 }*/

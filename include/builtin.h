@@ -19,6 +19,8 @@
 #include <termios.h>
 #include <curses.h>
 #include <sys/ioctl.h>
+# include "minishell.h"
+
 
 #define INPUT_SIZE 4095
 #define TRUE 1
