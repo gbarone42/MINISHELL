@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:44:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/23 15:58:47 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:28:23 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ typedef struct s_shell
 //    char *prompt;
 //  t_evlist *env_list;
 
-//
+//add
 char	*ft_free(char **ptr);
 
 t_shell		*ft_ret_shell(t_shell *p_shell);
