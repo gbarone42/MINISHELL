@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cdd2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/22 11:49:16 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/23 20:14:15 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	get_current_directory(char *cwd)
 	}
 }
 
-char*	build_user_string(void)
+char	*build_user_string(void)
 {
 	char	*user;
 
@@ -65,7 +65,7 @@ char*	build_user_string(void)
 	return (user);
 }
 
-char*	build_user_at_string(char *user)
+char	*build_user_at_string(char *user)
 {
 	char	*user_at;
 

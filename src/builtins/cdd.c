@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/11 19:20:24 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/23 20:13:27 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	free_memory(char *usr, char *usr_at, \
 	free(promsufx);
 }
 
-char*	build_user_at_colon_string(char *user_at)
+char	*build_user_at_colon_string(char	*user_at)
 {
 	char	*user_at_colon;
 
@@ -35,7 +35,7 @@ char*	build_user_at_colon_string(char *user_at)
 	return (user_at_colon);
 }
 
-char*	build_prompt_suffix(void)
+char	*build_prompt_suffix(void)
 {
 	char	*prompt_suffix;
 
