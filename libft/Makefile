@@ -3,79 +3,114 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sdel-gra <sdel-gra@student.42.fr>          +#+  +:+       +#+         #
+#    By: fcorri <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/10/05 15:24:57 by sdel-gra          #+#    #+#              #
-#    Updated: 2023/03/01 16:25:01 by sdel-gra         ###   ########.fr        #
+#    Created: 2022/10/31 15:29:43 by fcorri            #+#    #+#              #
+#    Updated: 2024/01/04 23:45:01 by filippo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= libft.a
+NAME			=	$(BUILD_DIR)/libft.a
 
-SRCS			=	ft_bzero.c\
-ft_isalnum.c\
-ft_isalpha.c\
-ft_isascii.c\
-ft_isdigit.c\
-ft_islower.c\
-ft_isprint.c\
-ft_isupper.c\
-ft_iswhitespace.c\
-ft_memcpy.c\
-ft_memset.c\
-ft_memcmp.c\
-ft_memmove.c\
-ft_memchr.c\
-ft_strrchr.c\
-ft_strchr.c\
-ft_strchri.c\
-ft_strlen.c\
-ft_calloc.c\
-ft_strdup.c\
-ft_strlcat.c\
-ft_strlcpy.c\
-ft_atoi.c\
-ft_atoibase.c\
-ft_strmapi.c\
-ft_substr.c\
-ft_strjoin.c\
-ft_strtrim.c\
-ft_strncmp.c\
-ft_strnstr.c\
-ft_split.c\
-ft_itoa.c\
-ft_striteri.c\
-ft_putchar_fd.c\
-ft_putstr_fd.c\
-ft_putendl_fd.c\
-ft_putnbr_fd.c\
-ft_tolower.c\
-ft_toupper.c\
-get_next_line_utils.c\
-get_next_line.c\
+CFLAGS			=	-g
+REQUIRED_FLAGS	=	$(CFLAGS) -Wall -Wextra -Werror
+CPPFLAGS		=	-I$(INC_DIR)/libft -I$(INC_DIR)
 
-OBJS			= $(SRCS:.c=.o)
+BUILD_DIR		=	build
+INC_DIR			=	$(BUILD_DIR)/inc
+OBJS_DIR		=	$(BUILD_DIR)/obj
 
-BONUS_OBJS		= $(BONUS:.c=.o)
+SRCS_DIR		=	src
+LIB_DIR			=	$(SRCS_DIR)/lib
+BONUS_DIR		=	$(LIB_DIR)/bonus
+UTILS_DIR		=	$(LIB_DIR)/utils
+GNL_DIR			=	$(SRCS_DIR)/gnl
 
-CC			= gcc
-RM			= rm -f
-CFLAGS			= -Wall -Wextra -Werror -I. -c
+SRCS			=	$(LIB_DIR)/ft_atoi.c \
+					$(LIB_DIR)/ft_atol.c \
+					$(LIB_DIR)/ft_abs.c \
+					$(LIB_DIR)/ft_bzero.c \
+					$(LIB_DIR)/ft_calloc.c \
+					$(LIB_DIR)/ft_error.c \
+					$(LIB_DIR)/ft_isalnum.c \
+					$(LIB_DIR)/ft_isalpha.c \
+					$(LIB_DIR)/ft_isascii.c \
+					$(LIB_DIR)/ft_isdigit.c \
+					$(LIB_DIR)/ft_isprint.c \
+					$(LIB_DIR)/ft_itoa.c \
+					$(LIB_DIR)/ft_memchr.c \
+					$(LIB_DIR)/ft_memcmp.c \
+					$(LIB_DIR)/ft_memcpy.c \
+					$(LIB_DIR)/ft_memmove.c \
+					$(LIB_DIR)/ft_memset.c \
+					$(LIB_DIR)/ft_putchar_fd.c \
+					$(LIB_DIR)/ft_putendl_fd.c \
+					$(LIB_DIR)/ft_putnbr_fd.c \
+					$(LIB_DIR)/ft_putstr_fd.c \
+					$(LIB_DIR)/ft_split.c \
+					$(LIB_DIR)/ft_strchr.c \
+					$(LIB_DIR)/ft_strdup.c \
+					$(LIB_DIR)/ft_striteri.c \
+					$(LIB_DIR)/ft_strjoin.c \
+					$(LIB_DIR)/ft_strlcat.c \
+					$(LIB_DIR)/ft_strlcpy.c \
+					$(LIB_DIR)/ft_strlen.c \
+					$(LIB_DIR)/ft_strmapi.c \
+					$(LIB_DIR)/ft_strncmp.c \
+					$(LIB_DIR)/ft_strndup.c \
+					$(LIB_DIR)/ft_strnstr.c \
+					$(LIB_DIR)/ft_strrchr.c \
+					$(LIB_DIR)/ft_strtrim.c \
+					$(LIB_DIR)/ft_substr.c \
+					$(LIB_DIR)/ft_tolower.c \
+					$(LIB_DIR)/ft_toupper.c \
+					$(UTILS_DIR)/ft_malloc_soul.c \
+					$(UTILS_DIR)/ft_memutils1.c \
+					$(UTILS_DIR)/ft_memutils2.c \
+					\
+					$(LIB_DIR)/dlist/ft_int_dlist1.c \
+					$(LIB_DIR)/dlist/ft_int_dlist2.c \
+					\
+					$(GNL_DIR)/get_next_line.c \
+					$(GNL_DIR)/get_next_line_utils.c
 
-all:			$(NAME)
+BONUS_SRCS		=	$(BONUS_DIR)/ft_lstadd_back.c \
+					$(BONUS_DIR)/ft_lstadd_front.c \
+					$(BONUS_DIR)/ft_lstclear.c \
+					$(BONUS_DIR)/ft_lstdelone.c \
+					$(BONUS_DIR)/ft_lstiter.c \
+					$(BONUS_DIR)/ft_lstlast.c \
+					$(BONUS_DIR)/ft_lstmap.c \
+					$(BONUS_DIR)/ft_lstnew.c \
+					$(BONUS_DIR)/ft_lstsize.c \
 
-$(NAME):		$(OBJS)
-			ar -rc $(NAME) $(OBJS)
+LIBS			=	$(BUILD_DIR)/libftprintf.a
 
-clean:			
-	$(RM) $(OBJS) $(BONUS_OBJS)
+LIBS_DIR		=	$(SRCS_DIR)/printf
 
-fclean:		clean
-			$(RM) $(NAME)
+OBJS			=	$(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o) \
+					$(BONUS_SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o) \
 
-re:			fclean all
+AR				=	ar -crs
+RM				=	rm -f
 
-bonus:			$(OBJS) $(BONUS_OBJS)
-				ar -rc $(NAME) $(OBJS) $(BONUS_OBJS)
+all: $(NAME)
 
-.PHONY: all clean fclean re
+$(NAME): $(OBJS)
+	$(foreach LIB_DIR, $(LIBS_DIR), $(MAKE) -C $(LIB_DIR);)
+	$(foreach LIB, $(LIBS), ar -x $(LIB))
+	$(AR) $(NAME) $(OBJS) ./*.o
+	$(RM) ./*.o
+
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
+	@mkdir -p $(@D)
+	$(CC) -c $< $(REQUIRED_FLAGS) $(CPPFLAGS) -o $@
+
+clean:
+	$(foreach LIB_DIR, $(LIBS_DIR), $(MAKE) clean -C $(LIB_DIR);)
+	$(RM) $(OBJS)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean all

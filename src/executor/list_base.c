@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 17:31:23 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/19 16:40:53 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:03:03 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 /*
 	Libft Create New Node adapted for t_list of push_swap
 */
-t_cmd	*ft_lstnew(char *s)
+t_cmd	*ft_lstnew_cmd(char *s)
 {
 	t_cmd	*n;
 
@@ -34,13 +34,13 @@ t_cmd	*ft_lstnew(char *s)
 /*
 	Libft Add Back adapted for t_list of push_swap
 */
-void	ft_lstadd_back(t_cmd **l, t_cmd *new)
+void	ft_lstadd_back_cmd(t_cmd **l, t_cmd *new)
 {
 	t_cmd	*last;
 
 	if (*l)
 	{
-		last = ft_lstlast(*l);
+		last = ft_lstlast_cmd(*l);
 		last->next = new;
 		new->next = NULL;
 	}
@@ -54,7 +54,7 @@ void	ft_lstadd_back(t_cmd **l, t_cmd *new)
 /*
 	Libft List Add front adapted for t_list of push_swap
 */
-void	ft_lstadd_front(t_cmd **l, t_cmd *new_head)
+void	ft_lstadd_front_cmd(t_cmd **l, t_cmd *new_head)
 {
 	new_head->next = *l;
 	*l = new_head;
@@ -63,7 +63,7 @@ void	ft_lstadd_front(t_cmd **l, t_cmd *new_head)
 /*
 	Libft List last adapted for t_list of push_swap
 */
-t_cmd	*ft_lstlast(t_cmd *head)
+t_cmd	*ft_lstlast_cmd(t_cmd *head)
 {
 	t_cmd	*tmp;
 
@@ -80,7 +80,7 @@ t_cmd	*ft_lstlast(t_cmd *head)
 /*
 	Libft List Size adapted for t_list of push_swap
 */
-int	ft_lstsize(t_cmd *lst)
+int	ft_lstsize_cmd(t_cmd *lst)
 {
 	t_cmd		*next_lst;
 	int				out;

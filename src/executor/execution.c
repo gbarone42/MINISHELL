@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:40:40 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/22 16:35:50 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:23:45 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,11 @@ void	child_handler(t_mshell *ms, t_cmd *cmd)
 	{
 		dup2(ms->tmp_fd, STDIN_FILENO);
 	}
+	if (cmd->next)
+	{
+		close(ms->fd_pipe[0]);
+		cmd->out = ms->fd_pipe[1];
+	}
 	if (cmd->redirs)//se ci sono redirection entra qua
 	{
 		ft_redir(ms, cmd);//redir
@@ -92,13 +97,8 @@ void	child_handler(t_mshell *ms, t_cmd *cmd)
 		else
 			dup2(cmd->in, STDIN_FILENO);
 	}
-	if (cmd->next)
-	{
-		close(ms->fd_pipe[0]);
-		dup2(ms->fd_pipe[1], STDOUT_FILENO);
-		close(ms->fd_pipe[1]);
-	}
-
+	dup2(cmd->out, STDOUT_FILENO);
+	close(ms->fd_pipe[1]);
 
 	//else
 		//dup2(cmd->out, 1);//normal redir after pipe

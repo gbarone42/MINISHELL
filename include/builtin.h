@@ -53,24 +53,11 @@ typedef struct env_var_node
 }	t_evlist;
 typedef struct s_history
 {
-    char *entries[HISTORY_SIZE];
-    int count;
-} t_history;
+	char	*entries[HISTORY_SIZE];
+	int		count;
+}	t_history;
 
-typedef struct s_shell
-{
-	pid_t		pid_child;
-	t_history	history;
-	int			fd_pipe[2];
-	int			tmp_fd;
-    char *prompt;
-	int			in;
-	int			out;
-    t_evlist *env_list;
-    char *input;
-	char		**paths;
-    char **export;
-} t_shell;
+typedef struct s_shell	t_shell;
 
 typedef struct s_parser
 {

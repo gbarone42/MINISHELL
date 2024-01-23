@@ -5,6 +5,7 @@ NAME = build/minishell
 SRC_DIR = src
 OBJ_DIR = build
 EXEC_DIR = executor
+PARSER_DIR = parser
 INCLUDE_DIR = include  # Change this to the appropriate folder for header files
 
 
@@ -39,8 +40,25 @@ SRCS =	${SRC_DIR}/minishell.c	\
 		${SRC_DIR}/${EXEC_DIR}/priority.c \
 		${SRC_DIR}/${EXEC_DIR}/redir_handler.c \
 		${SRC_DIR}/${EXEC_DIR}/redir.c \
-		${SRC_DIR}/${EXEC_DIR}/tools_file.c
-       # Add other source files as necessary
+		${SRC_DIR}/${EXEC_DIR}/tools_file.c \
+		${SRC_DIR}/${PARSER_DIR}/clist.c \
+		${SRC_DIR}/${PARSER_DIR}/env.c \
+		${SRC_DIR}/${PARSER_DIR}/free.c \
+		${SRC_DIR}/${PARSER_DIR}/grammar.txt \
+		${SRC_DIR}/${PARSER_DIR}/ilist.c \
+		${SRC_DIR}/${PARSER_DIR}/init.c \
+		${SRC_DIR}/${PARSER_DIR}/lexer.c \
+		${SRC_DIR}/${PARSER_DIR}/main.c \
+		${SRC_DIR}/${PARSER_DIR}/minishell_p.h \
+		${SRC_DIR}/${PARSER_DIR}/parser.c \
+		${SRC_DIR}/${PARSER_DIR}/parser_io_lists.c \
+		${SRC_DIR}/${PARSER_DIR}/parser_others.c \
+		${SRC_DIR}/${PARSER_DIR}/rlist.c \
+		${SRC_DIR}/${PARSER_DIR}/string.c \
+		${SRC_DIR}/${PARSER_DIR}/tlist.c \
+		${SRC_DIR}/${PARSER_DIR}/utils.c
+
+		# Add other source files as necessary
 
 # Header files
 HDRS = ${wildcard ${INCLUDE_DIR}/*.h}
@@ -73,7 +91,7 @@ ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c ${HDRS}
 ${NAME}: ${OBJS}
 	@echo "${GREEN}Compiling ${CLR_RMV} ${GOLD}${NAME} ${CLR_RMV}..."
 	make -C libft
-	${CC} ${FLAGS} ${OBJS} ${LIBFLAGS} -o ${NAME} libft/libft.a
+	${CC} ${FLAGS} ${OBJS} ${LIBFLAGS} -o ${NAME} libft/build/libft.a
 	@echo "${GOLD}${NAME} created[0m "
 
 # Build all

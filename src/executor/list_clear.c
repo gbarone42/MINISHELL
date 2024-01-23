@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:40:59 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/19 18:42:35 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:03:28 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_lstclear_redir(t_redir **lst)
 	}
 }
 
-void	ft_lstdelone(t_cmd *lst)
+void	ft_lstdelone_cmd(t_cmd *lst)
 {
 	if (lst != NULL)
 	{
@@ -48,12 +48,12 @@ void	ft_lstdelone(t_cmd *lst)
 	}
 }
 
-void	ft_lstclear(t_cmd **lst)
+void	ft_lstclear_cmd(t_cmd **lst)
 {
 	if (lst != NULL && *lst != NULL)
 	{
-		ft_lstclear(&(*lst)->next);
-		ft_lstdelone(*lst);
+		ft_lstclear_cmd(&(*lst)->next);
+		ft_lstdelone_cmd(*lst);
 		*lst = NULL;
 	}
 }

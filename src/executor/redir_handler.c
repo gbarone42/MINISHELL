@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:41:24 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/19 16:41:25 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/23 11:21:26 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	out_handler(t_cmd *cmd)
 		tmp = open(cmd->redirs->str, O_CREAT | O_WRONLY | O_TRUNC, 0666);
 	else if (cmd->redirs->type == APPEND)
 		tmp = open(cmd->redirs->str, O_CREAT | O_WRONLY | O_APPEND, 0666);
+	else if (cmd->redirs->type == PRIOROUTPUT)
+		tmp = STDOUT_FILENO;
 	if (tmp < 0)
 		perror(cmd->redirs->str);
 	return (tmp);
@@ -74,7 +76,8 @@ void	ft_redir(t_mshell *ms, t_cmd *cmd)
 {
 	while (cmd->redirs)
 	{
-		if (cmd->redirs->type == OUTPUT || cmd->redirs->type == APPEND)
+		if (cmd->redirs->type == OUTPUT || cmd->redirs->type == APPEND
+			|| cmd->redirs->type == PRIOROUTPUT)
 		{
 			close_fd(cmd->out);
 			cmd->out = out_handler(cmd);

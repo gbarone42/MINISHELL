@@ -6,18 +6,12 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:34:15 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/19 16:43:40 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:01:28 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CMD_H
 # define CMD_H
-
-# define OUTPUT 20
-# define APPEND 21
-# define INPUT 22
-# define HEREDOC 23
-# define PRIOROUTPUT 24
 
 # include "minishell.h"
 
@@ -52,12 +46,12 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }					t_cmd;
 
+t_cmd	*ft_lstnew_cmd(char *s);
+int		ft_lstsize_cmd(t_cmd *lst);
+t_cmd	*ft_lstlast_cmd(t_cmd *head);
+void	ft_lstadd_front_cmd(t_cmd **l, t_cmd *new_head);
+void	ft_lstadd_back_cmd(t_cmd **l, t_cmd *new);
 
-t_cmd	*ft_lstnew(char *s);
-int		ft_lstsize(t_cmd *lst);
-t_cmd	*ft_lstlast(t_cmd *head);
-void	ft_lstadd_front(t_cmd **l, t_cmd *new_head);
-void	ft_lstadd_back(t_cmd **l, t_cmd *new);
 
 
 t_redir	*ft_lstlast_red(t_redir *head);

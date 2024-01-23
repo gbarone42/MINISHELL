@@ -1,0 +1,35 @@
+/*
+	<job>				::=		<command>
+							|	<job> '|' <command>
+
+	<command>			::=		<io list> <simple command> <io list>
+
+	<io list>			::=		EMPTY
+							|	'<' <filename> <io list>
+							|	'>' <filename> <io list>
+							|	'<<' <filename> <io list>
+							|	'>>' <filename> <io list>
+
+	<simple command>	::=		<pathname> <args>
+
+	<args>				::=		EMPTY
+							|	<token> <args>
+
+--------------------------------------------------------------
+
+	<job>				::=		<command> '|' <job>
+							|	<command>
+
+	<command>			::=		<io list> <simple command> <io list>
+
+	<io list>			::=		'>>' <filename> <io list>
+							|	'<<' <filename> <io list>
+							|	'>' <filename> <io list>
+							|	'<' <filename> <io list>
+							|	EMPTY
+
+	<simple command>	::=		<pathname> <args>
+
+	<args>				::=		<token> <args>
+							|	EMPTY
+*/

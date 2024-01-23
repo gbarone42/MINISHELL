@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:34:07 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/22 19:21:19 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:01:10 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,16 @@ void	close_fd(int fd);
 
 void	path_finder(t_mshell *px, char **envp);
 
-t_cmd	*ft_lstnew(char *s);
-int		ft_lstsize(t_cmd *lst);
-t_cmd	*ft_lstlast(t_cmd *head);
-void	ft_lstadd_front(t_cmd **l, t_cmd *new_head);
-void	ft_lstadd_back(t_cmd **l, t_cmd *new);
+t_cmd	*ft_lstnew_cmd(char *s);
+int		ft_lstsize_cmd(t_cmd *lst);
+t_cmd	*ft_lstlast_cmd(t_cmd *head);
+void	ft_lstadd_front_cmd(t_cmd **l, t_cmd *new_head);
+void	ft_lstadd_back_cmd(t_cmd **l, t_cmd *new);
 
 char	*ft_free_char(char **ptr);
 void	ft_free_tutto(t_mshell *px, char ***cmd, char **cmd_path);
 
 void	ft_lstclear_redir(t_redir **lst);
-void	ft_lstclear(t_cmd **lst);
+void	ft_lstclear_cmd(t_cmd **lst);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badph <badph@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 03:10:35 by badph             #+#    #+#             */
-/*   Updated: 2024/01/12 03:12:03 by badph            ###   ########.fr       */
+/*   Updated: 2024/01/23 11:06:26 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_minishell_simulator(t_shell *shell)
 
 	while (1)
 	{
-		shell->input = readline(shell->prompt);
+		shell->input=  readline(shell->prompt);
 		if (shell->input == NULL)
 			ft_ctrld(shell);
 		if (ft_isvalid(shell->input))

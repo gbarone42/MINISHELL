@@ -6,11 +6,13 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:34:19 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/22 19:11:54 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:19:04 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	main_1(int argc, char **argv, char **env);
 
 void	path_finder(t_mshell *px, char **envp)
 {
@@ -53,26 +55,26 @@ int	main(int argc, char *argv[], char *envp[])
 	ms.tmp_fd = -1 ;
 	while (i < argc - 1)
 	{
-		tmpcmd = ft_lstnew(argv[i + 1]);
+		tmpcmd = ft_lstnew_cmd(argv[i + 1]);
 		//tmpcmd->redirs = ft_lstnew_redir("12", APPEND);
 		tmpcmd->in = -2;
 		tmpcmd->out = -2;
 		if(i == 0)
 		{
-			tmpcmd->is_first = 1;
-			ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("1", INPUT));
-			ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("11", HEREDOC));
-			ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("2", INPUT));
-			ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("13", OUTPUT));
+			//tmpcmd->is_first = 1;
+			//ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("1", INPUT));
+			//ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("11", HEREDOC));
+			//ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("2", INPUT));
+			//ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("13", OUTPUT));
 		}
 		if (i == 1)
 		{
-			ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("11", HEREDOC));
+			//ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("11", HEREDOC));
 		}
 		
 		else
 			tmpcmd->is_first = 0;
-		ft_lstadd_back(&(ms.c_l), tmpcmd);
+		ft_lstadd_back_cmd(&(ms.c_l), tmpcmd);
 		tmpcmd = NULL;
 		i++;
 	}
@@ -85,12 +87,15 @@ int	main(int argc, char *argv[], char *envp[])
 		printf("%s\n", tmpcmd->cmd_str);
 		tmpcmd = tmpcmd ->next;
 	}
-	ms.env = envp;
+	ms.c_l->is_first = 1;
+	//ms.env = envp;
 
 	//envp = NULL;
 
 
-	//ft_exec_cmd(&ms, envp);
+	ft_exec_cmd(&ms, envp);
+
+	main_1(argc, argv, envp);
 	//ft_lstclear(&ms.c_l);
 }
 /*
