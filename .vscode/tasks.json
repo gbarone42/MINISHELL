@@ -1,19 +1,43 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"type": "shell",
-			"label": "C/C++: clang build active file",
-			"command": "make",
-			"args": [],
-			"options": {
-				"cwd": "${fileDirname}/../"
-			},
-			"problemMatcher": [
-				"$gcc"
-			],
-			"group": "build",
-			"detail": "compiler: /usr/bin/clang"
-		}
-	]
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/minishell",
+			"args": ["pwd"],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+			/*	{
+					"description": "The new process is debugged after a fork. The parent process runs unimpeded.",
+					"text": "-gdb-set follow-fork-mode child",
+					"ignoreFailures": true
+				},
+				{
+					// https://sourceware.org/gdb/onlinedocs/gdb/Forks.html
+					"description": "Fork will keep the other process attached to debugger",
+					"text": "set detach-on-fork off",
+					"ignoreFailures": true
+				}*/
+            ]
+        },
+    ]
 }
