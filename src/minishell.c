@@ -6,7 +6,7 @@ int	main(int ac, char **av, char **env)
 {
 	int		output;
 	t_shell	my_shell;
-
+	
 	(void)ac;
 	(void)av;
 	memset(&my_shell, 0, sizeof(t_shell));

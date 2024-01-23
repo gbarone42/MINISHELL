@@ -2,6 +2,7 @@
 #define BUILTIN_H
 
 #include <stdbool.h>
+#include "minishell.h"
 #include <readline/history.h>
 #include <readline/readline.h>
 #include <sys/time.h>
@@ -58,6 +59,8 @@ typedef struct s_history
 }	t_history;
 
 typedef struct s_shell	t_shell;
+
+typedef struct command_node	t_clist;
 
 typedef struct s_parser
 {
@@ -191,9 +194,9 @@ void handle_export(t_shell *shell, char **args);
 void free_args(char **args);
 void handle_basic_builtin1(t_shell *shell, char **args);
 void handle_basic_builtin2(t_shell *shell, char **args);
-void handle_basic_builtins(t_shell *shell);
+void handle_basic_builtins(t_shell *shell, t_clist *commands);
 void handle_other_builtins(t_shell *shell);
-void builtins_call(t_shell *shell);
+void builtins_call(t_shell *shell, t_clist *commands);
 
 //history
 void add_to_history(t_history *history, char *command);

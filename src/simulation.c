@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 03:10:35 by badph             #+#    #+#             */
-/*   Updated: 2024/01/23 18:07:20 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/23 19:18:35 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_minishell_simulator(t_shell *shell)//remove envp
 //				int n = ft_count_space(shell->input);
 //				main_2(n , ft_split(shell->input, ' '), envp);
 			}
-//			builtins_call(shell);
+			builtins_call(shell, shell->commands);
 			add_to_history(&(shell->history), shell->input);
 //			ft_prepare_for_next_input(shell);
 		}
