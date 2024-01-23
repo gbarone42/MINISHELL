@@ -21,7 +21,7 @@ SRCS =	${SRC_DIR}/minishell.c	\
 		${SRC_DIR}/valid.c	\
 		${SRC_DIR}/builtins/exit.c	\
 		${SRC_DIR}/builtins/historyh.c	\
-		${SRC_DIR}/builtins/clears.c	\
+		${SRC_DIR}/builtins/clars.c	\
 		${SRC_DIR}/builtins/pwds.c	\
 		${SRC_DIR}/builtins/lss.c	\
 		${SRC_DIR}/builtins/echos.c	\
