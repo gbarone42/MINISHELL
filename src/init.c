@@ -79,7 +79,7 @@ int	create_prompt2(t_shell *shell, char *user)
 		free_env_array(shell->env_list);
 		return (MEM_ERROR3);
 	}
-	printf("prompt: %s\n", shell->prompt);
+	//printf("prompt: %s\n", shell->prompt);
 	return (0);
 }
 
