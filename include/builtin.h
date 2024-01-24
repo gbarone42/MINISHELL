@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:10:43 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/24 14:11:47 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:17:20 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ extern int	g_exit;
 //extern char *history[HISTORY_SIZE];
 //extern int history_count;
 
-void	free_env_list(t_evlist *env_list);
+void free_env_array(char **env_array);
+char **ft_get_env_array(char **env);
 
 //exit
 void	shell_exit(t_shell *shell);

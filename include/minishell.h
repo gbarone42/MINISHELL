@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:44:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/24 13:57:45 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:16:48 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct s_shell
 	size_t		input_len;
 	t_clist		*commands;
 	int			exit_status;
-	t_evlist	*env_list;
+	char		**env_list;
 	char		**export;
 }	t_shell;
 
