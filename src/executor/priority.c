@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:41:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/24 15:34:37 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/24 21:22:21 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_child_prio(t_shell *ms, t_clist *cmd, int inf, int outf)
 	i = 0;
 	dup2(inf, STDIN_FILENO);
 	dup2(outf, STDOUT_FILENO);
+	dup2(outf, STDERR_FILENO);
 	cmd_sp = cmd->args;
 	excve_core_prio(ms, cmd_sp[0], cmd_sp);
 	while (ms->paths[i])
@@ -43,9 +44,7 @@ void	ft_child_prio(t_shell *ms, t_clist *cmd, int inf, int outf)
 		free(paths);
 		i++;
 	}
-	//free ms
-	//FREE CMD_SP
-	ft_free_and_exit(ms, 1);
+	ft_free_shell(ms);
 }
 
 int	ft_compare_file(char *filename1, char *filename2)
@@ -129,7 +128,7 @@ void	ft_catchange(t_clist *cmds, char *cmd_name)
 	}
 }*/
 
-void ft_prio_cmd(t_shell *ms, t_clist **cmds)
+void	ft_prio_cmd(t_shell *ms, t_clist **cmds)
 {
 	t_clist	*iter;
 	t_clist	*tmp_prev;
@@ -140,10 +139,11 @@ void ft_prio_cmd(t_shell *ms, t_clist **cmds)
 	tmp_prev = NULL;
 	while (iter)
 	{
-		if (ft_isprio_cmd(ms, iter) == 0 && !isfirst)
+		if ((is_builtin_command(iter->args[0])
+				|| ft_isprio_cmd(ms, iter) == 0) && !isfirst)
 		{
 			//ft_catchange();
-			if (!ft_redir_out_exist(iter->redirections) || iter->next)
+			if (!ft_redir_out_exist(iter->redirections) || !iter->next)
 				ft_app_rlist(&iter->redirections, PRIOROUTPUT, "");
 			tmp_prev->next = NULL;
 			tmp_prev = ft_last_clist(iter);

@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:10:43 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/24 16:38:12 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/24 20:15:41 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,8 @@ void	handle_basic_builtin2(t_shell *shell, char **args);
 void	handle_basic_builtins(t_shell *shell, t_clist *commands);
 void	handle_other_builtins(t_shell *shell);
 void	builtins_call(t_shell *shell, t_clist *commands);
+int		is_builtin_command(char *command);
+
 
 //history
 void	add_to_history(t_history *history, char *command);
@@ -196,7 +198,7 @@ void	display_history(const t_history *history);
 
 //lss
 void	print_current_directory_contents(void);
-
+// RXCSO
 //pwds
 void	print_current_directory(void);
 

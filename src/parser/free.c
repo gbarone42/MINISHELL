@@ -6,21 +6,42 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 23:21:55 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/24 16:11:33 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/24 21:21:04 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_free_shell(t_shell *shell)
+/*
+typedef struct s_shell
 {
-	ft_free_char_p(shell->env_list);
-	shell->env_list = NULL;
+	pid_t		pid_child;
+	int			fd_pipe[2];
+	int			tmp_fd;
+	t_history	history;
+	int			in;
+	int			out;
+	char		**env;
+	char		**last_env;
+	char		*prompt;
+	char		*input;
+	char		**paths;
+	size_t		input_len;
+	t_clist		*commands;
+	char		**env_list;
+	char		**export;
+}	t_shell;
+*/
+
+void	ft_free_shell(t_shell *shell)
+{
+	shell->prompt = ft_free_char(&shell->prompt);
+	shell->input = ft_free_char(&shell->input);
 	ft_free_char_p(shell->paths);
 	shell->paths = NULL;
-	shell->prompt = ft_free_char(&shell->prompt);
 	shell->commands = ft_free_clist(shell->commands);
-	free(shell->prompt);
+	ft_free_char_p(shell->env_list);
+	shell->env_list = NULL;
 }
 
 void	ft_free_and_err(t_shell *shell, char *caller, int error)
@@ -47,6 +68,7 @@ void	ft_free_char_p(char **p)
 	while (value)
 	{
 		free(value);
+		value = NULL;
 		value = p[index++];
 	}
 	free(p);

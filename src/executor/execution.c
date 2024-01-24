@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:40:40 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/24 15:53:11 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:48:29 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ void	parent_handler(t_shell *ms)
 
 void	child_handler(t_shell *ms, t_clist *cmd, int i)
 {
-	printf("\e[1;31mChild (PID: %d) executed cmd:\e[0m\n", getpid());
-	if (i == 0)
-	{
-		
-	}
-	else
+	//printf("\e[1;31mChild (PID: %d) executed cmd:\e[0m\n", getpid());
+	//redirection
+	// first pipe redir 
+	// second redirs
+	// 3 close redirs
+	if (i > 0)
 	{
 		dup2(ms->tmp_fd, STDIN_FILENO);
 	}
@@ -88,19 +88,34 @@ void	child_handler(t_shell *ms, t_clist *cmd, int i)
 	}
 	if (cmd->redirections)//se ci sono redirection entra qua
 	{
-		//ft_redir(ms, cmd);//redir
+		ft_redir(ms, cmd);//redir
 		if (ms->tmp_fd > 0)
 			dup2(cmd->in, ms->tmp_fd);
 		else
 			dup2(cmd->in, STDIN_FILENO);
 	}
-	dup2(cmd->out, STDOUT_FILENO);
+	/*
+	else
+	{
+		dup2(ms->tmp_fd, STDIN_FILENO);
+	}*/
+	if (cmd->out != -1 && cmd->out != -2)
+	{
+		dup2(cmd->out, STDOUT_FILENO);
+	}
+	
+	
 	close(ms->fd_pipe[1]);
+
+	//	se ci sono redirs o pipe dup2(cmd->out, STDOUT_FILENO);
+
+
 
 	//else
 		//dup2(cmd->out, 1);//normal redir after pipe
 	// gestione se è una builtin da aggiungere
 	// else fai command_handler
+
 	command_handler(ms, cmd);
 }
 

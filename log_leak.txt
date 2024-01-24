@@ -1,0 +1,373 @@
+==2994326== Memcheck, a memory error detector
+==2994326== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2994326== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==2994326== Command: ./build/minishell
+==2994326== Parent PID: 2994324
+==2994326== 
+==2994364== Invalid read of size 8
+==2994364==    at 0x10C1E1: ft_child_prio (priority.c:38)
+==2994364==    by 0x10C4A9: ft_isprio_cmd (priority.c:97)
+==2994364==    by 0x10C590: ft_prio_cmd (priority.c:143)
+==2994364==    by 0x10BBCE: ft_exec_cmd (exec_starter.c:67)
+==2994364==    by 0x109E3D: ft_minishell_simulator (simulation.c:36)
+==2994364==    by 0x109696: main (minishell.c:21)
+==2994364==  Address 0x4b16488 is 8 bytes inside a block of size 48 free'd
+==2994364==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994364==    by 0x10CAEB: ft_free_clist (clist.c:51)
+==2994364==    by 0x10CD2C: ft_free_shell (free.c:42)
+==2994364==    by 0x10C288: ft_child_prio (priority.c:47)
+==2994364==    by 0x10C426: ft_isprio_cmd (priority.c:89)
+==2994364==    by 0x10C590: ft_prio_cmd (priority.c:143)
+==2994364==    by 0x10BBCE: ft_exec_cmd (exec_starter.c:67)
+==2994364==    by 0x109E3D: ft_minishell_simulator (simulation.c:36)
+==2994364==    by 0x109696: main (minishell.c:21)
+==2994364==  Block was alloc'd at
+==2994364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994364==    by 0x10C9F6: ft_new_clnode (clist.c:19)
+==2994364==    by 0x10D8E2: ft_jobs (parser.c:70)
+==2994364==    by 0x10D9AC: ft_parser (parser.c:92)
+==2994364==    by 0x109E16: ft_minishell_simulator (simulation.c:33)
+==2994364==    by 0x109696: main (minishell.c:21)
+==2994364== 
+==2994364== Invalid read of size 8
+==2994364==    at 0x10C1ED: ft_child_prio (priority.c:39)
+==2994364==    by 0x10C4A9: ft_isprio_cmd (priority.c:97)
+==2994364==    by 0x10C590: ft_prio_cmd (priority.c:143)
+==2994364==    by 0x10BBCE: ft_exec_cmd (exec_starter.c:67)
+==2994364==    by 0x109E3D: ft_minishell_simulator (simulation.c:36)
+==2994364==    by 0x109696: main (minishell.c:21)
+==2994364==  Address 0x4b164f0 is 0 bytes inside a block of size 16 free'd
+==2994364==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994364==    by 0x10CE48: ft_free_char_p (free.c:74)
+==2994364==    by 0x10CA87: ft_free_clist (clist.c:40)
+==2994364==    by 0x10CD2C: ft_free_shell (free.c:42)
+==2994364==    by 0x10C288: ft_child_prio (priority.c:47)
+==2994364==    by 0x10C426: ft_isprio_cmd (priority.c:89)
+==2994364==    by 0x10C590: ft_prio_cmd (priority.c:143)
+==2994364==    by 0x10BBCE: ft_exec_cmd (exec_starter.c:67)
+==2994364==    by 0x109E3D: ft_minishell_simulator (simulation.c:36)
+==2994364==    by 0x109696: main (minishell.c:21)
+==2994364==  Block was alloc'd at
+==2994364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994364==    by 0x10DE3A: ft_args (parser_others.c:45)
+==2994364==    by 0x10D773: ft_simple_command (parser.c:23)
+==2994364==    by 0x10D7C9: ft_command (parser.c:32)
+==2994364==    by 0x10D8F9: ft_jobs (parser.c:71)
+==2994364==    by 0x10D9AC: ft_parser (parser.c:92)
+==2994364==    by 0x109E16: ft_minishell_simulator (simulation.c:33)
+==2994364==    by 0x109696: main (minishell.c:21)
+==2994364== 
+==2994364== Syscall param access(pathname) points to unaddressable byte(s)
+==2994364==    at 0x49C135B: access (access.c:27)
+==2994364==    by 0x10C15D: excve_core_prio (priority.c:18)
+==2994364==    by 0x10C202: ft_child_prio (priority.c:39)
+==2994364==    by 0x10C4A9: ft_isprio_cmd (priority.c:97)
+==2994364==    by 0x10C590: ft_prio_cmd (priority.c:143)
+==2994364==    by 0x10BBCE: ft_exec_cmd (exec_starter.c:67)
+==2994364==    by 0x109E3D: ft_minishell_simulator (simulation.c:36)
+==2994364==    by 0x109696: main (minishell.c:21)
+==2994364==  Address 0x4b16540 is 0 bytes inside a block of size 2 free'd
+==2994364==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994364==    by 0x10CE0B: ft_free_char_p (free.c:70)
+==2994364==    by 0x10CA87: ft_free_clist (clist.c:40)
+==2994364==    by 0x10CD2C: ft_free_shell (free.c:42)
+==2994364==    by 0x10C288: ft_child_prio (priority.c:47)
+==2994364==    by 0x10C426: ft_isprio_cmd (priority.c:89)
+==2994364==    by 0x10C590: ft_prio_cmd (priority.c:143)
+==2994364==    by 0x10BBCE: ft_exec_cmd (exec_starter.c:67)
+==2994364==    by 0x109E3D: ft_minishell_simulator (simulation.c:36)
+==2994364==    by 0x109696: main (minishell.c:21)
+==2994364==  Block was alloc'd at
+==2994364==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994364==    by 0x1097D3: ft_strdup (utils1.c:49)
+==2994364==    by 0x10DDB0: ft_term (parser_others.c:26)
+==2994364==    by 0x10DE7C: ft_args (parser_others.c:47)
+==2994364==    by 0x10D773: ft_simple_command (parser.c:23)
+==2994364==    by 0x10D7C9: ft_command (parser.c:32)
+==2994364==    by 0x10D8F9: ft_jobs (parser.c:71)
+==2994364==    by 0x10D9AC: ft_parser (parser.c:92)
+==2994364==    by 0x109E16: ft_minishell_simulator (simulation.c:33)
+==2994364==    by 0x109696: main (minishell.c:21)
+==2994364== 
+==2994364== Invalid read of size 8
+==2994364==    at 0x10C275: ft_child_prio (priority.c:40)
+==2994364==    by 0x10C4A9: ft_isprio_cmd (priority.c:97)
+==2994364==    by 0x10C590: ft_prio_cmd (priority.c:143)
+==2994364==    by 0x10BBCE: ft_exec_cmd (exec_starter.c:67)
+==2994364==    by 0x109E3D: ft_minishell_simulator (simulation.c:36)
+==2994364==    by 0x109696: main (minishell.c:21)
+==2994364==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==2994364== 
+==2994364== 
+==2994364== Process terminating with default action of signal 11 (SIGSEGV)
+==2994364==  Access not within mapped region at address 0x0
+==2994364==    at 0x10C275: ft_child_prio (priority.c:40)
+==2994364==    by 0x10C4A9: ft_isprio_cmd (priority.c:97)
+==2994364==    by 0x10C590: ft_prio_cmd (priority.c:143)
+==2994364==    by 0x10BBCE: ft_exec_cmd (exec_starter.c:67)
+==2994364==    by 0x109E3D: ft_minishell_simulator (simulation.c:36)
+==2994364==    by 0x109696: main (minishell.c:21)
+==2994364==  If you believe this happened as a result of a stack
+==2994364==  overflow in your program's main thread (unlikely but
+==2994364==  possible), you can try to increase the size of the
+==2994364==  main thread stack using the --main-stacksize= flag.
+==2994364==  The main thread stack size used in this run was 8388608.
+==2994364== 
+==2994364== HEAP SUMMARY:
+==2994364==     in use at exit: 200,642 bytes in 214 blocks
+==2994364==   total heap usage: 540 allocs, 326 frees, 225,434 bytes allocated
+==2994364== 
+==2994364== LEAK SUMMARY:
+==2994364==    definitely lost: 0 bytes in 0 blocks
+==2994364==    indirectly lost: 0 bytes in 0 blocks
+==2994364==      possibly lost: 0 bytes in 0 blocks
+==2994364==    still reachable: 0 bytes in 0 blocks
+==2994364==         suppressed: 200,642 bytes in 214 blocks
+==2994364== 
+==2994364== For lists of detected and suppressed errors, rerun with: -s
+==2994364== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)
+==2994363== Invalid read of size 8
+==2994363==    at 0x10C628: ft_prio_cmd (priority.c:155)
+==2994363==    by 0x10BBCE: ft_exec_cmd (exec_starter.c:67)
+==2994363==    by 0x109E3D: ft_minishell_simulator (simulation.c:36)
+==2994363==    by 0x109696: main (minishell.c:21)
+==2994363==  Address 0x4b164a8 is 40 bytes inside a block of size 48 free'd
+==2994363==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994363==    by 0x10CAEB: ft_free_clist (clist.c:51)
+==2994363==    by 0x10CD2C: ft_free_shell (free.c:42)
+==2994363==    by 0x10C288: ft_child_prio (priority.c:47)
+==2994363==    by 0x10C426: ft_isprio_cmd (priority.c:89)
+==2994363==    by 0x10C590: ft_prio_cmd (priority.c:143)
+==2994363==    by 0x10BBCE: ft_exec_cmd (exec_starter.c:67)
+==2994363==    by 0x109E3D: ft_minishell_simulator (simulation.c:36)
+==2994363==    by 0x109696: main (minishell.c:21)
+==2994363==  Block was alloc'd at
+==2994363==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994363==    by 0x10C9F6: ft_new_clnode (clist.c:19)
+==2994363==    by 0x10D8E2: ft_jobs (parser.c:70)
+==2994363==    by 0x10D9AC: ft_parser (parser.c:92)
+==2994363==    by 0x109E16: ft_minishell_simulator (simulation.c:33)
+==2994363==    by 0x109696: main (minishell.c:21)
+==2994363== 
+==2994363== Invalid read of size 1
+==2994363==    at 0x483EF46: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994363==    by 0x4952382: strdup (strdup.c:41)
+==2994363==    by 0x10A6F8: add_to_history (historyh.c:23)
+==2994363==    by 0x109E5B: ft_minishell_simulator (simulation.c:38)
+==2994363==    by 0x109696: main (minishell.c:21)
+==2994363==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==2994363== 
+==2994363== 
+==2994363== Process terminating with default action of signal 11 (SIGSEGV)
+==2994363==  Access not within mapped region at address 0x0
+==2994363==    at 0x483EF46: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994363==    by 0x4952382: strdup (strdup.c:41)
+==2994363==    by 0x10A6F8: add_to_history (historyh.c:23)
+==2994363==    by 0x109E5B: ft_minishell_simulator (simulation.c:38)
+==2994363==    by 0x109696: main (minishell.c:21)
+==2994363==  If you believe this happened as a result of a stack
+==2994363==  overflow in your program's main thread (unlikely but
+==2994363==  possible), you can try to increase the size of the
+==2994363==  main thread stack using the --main-stacksize= flag.
+==2994363==  The main thread stack size used in this run was 8388608.
+==2994363== 
+==2994363== HEAP SUMMARY:
+==2994363==     in use at exit: 204,694 bytes in 217 blocks
+==2994363==   total heap usage: 547 allocs, 330 frees, 229,530 bytes allocated
+==2994363== 
+==2994363== LEAK SUMMARY:
+==2994363==    definitely lost: 0 bytes in 0 blocks
+==2994363==    indirectly lost: 0 bytes in 0 blocks
+==2994363==      possibly lost: 0 bytes in 0 blocks
+==2994363==    still reachable: 0 bytes in 0 blocks
+==2994363==         suppressed: 204,694 bytes in 217 blocks
+==2994363== 
+==2994363== For lists of detected and suppressed errors, rerun with: -s
+==2994363== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+==2994374== Invalid read of size 8
+==2994374==    at 0x10C628: ft_prio_cmd (priority.c:155)
+==2994374==    by 0x10BBCE: ft_exec_cmd (exec_starter.c:67)
+==2994374==    by 0x109E3D: ft_minishell_simulator (simulation.c:36)
+==2994374==    by 0x109696: main (minishell.c:21)
+==2994374==  Address 0x4b164a8 is 40 bytes inside a block of size 48 free'd
+==2994374==    at 0x483CA3F: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994374==    by 0x10CAEB: ft_free_clist (clist.c:51)
+==2994374==    by 0x10CD2C: ft_free_shell (free.c:42)
+==2994374==    by 0x10C288: ft_child_prio (priority.c:47)
+==2994374==    by 0x10C4A9: ft_isprio_cmd (priority.c:97)
+==2994374==    by 0x10C590: ft_prio_cmd (priority.c:143)
+==2994374==    by 0x10BBCE: ft_exec_cmd (exec_starter.c:67)
+==2994374==    by 0x109E3D: ft_minishell_simulator (simulation.c:36)
+==2994374==    by 0x109696: main (minishell.c:21)
+==2994374==  Block was alloc'd at
+==2994374==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994374==    by 0x10C9F6: ft_new_clnode (clist.c:19)
+==2994374==    by 0x10D8E2: ft_jobs (parser.c:70)
+==2994374==    by 0x10D9AC: ft_parser (parser.c:92)
+==2994374==    by 0x109E16: ft_minishell_simulator (simulation.c:33)
+==2994374==    by 0x109696: main (minishell.c:21)
+==2994374== 
+==2994374== Invalid read of size 1
+==2994374==    at 0x483EF46: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994374==    by 0x4952382: strdup (strdup.c:41)
+==2994374==    by 0x10A6F8: add_to_history (historyh.c:23)
+==2994374==    by 0x109E5B: ft_minishell_simulator (simulation.c:38)
+==2994374==    by 0x109696: main (minishell.c:21)
+==2994374==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==2994374== 
+==2994374== 
+==2994374== Process terminating with default action of signal 11 (SIGSEGV)
+==2994374==  Access not within mapped region at address 0x0
+==2994374==    at 0x483EF46: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994374==    by 0x4952382: strdup (strdup.c:41)
+==2994374==    by 0x10A6F8: add_to_history (historyh.c:23)
+==2994374==    by 0x109E5B: ft_minishell_simulator (simulation.c:38)
+==2994374==    by 0x109696: main (minishell.c:21)
+==2994374==  If you believe this happened as a result of a stack
+==2994374==  overflow in your program's main thread (unlikely but
+==2994374==  possible), you can try to increase the size of the
+==2994374==  main thread stack using the --main-stacksize= flag.
+==2994374==  The main thread stack size used in this run was 8388608.
+==2994374== 
+==2994374== HEAP SUMMARY:
+==2994374==     in use at exit: 204,694 bytes in 217 blocks
+==2994374==   total heap usage: 547 allocs, 330 frees, 229,530 bytes allocated
+==2994374== 
+==2994374== LEAK SUMMARY:
+==2994374==    definitely lost: 0 bytes in 0 blocks
+==2994374==    indirectly lost: 0 bytes in 0 blocks
+==2994374==      possibly lost: 0 bytes in 0 blocks
+==2994374==    still reachable: 0 bytes in 0 blocks
+==2994374==         suppressed: 204,694 bytes in 217 blocks
+==2994374== 
+==2994374== For lists of detected and suppressed errors, rerun with: -s
+==2994374== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+==2994376== 
+==2994376== HEAP SUMMARY:
+==2994376==     in use at exit: 204,387 bytes in 302 blocks
+==2994376==   total heap usage: 544 allocs, 242 frees, 225,478 bytes allocated
+==2994376== 
+==2994376== 2 bytes in 1 blocks are still reachable in loss record 2 of 66
+==2994376==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994376==    by 0x1097D3: ft_strdup (utils1.c:49)
+==2994376==    by 0x10DDB0: ft_term (parser_others.c:26)
+==2994376==    by 0x10DE7C: ft_args (parser_others.c:47)
+==2994376==    by 0x10D773: ft_simple_command (parser.c:23)
+==2994376==    by 0x10D7C9: ft_command (parser.c:32)
+==2994376==    by 0x10D8F9: ft_jobs (parser.c:71)
+==2994376==    by 0x10D9AC: ft_parser (parser.c:92)
+==2994376==    by 0x109E16: ft_minishell_simulator (simulation.c:33)
+==2994376==    by 0x109696: main (minishell.c:21)
+==2994376== 
+==2994376== 16 bytes in 1 blocks are still reachable in loss record 9 of 66
+==2994376==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994376==    by 0x10DE3A: ft_args (parser_others.c:45)
+==2994376==    by 0x10D773: ft_simple_command (parser.c:23)
+==2994376==    by 0x10D7C9: ft_command (parser.c:32)
+==2994376==    by 0x10D8F9: ft_jobs (parser.c:71)
+==2994376==    by 0x10D9AC: ft_parser (parser.c:92)
+==2994376==    by 0x109E16: ft_minishell_simulator (simulation.c:33)
+==2994376==    by 0x109696: main (minishell.c:21)
+==2994376== 
+==2994376== 36 bytes in 1 blocks are still reachable in loss record 13 of 66
+==2994376==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994376==    by 0x1098EA: ft_strjoin (utils2.c:11)
+==2994376==    by 0x10A0CC: create_prompt2 (init.c:74)
+==2994376==    by 0x10A1AE: ft_innit_user_and_prompt (init.c:100)
+==2994376==    by 0x10A2A9: ft_innit_shell (init.c:155)
+==2994376==    by 0x10965A: main (minishell.c:14)
+==2994376== 
+==2994376== 48 bytes in 1 blocks are still reachable in loss record 19 of 66
+==2994376==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994376==    by 0x10C9F6: ft_new_clnode (clist.c:19)
+==2994376==    by 0x10D8E2: ft_jobs (parser.c:70)
+==2994376==    by 0x10D9AC: ft_parser (parser.c:92)
+==2994376==    by 0x109E16: ft_minishell_simulator (simulation.c:33)
+==2994376==    by 0x109696: main (minishell.c:21)
+==2994376== 
+==2994376== 96 bytes in 1 blocks are still reachable in loss record 22 of 66
+==2994376==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994376==    by 0x109BA4: ft_split (utils2.c:85)
+==2994376==    by 0x10BAD6: path_finder (exec_starter.c:54)
+==2994376==    by 0x10BBB4: ft_exec_cmd (exec_starter.c:66)
+==2994376==    by 0x109E3D: ft_minishell_simulator (simulation.c:36)
+==2994376==    by 0x109696: main (minishell.c:21)
+==2994376== 
+==2994376== 158 bytes in 11 blocks are still reachable in loss record 25 of 66
+==2994376==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994376==    by 0x1098EA: ft_strjoin (utils2.c:11)
+==2994376==    by 0x10BB45: path_finder (exec_starter.c:58)
+==2994376==    by 0x10BBB4: ft_exec_cmd (exec_starter.c:66)
+==2994376==    by 0x109E3D: ft_minishell_simulator (simulation.c:36)
+==2994376==    by 0x109696: main (minishell.c:21)
+==2994376== 
+==2994376== 568 bytes in 1 blocks are still reachable in loss record 30 of 66
+==2994376==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994376==    by 0x109F34: ft_get_env_array (init.c:29)
+==2994376==    by 0x109FF9: copy_env_vars (init.c:49)
+==2994376==    by 0x10A160: ft_innit_user_and_prompt (init.c:91)
+==2994376==    by 0x10A2A9: ft_innit_shell (init.c:155)
+==2994376==    by 0x10965A: main (minishell.c:14)
+==2994376== 
+==2994376== 2,819 bytes in 70 blocks are still reachable in loss record 42 of 66
+==2994376==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994376==    by 0x1097D3: ft_strdup (utils1.c:49)
+==2994376==    by 0x109F7E: ft_get_env_array (init.c:36)
+==2994376==    by 0x109FF9: copy_env_vars (init.c:49)
+==2994376==    by 0x10A160: ft_innit_user_and_prompt (init.c:91)
+==2994376==    by 0x10A2A9: ft_innit_shell (init.c:155)
+==2994376==    by 0x10965A: main (minishell.c:14)
+==2994376== 
+==2994376== LEAK SUMMARY:
+==2994376==    definitely lost: 0 bytes in 0 blocks
+==2994376==    indirectly lost: 0 bytes in 0 blocks
+==2994376==      possibly lost: 0 bytes in 0 blocks
+==2994376==    still reachable: 3,743 bytes in 87 blocks
+==2994376==         suppressed: 200,644 bytes in 215 blocks
+==2994376== 
+==2994376== For lists of detected and suppressed errors, rerun with: -s
+==2994376== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==2994326== 
+==2994326== HEAP SUMMARY:
+==2994326==     in use at exit: 204,762 bytes in 221 blocks
+==2994326==   total heap usage: 541 allocs, 320 frees, 229,445 bytes allocated
+==2994326== 
+==2994326== 2 bytes in 1 blocks are indirectly lost in loss record 2 of 64
+==2994326==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994326==    by 0x1097D3: ft_strdup (utils1.c:49)
+==2994326==    by 0x10DDB0: ft_term (parser_others.c:26)
+==2994326==    by 0x10DE7C: ft_args (parser_others.c:47)
+==2994326==    by 0x10D773: ft_simple_command (parser.c:23)
+==2994326==    by 0x10D7C9: ft_command (parser.c:32)
+==2994326==    by 0x10D8F9: ft_jobs (parser.c:71)
+==2994326==    by 0x10D9AC: ft_parser (parser.c:92)
+==2994326==    by 0x109E16: ft_minishell_simulator (simulation.c:33)
+==2994326==    by 0x109696: main (minishell.c:21)
+==2994326== 
+==2994326== 16 bytes in 1 blocks are indirectly lost in loss record 10 of 64
+==2994326==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994326==    by 0x10DE3A: ft_args (parser_others.c:45)
+==2994326==    by 0x10D773: ft_simple_command (parser.c:23)
+==2994326==    by 0x10D7C9: ft_command (parser.c:32)
+==2994326==    by 0x10D8F9: ft_jobs (parser.c:71)
+==2994326==    by 0x10D9AC: ft_parser (parser.c:92)
+==2994326==    by 0x109E16: ft_minishell_simulator (simulation.c:33)
+==2994326==    by 0x109696: main (minishell.c:21)
+==2994326== 
+==2994326== 66 (48 direct, 18 indirect) bytes in 1 blocks are definitely lost in loss record 20 of 64
+==2994326==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2994326==    by 0x10C9F6: ft_new_clnode (clist.c:19)
+==2994326==    by 0x10D8E2: ft_jobs (parser.c:70)
+==2994326==    by 0x10D9AC: ft_parser (parser.c:92)
+==2994326==    by 0x109E16: ft_minishell_simulator (simulation.c:33)
+==2994326==    by 0x109696: main (minishell.c:21)
+==2994326== 
+==2994326== LEAK SUMMARY:
+==2994326==    definitely lost: 48 bytes in 1 blocks
+==2994326==    indirectly lost: 18 bytes in 2 blocks
+==2994326==      possibly lost: 0 bytes in 0 blocks
+==2994326==    still reachable: 0 bytes in 0 blocks
+==2994326==         suppressed: 204,696 bytes in 218 blocks
+==2994326== 
+==2994326== For lists of detected and suppressed errors, rerun with: -s
+==2994326== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)

@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:44:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/24 14:16:48 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:45:18 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,9 @@ typedef struct s_shell
 
 //add
 char		*ft_free(char **ptr);
+void		ft_redir(t_shell *ms, t_clist *cmd);
 
+void		ft_free_shell(t_shell *shell);
 t_shell		*ft_ret_shell(t_shell *p_shell);
 void		ft_err(char *caller, int error);
 

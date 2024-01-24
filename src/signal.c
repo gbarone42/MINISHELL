@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 03:12:42 by badph             #+#    #+#             */
-/*   Updated: 2024/01/22 11:46:38 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/24 17:48:54 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_ctrld(t_shell *shell)
 		write(STDERR_FILENO, "readline error: ", 17);
 	}
 	printf("\n");
-	//free all
+	ft_free_shell(shell);
 	shell_exit(shell);
 }
 
