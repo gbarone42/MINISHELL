@@ -6,26 +6,27 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:32 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/24 15:26:56 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/24 19:05:14 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void handle_env(t_shell *shell)
+void	handle_env(t_shell *shell)
 {
-    if (shell == NULL || shell->env_list == NULL)
-    {
-        printf("shell or shell->env is NULL.\n");
-        return;
-    }
+	char	**env;
 
-    char **env = shell->env_list;
-    while (*env)
-    {
-        printf("%s\n", *env);
-        env++;
-    }
+	if (shell == NULL || shell->env_list == NULL)
+	{
+		printf("shell or shell->env is NULL.\n");
+		return ;
+	}
+	env = shell->env_list;
+	while (*env)
+	{
+		printf("%s\n", *env);
+		env++;
+	}
 }
 
 // void handle_env(t_shell *shell)
