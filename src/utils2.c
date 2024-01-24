@@ -1,18 +1,16 @@
-
 #include "../include/minishell.h"
 
-char *ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	unsigned int i;
-	char *p;
-	int l;
-	int j;
+	unsigned int		i;
+	char				*p;
+	int					l;
+	int					j;
 
 	l = ft_strlen(s1) + ft_strlen(s2) + 1;
 	p = malloc(l);
 	if (!p)
 		return (0);
-
 	j = 0;
 	i = 0;
 	while (s1[i] != 0)
@@ -21,13 +19,12 @@ char *ft_strjoin(char const *s1, char const *s2)
 	while (s2[i] != 0)
 		p[j++] = s2[i++];
 	p[j] = 0;
-
 	return (p);
 }
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (size != 0)
@@ -58,10 +55,10 @@ int	ft_countdel(const char *str, char del)
 	return (countdel + 1);
 }
 
-char *ft_newsub(char **str, char c)
+char	*ft_newsub(char **str, char c)
 {
-	int i;
-	char *unptr;
+	int		i;
+	char	*unptr;
 
 	i = 0;
 	while ((*str)[i] != '\0' && (*str)[i] != c)
@@ -70,8 +67,10 @@ char *ft_newsub(char **str, char c)
 	if (unptr == NULL)
 		return (NULL);
 	ft_strlcpy(unptr, *str, i + 1);
-	*str = *str + i + ((*str)[i] == c ? 1 : 0);
-
+	if ((*str)[i] == c)
+		*str = *str + i + 1;
+	else
+		*str = *str + i;
 	return (unptr);
 }
 

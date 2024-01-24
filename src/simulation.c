@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 03:10:35 by badph             #+#    #+#             */
-/*   Updated: 2024/01/24 14:33:43 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:31:51 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ static void	ft_prepare_for_next_input(t_shell *shell)
 
 void	ft_minishell_simulator(t_shell *shell)//remove envp
 {
-	//t_pars	*command;
-
 	while (1)
 	{
 		shell->input = readline(shell->prompt);

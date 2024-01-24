@@ -1,4 +1,3 @@
-
 #include "../include/minishell.h"
 
 void	ft_bzero(void *s, size_t n)
@@ -41,16 +40,19 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char *ft_strdup(const char *s)
+char	*ft_strdup(const char *s)
 {
-	size_t len = ft_strlen(s);
-	char *y = malloc(len + 1);
+	size_t	len;
+	char	*y;
+
+	len = ft_strlen(s);
+	y = malloc(len + 1);
 	if (!y)
 	{
-		return NULL;
+		return (NULL);
 	}
 	ft_memcpy(y, s, len + 1);
-	return y;
+	return (y);
 }
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
