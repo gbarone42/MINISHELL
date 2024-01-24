@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:34:07 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/24 13:58:00 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:29:52 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_rlist(t_shell *ms, t_clist *cmd);
 
 void	close_fd(int fd);
 
-void	path_finder(t_shell *px, char **envp);
+void	path_finder(t_shell *px);
 
 t_clist	*ft_lstnew_cmd(char *s);
 int		ft_lstsize_cmd(t_clist *lst);

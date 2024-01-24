@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:34:19 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/23 19:00:21 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:34:01 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	main_1(int argc, char **argv, char **env);
 
-void	path_finder(t_shell *px, char **envp)
+void	path_finder(t_shell *px)
 {
 	char	**tmp;
 	char	*tofree;
 	int		i;
 
 	i = 0;
-	tmp = envp;
+	tmp = px->env_list;
 	while (tmp && ft_strncmp("PATH=", *tmp, 5))
 		tmp++;
 	px->paths = ft_split((*tmp) + 5, ':');
@@ -36,6 +36,8 @@ void	path_finder(t_shell *px, char **envp)
 
 void	ft_exec_cmd(t_shell *ms)
 {
+	path_finder(ms);
+	builtins_call(ms, ms->commands);
 	ft_prio_cmd(ms, &ms->commands);
 	pipe(ms->fd_pipe);
 	ft_exec(ms);

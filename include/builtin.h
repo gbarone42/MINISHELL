@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:10:43 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/24 14:17:20 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:22:21 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	free_myenv(char **my_env);
 int		main(int argc, char **argv, char **env);
 
 //parsing
-void	shell_parser(t_shell *shell, t_pars **command);
+void	shell_parser(t_shell *shell);
 char	**input_handler(t_shell *shell);
 int		ft_count_pipes(const char *s, char pipe);
 int		pipe_handler_quote(const char *s, size_t *i);
