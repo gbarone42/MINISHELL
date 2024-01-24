@@ -103,7 +103,8 @@ extern int g_exit;
 //extern char *history[HISTORY_SIZE];
 //extern int history_count;
 
-void free_env_list(t_evlist *env_list);
+void free_env_array(char **env_array);
+char **ft_get_env_array(char **env);
 
 //exit
 void shell_exit(t_shell *shell);

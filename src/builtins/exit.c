@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:22:16 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/11 18:23:40 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/24 13:47:16 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	free_array_memory(t_shell *shell)
 	i = 0;
 	if (shell->env_list)
 	{
-		free_env_list(shell->env_list);
+		free_env_array(shell->env_list);
 		shell->env_list = NULL;
 	}
 	if (shell->paths)
