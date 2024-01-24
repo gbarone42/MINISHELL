@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:40:40 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/24 14:31:30 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:53:11 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ void	excve_core(t_shell *ms, char *paths, char **cmd)
 	if (access(paths, F_OK | X_OK) == 0)
 	{
 		execve(paths, cmd, ms->env);
-		perror("execve");
-		//free CMDSP
-		//FREE MS
-		//FREE PATH(?)
+		ft_free_and_err(ms, "execve", 126);
 	}
 }
 

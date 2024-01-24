@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:41:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/24 14:12:08 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:34:37 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	ft_child_prio(t_shell *ms, t_clist *cmd, int inf, int outf)
 	}
 	//free ms
 	//FREE CMD_SP
+	ft_free_and_exit(ms, 1);
 }
 
 int	ft_compare_file(char *filename1, char *filename2)

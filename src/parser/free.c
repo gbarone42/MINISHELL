@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 23:21:55 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/23 14:37:17 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:57:50 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 static void	ft_free_shell(t_shell *shell)
 {
-	ft_free_char_p(shell->env);
+	ft_free_char_p(shell->env_list);
+	ft_free_char_p(shell->paths);
+	shell->prompt = ft_free_char(&shell->prompt);
+	shell->commands = ft_free_clist(shell->commands);
 	free(shell->prompt);
 }
 
