@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:34:07 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/23 19:58:33 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:58:00 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 typedef struct command_node	t_clist;
 typedef struct s_shell		t_shell;
 typedef struct redirection	t_rlist;
-
 
 void	ft_exec_cmd(t_shell *ms);
 

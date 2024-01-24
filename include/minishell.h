@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:44:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/23 19:20:23 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:57:45 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ enum
 	PRIOROUTPUT = 24
 };
 
-
 typedef struct redirection
 {
 	int					type;
@@ -97,7 +96,7 @@ typedef struct s_shell
 //  t_evlist *env_list;
 
 //add
-char	*ft_free(char **ptr);
+char		*ft_free(char **ptr);
 
 t_shell		*ft_ret_shell(t_shell *p_shell);
 void		ft_err(char *caller, int error);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcorri <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:01:44 by fcorri            #+#    #+#             */
-/*   Updated: 2023/10/10 16:18:08 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/01/24 13:58:19 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	ft_atoi(const char *nptr)
 			return (ft_overflow(sign));
 		output = temp;
 		digit = *++nptr;
-	}	
+	}
 	output *= sign;
 	return (output);
 }

@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:41:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/23 19:59:20 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:12:08 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,11 @@ int	ft_compare_file(char *filename1, char *filename2)
 	f_line[1] = get_next_line(fd2);
 	while (f_line[0] != NULL || f_line[1] != NULL)
 	{
-		//printf("f1:%s\n",f_line[0]);
-		//printf("f2:%s\n",f_line[1]);
 		out = ft_strcmp(f_line[0], f_line[1]);
 		f_line[0] = ft_free(f_line + 0);
 		f_line[1] = ft_free(f_line + 1);
 		if (out != 0)
-				break ;
+			break ;
 		f_line[0] = get_next_line(fd1);
 		f_line[1] = get_next_line(fd2);
 	}
@@ -85,7 +83,7 @@ int	ft_isprio_cmd(t_shell *ms, t_clist *cmd)
 	int	outf;
 
 	inf = open("/dev/null", O_RDONLY);
-	outf =  open(".tmp_n", O_TRUNC | O_CREAT | O_RDWR, 0644);
+	outf = open(".tmp_n", O_TRUNC | O_CREAT | O_RDWR, 0644);
 	pid1 = fork();
 	if (pid1 == 0)
 		ft_child_prio(ms, cmd, inf, outf);
@@ -93,7 +91,7 @@ int	ft_isprio_cmd(t_shell *ms, t_clist *cmd)
 	close(outf);
 	waitpid(pid1, NULL, 0);
 	inf = open("/etc/passwd", O_RDONLY);
-	outf =  open(".tmp_f", O_TRUNC | O_CREAT | O_RDWR, 0644);
+	outf = open(".tmp_f", O_TRUNC | O_CREAT | O_RDWR, 0644);
 	pid1 = fork();
 	if (pid1 == 0)
 		ft_child_prio(ms, cmd, inf, outf);
