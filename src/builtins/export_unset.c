@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:40 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/23 20:21:12 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/24 15:55:14 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,33 +311,34 @@ void add_env_variable(t_shell *shell, const char *name, const char *value)
     strcat(new_variable, value);
     printf("New variable: %s\n", new_variable);
     int found = 0;
-    for (int i = 0; shell->env[i] != NULL; ++i)
+    for (int i = 0; shell->env_list[i] != NULL; ++i)
     {
-        if (strncmp(shell->env[i], name, strlen(name)) == 0 && shell->env[i][strlen(name)] == '=')
+        if (strncmp(shell->env_list[i], name, strlen(name)) == 0 && shell->env_list[i][strlen(name)] == '=')
         {
-            free(shell->env[i]);
-            shell->env[i] = new_variable;
+            free(shell->env_list[i]);
+            shell->env_list[i] = new_variable;
             found = 1;
             break;
         }
     }
     if (!found)
     {
-        int env_size = 0;
-        while (shell->env[env_size] != NULL)
+        int env_size;
+        env_size = 0;
+        while (shell->env_list[env_size] != NULL)
         {
             env_size++;
         }
 
-        shell->env = (char **)ft_realloc(shell->env, env_size * sizeof(char *), (env_size + 2) * sizeof(char *));
-        if (!shell->env)
+        shell->env_list = (char **)ft_realloc(shell->env_list, env_size * sizeof(char *), (env_size + 2) * sizeof(char *));
+        if (!shell->env_list)
         {
             perror("Memory allocation failed for env array.\n");
             exit(EXIT_FAILURE);
         }
 
-        shell->env[env_size] = new_variable;
-        shell->env[env_size + 1] = NULL;
+        shell->env_list[env_size] = new_variable;
+        shell->env_list[env_size + 1] = NULL;
     }
 }
 
