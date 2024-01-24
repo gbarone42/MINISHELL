@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:40 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/24 15:55:14 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/24 16:18:13 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,30 +208,49 @@ void handle_envv(t_shell *shell)
 
 void handle_unset(t_shell *shell, char **args)
 {
-    if (args[1] == NULL)
-    {
+    if (args[1] == NULL) {
         printf("Usage: unset <variable>\n");
         return;
     }
 
-    for (int i = 1; args[i] != NULL; ++i)
-    {
-        for (int j = 0; shell->env[j] != NULL; ++j)
-        {
-            if (strstr(shell->env[j], args[i]) == shell->env[j])
-            {
-                printf("Unsetting: %s\n", shell->env[j]);
-                free(shell->env[j]);
-                for (int k = j; shell->env[k] != NULL; ++k)
-                {
-                    shell->env[k] = shell->env[k + 1];
-                }
-
+    for (int i = 1; args[i] != NULL; ++i) {
+        for (int j = 0; shell->env_list[j] != NULL; ++j) {
+            if (strstr(shell->env_list[j], args[i]) == shell->env_list[j]) {
+                printf("Unsetting: %s\n", shell->env_list[j]);
+                free(shell->env_list[j]); // Free the memory for the matching environment variable
                 break;
             }
         }
     }
 }
+
+// void handle_unset(t_shell *shell, char **args)
+// {
+//     if (args[1] == NULL)
+//     {
+//         printf("Usage: unset <variable>\n");
+//         return;
+//     }
+
+//     for (int i = 1; args[i] != NULL; ++i)
+//     {
+//         for (int j = 0; shell->env_list[j] != NULL; ++j)
+//         {
+//             if (strstr(shell->env_list[j], args[i]) == shell->env_list[j])
+//             {
+//                 printf("Unsetting: %s\n", shell->env_list[j]);
+//                 free(shell->env_list[j]);
+//                 for (int k = j; shell->env_list[k] != NULL; ++k)
+//                 {
+//                     shell->env_list[k] = shell->env_list[k + 1];
+//                 }
+
+//                 break;
+//             }
+//         }
+//     }
+// }
+
 char *ft_strtok(char *str, char sep)
 {
     static char *last = NULL;
