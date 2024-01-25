@@ -24,7 +24,8 @@ void	handle_env(t_shell *shell)
 	env = shell->env_list;
 	while (*env)
 	{
-		printf("%s\n", *env);
+		if(ft_strnstr(*env, "=", ft_strlen(*env)))
+			printf("%s\n", *env);
 		env++;
 	}
 }

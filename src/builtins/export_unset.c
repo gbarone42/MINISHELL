@@ -16,10 +16,10 @@ void	handle_envv(t_shell *shell)
 {
 	char	**env;
 
-	env = shell->env;
+	env = shell->env_list;
 	while (*env)
 	{
-		printf("%s\n", *env);
+		printf("declare -x %s\n", *env);
 		env++;
 	}
 }
@@ -139,6 +139,51 @@ void *ft_realloc(void *ptr, size_t old_size, size_t new_size)
     return new_ptr;
 }
 
+void add_envv_variable(t_shell *shell, const char *name, const char *value)
+{
+    char *new_variable = (char *)malloc(strlen(name) + strlen(value) + 2);
+    if (!new_variable)
+    {
+        printf("Memory allocation failed for env variable.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    strcpy(new_variable, name);
+    //strcat(new_variable, "=");
+    strcat(new_variable, value);
+    printf("New variable: %s\n", new_variable);
+    int found = 0;
+    for (int i = 0; shell->env_list[i] != NULL; ++i)
+    {
+        if (strncmp(shell->env_list[i], name, strlen(name)) == 0 && shell->env_list[i][strlen(name)] == '=')
+        {
+            free(shell->env_list[i]);
+            shell->env_list[i] = new_variable;
+            found = 1;
+            break;
+        }
+    }
+    if (!found)
+    {
+        int env_size;
+        env_size = 0;
+        while (shell->env_list[env_size] != NULL)
+        {
+            env_size++;
+        }
+
+        shell->env_list = (char **)ft_realloc(shell->env_list, env_size * sizeof(char *), (env_size + 2) * sizeof(char *));
+        if (!shell->env_list)
+        {
+            perror("Memory allocation failed for env array.\n");
+            exit(EXIT_FAILURE);
+        }
+
+        shell->env_list[env_size] = new_variable;
+        shell->env_list[env_size + 1] = NULL;
+    }
+}
+
 void add_env_variable(t_shell *shell, const char *name, const char *value)
 {
     char *new_variable = (char *)malloc(strlen(name) + strlen(value) + 2);
@@ -184,6 +229,37 @@ void add_env_variable(t_shell *shell, const char *name, const char *value)
     }
 }
 
+// void handle_export(t_shell *shell, char **args)
+// {
+//     if (args[1] == NULL)
+//     {
+//         handle_envv(shell);
+//     }
+//     else
+//     {
+//     char *name  = ft_strtok(args[1], '=');
+//     char *value = ft_strtok(NULL, '=');
+//         if (name != NULL && value != NULL)
+//         {
+//             if (contains_invalid_characters(name))
+//             {
+//                 printf("Invalid variable name: %s\n", name);
+//             }
+//             else
+//             {
+//                 printf("Name: %s\n", name);
+//                 printf("Value: %s\n", value);
+//                 add_env_variable(shell, name, value);
+//             }
+//         }
+//         else
+//         {
+//             printf("Invalid export syntax: %s\n", args[1]);
+//         }
+//     }
+// }
+
+
 void handle_export(t_shell *shell, char **args)
 {
     if (args[1] == NULL)
@@ -192,9 +268,10 @@ void handle_export(t_shell *shell, char **args)
     }
     else
     {
-    char *name  = ft_strtok(args[1], '=');
-    char *value = ft_strtok(NULL, '=');
-        if (name != NULL && value != NULL)
+        char *name  = ft_strtok(args[1], '=');
+        char *value = ft_strtok(NULL, '=');
+
+        if (name != NULL)
         {
             if (contains_invalid_characters(name))
             {
@@ -202,9 +279,18 @@ void handle_export(t_shell *shell, char **args)
             }
             else
             {
-                printf("Name: %s\n", name);
-                printf("Value: %s\n", value);
-                add_env_variable(shell, name, value);
+                // Check if value is NULL, which means variable is declared without a value
+                if (value == NULL)
+                {
+                    printf("Name: %s\n", name);
+                    add_envv_variable(shell, name, ""); // Add with an empty string as value
+                }
+                else
+                {
+                    printf("Name: %s\n", name);
+                    printf("Value: %s\n", value);
+                    add_env_variable(shell, name, value);
+                }
             }
         }
         else
