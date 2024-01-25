@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:40:40 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/25 15:32:12 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:19:48 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	command_handler(t_shell *ms, t_clist *cmd)
 	i = 0;
 	cmd_sp = cmd->args;
 	excve_core(ms, cmd_sp[0], cmd_sp);
-	while (ms->paths[i])
+	while (ms->paths && ms->paths[i])
 	{
 		paths = ft_strjoin(ms->paths[i], cmd_sp[0]);
 		excve_core(ms, paths, cmd_sp);
