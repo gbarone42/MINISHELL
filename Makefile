@@ -79,15 +79,15 @@ ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c ${HDRS}
 	@mkdir -p ${@D}
 	${CC} ${FLAGS} -c $< -o $@
 
+# Build all
+all: $(NAME)
+
 # Build the executable
-${NAME}: ${OBJS}
+$(NAME): ${OBJS}
 	@echo "${GREEN}Compiling ${CLR_RMV} ${GOLD}${NAME} ${CLR_RMV}..."
 	make -C libft
 	${CC} ${FLAGS} ${OBJS} ${LIBFLAGS} -o ${NAME} libft/build/libft.a
 	@echo "${GOLD}${NAME} created[0m "
-
-# Build all
-all: ${NAME}
 
 # Clean object files
 clean:
@@ -106,17 +106,43 @@ re: fclean all
 
 # Custom command 'makex'
 x: fclean all
-
-
 	@echo "${GREEN}Running ${CYAN}${NAME} ${CLR_RMV}..."
 	-@./$(NAME)
 #i've added '-' in front of @./$(NAME) because i wanted to silence this error "make: *** [Makefile:75: x] Error 130".
 #i've havent solved the problem at the root, i just silenced this problem that only happens if im compiling with "make x"
 
 clear:
-		clear
+	clear
 
-mem:clear all
-	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=resources/readline.supp ./build/minishell
+run: clear all
+	$(NAME)
 
-.PHONY: all clean fclean re x clear mem
+VALGRIND-TOOL	=	memcheck
+VALGRIND-OPTIONS=	--track-origins=yes --leak-check=full --show-leak-kinds=all --suppressions=resources/readline.supp
+
+mem: clear all
+	valgrind --tool=$(VALGRIND-TOOL) $(VALGRIND-OPTIONS) $(NAME)
+
+vgdb: clear all
+	valgrind --tool=$(VALGRIND-TOOL) $(VALGRIND-OPTIONS) --vgdb-error=0 $(NAME)
+
+gdb: clear all
+	echo "target remote | vgdb\nb main\nc" > .gdbinit
+	gdb --args $(NAME)
+
+debug: clear all
+	gdb --args $(NAME)
+
+debugf: clear all
+	vi .gdbinit && gdb --args $(NAME)
+
+TIME	=	2
+
+arg_norme       ?=      
+norme:
+	while [ 1 ] ; do sleep $(TIME) ; clear ; norminette $(SRC_DIR)/$(notdir $(arg_norme)) ; done
+
+compile:
+	while [ 1 ] ; do sleep $(TIME) ; clear ; make ; done
+
+.PHONY: all clean fclean re x clear run mem vgdb gdb debug debugf norme compile
