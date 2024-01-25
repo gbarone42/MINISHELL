@@ -24,6 +24,31 @@ void	handle_envv(t_shell *shell)
 	}
 }
 
+char *ft_strstr(const char *haystack, const char *needle)
+{
+    if (*needle == '\0')
+    {
+        return (char *)haystack;
+    }
+    const char *p = haystack;
+    while (*p != '\0')
+    {
+        const char *begin = p;
+        const char *pattern = needle;
+        while (*begin != '\0' && *pattern != '\0' && *begin == *pattern)
+        {
+            begin++;
+            pattern++;
+        }
+        if (*pattern == '\0')
+        {
+            return (char *)p;
+        }
+        p++;
+    }
+    return NULL;
+}
+
 void remove_env_variable(t_shell *shell, const char *var_name)
 {
     int j, k;
@@ -31,7 +56,7 @@ void remove_env_variable(t_shell *shell, const char *var_name)
     j = 0;
     while (shell->env_list[j] != NULL)
     {
-        if (strstr(shell->env_list[j], var_name) == shell->env_list[j])
+        if (ft_strstr(shell->env_list[j], var_name) == shell->env_list[j])
         {
             printf("Unsetting: %s\n", shell->env_list[j]);
             free(shell->env_list[j]); // Free the memory for the matching environment variable
@@ -139,23 +164,54 @@ void *ft_realloc(void *ptr, size_t old_size, size_t new_size)
     return new_ptr;
 }
 
+char *ft_strcpy(char *dest, const char *src)
+{
+    char *saved = dest;
+    while (*src)
+    {
+        *dest = *src;
+        dest++;
+        src++;
+    }
+    *dest = '\0';  // Ensure the destination is null-terminated
+    return saved;
+}
+
+
+char *ft_strcat(char *dest, const char *src)
+{
+    char *saved = dest;
+    while (*dest)  // Move to the end of dest
+    {
+        dest++;
+    }
+    while (*src)  // Append each character of src to dest
+    {
+        *dest = *src;
+        dest++;
+        src++;
+    }
+    *dest = '\0';  // Null-terminate the result
+    return saved;
+}
+
 void add_envv_variable(t_shell *shell, const char *name, const char *value)
 {
-    char *new_variable = (char *)malloc(strlen(name) + strlen(value) + 2);
+    char *new_variable = (char *)malloc(ft_strlen(name) + ft_strlen(value) + 2);
     if (!new_variable)
     {
         printf("Memory allocation failed for env variable.\n");
         exit(EXIT_FAILURE);
     }
 
-    strcpy(new_variable, name);
+    ft_strcpy(new_variable, name);
     //strcat(new_variable, "=");
-    strcat(new_variable, value);
+    ft_strcat(new_variable, value);
     printf("New variable: %s\n", new_variable);
     int found = 0;
     for (int i = 0; shell->env_list[i] != NULL; ++i)
     {
-        if (strncmp(shell->env_list[i], name, strlen(name)) == 0 && shell->env_list[i][strlen(name)] == '=')
+        if (ft_strncmp(shell->env_list[i], name, ft_strlen(name)) == 0 && shell->env_list[i][ft_strlen(name)] == '=')
         {
             free(shell->env_list[i]);
             shell->env_list[i] = new_variable;
@@ -186,21 +242,21 @@ void add_envv_variable(t_shell *shell, const char *name, const char *value)
 
 void add_env_variable(t_shell *shell, const char *name, const char *value)
 {
-    char *new_variable = (char *)malloc(strlen(name) + strlen(value) + 2);
+    char *new_variable = (char *)malloc(strlen(name) + ft_strlen(value) + 2);
     if (!new_variable)
     {
         printf("Memory allocation failed for env variable.\n");
         exit(EXIT_FAILURE);
     }
 
-    strcpy(new_variable, name);
-    strcat(new_variable, "=");
-    strcat(new_variable, value);
+    ft_strcpy(new_variable, name);
+    ft_strcat(new_variable, "=");
+    ft_strcat(new_variable, value);
     printf("New variable: %s\n", new_variable);
     int found = 0;
     for (int i = 0; shell->env_list[i] != NULL; ++i)
     {
-        if (strncmp(shell->env_list[i], name, strlen(name)) == 0 && shell->env_list[i][strlen(name)] == '=')
+        if (ft_strncmp(shell->env_list[i], name, ft_strlen(name)) == 0 && shell->env_list[i][ft_strlen(name)] == '=')
         {
             free(shell->env_list[i]);
             shell->env_list[i] = new_variable;
@@ -299,3 +355,4 @@ void handle_export(t_shell *shell, char **args)
         }
     }
 }
+
