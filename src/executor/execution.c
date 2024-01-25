@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:40:40 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/25 17:53:07 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:31:23 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	command_handler(t_shell *ms, t_clist *cmd)
 		exit(127);
 	}
 	excve_core(ms, cmd_sp[0], cmd_sp);
-	while (ms->paths[i])
+	while (ms->paths && ms->paths[i])
 	{
 		paths = ft_strjoin(ms->paths[i], cmd_sp[0]);
 		excve_core(ms, paths, cmd_sp);

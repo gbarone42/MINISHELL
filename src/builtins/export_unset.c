@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:40 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/25 17:09:03 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:32:25 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ void	handle_envv(t_shell *shell)
 
 void remove_env_variable(t_shell *shell, const char *var_name)
 {
-    int j;
-    int k;
+    int j, k;
     
     j = 0;
     while (shell->env_list[j] != NULL)
@@ -36,6 +35,7 @@ void remove_env_variable(t_shell *shell, const char *var_name)
         {
             printf("Unsetting: %s\n", shell->env_list[j]);
             free(shell->env_list[j]); // Free the memory for the matching environment variable
+
             // Shift remaining elements left to fill the gap
             k = j;
             while (shell->env_list[k] != NULL)
@@ -43,6 +43,10 @@ void remove_env_variable(t_shell *shell, const char *var_name)
                 shell->env_list[k] = shell->env_list[k + 1];
                 k++;
             }
+
+            // Ensure the last pointer is NULL after shifting
+            shell->env_list[k - 1] = NULL;
+
             break; // Break when a match is found
         }
         j++;

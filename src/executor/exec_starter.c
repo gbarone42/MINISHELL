@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:34:19 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/25 18:28:01 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:32:14 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,11 @@ void	path_finder(t_shell *px)
 		ft_free_char_p(px->paths);
 		px->paths = NULL;
 	}
-	while (tmp && ft_strncmp("PATH=", *tmp, 5))
+	while (*tmp && ft_strncmp("PATH=", *tmp, 5))
 		tmp++;
-	px->paths = ft_split((*tmp) + 5, ':');
-	while (px->paths[i])
+	if (*tmp)
+		px->paths = ft_split((*tmp) + 5, ':');
+	while (px->paths && px->paths[i])
 	{
 		tofree = px->paths[i];
 		px->paths[i] = ft_strjoin(px->paths[i], "/");
