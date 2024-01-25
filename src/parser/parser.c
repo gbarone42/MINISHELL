@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 20:16:03 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/23 18:07:26 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 13:47:28 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_clist	*ft_parser(t_shell *shell)
 	{
 		last = first;
 		commands = ft_jobs(&last);
-		ft_print_clist(commands);
+		//ft_print_clist(commands);
 	}
 	ft_free_tlist(first);
 	return (commands);

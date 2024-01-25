@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:34:19 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/25 12:20:48 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:22:48 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,12 @@ void	path_finder(t_shell *px)
 void	ft_exec_cmd(t_shell *ms)
 {
 	path_finder(ms);
-	//ft_prio_cmd(ms, &ms->commands);
-	//builtins_call(ms, ms->commands);
+	ft_prio_cmd(ms, &ms->commands);
 	pipe(ms->fd_pipe);
-	ft_exec(ms);
+	if (is_builtin_command(ms->commands->args[0]))
+		builtins_call(ms, ms->commands);
+	else
+		ft_exec(ms);
 }
 /*
 int	main_2(int argc, char *argv[], char *envp[])

@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 16:26:35 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/23 14:36:55 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 13:47:47 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,6 @@ t_tlist	*ft_lexer(t_shell *shell, char *input, size_t input_len, int state)
 	}
 	ft_expand_env_variables(shell, first, 0);
 	ft_remove_quotes(first);
-	ft_print_tlist(first);
+	//ft_print_tlist(first);
 	return (first);
 }
