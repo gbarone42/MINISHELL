@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_starter.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:34:19 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/25 15:30:23 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:56:20 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,11 @@ void	path_finder(t_shell *px)
 		ft_free_char_p(px->paths);
 		px->paths = NULL;
 	}
-	while (tmp && ft_strncmp("PATH=", *tmp, 5))
+	while (*tmp && ft_strncmp("PATH=", *tmp, 5))
 		tmp++;
-	px->paths = ft_split((*tmp) + 5, ':');
-	while (px->paths[i])
+	if (*tmp)
+		px->paths = ft_split((*tmp) + 5, ':');
+	while (px->paths && px->paths[i])
 	{
 		tofree = px->paths[i];
 		px->paths[i] = ft_strjoin(px->paths[i], "/");
@@ -68,7 +69,7 @@ void	path_finder(t_shell *px)
 
 void	ft_exec_cmd(t_shell *ms)
 {
-	path_finder(ms);
+	 path_finder(ms);
 	ft_prio_cmd(ms, &ms->commands);
 	pipe(ms->fd_pipe);
 	if (is_builtin_command(ms->commands->args[0]))
