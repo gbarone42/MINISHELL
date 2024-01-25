@@ -6,17 +6,17 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 19:44:51 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/23 17:56:46 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:47:55 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+/*
 static void	ft_prepare_for_next_input(t_shell *shell)
 {
 	free(shell->input);
 	ft_free_clist(shell->commands);
-}
+}*/
 
 static void	ft_test(t_shell *shell, char **argv)
 {
@@ -48,7 +48,7 @@ int	main_1(int argc, char **argv, char **env)
 //		shell.commands = ft_parser(&shell);
 //		if (shell.commands)
 //			ft_execute(&shell);
-		ft_prepare_for_next_input(&shell);
+//		ft_prepare_for_next_input(&shell);
 	}
 	ft_free_and_exit(&shell, EXIT_SUCCESS);
 	return (0);

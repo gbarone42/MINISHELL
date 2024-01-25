@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:40:40 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/24 18:48:29 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 12:11:12 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ void	command_handler(t_shell *ms, t_clist *cmd)
 	else
 		write(STDERR_FILENO, " ", 1);
 	write(STDERR_FILENO, ": command not found\n", 21);
-	//free ms
-	//FREE CMD_SP
+	ft_free_and_err(ms, "execve", 126);
 	exit(127);
 }
 
@@ -122,23 +121,25 @@ void	child_handler(t_shell *ms, t_clist *cmd, int i)
 void	ft_exec(t_shell *ms)
 {
 	int		i;
+	t_clist	*iter;
 
+	iter = ms->commands;
 	i = 0;
 	ms->tmp_fd = STDIN_FILENO;
-	while (ms->commands)
+	while (iter)
 	{
 		if (pipe(ms->fd_pipe) < 0)
 			perror("pipe");
 		ms->pid_child = fork();
 		if (ms->pid_child == 0)
 		{
-			child_handler(ms, ms->commands, i);
+			child_handler(ms, iter, i);
 		}
 		else
 		{
 			parent_handler(ms);
 		}
-		ms->commands = ms->commands->next;
+		iter = iter->next;
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:41:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/24 21:22:21 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/24 21:42:31 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ void	excve_core_prio(t_shell *ms, char *paths, char **cmd)
 	{
 		execve(paths, cmd, ms->env);
 		perror("execve");
-		//free CMDSP
-		//FREE MS
-		//FREE PATH(?)
 	}
 }
 

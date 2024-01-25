@@ -117,6 +117,6 @@ clear:
 		clear
 
 mem:clear all
-	valgrind --leak-check=full --track-origins=yes --log-file=log_leak.txt --show-leak-kinds=all --suppressions=EXTRA/readline.supp ./build/minishell
+	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=EXTRA/readline.supp ./build/minishell
 
 .PHONY: all clean fclean re x clear mem

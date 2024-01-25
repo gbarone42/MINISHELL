@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:34:19 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/24 21:15:16 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 12:20:48 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ void	path_finder(t_shell *px)
 
 	i = 0;
 	tmp = px->env_list;
+	if (px->paths)
+	{
+		ft_free_char_p(px->paths);
+		px->paths = NULL;
+	}
 	while (tmp && ft_strncmp("PATH=", *tmp, 5))
 		tmp++;
 	px->paths = ft_split((*tmp) + 5, ':');
@@ -64,7 +69,7 @@ void	path_finder(t_shell *px)
 void	ft_exec_cmd(t_shell *ms)
 {
 	path_finder(ms);
-	ft_prio_cmd(ms, &ms->commands);
+	//ft_prio_cmd(ms, &ms->commands);
 	//builtins_call(ms, ms->commands);
 	pipe(ms->fd_pipe);
 	ft_exec(ms);
