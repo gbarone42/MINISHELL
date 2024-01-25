@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 03:10:35 by badph             #+#    #+#             */
-/*   Updated: 2024/01/25 15:06:38 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 22:34:21 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	ft_minishell_simulator(t_shell *shell)//remove envp
 			shell->input = NULL;
 			shell->commands = ft_free_clist(shell->commands);
 		}
+		else if (shell->input == NULL)
+			shell->input == NULL;
 		else
 			printf("Invalid input detected!\n");
 	}

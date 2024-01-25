@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 21:53:22 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/25 21:53:24 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 22:55:20 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_isvalid(const char *input)
 	{
 		return (0);
 	}
-	if (length == 0 || length > INPUT_SIZE)
+	if (length > INPUT_SIZE)
 	{
 		return (0);
 	}
