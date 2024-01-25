@@ -6,20 +6,12 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:48 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/25 12:35:29 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 13:36:52 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_free_history(t_shell *ms)
-{
-	if (ms && ms->history.entries)
-	{
-		ft_free_char_p(ms->history.entries);
-		//ms->history.entries = NULL;
-	}
-}
 
 void	add_to_history(t_history *history, char	*command)
 {

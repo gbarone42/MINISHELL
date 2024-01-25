@@ -1,3 +1,5 @@
 *.a
 *.o
 *build*
+*.tmp*
+*.here_*
