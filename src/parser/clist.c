@@ -6,11 +6,11 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:52:44 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/23 15:16:40 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:14:33 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parser_p.h"
 
 t_clist	*ft_new_clnode(void)
 {

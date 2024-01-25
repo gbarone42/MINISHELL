@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 void	free_memory(char *usr, char *usr_at, \
 	char *useratcolon, char *promsufx)
