@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 03:10:35 by badph             #+#    #+#             */
-/*   Updated: 2024/01/25 12:30:18 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:06:38 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_minishell_simulator(t_shell *shell)//remove envp
 			}
 			add_to_history(&(shell->history), shell->input);
 			shell->input = NULL;
-			//ft_prepare_for_next_input(shell);
 			shell->commands = ft_free_clist(shell->commands);
 		}
 		else

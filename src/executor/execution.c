@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:40:40 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/25 13:50:37 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:32:12 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	excve_core(t_shell *ms, char *paths, char **cmd)
 {
 	if (access(paths, F_OK | X_OK) == 0)
 	{
-		execve(paths, cmd, ms->env);
+		execve(paths, cmd, ms->env_list);
 		ft_free_and_err(ms, "execve", 126);
 	}
 }
@@ -84,9 +84,9 @@ void	child_handler(t_shell *ms, t_clist *cmd, int i)
 		close(ms->fd_pipe[0]);
 		cmd->out = ms->fd_pipe[1];
 	}
-	if (cmd->redirections)//se ci sono redirection entra qua
+	if (cmd -> redirections)
 	{
-		ft_redir(ms, cmd);//redir
+		ft_redir(ms, cmd);
 		if (ms->tmp_fd > 0)
 			dup2(cmd->in, ms->tmp_fd);
 		else
@@ -101,19 +101,12 @@ void	child_handler(t_shell *ms, t_clist *cmd, int i)
 	{
 		dup2(cmd->out, STDOUT_FILENO);
 	}
-	
-	
 	close(ms->fd_pipe[1]);
-
 	//	se ci sono redirs o pipe dup2(cmd->out, STDOUT_FILENO);
-
-
-
 	//else
 		//dup2(cmd->out, 1);//normal redir after pipe
 	// gestione se è una builtin da aggiungere
 	// else fai command_handler
-
 	command_handler(ms, cmd);
 }
 

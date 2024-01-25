@@ -6,10 +6,9 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:41:24 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/23 19:24:34 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:29:23 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../include/minishell.h"
 
@@ -47,16 +46,17 @@ int	out_handler(t_clist *cmd)
 
 	tmp = -1;
 	if (cmd->redirections->type == OUTPUT)
-		tmp = open(cmd->redirections->filename, O_CREAT | O_WRONLY | O_TRUNC, 0666);
+		tmp = open(cmd->redirections->filename,
+				O_CREAT | O_WRONLY | O_TRUNC, 0666);
 	else if (cmd->redirections->type == APPEND)
-		tmp = open(cmd->redirections->filename, O_CREAT | O_WRONLY | O_APPEND, 0666);
+		tmp = open(cmd->redirections->filename,
+				O_CREAT | O_WRONLY | O_APPEND, 0666);
 	else if (cmd->redirections->type == PRIOROUTPUT)
 		tmp = STDOUT_FILENO;
 	if (tmp < 0)
 		perror(cmd->redirections->filename);
 	return (tmp);
 }
-
 
 int	in_handler(t_shell *ms, t_clist *cmd)
 {
@@ -66,7 +66,8 @@ int	in_handler(t_shell *ms, t_clist *cmd)
 	if (cmd->redirections->type == INPUT)
 		tmp = open(cmd->redirections->filename, O_RDONLY);
 	else if (cmd->redirections->type == HEREDOC)
-		tmp = heredoc_handler(ms, ft_strjoin(cmd->redirections->filename, "\n"));
+		tmp = heredoc_handler(ms,
+				ft_strjoin(cmd->redirections->filename, "\n"));
 	if (tmp < 0)
 		perror(cmd->redirections->filename);
 	return (tmp);
@@ -76,13 +77,15 @@ void	ft_redir(t_shell *ms, t_clist *cmd)
 {
 	while (cmd->redirections)
 	{
-		if (cmd->redirections->type == OUTPUT || cmd->redirections->type == APPEND
+		if (cmd->redirections->type == OUTPUT
+			|| cmd->redirections->type == APPEND
 			|| cmd->redirections->type == PRIOROUTPUT)
 		{
 			close_fd(cmd->out);
 			cmd->out = out_handler(cmd);
 		}
-		else if (cmd->redirections->type == INPUT || cmd->redirections->type == HEREDOC)
+		else if (cmd->redirections->type == INPUT
+			|| cmd->redirections->type == HEREDOC)
 		{
 			close_fd(cmd->in);
 			cmd->in = in_handler(ms, cmd);

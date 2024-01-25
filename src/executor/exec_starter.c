@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:34:19 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/25 14:22:48 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:30:23 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,67 +77,6 @@ void	ft_exec_cmd(t_shell *ms)
 		ft_exec(ms);
 }
 /*
-int	main_2(int argc, char *argv[], char *envp[])
-{
-	t_shell	ms;
-	int			i;
-	t_clist		*tmpcmd;
-	char *str = "PATH=/home/simo/.local/bin:/home/simo/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/WindowsApps/MicrosoftCorporationII.WindowsSubsystemForLinux_1.2.5.0_x64__8wekyb3d8bbwe:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/Microsoft/jdk-11.0.12.7-hotspot/bin:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/Microsoft SQL Server/150/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files (x86)/Microsoft SQL Server/150/DTS/Binn/:/mnt/c/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/160/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/160/DTS/Binn/:/mnt/c/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/Program Files/MySQL/MySQL Shell 8.0/bin/:/mnt/c/Users/S/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/S/.dotnet/tools:/mnt/c/Users/S/AppData/Local/GitHubDesktop/bin:/mnt/c/Program Files/Azure Data Studio/bin:/mnt/c/Users/S/AppData/Local/Programs/Microsoft VS Code/bin:/snap/bin";
-
-	i = 0;
-	ms.commands = NULL;
-	ms.infile = STDIN_FILENO;
-	ms.outfile = STDOUT_FILENO;
-	ms.env = &str;
-	ms.tmp_fd = -1 ;
-	while (i < argc - 1)
-	{
-		tmpcmd = ft_lstnew_cmd(argv[i + 1]);
-		//tmpcmd->redirs = ft_lstnew_redir("12", APPEND);
-		tmpcmd->in = -2;
-		tmpcmd->out = -2;
-		tmpcmd->redirs = ft_lstnew_redir(NULL, ND);
-		if(i == 0)
-		{
-			//tmpcmd->is_first = 1;
-			//ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("1", INPUT));
-			//ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("11", HEREDOC));
-			//ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("2", INPUT));
-			//ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("13", OUTPUT));
-		}
-		if (i == 1)
-		{
-			//ft_lstadd_back_redir(&tmpcmd->redirs , ft_lstnew_redir("11", HEREDOC));
-		}
-		
-		else
-			tmpcmd->is_first = 0;
-		ft_lstadd_back_cmd(&(ms.commands), tmpcmd);
-		tmpcmd = NULL;
-		i++;
-	}
-//	path_finder(&ms, envp);
-//	ft_prio_cmd(&ms, &ms.commands);
-	i = 0;
-	tmpcmd = ms.commands;
-	while (tmpcmd)
-	{
-		printf("%s\n", tmpcmd->cmd_str);
-		tmpcmd = tmpcmd ->next;
-	}
-	ms.commands->is_first = 1;
-	//ms.env = envp;
-
-	//envp = NULL;
-
-
-//	ft_exec_cmd(&ms, envp);
-
-	//main_1(argc, argv, envp);
-	//ft_lstclear(&ms.commands);
-	return (1);
-}*/
-/*
 void	command_handler(t_shell *px, char **envp)
 {
 	char	**cmd;
@@ -160,7 +99,6 @@ void	command_handler(t_shell *px, char **envp)
 	if (execve(paths, cmd, envp) == -1)
 		write(1, "errore execve\n", 14);
 }
-
 
 void	child_handler(t_shell *ms, char *envp[], int fd_in)
 {
@@ -204,4 +142,3 @@ void	ft_exec(t_shell *ms, char *envp[])
 		i++;
 	}
 }*/
-
