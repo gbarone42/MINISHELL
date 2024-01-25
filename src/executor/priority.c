@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:41:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/25 16:50:39 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:37:36 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	excve_core_prio(t_shell *ms, char *paths, char **cmd)
 {
 	if (access(paths, F_OK | X_OK) == 0)
 	{
-		execve(paths, cmd, ms->env);
+		execve(paths, cmd, ms->env_list);
 		perror("execve");
 	}
 }
@@ -30,13 +30,13 @@ void	ft_child_prio(t_shell *ms, t_clist *cmd, int inf, int outf)
 	i = 0;
 	dup2(inf, STDIN_FILENO);
 	dup2(outf, STDOUT_FILENO);
+	dup2(outf, STDERR_FILENO);
 	cmd_sp = cmd->args;
 	if (strcmp(cmd_sp[0], ""))
 	{
-		execve(cmd_sp[0], cmd_sp, ms->env_list);
+		execve("/dev/null", cmd_sp, ms->env_list);
 		ft_free_shell(ms);
 		exit(1);
-
 	}
 	excve_core_prio(ms, cmd_sp[0], cmd_sp);
 	while (ms->paths[i])
@@ -142,7 +142,7 @@ void	ft_prio_cmd(t_shell *ms, t_clist **cmds)
 	while (iter)
 	{
 		if ((is_builtin_command(iter->args[0])
-				||	ft_isprio_cmd(ms, iter) == 0) && !isfirst)
+				||	ft_isprio_cmd(ms, iter) != 0) && !isfirst)
 		{
 			//ft_catchange();
 			if (!ft_redir_out_exist(iter->redirections) || !iter->next)

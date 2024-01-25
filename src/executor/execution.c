@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:40:40 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/25 15:32:12 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:53:07 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,13 @@ void	command_handler(t_shell *ms, t_clist *cmd)
 	int		i;
 
 	i = 0;
-	cmd_sp = cmd->args;
+	cmd_sp = cmd->args;	
+	if (cmd_sp[0][0] == '\0')
+	{
+		execve("/dev/null", cmd_sp, ms->env_list);
+		ft_free_shell(ms);
+		exit(127);
+	}
 	excve_core(ms, cmd_sp[0], cmd_sp);
 	while (ms->paths[i])
 	{
