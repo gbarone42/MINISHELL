@@ -109,7 +109,7 @@ VALGRIND-TOOL	=	memcheck
 VALGRIND-OPTIONS=	--track-origins=yes --leak-check=full --show-leak-kinds=all --suppressions=resources/readline.supp
 
 mem: clear all
-	valgrind $(VALGRIND-OPTIONS) $(NAME)
+	valgrind --tool=$(VALGRIND-TOOL) $(VALGRIND-OPTIONS) $(NAME)
 
 vgdb: clear all
 	valgrind --tool=$(VALGRIND-TOOL) $(VALGRIND-OPTIONS) --vgdb-error=0 $(NAME)
