@@ -1,17 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                          :+:      :+:    :+:   */
+/*   builtins_p.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:10:43 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/24 20:15:41 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:49:09 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
+#ifndef BUILTINS_P_H
+# define BUILTINS_P_H
+
+# ifndef HISTORY_SIZE
+#  define HISTORY_SIZE 100
+# endif
+
+# ifndef PATH_MAX
+#  define PATH_MAX 4096
+# endif
 
 # include <stdbool.h>
 # include "minishell.h"
@@ -75,24 +83,13 @@ typedef struct s_shell		t_shell;
 
 typedef struct command_node	t_clist;
 
-extern int	g_exit;
-
-#ifndef HISTORY_H
-# define HISTORY_H
-
-# define HISTORY_SIZE 100
-
-#ifndef PATH_MAX
-# define PATH_MAX 4096
-
-#endif
-
+extern	int	g_exit;
 
 //extern char *history[HISTORY_SIZE];
 //extern int history_count;
 
-void free_env_array(char **env_array);
-char **ft_get_env_array(char **env);
+void	free_env_array(char **env_array);
+char	**ft_get_env_array(char **env);
 
 //exit
 void	shell_exit(t_shell *shell);
@@ -157,7 +154,6 @@ void	get_current_directory(char *cwd);
 char	*build_user_string(void);
 char	*build_user_at_string(char *user);
 
-
 //clears
 void	clear_screen(void);
 
@@ -173,13 +169,11 @@ void	shell_exit(t_shell *shell);
 //export_unset
 void	handle_unset(t_shell *shell, char **args);
 
-
 char	*ft_strtok(char *str, char sep);
-void	print_environment();
+void	print_environment(void);
 bool	contains_invalid_characters(const char *str);
 void	add_env_variable(t_shell *shell, const char *name, const char *value);
 void	handle_export(t_shell *shell, char **args);
-
 
 //history
 void	free_args(char **args);
@@ -189,7 +183,6 @@ void	handle_basic_builtins(t_shell *shell, t_clist *commands);
 void	handle_other_builtins(t_shell *shell);
 void	builtins_call(t_shell *shell, t_clist *commands);
 int		is_builtin_command(char *command);
-
 
 //history
 void	add_to_history(t_history *history, char *command);
@@ -209,8 +202,6 @@ void	handle_suspend(void);
 void	print_current_time(void);
 
 //whoami
-void	whoami_command();
-
-#endif // HISTORY_H
+void	whoami_command(void);
 
 #endif // MINISHELL_H

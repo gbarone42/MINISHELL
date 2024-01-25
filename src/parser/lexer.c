@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 16:26:35 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/25 13:47:47 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 22:01:26 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	ft_remove_quotes(t_tlist *token)
 	while (token)
 	{
 		data = token->data;
-		src_dest_index = (t_dsize_t) {0, 0};
+		src_dest_index = (t_dsize_t){0, 0};
 		control = 0;
 		c = data[src_dest_index.x++];
 		while (c)

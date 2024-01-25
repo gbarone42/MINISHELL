@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:22:16 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/24 13:47:16 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/25 21:32:02 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,9 @@ void	exit_shell(void)
 
 void	shell_exit(t_shell *shell)
 {
-	clear_shell_history(&shell->history);
+	/*clear_shell_history(&shell->history);
 	free_basic_memory(shell);
-	free_array_memory(shell);
-	exit_shell();
+	free_array_memory(shell);*/
+	ft_free_and_exit(shell, g_exit);
+	//exit_shell();
 }

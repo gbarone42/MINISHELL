@@ -6,12 +6,11 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:48 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/25 13:36:52 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:54:22 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	add_to_history(t_history *history, char	*command)
 {

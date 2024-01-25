@@ -6,12 +6,11 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:56:34 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/23 14:37:09 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:57:58 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 t_ilist	*ft_new_ilnode(size_t index)
 {

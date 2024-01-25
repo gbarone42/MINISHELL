@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fcorri <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 15:01:44 by fcorri            #+#    #+#             */
-/*   Updated: 2023/10/07 17:22:59 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/01/25 21:50:05 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ long	ft_atol(const char *nptr)
 			return (ft_overflow(sign));
 		output = temp;
 		digit = *++nptr;
-	}	
+	}
 	output *= sign;
 	return (output);
 }
