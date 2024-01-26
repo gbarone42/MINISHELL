@@ -23,7 +23,7 @@ BUILTINS_DIR	=	$(SRC_DIR)/builtins
 # Compiler and flags
 CC				=	cc
 CFLAGS			=	-g3
-REQUIRED_FLAGS	=	$(CFLAGS) -Wall -Wextra -Werror
+REQUIRED_CFLAGS	=	$(CFLAGS) -Wall -Wextra -Werror
 CPPFLAGS		=	$(addprefix -I, $(INC_DIR) $(LIBFT_DIR)/$(INC_DIR) /usr/local/include)
 LDFLAGS			=	$(addprefix -L, $(LIBFT_DIR)/$(BUILD_DIR) /usr/local/lib)
 LDLIBS			=	$(addprefix -l, ft readline)
