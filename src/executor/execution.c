@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:40:40 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 16:46:34 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:29:04 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,39 +54,36 @@ void	parent_handler(t_shell *ms)
 {
 	int	child_exit_status;
 
+	signal(SIGINT, signal_print);
+	signal(SIGQUIT, signal_print);
 	waitpid(ms->pid_child, &child_exit_status, 0);
 	close_fd(ms->fd_pipe[1]);
 	ms->tmp_fd = ms->fd_pipe[0];
 	ms->fd_pipe[0] = -1;
 	ms->fd_pipe[1] = -1;
-
 	if (WIFEXITED(child_exit_status))
 		ms->exit_status = WEXITSTATUS(child_exit_status);
 	else if (WIFSIGNALED(child_exit_status))
 		ms->exit_status = WEXITSTATUS(child_exit_status) + 128;
 }
 
-
 void	child_handler(t_shell *ms, t_clist *cmd, int i)
 {
-	//printf("\e[1;31mChild (PID: %d) executed cmd:\e[0m\n", getpid());
-	//redirection
-	// first pipe redir 
-	// second redirs
-	// 3 close redirs
-	if (i == 0 && cmd && cmd->next)// pipe redir output
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+	if (i == 0 && cmd && cmd->next)
 	{
 		cmd->in = STDIN_FILENO;
 		cmd->out = ms->fd_pipe[1];
 		close_fd(ms->fd_pipe[0]);
 	}
-	else if (i > 0 && cmd && cmd->next) // pipe redirs in e out
+	else if (i > 0 && cmd && cmd->next)
 	{
 		cmd->in = ms->tmp_fd;
 		cmd->out = ms->fd_pipe[1];
 		close_fd(ms->fd_pipe[0]);
 	}
-	else if (i > 0 && cmd && !cmd->next) // pipe redirs in
+	else if (i > 0 && cmd && !cmd->next)
 	{
 		cmd->in = ms->tmp_fd;
 		cmd->out = STDOUT_FILENO;
@@ -97,29 +94,6 @@ void	child_handler(t_shell *ms, t_clist *cmd, int i)
 		ft_redir(ms, cmd);
 	dup2(cmd->in, STDIN_FILENO);
 	dup2(cmd->out, STDOUT_FILENO);
-	/*if (cmd->next)
-	{
-		close(ms->fd_pipe[0]);
-		cmd->out = ms->fd_pipe[1];
-	}*/
-	/*
-*/
-	/*
-	else
-	{
-		dup2(ms->tmp_fd, STDIN_FILENO);
-	}*/
-	/*
-	if (cmd->out != -1 && cmd->out != -2)
-	{
-		dup2(cmd->out, STDOUT_FILENO);
-	}
-	close(ms->fd_pipe[1]);*/
-	//	se ci sono redirs o pipe dup2(cmd->out, STDOUT_FILENO);
-	//else
-		//dup2(cmd->out, 1);//normal redir after pipe
-	// gestione se è una builtin da aggiungere
-	// else fai command_handler
 	command_handler(ms, cmd);
 }
 

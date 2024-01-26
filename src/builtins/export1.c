@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/26 16:09:30 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/26 18:03:53 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ char	*create_new_env_variable(const char *name, const char *value)
 {
 	char	*new_variable;
 
-	new_variable = (char *)malloc(strlen(name) + strlen(value) + 2);
+	new_variable = (char *)malloc(strlen(name) + ft_strlen(value) + 2);
 	if (!new_variable)
 	{
 		printf("Memory allocation failed for env variable.\n");
 		//exit(EXIT_FAILURE);
-		ft_free_and_err(ft_ret_shell(NULL), "create_new_env_variable", errno = ENOMEM);
+		ft_free_and_err(ft_ret_shell(NULL), "create_new_env_variable", errno = ENOMEM);// ma serve proprio?
 	}
 	ft_strcpy(new_variable, name);
 	ft_strcat(new_variable, "=");
@@ -36,7 +36,8 @@ int	update_existing_var(t_shell *shell, const char *name, char *new_variable)
 	i = 0;
 	while (shell->env_list[i] != NULL)
 	{
-		if (ft_strncmp(shell->env_list[i], name, strlen(name)) == 0 && shell->env_list[i][strlen(name)] == '=')
+		if (ft_strncmp(shell->env_list[i], name, ft_strlen(name))
+			== 0 && shell->env_list[i][strlen(name)] == '=')
 		{
 			free(shell->env_list[i]);
 			shell->env_list[i] = new_variable;
@@ -49,7 +50,12 @@ int	update_existing_var(t_shell *shell, const char *name, char *new_variable)
 
 void	add_new_variable(t_shell *shell, char *new_variable, int env_size)
 {
-	shell->env_list = (char **)realloc(shell->env_list, (env_size + 2) * sizeof(char *));
+	size_t	old_size;
+	size_t	new_size;
+
+	old_size = env_size * sizeof(char *);
+	new_size = (env_size + 2) * sizeof(char *);
+	shell->env_list = (char **)ft_realloc(shell->env_list, old_size, new_size);
 	if (!shell->env_list)
 	{
 		perror("Memory allocation failed for env array.\n");
