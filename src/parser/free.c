@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 23:21:55 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/26 12:37:12 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/26 14:54:18 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_free_history(t_shell *ms)
 	int	i;
 
 	i = 0;
-	while (ms && ms->history.entries && ms->history.entries[i])
+	while (ms && ms->history.entries[i])
 	{
 		ms->history.entries[i] = ft_free(&ms->history.entries[i]);
 		i++;
