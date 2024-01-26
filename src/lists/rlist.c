@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:56:34 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/23 15:17:55 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 12:21:59 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	ft_app_rlist(t_rlist **p_first, int type, char *filename)
 
 	new = ft_new_rlnode(type, filename);
 	if (!new)
-// DOMANDA: cosa facciamo?
 		ft_free_and_err(ft_ret_shell(NULL), "FT_NEW_ILNODE", errno = ENOMEM);
 	first = *p_first;
 	if (!first)

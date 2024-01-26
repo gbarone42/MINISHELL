@@ -18,6 +18,7 @@ LIBFT_DIR		=	libft
 SRC_DIR			=	src
 EXEC_DIR		=	$(SRC_DIR)/executor
 PARSER_DIR		=	$(SRC_DIR)/parser
+LISTS_DIR		=	$(SRC_DIR)/lists
 BUILTINS_DIR	=	$(SRC_DIR)/builtins
 
 # Compiler and flags
@@ -55,19 +56,19 @@ SRCS			=	$(SRC_DIR)/minishell.c \
 					$(EXEC_DIR)/redir_handler.c \
 					$(EXEC_DIR)/redir.c \
 					$(EXEC_DIR)/tools_file.c \
-					$(PARSER_DIR)/clist.c \
 					$(PARSER_DIR)/env.c \
 					$(PARSER_DIR)/free.c \
-					$(PARSER_DIR)/ilist.c \
 					$(PARSER_DIR)/init.c \
 					$(PARSER_DIR)/lexer.c \
 					$(PARSER_DIR)/parser.c \
 					$(PARSER_DIR)/parser_io_lists.c \
 					$(PARSER_DIR)/parser_others.c \
-					$(PARSER_DIR)/rlist.c \
 					$(PARSER_DIR)/string.c \
-					$(PARSER_DIR)/tlist.c \
-					$(PARSER_DIR)/utils.c
+					$(PARSER_DIR)/utils.c \
+					$(LISTS_DIR)/clist.c \
+					$(LISTS_DIR)/ilist.c \
+					$(LISTS_DIR)/rlist.c \
+					$(LISTS_DIR)/tlist.c
 
 HEADERS			=	$(INC_DIR)/minishell.h \
 					$(INC_DIR)/executor_p.h \

@@ -1,0 +1,5 @@
+- Quando usciamo dal programma per un errore, stampiamo il messaggio di errore e `usciamo con errno`?
+	- controllare che tutti chiamino ft_free_and_err
+		- controllare che tutti settano errno
+- file utils sono un po' pericolosi, secondo me: vedi ft_strcmp
+- pathname non viene settato come args[0]

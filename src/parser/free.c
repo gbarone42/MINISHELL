@@ -6,32 +6,11 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 23:21:55 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/25 13:51:55 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 12:37:12 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-typedef struct s_shell
-{
-	pid_t		pid_child;
-	int			fd_pipe[2];
-	int			tmp_fd;
-	t_history	history;
-	int			in;
-	int			out;
-	char		**env;
-	char		**last_env;
-	char		*prompt;
-	char		*input;
-	char		**paths;
-	size_t		input_len;
-	t_clist		*commands;
-	char		**env_list;
-	char		**export;
-}	t_shell;
-*/
 
 void	ft_free_history(t_shell *ms)
 {
