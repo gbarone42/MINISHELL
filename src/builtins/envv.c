@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:32 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/26 14:30:38 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/26 17:11:56 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	handle_env(t_shell *shell)
 	env = shell->env_list;
 	while (*env)
 	{
-		if(ft_strnstr(*env, "=", ft_strlen(*env)))
+		if (ft_strnstr(*env, "=", ft_strlen(*env)))
 			printf("%s\n", *env);
 		env++;
 	}
