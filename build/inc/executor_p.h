@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:34:07 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 17:28:40 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:11:54 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_exec_cmd(t_shell *ms);
 
 void	ft_prio_cmd(t_shell *ms, t_clist **cmds);
 
-void	ft_exec(t_shell *ms);
+void	ft_exec(t_shell *ms, int i);
 
 void	ft_rlist(t_shell *ms, t_clist *cmd);
 

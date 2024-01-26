@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:40:40 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 17:40:36 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:13:31 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	parent_handler(t_shell *ms)
 
 void	child_handler(t_shell *ms, t_clist *cmd, int i)
 {
+	signal(SIGQUIT, SIG_DFL);
 	if (i == 0 && cmd && cmd->next)
 	{
 		cmd->in = STDIN_FILENO;
@@ -95,27 +96,29 @@ void	child_handler(t_shell *ms, t_clist *cmd, int i)
 	command_handler(ms, cmd);
 }
 
-void	ft_exec(t_shell *ms)
+void	ft_exec(t_shell *ms, int i)
 {
-	int		i;
 	t_clist	*iter;
 
 	iter = ms->commands;
-	i = 0;
 	ms->tmp_fd = STDIN_FILENO;
 	while (iter)
 	{
 		if (pipe(ms->fd_pipe) < 0)
 			perror("pipe");
-		ms->pid_child = fork();
-		if (ms->pid_child == 0)
-		{
-			signal(SIGINT, SIG_DFL);
-			signal(SIGQUIT, SIG_DFL);
-			child_handler(ms, iter, i);
-		}
+		if (is_builtin_command(iter->args[0]))
+			builtins_call(ms, iter, i);
 		else
-			parent_handler(ms);
+		{
+			ms->pid_child = fork();
+			if (ms->pid_child == 0)
+			{
+				signal(SIGINT, SIG_DFL);
+				child_handler(ms, iter, i);
+			}
+			else
+				parent_handler(ms);
+		}
 		iter = iter->next;
 		i++;
 	}

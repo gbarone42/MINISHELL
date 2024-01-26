@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:10:43 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 17:44:19 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:43:58 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,9 @@ int		ft_strcmp(char *s1, char *s2);
 char	*ft_strcpy(char *dest, const char *src);
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 char	*ft_strcat(char *dest, const char *src);
+char	*ft_strcpy(char *dest, const char *src);
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+char	*ft_strcat(char *dest, const char *src);
 
 //valid
 int		ft_isvalid(const char *input);
@@ -207,7 +210,10 @@ void	print_current_time(void);
 //whoami
 void	whoami_command(void);
 bool	contains_invalid_characters(const char *str);
+bool	contains_invalid_characters(const char *str);
 
+void	handle_export(t_shell *shell, char **args);
+void	process_env_variable(t_shell *shell, char *arg);
 void	handle_export(t_shell *shell, char **args);
 void	process_env_variable(t_shell *shell, char *arg);
 
@@ -225,6 +231,8 @@ void	add_new_envv_variable(t_shell *shell,
 int		find_envv_variable(t_shell *shell, const char *name, const char *value);
 char	*create_envv_variable(const char *name, const char *value);
 
+int		create_user(char **user);
+int		copy_env_vars(t_shell *shell, char **env);
 int		create_user(char **user);
 int		copy_env_vars(t_shell *shell, char **env);
 char	**ft_get_env_array(char **env);

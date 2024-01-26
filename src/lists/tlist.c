@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:52:44 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/23 15:19:50 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:32:03 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,33 +91,7 @@ size_t	ft_app_tlist_decorator(t_dsize_t *i_j, t_tlist **p_last, \
 		i_j->x++;
 	}
 	last->type = type;
+	if (!len)
+		len = 1;
 	return (ft_app_tlist(index, p_last, len - 1));
-}
-
-void	ft_print_tlist(t_tlist *first)
-{
-	int		ntokens;
-	t_ilist	*expand;
-
-	ntokens = 0;
-	printf("-----LEXER-----\n\n");
-	while (first->next)
-	{
-		printf("Data: %s\nType: %d\nExpand: ", first->data, first->type);
-		expand = first->expand;
-		first = first->next;
-		ntokens++;
-		if (!expand)
-		{
-			printf("\n\n");
-			continue ;
-		}
-		while (expand->next)
-		{
-			printf("%lu, ", expand->index);
-			expand = expand->next;
-		}
-		printf("%lu\n\n", expand->index);
-	}
-	printf("ntokens: %d\n", ntokens);
 }

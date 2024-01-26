@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/26 17:21:15 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/26 18:32:26 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*create_new_env_variable(const char *name, const char *value)
 {
 	char	*new_variable;
 
-	new_variable = (char *)malloc(strlen(name) + strlen(value) + 2);
+	new_variable = (char *)malloc(strlen(name) + ft_strlen(value) + 2);
 	if (!new_variable)
 	{
 		printf("Memory allocation failed for env variable.\n");
@@ -29,15 +29,15 @@ char	*create_new_env_variable(const char *name, const char *value)
 	return (new_variable);
 }
 
-int	update_existing_var(t_shell *shell, const char *name, char *new_variable)
+int	update_exist_var(t_shell *shell, const char *name, char *new_variable)
 {
 	int	i;
 
 	i = 0;
 	while (shell->env_list[i] != NULL)
 	{
-		if (ft_strncmp(shell->env_list[i], name, strlen(name))
-			== 0 && shell->env_list[i][strlen(name)] == '=')
+		if (ft_strncmp(shell->env_list[i], name, ft_strlen(name))
+			== 0 && shell->env_list[i][ft_strlen(name)] == '=')
 		{
 			free(shell->env_list[i]);
 			shell->env_list[i] = new_variable;
@@ -73,7 +73,7 @@ void	add_env_variable(t_shell *shell, const char *name, const char *value)
 
 	new_variable = create_new_env_variable(name, value);
 	printf("New variable: %s\n", new_variable);
-	found = update_existing_var(shell, name, new_variable);
+	found = update_exist_var(shell, name, new_variable);
 	if (!found)
 	{
 		env_size = 0;

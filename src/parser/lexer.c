@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 16:26:35 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/25 22:01:26 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:18:38 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,14 @@ static void	ft_expand_env_variables(t_shell *shell, t_tlist *token, \
 				c = data[++index];
 				while (ft_isalnum(c) || c == '_')
 					c = data[++index];
-				if (index == original_index + 1)
+				if (c != '?' && index == original_index + 1)
 					break ;
 				data[original_index++] = '\0';
 				if (c == '?')
+				{
 					expanded = ft_itoa(shell->exit_status);
+					index++;
+				}
 				else
 					expanded = ft_get_value_of(shell, \
 					data + original_index, index - original_index);
