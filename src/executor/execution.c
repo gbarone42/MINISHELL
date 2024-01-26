@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:40:40 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 14:39:32 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 15:01:33 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ void	command_handler(t_shell *ms, t_clist *cmd)
 		write(STDERR_FILENO, cmd_sp[0], ft_strlen(cmd_sp[0]));
 	else
 		write(STDERR_FILENO, " ", 1);
-	ft_free_and_err(ms, ": command not found\n", 126);
-	exit(127);
+	ft_free_and_err(ms, ": command not found\n", 127);
 }
 
 void	parent_handler(t_shell *ms)

@@ -2,18 +2,20 @@
 #include "minishell.h"
 
 
-char *ft_strtok(char *str, char sep)
+char	*ft_strtok(char *str, char sep)
 {
 	static char *last = NULL;
+	char 		*token_start;
 
 	if (str != NULL)
 	{
 		last = str;
-	} else if (last == NULL || *last == '\0')
+	}
+	else if (last == NULL || *last == '\0')
 	{
 		return NULL;
 	}
-	char *token_start = last;
+	token_start = last;
 	while (*last != '\0' && *last != sep)
 	{
 		last++;
