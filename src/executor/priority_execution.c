@@ -6,12 +6,40 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 14:40:11 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 14:45:04 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:48:23 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	ft_compare_file(char *filename1, char *filename2)
+{
+	char	*f_line[2];
+	int		fd1;
+	int		fd2;
+	int		out;
+
+	out = 0;
+	fd1 = open(filename1, O_RDONLY);
+	fd2 = open(filename2, O_RDONLY);
+	f_line[0] = get_next_line(fd1);
+	f_line[1] = get_next_line(fd2);
+	while (f_line[0] != NULL || f_line[1] != NULL)
+	{
+		out = ft_strcmp(f_line[0], f_line[1]);
+		f_line[0] = ft_free(f_line + 0);
+		f_line[1] = ft_free(f_line + 1);
+		if (out != 0)
+			break ;
+		f_line[0] = get_next_line(fd1);
+		f_line[1] = get_next_line(fd2);
+	}
+	close(fd1);
+	close(fd2);
+	get_next_line(fd1);
+	get_next_line(fd2);
+	return (out);
+}
 
 void	excve_core_prio(t_shell *ms, char *paths, char **cmd)
 {

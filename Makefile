@@ -56,6 +56,7 @@ SRCS			=	$(SRC_DIR)/minishell.c \
 					$(EXEC_DIR)/redir_handler.c \
 					$(EXEC_DIR)/redir.c \
 					$(EXEC_DIR)/tools_file.c \
+					$(EXEC_DIR)/priority_execution.c \
 					$(PARSER_DIR)/env.c \
 					$(PARSER_DIR)/free.c \
 					$(PARSER_DIR)/init.c \
