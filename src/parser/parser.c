@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 20:16:03 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/25 17:18:32 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 12:30:08 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,8 @@
 
 static void	ft_simple_command(t_tlist **token, t_clist *cmd)
 {
-	//char	*pathname;
 	char	**args;
 
-	/*if (!ft_term(token, GENERAL_TOKEN, &pathname))
-		return ;
-	cmd->pathname = pathname;*/
 	args = ft_args(token);
 	if (!args)
 		return ;
@@ -84,13 +80,11 @@ t_clist	*ft_parser(t_shell *shell)
 	commands = NULL;
 	last = first;
 	if (!ft_check_grammar(&last))
-		printf("minishell: syntax error near unexpected token `%s`\n", \
-			last->data);
+		printf(SYNTAX_ERROR "`%s`\n", last->data);
 	else
 	{
 		last = first;
 		commands = ft_jobs(&last);
-		//ft_print_clist(commands);
 	}
 	ft_free_tlist(first);
 	return (commands);

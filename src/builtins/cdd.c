@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/26 14:26:12 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/26 14:58:48 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	create_prompt(t_shell *shell, char *user_at_colon, \
 	strcpy(shell->prompt, user_at_colon);
 	strcat(shell->prompt, cwd);
 	strcat(shell->prompt, prompt_suffix);
-	printf("Updated prompt: %s\n", shell->prompt);
 }
 
 void	update_prompt(t_shell *shell)

@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:44:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/25 21:21:00 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/01/26 12:30:02 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@
 # define PURPLE	"\033[1;35m"
 # define CYAN	"\033[1;36m"
 # define GOLD	"\033[1;94m"
+
+# define SYNTAX_ERROR	"minishell: syntax error near unexpected token "
 
 enum
 {

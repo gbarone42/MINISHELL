@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:40:40 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/25 18:31:23 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:39:32 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	command_handler(t_shell *ms, t_clist *cmd)
 	int		i;
 
 	i = 0;
-	cmd_sp = cmd->args;	
+	cmd_sp = cmd->args;
 	if (cmd_sp[0][0] == '\0')
 	{
 		execve("/dev/null", cmd_sp, ms->env_list);
@@ -55,15 +55,9 @@ void	parent_handler(t_shell *ms)
 {
 	int	child_exit_status;
 
-
-
 	waitpid(ms->pid_child, &child_exit_status, 0);
-	//close(ms->fd_pipe[1]);
-	//printf("%s\n", get_next_line(ms->fd_pipe[1]));
 	close(ms->fd_pipe[1]);
-	//printf("%d\n", ms->tmp_fd);
 	ms->tmp_fd = ms->fd_pipe[0];
-	//printf("%d\n", ms->tmp_fd);
 	ms->fd_pipe[0] = -1;
 	ms->fd_pipe[1] = -1;
 
