@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:10:43 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 18:44:52 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:45:46 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ void	handle_basic_builtin1(t_shell *shell, char **args);
 void	handle_basic_builtin2(t_shell *shell, char **args);
 void	handle_basic_builtins(t_shell *shell, t_clist *commands);
 void	handle_other_builtins(t_shell *shell);
-void	builtins_call(t_shell *shell, t_clist *commands);
+void	builtins_call(t_shell *shell, t_clist *commands, int i);
 int		is_builtin_command(char *command);
 
 //history
