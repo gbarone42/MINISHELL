@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_p.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:10:43 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/25 21:49:09 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:54:38 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,9 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 void	*ft_memset(void *b, int c, size_t len);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 int		ft_strcmp(char *s1, char *s2);
+char *ft_strcpy(char *dest, const char *src);
+void *ft_realloc(void *ptr, size_t old_size, size_t new_size);
+char *ft_strcat(char *dest, const char *src);
 
 //valid
 int		ft_isvalid(const char *input);
@@ -162,6 +165,7 @@ void	handle_echo(char **args);
 
 //envv
 void	handle_env(t_shell *shell);
+void	handle_envv(t_shell *shell);
 
 //exit
 void	shell_exit(t_shell *shell);
@@ -203,5 +207,7 @@ void	print_current_time(void);
 
 //whoami
 void	whoami_command(void);
+bool contains_invalid_characters(const char *str);
+
 
 #endif // MINISHELL_H

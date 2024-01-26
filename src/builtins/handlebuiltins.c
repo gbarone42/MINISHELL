@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handlebuiltins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:01:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/24 16:37:55 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:30:38 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	handle_basic_builtin1(t_shell *shell, char **args)
 	{
 		ft_handle_cd(shell, args);
 	}
-	if (args && args[0] && strcmp(args[0], "echo") == 0)
+	if (args && args[0] && ft_strcmp(args[0], "echo") == 0)
 	{
 		handle_echo(args);
 	}

@@ -47,6 +47,9 @@ SRCS			=	$(SRC_DIR)/minishell.c \
 					$(BUILTINS_DIR)/handlebuiltins.c \
 					$(BUILTINS_DIR)/envv.c \
 					$(BUILTINS_DIR)/export_unset.c \
+					$(BUILTINS_DIR)/unset.c \
+					$(BUILTINS_DIR)/utils_built.c \
+					$(BUILTINS_DIR)/utils_built2.c \
 					$(EXEC_DIR)/clist_utils.c \
 					$(EXEC_DIR)/exec_starter.c \
 					$(EXEC_DIR)/execution.c \

@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/23 20:13:27 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/26 14:26:12 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ char	*build_prompt_suffix(void)
 void	create_prompt(t_shell *shell, char *user_at_colon, \
 	char *cwd, char *prompt_suffix)
 {
-	shell->prompt = (char *)malloc(strlen(user_at_colon) +\
-					strlen(cwd) + strlen(prompt_suffix) + 1);
+	shell->prompt = (char *)malloc(ft_strlen(user_at_colon) +\
+					ft_strlen(cwd) + ft_strlen(prompt_suffix) + 1);
 	if (!shell->prompt)
 	{
 		perror("Error: Unable to allocate memory for the new prompt\n");
