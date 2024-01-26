@@ -1,6 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_built.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
+/*   Updated: 2024/01/26 16:29:12 by gbarone          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
-
 
 char	*ft_strtok(char *str, char sep)
 {
@@ -51,9 +61,11 @@ void *ft_realloc(void *ptr, size_t old_size, size_t new_size)
 	return new_ptr;
 }
 
-char *ft_strcpy(char *dest, const char *src)
+char	*ft_strcpy(char *dest, const char *src)
 {
-	char *saved = dest;
+	char *saved;
+
+	saved = dest;
 	while (*src)
 	{
 		*dest = *src;
@@ -61,13 +73,14 @@ char *ft_strcpy(char *dest, const char *src)
 		src++;
 	}
 	*dest = '\0';
-	return saved;
+	return (saved);
 }
 
-
-char *ft_strcat(char *dest, const char *src)
+char	*ft_strcat(char *dest, const char *src)
 {
-	char *saved = dest;
+	char	*saved;
+
+	saved = dest;
 	while (*dest)
 	{
 		dest++;
@@ -79,5 +92,5 @@ char *ft_strcat(char *dest, const char *src)
 		src++;
 	}
 	*dest = '\0';
-	return saved;
+	return (saved);
 }

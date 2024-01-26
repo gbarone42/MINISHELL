@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_built2.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
+/*   Updated: 2024/01/26 16:26:04 by gbarone          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	handle_envv(t_shell *shell)
@@ -12,9 +24,10 @@ void	handle_envv(t_shell *shell)
 	}
 }
 
-bool contains_invalid_characters(const char *str)
+bool	contains_invalid_characters(const char *str)
 {
-	int i;
+	int		i;
+
 	i = 0;
 	if (!((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z') || str[i] == '_'))
 	{

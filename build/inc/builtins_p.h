@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:10:43 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 15:24:34 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/26 16:05:03 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ void process_env_variable(t_shell *shell, char *arg);
 //v
 void add_env_variable(t_shell *shell, const char *name, const char *value);
 void add_new_variable(t_shell *shell, char *new_variable, int env_size);
-int update_existing_variable(t_shell *shell, const char *name, char *new_variable);
+int update_existing_var(t_shell *shell, const char *name, char *new_variable);
 char *create_new_env_variable(const char *name, const char *value);
 
 //vv
