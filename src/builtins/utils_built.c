@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/26 16:29:12 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/26 16:38:26 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strtok(char *str, char sep)
 {
-	static char *last = NULL;
-	char 		*token_start;
+	static char	*last = NULL;
+	char		*token_start;
 
 	if (str != NULL)
 	{
@@ -23,7 +23,7 @@ char	*ft_strtok(char *str, char sep)
 	}
 	else if (last == NULL || *last == '\0')
 	{
-		return NULL;
+		return (NULL);
 	}
 	token_start = last;
 	while (*last != '\0' && *last != sep)
@@ -35,35 +35,39 @@ char	*ft_strtok(char *str, char sep)
 		*last = '\0';
 		last++;
 	}
-	return token_start;
+	return (token_start);
 }
 
-void *ft_realloc(void *ptr, size_t old_size, size_t new_size)
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 {
-	void *new_ptr;
+	void		*new_ptr;
+	size_t		copy_size;
 
 	if (ptr == NULL)
-		return malloc(new_size);
-	if (!new_size)
+		return (malloc(new_size));
+	if (new_size == 0)
 	{
 		free(ptr);
-		return NULL;
+		return (NULL);
 	}
 	new_ptr = malloc(new_size);
-	if (!new_ptr)
+	if (new_ptr == NULL)
 	{
 		perror("Memory allocation failed for realloc.\n");
 		exit(EXIT_FAILURE);
 	}
-	size_t copy_size = (old_size < new_size) ? old_size : new_size;
+	if (old_size < new_size)
+		copy_size = old_size;
+	else
+		copy_size = new_size;
 	ft_memcpy(new_ptr, ptr, copy_size);
 	free(ptr);
-	return new_ptr;
+	return (new_ptr);
 }
 
 char	*ft_strcpy(char *dest, const char *src)
 {
-	char *saved;
+	char	*saved;
 
 	saved = dest;
 	while (*src)
