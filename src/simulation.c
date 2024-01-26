@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 03:10:35 by badph             #+#    #+#             */
-/*   Updated: 2024/01/26 17:29:17 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 19:49:22 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	ft_prepare_for_next_input(t_shell *shell)
 	shell->commands = ft_free_clist(shell->commands);
 }*/
 
-void	ft_minishell_simulator(t_shell *shell)//remove envp
+void	ft_minishell_simulator(t_shell *shell)
 {
 	while (1)
 	{

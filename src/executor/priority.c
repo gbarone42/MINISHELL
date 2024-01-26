@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:41:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 17:47:15 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 20:11:41 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,16 @@ void	ft_prio_cmd(t_shell *ms, t_clist **cmds)
 	t_clist	*iter;
 	t_clist	*tmp_prev;
 	int		isfirst;
+	int o1, o2;
 
 	isfirst = 1;
 	iter = *cmds;
 	tmp_prev = NULL;
 	while (iter)
 	{
-		if ((is_builtin_command(iter->args[0])
-				|| ft_isprio_cmd(ms, iter) != 0) && !isfirst)
+		o1 =is_builtin_command(iter->args[0]);
+		o2 = ft_isprio_cmd(ms, iter);
+		if ((o1|| o2 == 0) && !isfirst)
 		{
 			//ft_catchange();
 			if (!ft_redir_out_exist(iter->redirections) || !iter->next)

@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:34:19 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 19:01:25 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 19:56:05 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void	ft_exec_cmd(t_shell *ms)
 {
 	ft_check_cmd(ms);
 	path_finder(ms);
-	//ft_prio_cmd(ms, &ms->commands);
-	pipe(ms->fd_pipe);
-	ft_exec(ms, 0);
+	ft_prio_cmd(ms, &ms->commands);
+	ft_print_clist(ms->commands);
+	//pipe(ms->fd_pipe);
+	//ft_exec(ms, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 14:40:11 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 16:46:57 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 20:11:14 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ void	ft_child_prio(t_shell *ms, t_clist *cmd, int inf, int outf)
 	i = 0;
 	dup2(inf, STDIN_FILENO);
 	dup2(outf, STDOUT_FILENO);
-	dup2(outf, STDERR_FILENO);
+	//dup2(outf, STDERR_FILENO);
 	cmd_sp = cmd->args;
-	if (strcmp(cmd_sp[0], ""))
+	if (ft_strcmp(cmd_sp[0], "") == 0)
 	{
 		execve("/dev/null", cmd_sp, ms->env_list);
 		ft_free_shell(ms);

@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:01:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/26 18:33:05 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 19:39:01 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	builtins_call(t_shell *shell, t_clist *commands, int i)
 	{
 		commands->in = STDIN_FILENO;
 		commands->out = shell->fd_pipe[1];
-		close_fd(shell->fd_pipe[0]);
+		//close_fd(shell->fd_pipe[0]);
 	}
 	else if (i > 0 && commands && commands->next)
 	{
@@ -101,4 +101,9 @@ void	builtins_call(t_shell *shell, t_clist *commands, int i)
 	close_fd(commands->in);
 	dup2(shell->in, STDIN_FILENO);
 	dup2(shell->out, STDOUT_FILENO);
+	close_fd(shell->fd_pipe[1]);
+	close_fd(shell->tmp_fd);
+	shell->tmp_fd = shell->fd_pipe[0];
+	shell->fd_pipe[0] = -1;
+	shell->fd_pipe[1] = -1;
 }
