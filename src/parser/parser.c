@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 20:16:03 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/26 12:30:08 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/26 15:53:51 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ t_clist	*ft_parser(t_shell *shell)
 
 	first = ft_lexer(shell, shell->input, shell->input_len, GENERAL_STATE);
 	if (!first->type)
+	{
+		ft_free_tlist(first);
 		return (NULL);
+	}
 	commands = NULL;
 	last = first;
 	if (!ft_check_grammar(&last))
