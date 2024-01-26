@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:34:19 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 18:12:12 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 19:01:25 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main_1(int argc, char **argv, char **env);
 
 int	is_builtin_command(char *command)
 {
-	const char	*builtins[12];
+	const char	*builtins[8];
 	size_t		i;
 
 	i = 0;
@@ -29,11 +29,7 @@ int	is_builtin_command(char *command)
 		builtins[4] = "unset";
 		builtins[5] = "env";
 		builtins[6] = "exit";
-		builtins[7] = "rm";
-		builtins[8] = "mkdir";
-		builtins[9] = "rmdir";
-		builtins[10] = NULL;
-		builtins[11] = NULL;
+		builtins[7] = NULL;
 		while (builtins[i] != NULL)
 			if (strcmp(command, builtins[i++]) == 0)
 				return (1);
