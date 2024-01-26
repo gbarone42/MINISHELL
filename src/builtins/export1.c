@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/26 17:21:15 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/26 18:03:53 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*create_new_env_variable(const char *name, const char *value)
 {
 	char	*new_variable;
 
-	new_variable = (char *)malloc(strlen(name) + strlen(value) + 2);
+	new_variable = (char *)malloc(strlen(name) + ft_strlen(value) + 2);
 	if (!new_variable)
 	{
 		printf("Memory allocation failed for env variable.\n");
@@ -36,7 +36,7 @@ int	update_existing_var(t_shell *shell, const char *name, char *new_variable)
 	i = 0;
 	while (shell->env_list[i] != NULL)
 	{
-		if (ft_strncmp(shell->env_list[i], name, strlen(name))
+		if (ft_strncmp(shell->env_list[i], name, ft_strlen(name))
 			== 0 && shell->env_list[i][strlen(name)] == '=')
 		{
 			free(shell->env_list[i]);
