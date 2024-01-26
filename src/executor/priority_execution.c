@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 14:40:11 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 14:48:23 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:46:57 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	ft_compare_file(char *filename1, char *filename2)
 		f_line[0] = get_next_line(fd1);
 		f_line[1] = get_next_line(fd2);
 	}
-	close(fd1);
-	close(fd2);
+	close_fd(fd1);
+	close_fd(fd2);
 	get_next_line(fd1);
 	get_next_line(fd2);
 	return (out);

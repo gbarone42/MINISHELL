@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:40:40 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 15:01:33 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:46:34 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	excve_core(t_shell *ms, char *paths, char **cmd)
 	if (access(paths, F_OK | X_OK) == 0)
 	{
 		execve(paths, cmd, ms->env_list);
-		ft_free_and_err(ms, "execve", 126);
+		ft_free_and_err(ms, "execve", 127);
 	}
 }
 
@@ -47,7 +47,7 @@ void	command_handler(t_shell *ms, t_clist *cmd)
 		write(STDERR_FILENO, cmd_sp[0], ft_strlen(cmd_sp[0]));
 	else
 		write(STDERR_FILENO, " ", 1);
-	ft_free_and_err(ms, ": command not found\n", 127);
+	ft_free_err_cmdnotf(ms, ": command not found\n", 127);
 }
 
 void	parent_handler(t_shell *ms)
@@ -55,7 +55,7 @@ void	parent_handler(t_shell *ms)
 	int	child_exit_status;
 
 	waitpid(ms->pid_child, &child_exit_status, 0);
-	close(ms->fd_pipe[1]);
+	close_fd(ms->fd_pipe[1]);
 	ms->tmp_fd = ms->fd_pipe[0];
 	ms->fd_pipe[0] = -1;
 	ms->fd_pipe[1] = -1;
@@ -74,33 +74,47 @@ void	child_handler(t_shell *ms, t_clist *cmd, int i)
 	// first pipe redir 
 	// second redirs
 	// 3 close redirs
-	if (i > 0)
+	if (i == 0 && cmd && cmd->next)// pipe redir output
 	{
-		dup2(ms->tmp_fd, STDIN_FILENO);
+		cmd->in = STDIN_FILENO;
+		cmd->out = ms->fd_pipe[1];
+		close_fd(ms->fd_pipe[0]);
 	}
-	if (cmd->next)
+	else if (i > 0 && cmd && cmd->next) // pipe redirs in e out
+	{
+		cmd->in = ms->tmp_fd;
+		cmd->out = ms->fd_pipe[1];
+		close_fd(ms->fd_pipe[0]);
+	}
+	else if (i > 0 && cmd && !cmd->next) // pipe redirs in
+	{
+		cmd->in = ms->tmp_fd;
+		cmd->out = STDOUT_FILENO;
+		close_fd(ms->fd_pipe[1]);
+		close_fd(ms->fd_pipe[0]);
+	}
+	if (cmd -> redirections)
+		ft_redir(ms, cmd);
+	dup2(cmd->in, STDIN_FILENO);
+	dup2(cmd->out, STDOUT_FILENO);
+	/*if (cmd->next)
 	{
 		close(ms->fd_pipe[0]);
 		cmd->out = ms->fd_pipe[1];
-	}
-	if (cmd -> redirections)
-	{
-		ft_redir(ms, cmd);
-		if (ms->tmp_fd > 0)
-			dup2(cmd->in, ms->tmp_fd);
-		else
-			dup2(cmd->in, STDIN_FILENO);
-	}
+	}*/
+	/*
+*/
 	/*
 	else
 	{
 		dup2(ms->tmp_fd, STDIN_FILENO);
 	}*/
+	/*
 	if (cmd->out != -1 && cmd->out != -2)
 	{
 		dup2(cmd->out, STDOUT_FILENO);
 	}
-	close(ms->fd_pipe[1]);
+	close(ms->fd_pipe[1]);*/
 	//	se ci sono redirs o pipe dup2(cmd->out, STDOUT_FILENO);
 	//else
 		//dup2(cmd->out, 1);//normal redir after pipe

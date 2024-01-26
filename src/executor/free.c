@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:40:37 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/24 21:09:29 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:17:50 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,11 @@ void	ft_free_tutto(t_shell *px, char ***cmd, char **paths)
 		free(px->paths);
 	if (*cmd)
 		free(*cmd);
+}
+
+void	ft_free_err_cmdnotf(t_shell *shell, char *caller, int error)
+{
+	ft_free_shell(shell);
+	write(STDERR_FILENO, caller, ft_strlen(caller));
+	exit(error);
 }
