@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:40:40 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 17:29:04 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:40:36 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ void	parent_handler(t_shell *ms)
 
 void	child_handler(t_shell *ms, t_clist *cmd, int i)
 {
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
 	if (i == 0 && cmd && cmd->next)
 	{
 		cmd->in = STDIN_FILENO;
@@ -112,12 +110,12 @@ void	ft_exec(t_shell *ms)
 		ms->pid_child = fork();
 		if (ms->pid_child == 0)
 		{
+			signal(SIGINT, SIG_DFL);
+			signal(SIGQUIT, SIG_DFL);
 			child_handler(ms, iter, i);
 		}
 		else
-		{
 			parent_handler(ms);
-		}
 		iter = iter->next;
 		i++;
 	}

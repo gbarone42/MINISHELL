@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:52:44 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/26 16:50:11 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:39:47 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_clist	*ft_new_clnode(void)
 		return (NULL);
 	output->pathname = NULL;
 	output->args = NULL;
-	// da rivedere inizializzazione default file descriptors
 	output->in = -1;
 	output->out = -1;
 	output->redirections = NULL;
@@ -39,7 +38,6 @@ t_clist	*ft_free_clist(t_clist *head)
 		free(head->pathname);
 		ft_free_char_p(head->args);
 		file = head->in;
-		// file != STD_IN
 		if (file)
 			close_fd(file);
 		file = head->out;

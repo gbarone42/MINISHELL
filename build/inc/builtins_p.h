@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_p.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:10:43 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 16:44:51 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/26 17:44:19 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,9 @@ typedef struct s_shell		t_shell;
 
 typedef struct command_node	t_clist;
 
-extern int		g_exit;
-
 //extern char *history[HISTORY_SIZE];
 //extern int history_count;
+extern int		g_exit;
 
 void	free_env_array(char **env_array);
 char	**ft_get_env_array(char **env);
@@ -140,9 +139,9 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 void	*ft_memset(void *b, int c, size_t len);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 int		ft_strcmp(char *s1, char *s2);
-char *ft_strcpy(char *dest, const char *src);
-void *ft_realloc(void *ptr, size_t old_size, size_t new_size);
-char *ft_strcat(char *dest, const char *src);
+char	*ft_strcpy(char *dest, const char *src);
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
+char	*ft_strcat(char *dest, const char *src);
 
 //valid
 int		ft_isvalid(const char *input);
@@ -207,27 +206,27 @@ void	print_current_time(void);
 
 //whoami
 void	whoami_command(void);
-bool contains_invalid_characters(const char *str);
+bool	contains_invalid_characters(const char *str);
 
-
-
-void handle_export(t_shell *shell, char **args);
-void process_env_variable(t_shell *shell, char *arg);
+void	handle_export(t_shell *shell, char **args);
+void	process_env_variable(t_shell *shell, char *arg);
 
 //v
-void add_env_variable(t_shell *shell, const char *name, const char *value);
-void add_new_variable(t_shell *shell, char *new_variable, int env_size);
-int update_existing_var(t_shell *shell, const char *name, char *new_variable);
-char *create_new_env_variable(const char *name, const char *value);
+void	add_env_variable(t_shell *shell, const char *name, const char *value);
+void	add_new_variable(t_shell *shell, char *new_variable, int env_size);
+char	*create_new_env_variable(const char *name, const char *value);
+int		update_existing_var(t_shell *shell,
+			const char *name, char *new_variable);
 
 //vv
-void add_envv_variable(t_shell *shell, const char *name, const char *value);
-void add_new_envv_variable(t_shell *shell, const char *name, const char *value);
-int find_envv_variable(t_shell *shell, const char *name, const char *value);
-char *create_envv_variable(const char *name, const char *value);
+void	add_envv_variable(t_shell *shell, const char *name, const char *value);
+void	add_new_envv_variable(t_shell *shell,
+			const char *name, const char *value);
+int		find_envv_variable(t_shell *shell, const char *name, const char *value);
+char	*create_envv_variable(const char *name, const char *value);
 
-int	create_user(char **user);
-int	copy_env_vars(t_shell *shell, char **env);
+int		create_user(char **user);
+int		copy_env_vars(t_shell *shell, char **env);
 char	**ft_get_env_array(char **env);
 void	free_env_array(char **env_array);
 

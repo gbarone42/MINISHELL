@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:22:16 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/25 21:32:02 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:41:09 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,5 @@ void	exit_shell(void)
 
 void	shell_exit(t_shell *shell)
 {
-	/*clear_shell_history(&shell->history);
-	free_basic_memory(shell);
-	free_array_memory(shell);*/
 	ft_free_and_exit(shell, g_exit);
-	//exit_shell();
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 21:53:39 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 16:45:04 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/26 17:40:58 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	create_prompt2(t_shell *shell, char *user)
 		free_env_array(shell->env_list);
 		return (MEM_ERROR3);
 	}
-	//printf("prompt: %s\n", shell->prompt);
 	return (0);
 }
 

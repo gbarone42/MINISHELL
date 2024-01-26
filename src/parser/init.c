@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 22:42:17 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/23 14:37:13 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:44:40 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,5 @@ void	ft_init_shell(t_shell *shell, char **env)
 {
 	ft_ret_shell(shell);
 	ft_init_env(shell, env);
-	//! come settiamo il prompt?
 	ft_set_prompt(shell);
-	//ft_set_signals();
 }
