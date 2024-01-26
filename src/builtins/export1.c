@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/26 18:15:22 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/26 18:32:26 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*create_new_env_variable(const char *name, const char *value)
 	return (new_variable);
 }
 
-int	update_existing_var(t_shell *shell, const char *name, char *new_variable)
+int	update_exist_var(t_shell *shell, const char *name, char *new_variable)
 {
 	int	i;
 
@@ -73,7 +73,7 @@ void	add_env_variable(t_shell *shell, const char *name, const char *value)
 
 	new_variable = create_new_env_variable(name, value);
 	printf("New variable: %s\n", new_variable);
-	found = update_existing_var(shell, name, new_variable);
+	found = update_exist_var(shell, name, new_variable);
 	if (!found)
 	{
 		env_size = 0;
