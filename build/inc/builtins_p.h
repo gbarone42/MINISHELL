@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:10:43 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 14:58:18 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/26 15:24:34 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,5 +209,21 @@ void	print_current_time(void);
 void	whoami_command(void);
 bool contains_invalid_characters(const char *str);
 
+
+
+void handle_export(t_shell *shell, char **args);
+void process_env_variable(t_shell *shell, char *arg);
+
+//v
+void add_env_variable(t_shell *shell, const char *name, const char *value);
+void add_new_variable(t_shell *shell, char *new_variable, int env_size);
+int update_existing_variable(t_shell *shell, const char *name, char *new_variable);
+char *create_new_env_variable(const char *name, const char *value);
+
+//vv
+void add_envv_variable(t_shell *shell, const char *name, const char *value);
+void add_new_envv_variable(t_shell *shell, const char *name, const char *value);
+int find_envv_variable(t_shell *shell, const char *name, const char *value);
+char *create_envv_variable(const char *name, const char *value);
 
 #endif // MINISHELL_H
