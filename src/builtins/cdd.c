@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/26 14:58:48 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/26 18:08:20 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void	create_prompt(t_shell *shell, char *user_at_colon, \
 		perror("Error: Unable to allocate memory for the new prompt\n");
 		exit(EXIT_FAILURE);
 	}
-	strcpy(shell->prompt, user_at_colon);
-	strcat(shell->prompt, cwd);
-	strcat(shell->prompt, prompt_suffix);
+	ft_strcpy(shell->prompt, user_at_colon);
+	ft_strcat(shell->prompt, cwd);
+	ft_strcat(shell->prompt, prompt_suffix);
 }
 
 void	update_prompt(t_shell *shell)
