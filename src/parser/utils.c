@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 20:18:17 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/26 19:53:38 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/01/26 20:04:17 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	*ft_get_expd(t_tlist *t, size_t o, size_t *p_i)
 	return (expd);
 }
 
-void	ft_expand_env_variables(t_tlist *t, t_dsize_t o_i, \
+void	ft_expand_env_var(t_tlist *t, t_dsize_t o_i, \
 	char *expd)
 {
 	t_ilist	*exp;

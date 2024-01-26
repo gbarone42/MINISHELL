@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 16:26:35 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/26 19:52:08 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/01/26 20:04:17 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ t_tlist	*ft_lexer(t_shell *shell, char *input, size_t input_len, int state)
 		else if (state == QUOTE_STATE || state == DQUOTE_STATE)
 			state = ft_case_decorator(token, c, &i_j.y, state);
 	}
-	ft_expand_env_variables(first, (t_dsize_t){0, 0}, 0);
+	ft_expand_env_var(first, (t_dsize_t){0, 0}, 0);
 	ft_remove_quotes(first);
 	return (first);
 }

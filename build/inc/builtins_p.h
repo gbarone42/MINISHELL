@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_p.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:10:43 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 18:45:46 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 20:05:11 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ typedef struct command_node	t_clist;
 
 //extern char *history[HISTORY_SIZE];
 //extern int history_count;
-extern int		g_exit;
+extern int					g_exit;
 
 void	free_env_array(char **env_array);
 char	**ft_get_env_array(char **env);
