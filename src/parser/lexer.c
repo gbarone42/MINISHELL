@@ -6,56 +6,11 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 16:26:35 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/26 17:18:38 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/01/26 19:52:08 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	ft_expand_env_variables(t_shell *shell, t_tlist *token, \
-	size_t original_index)
-{
-	t_ilist	*expand;
-	char	*data;
-	size_t	index;
-	char	c;
-	char	*expanded;
-
-	while (token->next)
-	{
-		expand = token->expand;
-		if (token->type == GENERAL_TOKEN)
-		{
-			while (expand)
-			{
-				original_index = expand->index;
-				data = token->data;
-				index = original_index;
-				c = data[++index];
-				while (ft_isalnum(c) || c == '_')
-					c = data[++index];
-				if (c != '?' && index == original_index + 1)
-					break ;
-				data[original_index++] = '\0';
-				if (c == '?')
-				{
-					expanded = ft_itoa(shell->exit_status);
-					index++;
-				}
-				else
-					expanded = ft_get_value_of(shell, \
-					data + original_index, index - original_index);
-				expand = expand->next;
-				ft_update_ilist(expand, ft_strlen(expanded) - (index - original_index + 1));
-				expanded = ft_strjoin_and_free_second(data, expanded);
-				expanded = ft_strjoin_and_free_first(expanded, data + index);
-				free(data);
-				token->data = expanded;
-			}
-		}
-		token = token->next;
-	}
-}
 
 static void	ft_remove_quotes(t_tlist *token)
 {
@@ -141,8 +96,7 @@ t_tlist	*ft_lexer(t_shell *shell, char *input, size_t input_len, int state)
 		else if (state == QUOTE_STATE || state == DQUOTE_STATE)
 			state = ft_case_decorator(token, c, &i_j.y, state);
 	}
-	ft_expand_env_variables(shell, first, 0);
+	ft_expand_env_variables(first, (t_dsize_t){0, 0}, 0);
 	ft_remove_quotes(first);
-	//ft_print_tlist(first);
 	return (first);
 }

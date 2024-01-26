@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 00:19:35 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/25 20:52:04 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/01/26 19:51:56 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ void		ft_free_ilist(t_ilist *head);
 void		ft_update_ilist(t_ilist *expand, int diff);
 
 t_tlist		*ft_lexer(t_shell *shell, char *input, size_t input_len, int state);
+void		ft_expand_env_variables(t_tlist *token, t_dsize_t o_i, char *expanded);
 
 #endif
