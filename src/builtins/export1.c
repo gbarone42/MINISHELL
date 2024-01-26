@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/26 18:03:53 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/26 18:15:22 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	update_existing_var(t_shell *shell, const char *name, char *new_variable)
 	while (shell->env_list[i] != NULL)
 	{
 		if (ft_strncmp(shell->env_list[i], name, ft_strlen(name))
-			== 0 && shell->env_list[i][strlen(name)] == '=')
+			== 0 && shell->env_list[i][ft_strlen(name)] == '=')
 		{
 			free(shell->env_list[i]);
 			shell->env_list[i] = new_variable;
