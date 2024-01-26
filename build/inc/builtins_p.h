@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:10:43 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/25 21:49:09 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:43:57 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct s_shell		t_shell;
 
 typedef struct command_node	t_clist;
 
-extern	int	g_exit;
+extern int		g_exit;
 
 //extern char *history[HISTORY_SIZE];
 //extern int history_count;

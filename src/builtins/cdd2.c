@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cdd2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/23 20:14:15 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/26 11:44:43 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_handle_cd(t_shell *shell, char **args)
 {
-	printf("Input for 'cd': %s\n", shell->input);
 	if (args && args[1])
 	{
 		change_directory(shell, args[1]);
@@ -33,7 +32,6 @@ void	change_directory(t_shell *shell, char *path)
 	}
 	if (chdir(path) == 0)
 	{
-		printf("Changed to directory: %s\n", path);
 		update_prompt(shell);
 	}
 	else

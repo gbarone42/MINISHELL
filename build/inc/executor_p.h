@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:34:07 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/25 21:49:27 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 14:42:31 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 typedef struct command_node	t_clist;
 typedef struct s_shell		t_shell;
 typedef struct redirection	t_rlist;
+
+int		ft_isprio_cmd(t_shell *ms, t_clist *cmd);
 
 void	ft_exec_cmd(t_shell *ms);
 
