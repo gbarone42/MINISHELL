@@ -37,6 +37,7 @@ SRCS			=	$(SRC_DIR)/minishell.c \
 					$(SRC_DIR)/utils3.c \
 					$(SRC_DIR)/simulation.c \
 					$(SRC_DIR)/init.c \
+					$(SRC_DIR)/init2.c \
 					$(SRC_DIR)/signal.c \
 					$(SRC_DIR)/valid.c \
 					$(BUILTINS_DIR)/exit.c \

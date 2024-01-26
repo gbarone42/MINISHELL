@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:10:43 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 16:05:03 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/26 16:44:51 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,5 +225,10 @@ void add_envv_variable(t_shell *shell, const char *name, const char *value);
 void add_new_envv_variable(t_shell *shell, const char *name, const char *value);
 int find_envv_variable(t_shell *shell, const char *name, const char *value);
 char *create_envv_variable(const char *name, const char *value);
+
+int	create_user(char **user);
+int	copy_env_vars(t_shell *shell, char **env);
+char	**ft_get_env_array(char **env);
+void	free_env_array(char **env_array);
 
 #endif // MINISHELL_H
