@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 03:10:35 by badph             #+#    #+#             */
-/*   Updated: 2024/01/26 14:46:29 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:29:17 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_minishell_simulator(t_shell *shell)//remove envp
 {
 	while (1)
 	{
+		ft_norm_signal();
 		shell->input = readline(shell->prompt);
 		if (shell->input == NULL)
 			ft_ctrld(shell);

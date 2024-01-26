@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:34:19 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 15:53:24 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/26 16:59:10 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void	path_finder(t_shell *px)
 
 void	ft_check_cmd(t_shell *ms)
 {
-	if (ms && ms->commands && ms->commands->redirections && ms->commands->args == NULL)
+	if (ms && ms->commands && ms->commands->redirections
+		&& ms->commands->args == NULL)
 		ms->commands->args = ft_split("", ' ');
 }
 
