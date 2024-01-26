@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/26 16:17:56 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/26 17:05:27 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ int	find_envv_variable(t_shell *shell, const char *name, const char *value)
 	i = 0;
 	while (shell->env_list[i] != NULL)
 	{
-		if (ft_strncmp(shell->env_list[i], name, ft_strlen(name)) == 0 &&
-			(shell->env_list[i][ft_strlen(name)] == '=' || shell->env_list[i][ft_strlen(name)] == '\0'))
+		if (ft_strncmp(shell->env_list[i], name, ft_strlen(name)) == 0
+			&& (shell->env_list[i][ft_strlen(name)] == '='
+			|| shell->env_list[i][ft_strlen(name)] == '\0'))
 		{
 			free(shell->env_list[i]);
 			shell->env_list[i] = create_envv_variable(name, value);
@@ -56,7 +57,7 @@ int	find_envv_variable(t_shell *shell, const char *name, const char *value)
 	return (0);
 }
 
-void	add_new_envv_variable(t_shell *shell, const char *name, const char *value)
+void	add_new_envv_var(t_shell *shell, const char *name, const char *value)
 {
 	int		env_size;
 	char	*new_variable;
@@ -68,7 +69,8 @@ void	add_new_envv_variable(t_shell *shell, const char *name, const char *value)
 		env_size++;
 	}
 	new_variable = create_envv_variable(name, value);
-	new_env_list = (char **)ft_realloc(shell->env_list, env_size * sizeof(char *), (env_size + 2) * sizeof(char *));
+	new_env_list = (char **)ft_realloc(shell->env_list,
+			env_size * sizeof(char *), (env_size + 2) * sizeof(char *));
 	if (!new_env_list)
 	{
 		perror("Memory allocation failed for env array.\n");
@@ -83,6 +85,6 @@ void	add_envv_variable(t_shell *shell, const char *name, const char *value)
 {
 	if (!find_envv_variable(shell, name, value))
 	{
-		add_new_envv_variable(shell, name, value);
+		add_new_envv_var(shell, name, value);
 	}
 }
