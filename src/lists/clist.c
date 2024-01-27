@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:52:44 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/26 17:39:47 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/27 19:33:15 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_clist	*ft_new_clnode(void)
 	output = malloc(sizeof(*output));
 	if (!output)
 		return (NULL);
-	output->pathname = NULL;
 	output->args = NULL;
 	output->in = -1;
 	output->out = -1;
@@ -35,7 +34,6 @@ t_clist	*ft_free_clist(t_clist *head)
 
 	while (head)
 	{
-		free(head->pathname);
 		ft_free_char_p(head->args);
 		file = head->in;
 		if (file)
@@ -59,7 +57,6 @@ void	ft_print_clist(t_clist *head)
 	printf("\n-----PARSER-----\n\n");
 	while (head)
 	{
-		printf("pathname: %s\n", head->pathname);
 		printf("args: ");
 		ft_print_char_p(head->args);
 		printf("in: %d\n", head->in);

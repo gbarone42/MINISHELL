@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:44:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 12:30:02 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/27 20:43:35 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef struct redirection
 
 typedef struct command_node
 {
-	char				*pathname;
 	char				**args;
 	int					in;
 	int					out;
@@ -95,10 +94,6 @@ typedef struct s_shell
 	char		**export;
 }	t_shell;
 
-//    char *prompt;
-//  t_evlist *env_list;
-
-//add
 char		*ft_free(char **ptr);
 void		ft_redir(t_shell *ms, t_clist *cmd);
 

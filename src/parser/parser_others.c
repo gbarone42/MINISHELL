@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 16:59:57 by fcorri            #+#    #+#             */
-/*   Updated: 2024/01/23 14:38:22 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/27 20:44:09 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,33 @@ int	ft_term(t_tlist **p_token, int token_type, char **buffer)
 	return (0);
 }
 
-char	**ft_args(t_tlist **token)
+char	**ft_args_2(char **old_args, t_tlist **token, t_tlist *save)
+{
+	t_dsize_t	i_j;
+	char		**args;
+
+	save = *token;
+	i_j = (t_dsize_t){0, 0};
+	while (ft_term(token, GENERAL_TOKEN, NULL))
+		i_j.x++;
+	*token = save;
+	if (!i_j.x)
+		return (old_args);
+	while (old_args[i_j.y++])
+		i_j.x++;
+	args = malloc(sizeof(char *) * ++i_j.x);
+	i_j = (t_dsize_t){0, 0};
+	while (old_args[i_j.y])
+		args[i_j.x++] = old_args[i_j.y++];
+	free(old_args);
+	while (ft_term(token, GENERAL_TOKEN, &args[i_j.x++]))
+		save = *token;
+	args[i_j.x - 1] = NULL;
+	*token = save;
+	return (args);
+}
+
+char	**ft_args_1(t_tlist **token)
 {
 	t_tlist	*save;
 	size_t	index;
@@ -44,12 +70,9 @@ char	**ft_args(t_tlist **token)
 		return (NULL);
 	args = malloc(sizeof(char *) * ++index);
 	index = 0;
-	while (ft_term(token, GENERAL_TOKEN, &args[index]))
-	{
-		index++;
+	while (ft_term(token, GENERAL_TOKEN, &args[index++]))
 		save = *token;
-	}
-	args[index] = 0;
+	args[index - 1] = NULL;
 	*token = save;
 	return (args);
 }

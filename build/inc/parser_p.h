@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 17:03:31 by fcorri            #+#    #+#             */
-/*   Updated: 2024/01/26 19:38:51 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/01/27 20:01:52 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ typedef struct index_node	t_ilist;
 typedef struct token_node	t_tlist;
 
 void	ft_io_lists(t_tlist **token, t_clist *cmd);
-char	**ft_args(t_tlist **token);
+char	**ft_args_1(t_tlist **token);
+char	**ft_args_2(char **old_args, t_tlist **token, t_tlist *save);
 int		ft_term(t_tlist **p_token, int token_type, char **buffer);
 int		ft_check_grammar(t_tlist **p_first);
 
