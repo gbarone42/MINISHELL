@@ -71,6 +71,24 @@ void	ft_check_cmd(t_shell *ms)
 		ms->commands->args = ft_split("", ' ');
 }
 
+void	ft_exec_onparent(t_shell *ms)
+{
+	if (is_builtin_command(ms->commands->args[0]))
+		builtins_call(ms, ms->commands);
+	else
+	{
+		ms->pid_child = fork();
+		if (ms->pid_child == 0)
+		{
+			signal(SIGINT, SIG_DFL);
+			signal(SIGQUIT, SIG_DFL);
+			command_handler(ms, ms->commands);
+		}
+		else
+			parent_handler(ms);
+	}
+}
+
 void	ft_exec_cmd(t_shell *ms)
 {
 	ft_check_cmd(ms);
@@ -91,23 +109,7 @@ void	ft_exec_cmd(t_shell *ms)
 			if (ms->commands->out > -1)
 				dup2(ms->commands->out, STDOUT_FILENO);
 		}
-		if (is_builtin_command(ms->commands->args[0]))
-		{
-			builtins_call(ms, ms->commands);
-			//ft_free_shell(ms);
-		}
-		else
-		{
-			ms->pid_child = fork();
-			if (ms->pid_child == 0)
-			{
-				signal(SIGINT, SIG_DFL);
-				signal(SIGQUIT, SIG_DFL);
-				command_handler(ms, ms->commands);
-			}
-			else
-				parent_handler(ms);
-		}
+		ft_exec_onparent(ms);
 		dup2(ms->in, STDIN_FILENO);
 		dup2(ms->out, STDOUT_FILENO);
 	}

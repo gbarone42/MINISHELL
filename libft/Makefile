@@ -82,14 +82,10 @@ BONUS_SRCS		=	$(BONUS_DIR)/ft_lstadd_back.c \
 					$(BONUS_DIR)/ft_lstlast.c \
 					$(BONUS_DIR)/ft_lstmap.c \
 					$(BONUS_DIR)/ft_lstnew.c \
-					$(BONUS_DIR)/ft_lstsize.c \
-
-LIBS			=	$(BUILD_DIR)/libftprintf.a
-
-LIBS_DIR		=	$(SRCS_DIR)/printf
+					$(BONUS_DIR)/ft_lstsize.c
 
 OBJS			=	$(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o) \
-					$(BONUS_SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o) \
+					$(BONUS_SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o)
 
 AR				=	ar -crs
 RM				=	rm -f

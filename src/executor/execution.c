@@ -68,33 +68,6 @@ void	parent_handler(t_shell *ms)
 		ms->exit_status = WEXITSTATUS(child_exit_status) + 128;
 }
 
-void	redirs_fork(t_shell *ms, t_clist *cmd, int i)
-{
-	if (i == 0 && cmd && cmd->next)
-	{
-		cmd->in = STDIN_FILENO;
-		cmd->out = ms->fd_pipe[1];
-		close_fd(ms->fd_pipe[0]);
-	}
-	else if (i > 0 && cmd && cmd->next)
-	{
-		cmd->in = ms->tmp_fd;
-		cmd->out = ms->fd_pipe[1];
-		close_fd(ms->fd_pipe[0]);
-	}
-	else if (i > 0 && cmd && !cmd->next)
-	{
-		cmd->in = ms->tmp_fd;
-		cmd->out = STDOUT_FILENO;
-		close_fd(ms->fd_pipe[1]);
-		close_fd(ms->fd_pipe[0]);
-	}
-	if (cmd -> redirections)
-		ft_redir(ms, cmd);
-	dup2(cmd->in, STDIN_FILENO);
-	dup2(cmd->out, STDOUT_FILENO);
-}
-
 void	child_handler(t_shell *ms, t_clist *cmd, int i)
 {
 	signal(SIGQUIT, SIG_DFL);

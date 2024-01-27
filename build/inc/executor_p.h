@@ -20,6 +20,7 @@ typedef struct s_shell		t_shell;
 typedef struct redirection	t_rlist;
 
 void	parent_handler(t_shell *ms);
+void	redirs_fork(t_shell *ms, t_clist *cmd, int i);
 
 void	command_handler(t_shell *ms, t_clist *cmd);
 

@@ -14,6 +14,6 @@
 
 void	ft_error(char *caller, char *message)
 {
-	ft_printf("ERROR on %s:\t%s\n", caller, message);
+	printf("ERROR on %s:\t%s\n", caller, message);
 	exit(1);
 }

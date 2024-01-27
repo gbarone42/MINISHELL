@@ -26,7 +26,6 @@ int	ft_redir_out_exist(t_rlist *redirs)
 	return (0);
 }
 
-
 void	ft_catchange(t_clist *cmds)
 {
 	t_clist	*iter;
@@ -58,6 +57,7 @@ void	ft_read(t_shell *shell)
 	}
 	shell->exit_status = 0;
 }
+
 int	ft_isprio_cmd2(t_clist *cmds)
 {
 	char	*builtins[5];
@@ -77,6 +77,7 @@ int	ft_isprio_cmd2(t_clist *cmds)
 	}
 	return (0);
 }
+
 void	ft_prio_cmd(t_shell *ms, t_clist **cmds)
 {
 	t_clist	*iter;
