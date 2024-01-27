@@ -124,13 +124,13 @@ vgdb: clear all
 
 gdb: clear all
 	echo "target remote | vgdb\nb main\nc" > .gdbinit
-	gdb --args $(NAME)
+	gdb $(NAME)
 
 debug: clear all
-	gdb --args $(NAME)
+	gdb $(NAME)
 
 debugf: clear all
-	vi .gdbinit && gdb --args $(NAME)
+	vi .gdbinit && gdb $(NAME)
 
 TIME			=	2
 

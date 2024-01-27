@@ -6,7 +6,7 @@
 #    By: fcorri <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/31 15:29:43 by fcorri            #+#    #+#              #
-#    Updated: 2024/01/04 23:45:01 by filippo          ###   ########.fr        #
+#    Updated: 2024/01/27 19:11:56 by filippo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,8 +95,8 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(foreach LIB_DIR, $(LIBS_DIR), $(MAKE) -C $(LIB_DIR);)
 	$(foreach LIB, $(LIBS), ar -x $(LIB))
-	$(AR) $(NAME) $(OBJS) ./*.o
-	$(RM) ./*.o
+	$(AR) $(NAME) $(OBJS)
+	$(RM) $(OBJS)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(@D)
