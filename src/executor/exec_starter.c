@@ -29,7 +29,8 @@ int	is_builtin_command(char *command)
 		builtins[4] = "unset";
 		builtins[5] = "env";
 		builtins[6] = "exit";
-		builtins[7] = NULL;
+		builtins[7] = "readbuiltin";
+		builtins[8] = NULL;
 		while (builtins[i] != NULL)
 			if (strcmp(command, builtins[i++]) == 0)
 				return (1);
@@ -74,8 +75,40 @@ void	ft_exec_cmd(t_shell *ms)
 {
 	ft_check_cmd(ms);
 	path_finder(ms);
-	ft_prio_cmd(ms, &ms->commands);
-	ft_print_clist(ms->commands);
-	//pipe(ms->fd_pipe);
-	//ft_exec(ms, 0);
+	if (ms->commands && ms->commands->next)
+	{
+		ft_prio_cmd(ms, &ms->commands);
+		pipe(ms->fd_pipe);
+		ft_exec(ms, 0);
+	}
+	else if (ms->commands)
+	{
+		if (ms->commands->redirections)
+		{
+			ft_redir(ms, ms->commands);
+			if (ms->commands->in > -1)
+				dup2(ms->commands->in, STDIN_FILENO);
+			if (ms->commands->out > -1)
+				dup2(ms->commands->out, STDOUT_FILENO);
+		}
+		if (is_builtin_command(ms->commands->args[0]))
+		{
+			builtins_call(ms, ms->commands);
+			//ft_free_shell(ms);
+		}
+		else
+		{
+			ms->pid_child = fork();
+			if (ms->pid_child == 0)
+			{
+				signal(SIGINT, SIG_DFL);
+				signal(SIGQUIT, SIG_DFL);
+				command_handler(ms, ms->commands);
+			}
+			else
+				parent_handler(ms);
+		}
+		dup2(ms->in, STDIN_FILENO);
+		dup2(ms->out, STDOUT_FILENO);
+	}
 }

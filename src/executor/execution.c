@@ -58,6 +58,7 @@ void	parent_handler(t_shell *ms)
 	signal(SIGQUIT, signal_print);
 	waitpid(ms->pid_child, &child_exit_status, 0);
 	close_fd(ms->fd_pipe[1]);
+	close_fd(ms->tmp_fd);
 	ms->tmp_fd = ms->fd_pipe[0];
 	ms->fd_pipe[0] = -1;
 	ms->fd_pipe[1] = -1;
@@ -67,9 +68,8 @@ void	parent_handler(t_shell *ms)
 		ms->exit_status = WEXITSTATUS(child_exit_status) + 128;
 }
 
-void	child_handler(t_shell *ms, t_clist *cmd, int i)
+void	redirs_fork(t_shell *ms, t_clist *cmd, int i)
 {
-	signal(SIGQUIT, SIG_DFL);
 	if (i == 0 && cmd && cmd->next)
 	{
 		cmd->in = STDIN_FILENO;
@@ -93,7 +93,19 @@ void	child_handler(t_shell *ms, t_clist *cmd, int i)
 		ft_redir(ms, cmd);
 	dup2(cmd->in, STDIN_FILENO);
 	dup2(cmd->out, STDOUT_FILENO);
-	command_handler(ms, cmd);
+}
+
+void	child_handler(t_shell *ms, t_clist *cmd, int i)
+{
+	signal(SIGQUIT, SIG_DFL);
+	redirs_fork(ms, cmd, i);
+	if (is_builtin_command(cmd->args[0]))
+	{
+		builtins_call(ms, cmd);
+		ft_free_and_exit(ms, 0);
+	}
+	else
+		command_handler(ms, cmd);
 }
 
 void	ft_exec(t_shell *ms, int i)
@@ -101,13 +113,11 @@ void	ft_exec(t_shell *ms, int i)
 	t_clist	*iter;
 
 	iter = ms->commands;
-	ms->tmp_fd = STDIN_FILENO;
+	ms->tmp_fd = -1;
 	while (iter)
 	{
 		if (pipe(ms->fd_pipe) < 0)
 			perror("pipe");
-		if (is_builtin_command(iter->args[0]))
-			builtins_call(ms, iter, i);
 		else
 		{
 			ms->pid_child = fork();

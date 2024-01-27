@@ -187,7 +187,7 @@ void	handle_basic_builtin1(t_shell *shell, char **args);
 void	handle_basic_builtin2(t_shell *shell, char **args);
 void	handle_basic_builtins(t_shell *shell, t_clist *commands);
 void	handle_other_builtins(t_shell *shell);
-void	builtins_call(t_shell *shell, t_clist *commands, int i);
+void	builtins_call(t_shell *shell, t_clist *commands);
 int		is_builtin_command(char *command);
 
 //history

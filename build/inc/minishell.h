@@ -53,7 +53,8 @@ enum
 	OUTPUT = 1,
 	APPEND = 2,
 	HEREDOC = 3,
-	PRIOROUTPUT = 24
+	PRIOROUTPUT = 24,
+	DEVNULLOUT = 25
 };
 
 typedef struct redirection

@@ -61,7 +61,7 @@ int	copy_env_vars(t_shell *shell, char **env)
 	shell->env_list = ft_get_env_array(env);
 	if (!shell->env_list)
 	{
-		write(STDERR_FILENO, "Failed to allocate for env_list_copied.\n", 48);
+		write(STDERR_FILENO, "Failed to allocate for env_list_copied.\n", 41);
 		return (MEM_ERROR2);
 	}
 	return (0);

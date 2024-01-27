@@ -59,7 +59,6 @@ void	ft_child_prio(t_shell *ms, t_clist *cmd, int inf, int outf)
 	i = 0;
 	dup2(inf, STDIN_FILENO);
 	dup2(outf, STDOUT_FILENO);
-	//dup2(outf, STDERR_FILENO);
 	cmd_sp = cmd->args;
 	if (ft_strcmp(cmd_sp[0], "") == 0)
 	{

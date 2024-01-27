@@ -50,7 +50,7 @@ void	ft_free_rlist(t_rlist *head)
 
 	while (head)
 	{
-		free(head->filename);
+		head->filename = ft_free_char(&head->filename);
 		tmp = head;
 		head = head->next;
 		free(tmp);

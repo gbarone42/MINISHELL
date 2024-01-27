@@ -19,6 +19,12 @@ typedef struct command_node	t_clist;
 typedef struct s_shell		t_shell;
 typedef struct redirection	t_rlist;
 
+void	parent_handler(t_shell *ms);
+
+void	command_handler(t_shell *ms, t_clist *cmd);
+
+void	ft_read(t_shell *shell);
+
 void	ft_free_err_cmdnotf(t_shell *shell, char *caller, int error);
 
 int		ft_isprio_cmd(t_shell *ms, t_clist *cmd);

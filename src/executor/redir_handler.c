@@ -53,6 +53,8 @@ int	out_handler(t_clist *cmd)
 				O_CREAT | O_WRONLY | O_APPEND, 0666);
 	else if (cmd->redirections->type == PRIOROUTPUT)
 		tmp = STDOUT_FILENO;
+	else if (cmd->redirections->type == DEVNULLOUT)
+		tmp = open("/dev/null", O_APPEND, 0666);
 	if (tmp < 0)
 		perror(cmd->redirections->filename);
 	return (tmp);
@@ -79,7 +81,8 @@ void	ft_redir(t_shell *ms, t_clist *cmd)
 	{
 		if (cmd->redirections->type == OUTPUT
 			|| cmd->redirections->type == APPEND
-			|| cmd->redirections->type == PRIOROUTPUT)
+			|| cmd->redirections->type == PRIOROUTPUT
+			|| cmd->redirections->type == DEVNULLOUT)
 		{
 			close_fd(cmd->out);
 			cmd->out = out_handler(cmd);

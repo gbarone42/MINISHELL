@@ -20,8 +20,8 @@ char	*create_new_env_variable(const char *name, const char *value)
 	if (!new_variable)
 	{
 		printf("Memory allocation failed for env variable.\n");
-		//exit(EXIT_FAILURE);
-		ft_free_and_err(ft_ret_shell(NULL), "create_new_env_variable", errno = ENOMEM);// ma serve proprio?
+		ft_free_and_err(ft_ret_shell(NULL),
+			"create_new_env_variable", errno = ENOMEM);
 	}
 	ft_strcpy(new_variable, name);
 	ft_strcat(new_variable, "=");

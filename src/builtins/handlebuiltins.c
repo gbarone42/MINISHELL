@@ -29,7 +29,6 @@ void	handle_basic_builtin1(t_shell *shell, char **args)
 {
 	if (!ft_strncmp(args[0], "exit", 5))
 	{
-		//free_args(args);
 		shell_exit(shell);
 	}
 	else if (args && args[0] && !ft_strcmp(args[0], "cd"))
@@ -60,6 +59,10 @@ void	handle_basic_builtin2(t_shell *shell, char **args)
 	{
 		handle_env(shell);
 	}
+	else if (!ft_strncmp(args[0], "readbuiltin", 4))
+	{
+		ft_read(shell);
+	}
 }
 
 void	handle_basic_builtins(t_shell *shell, t_clist *commands)
@@ -68,42 +71,7 @@ void	handle_basic_builtins(t_shell *shell, t_clist *commands)
 	handle_basic_builtin2(shell, commands->args);
 }
 
-void	builtins_call(t_shell *shell, t_clist *commands, int i)
+void	builtins_call(t_shell *shell, t_clist *commands)
 {
-	if (i == 0 && commands && commands->next)
-	{
-		commands->in = STDIN_FILENO;
-		commands->out = shell->fd_pipe[1];
-		//close_fd(shell->fd_pipe[0]);
-	}
-	else if (i > 0 && commands && commands->next)
-	{
-		commands->in = shell->tmp_fd;
-		commands->out = shell->fd_pipe[1];
-		close_fd(shell->fd_pipe[0]);
-	}
-	else if (i > 0 && commands && !commands->next)
-	{
-		commands->in = shell->tmp_fd;
-		commands->out = STDOUT_FILENO;
-		close_fd(shell->fd_pipe[1]);
-		close_fd(shell->fd_pipe[0]);
-	}
-	if (commands -> redirections)
-		ft_redir(shell, commands);
-	if (commands->in > -1)
-		dup2(commands->in, STDIN_FILENO);
-	else
-		dup2(STDIN_FILENO, STDIN_FILENO);
-	dup2(commands->out, STDOUT_FILENO);
 	handle_basic_builtins(shell, commands);
-	close_fd(commands->out);
-	close_fd(commands->in);
-	dup2(shell->in, STDIN_FILENO);
-	dup2(shell->out, STDOUT_FILENO);
-	close_fd(shell->fd_pipe[1]);
-	close_fd(shell->tmp_fd);
-	shell->tmp_fd = shell->fd_pipe[0];
-	shell->fd_pipe[0] = -1;
-	shell->fd_pipe[1] = -1;
 }
