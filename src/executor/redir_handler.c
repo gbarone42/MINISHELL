@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:41:24 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/25 15:29:23 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/27 23:49:55 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,22 +77,27 @@ int	in_handler(t_shell *ms, t_clist *cmd)
 
 void	ft_redir(t_shell *ms, t_clist *cmd)
 {
-	while (cmd->redirections)
+	t_rlist	*redir;
+	int		type;
+
+	redir = cmd->redirections;
+	while (redir)
 	{
-		if (cmd->redirections->type == OUTPUT
-			|| cmd->redirections->type == APPEND
-			|| cmd->redirections->type == PRIOROUTPUT
-			|| cmd->redirections->type == DEVNULLOUT)
+		type = redir->type;
+		if (type == OUTPUT
+			|| type == APPEND
+			|| type == PRIOROUTPUT
+			|| type == DEVNULLOUT)
 		{
 			close_fd(cmd->out);
 			cmd->out = out_handler(cmd);
 		}
-		else if (cmd->redirections->type == INPUT
-			|| cmd->redirections->type == HEREDOC)
+		else if (type == INPUT
+			|| type == HEREDOC)
 		{
 			close_fd(cmd->in);
 			cmd->in = in_handler(ms, cmd);
 		}
-		cmd->redirections = cmd->redirections->next;
+		redir = redir->next;
 	}
 }
