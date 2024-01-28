@@ -6,14 +6,14 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 11:56:14 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/23 15:57:35 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/28 19:16:09 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 1
 # endif
 # include <stdlib.h>
 # include <stdint.h>

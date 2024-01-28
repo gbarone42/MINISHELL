@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:53:43 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/23 16:04:10 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/28 19:26:01 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 			// se r == -1 libero e restituisco NULL
 			// se r == 0  e buffer e' NULL restituisco NULL
 */
+
 char	*get_next_line(int fd)
 {
 	char		*out;

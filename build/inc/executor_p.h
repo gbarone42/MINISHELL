@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:34:07 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 18:11:54 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/28 20:07:20 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ void	redirs_fork(t_shell *ms, t_clist *cmd, int i);
 
 void	command_handler(t_shell *ms, t_clist *cmd);
 
+int		heredoc_handler(t_shell *shell, char *delim);
+void	heredoc_handler_prio(t_shell *shell, char *delim);
+
 void	ft_read(t_shell *shell);
+char	*gnl(int fd);
 
 void	ft_free_err_cmdnotf(t_shell *shell, char *caller, int error);
 

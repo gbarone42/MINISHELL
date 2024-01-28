@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/26 11:44:43 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/28 20:15:51 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	change_directory(t_shell *shell, char *path)
 	}
 	else
 	{
+		shell->exit_status = 1;
 		perror("cd");
 	}
 }

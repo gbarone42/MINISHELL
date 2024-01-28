@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 03:12:42 by badph             #+#    #+#             */
-/*   Updated: 2024/01/26 17:28:43 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/28 19:49:39 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	signal_handler(int sig)
 {
 	(void)sig;
 	ft_kill_child(0);
-	write(STDOUT_FILENO, "\n \n", 3);
+	write(STDOUT_FILENO, "\n", 1);
 	g_exit = 130;
 	rl_on_new_line();
 	rl_replace_line("", 0);

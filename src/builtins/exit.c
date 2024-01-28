@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:22:16 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/26 17:41:09 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/28 19:43:22 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ void	exit_shell(void)
 
 void	shell_exit(t_shell *shell)
 {
+	printf("exit\n");
 	ft_free_and_exit(shell, g_exit);
 }

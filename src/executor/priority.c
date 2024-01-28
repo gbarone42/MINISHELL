@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:41:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 20:11:41 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/01/28 20:10:31 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,7 @@ void	ft_catchange(t_clist *cmds)
 
 void	ft_read(t_shell *shell)
 {
-	char	*pew;
-
 	(void)shell;
-	pew = readline(NULL);
-	if (ft_strchr(pew, '\n'))
-	{
-		printf("%s", pew);
-		printf("\n");
-	}
 	shell->exit_status = 0;
 }
 
