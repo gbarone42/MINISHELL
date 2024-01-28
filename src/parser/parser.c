@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 20:16:03 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/26 15:53:51 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/01/27 20:01:35 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ static void	ft_simple_command(t_tlist **token, t_clist *cmd)
 {
 	char	**args;
 
-	args = ft_args(token);
+	args = ft_args_1(token);
 	if (!args)
 		return ;
+	ft_io_lists(token, cmd);
+	args = ft_args_2(args, token, NULL);
 	cmd->args = args;
 }
 
@@ -34,18 +36,12 @@ static t_clist	*ft_jobs(t_tlist **token);
 static t_clist	*ft_job(t_tlist **token)
 {
 	t_clist	*cmd;
-	t_tlist	*save;
 	t_clist	*job;
 
 	cmd = ft_new_clnode();
 	ft_command(token, cmd);
-	save = *token;
 	if (!ft_term(token, PIPE_TOKEN, NULL))
-	{
-		*token = save;
-		if (!ft_term(token, LF_TOKEN, NULL))
-			return (ft_free_clist(cmd));
-	}
+		return (ft_free_clist(cmd));
 	job = ft_jobs(token);
 	if (!job)
 		return (ft_free_clist(cmd));
