@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:44:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/27 20:43:35 by filippo          ###   ########.fr       */
+/*   Updated: 2024/01/28 18:30:21 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,7 @@ void		ft_print_clist(t_clist *head);
 char		*ft_strjoin_and_free_first(char *first, char *second);
 char		*ft_strjoin_and_free_second(char *first, char *second);
 void		ft_set_prompt(t_shell *shell);
+
+void		remove_env_variable(t_shell *shell, const char *var_name);
 
 #endif

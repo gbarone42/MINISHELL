@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: naal-jen <naal-jen@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/26 17:05:27 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/27 19:55:05 by naal-jen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char	*create_envv_variable(const char *name, const char *value)
 		ft_strcat(variable, "=");
 		ft_strcat(variable, value);
 	}
+	// else
+	// 	ft_strcat(variable, "=");
 	return (variable);
 }
 
