@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/28 18:24:54 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/28 18:40:53 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	handle_name_only(t_shell *shell, char *name)
 			printf("Invalid variable new_name: %s\n", new_name);
 		else
 			add_envv_variable(shell, new_name, "");
+		free(new_name);
 	}
 	else
 		printf("Invalid export syntax: %s\n", name);
