@@ -12,31 +12,19 @@
 
 #include "minishell.h"
 
-void	process_env_variable(t_shell *shell, char *arg)
+void	free_arr(char ***arr)
 {
-	char	*name;
-	char	*value;
+	int	i;
 
-	name = ft_strtok(arg, '=');
-	value = ft_strtok(NULL, '=');
-	if (name != NULL)
+	i = 0;
+	while ((*arr)[i])
 	{
-		if (contains_invalid_characters(name))
-			printf("Invalid variable name: %s\n", name);
-		else
-		{
-			if (value == NULL)
-			{
-				add_envv_variable(shell, name, "");
-			}
-			else
-			{
-				add_env_variable(shell, name, value);
-			}
-		}
+		free((*arr)[i]);
+		(*arr)[i] = NULL;
+		i++;
 	}
-	else
-		printf("Invalid export syntax: %s\n", arg);
+	free(*arr);
+	*arr = NULL;
 }
 
 void	handle_export(t_shell *shell, char **args)
