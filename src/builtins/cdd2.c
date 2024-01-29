@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cdd2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/11 19:21:50 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/28 20:15:51 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 void	ft_handle_cd(t_shell *shell, char **args)
 {
-	printf("Input for 'cd': %s\n", shell->input);
 	if (args && args[1])
 	{
 		change_directory(shell, args[1]);
@@ -33,11 +32,11 @@ void	change_directory(t_shell *shell, char *path)
 	}
 	if (chdir(path) == 0)
 	{
-		printf("Changed to directory: %s\n", path);
 		update_prompt(shell);
 	}
 	else
 	{
+		shell->exit_status = 1;
 		perror("cd");
 	}
 }
@@ -52,7 +51,7 @@ void	get_current_directory(char *cwd)
 	}
 }
 
-char*	build_user_string(void)
+char	*build_user_string(void)
 {
 	char	*user;
 
@@ -65,7 +64,7 @@ char*	build_user_string(void)
 	return (user);
 }
 
-char*	build_user_at_string(char *user)
+char	*build_user_at_string(char *user)
 {
 	char	*user_at;
 

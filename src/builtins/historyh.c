@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   historyh.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:48 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/11 18:54:33 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/25 21:54:22 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 void	add_to_history(t_history *history, char	*command)
 {
@@ -20,7 +20,7 @@ void	add_to_history(t_history *history, char	*command)
 	add_history(command);
 	if (history->count < HISTORY_SIZE)
 	{
-		history->entries[history->count++] = strdup(command);
+		history->entries[history->count++] = ft_strdup(command);
 	}
 	else
 	{
@@ -30,7 +30,7 @@ void	add_to_history(t_history *history, char	*command)
 			history->entries[i] = history->entries[i + 1];
 			i++;
 		}
-		history->entries[history->count - 1] = strdup(command);
+		history->entries[history->count - 1] = ft_strdup(command);
 	}
 	free(command);
 }

@@ -6,11 +6,11 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/11 19:20:24 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/26 18:08:20 by gbarone          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 void	free_memory(char *usr, char *usr_at, \
 	char *useratcolon, char *promsufx)
@@ -21,7 +21,7 @@ void	free_memory(char *usr, char *usr_at, \
 	free(promsufx);
 }
 
-char*	build_user_at_colon_string(char *user_at)
+char	*build_user_at_colon_string(char	*user_at)
 {
 	char	*user_at_colon;
 
@@ -35,7 +35,7 @@ char*	build_user_at_colon_string(char *user_at)
 	return (user_at_colon);
 }
 
-char*	build_prompt_suffix(void)
+char	*build_prompt_suffix(void)
 {
 	char	*prompt_suffix;
 
@@ -51,17 +51,16 @@ char*	build_prompt_suffix(void)
 void	create_prompt(t_shell *shell, char *user_at_colon, \
 	char *cwd, char *prompt_suffix)
 {
-	shell->prompt = (char *)malloc(strlen(user_at_colon) +\
-					strlen(cwd) + strlen(prompt_suffix) + 1);
+	shell->prompt = (char *)malloc(ft_strlen(user_at_colon) +\
+					ft_strlen(cwd) + ft_strlen(prompt_suffix) + 1);
 	if (!shell->prompt)
 	{
 		perror("Error: Unable to allocate memory for the new prompt\n");
 		exit(EXIT_FAILURE);
 	}
-	strcpy(shell->prompt, user_at_colon);
-	strcat(shell->prompt, cwd);
-	strcat(shell->prompt, prompt_suffix);
-	printf("Updated prompt: %s\n", shell->prompt);
+	ft_strcpy(shell->prompt, user_at_colon);
+	ft_strcat(shell->prompt, cwd);
+	ft_strcat(shell->prompt, prompt_suffix);
 }
 
 void	update_prompt(t_shell *shell)

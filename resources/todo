@@ -1,0 +1,11 @@
+BEPPE:
+Norminettare Builtin File e i suoi altri file
+Rimuovere File e funzioni non utilizzati
+Funzione ft_isbuiltin()
+	-Restituisce 1 se builtin
+	-restituisce 0 se nobuiltin
+	-Non esegue le builtin solo check se il comando e'
+SIMO:
+Fix Pipe Error
+GENERALE:
+Memory Leak vary alla chiusura del programma

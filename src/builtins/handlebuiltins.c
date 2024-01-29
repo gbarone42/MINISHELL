@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handlebuiltins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: badph <badph@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:01:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/12 03:11:10 by badph            ###   ########.fr       */
+/*   Updated: 2024/01/26 19:39:01 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 void	free_args(char **args)
 {
@@ -27,16 +27,15 @@ void	free_args(char **args)
 
 void	handle_basic_builtin1(t_shell *shell, char **args)
 {
-	if (!ft_strncmp(shell->input, "exit", 5))
+	if (!ft_strncmp(args[0], "exit", 5))
 	{
-		free_args(args);
 		shell_exit(shell);
 	}
 	else if (args && args[0] && !ft_strcmp(args[0], "cd"))
 	{
 		ft_handle_cd(shell, args);
 	}
-	if (args && args[0] && strcmp(args[0], "echo") == 0)
+	if (args && args[0] && ft_strcmp(args[0], "echo") == 0)
 	{
 		handle_echo(args);
 	}
@@ -44,7 +43,7 @@ void	handle_basic_builtin1(t_shell *shell, char **args)
 
 void	handle_basic_builtin2(t_shell *shell, char **args)
 {
-	if (!ft_strncmp(shell->input, "pwd", 4))
+	if (!ft_strncmp(args[0], "pwd", 4))
 	{
 		print_current_directory();
 	}
@@ -56,45 +55,23 @@ void	handle_basic_builtin2(t_shell *shell, char **args)
 	{
 		handle_unset(shell, args);
 	}
-	else if (!ft_strncmp(shell->input, "env", 4))
+	else if (!ft_strncmp(args[0], "env", 4))
 	{
 		handle_env(shell);
 	}
-	free_args(args);
-}
-
-void	handle_basic_builtins(t_shell *shell)
-{
-	char	**args;
-	int		i;
-
-	i = 0;
-	printf("Input before comparison: %s\n", shell->input);
-	args = ft_split(shell->input, ' ');
-	printf("First command of Input after comparison: %s\n", args[0]);
-	while (args[i])
+	else if (!ft_strncmp(args[0], "readbuiltin", 4))
 	{
-		printf("arg[%d]: %s\n", i, args[i]);
-		i++;
-	}
-	handle_basic_builtin1(shell, args);
-	handle_basic_builtin2(shell, args);
-}
-
-void	handle_other_builtins(t_shell *shell)
-{
-	if (!ft_strncmp(shell->input, "clear", 6))
-	{
-		clear_screen();
-	}
-	else if (!ft_strncmp(shell->input, "ls", 3))
-	{
-		print_current_directory_contents();
+		ft_read(shell);
 	}
 }
 
-void	builtins_call(t_shell *shell)
+void	handle_basic_builtins(t_shell *shell, t_clist *commands)
 {
-	handle_basic_builtins(shell);
-	handle_other_builtins(shell);
+	handle_basic_builtin1(shell, commands->args);
+	handle_basic_builtin2(shell, commands->args);
+}
+
+void	builtins_call(t_shell *shell, t_clist *commands)
+{
+	handle_basic_builtins(shell, commands);
 }

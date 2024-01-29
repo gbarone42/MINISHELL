@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echos.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:29 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/10 17:30:51 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/26 19:25:13 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 void	echo_no_arguments(void)
 {
@@ -57,7 +57,7 @@ void	handle_echo(char **args)
 	{
 		echo_no_arguments();
 	}
-	else if (strcmp(args[1], "-n") == 0)
+	else if (ft_strcmp(args[1], "-n") == 0)
 	{
 		echo_with_n_argument(args);
 	}

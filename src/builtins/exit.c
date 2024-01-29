@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:22:16 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/11 18:23:40 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/01/28 19:43:22 by sdel-gra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "minishell.h"
 
 void	free_basic_memory(t_shell *shell)
 {
@@ -31,7 +31,7 @@ void	free_array_memory(t_shell *shell)
 	i = 0;
 	if (shell->env_list)
 	{
-		free_env_list(shell->env_list);
+		free_env_array(shell->env_list);
 		shell->env_list = NULL;
 	}
 	if (shell->paths)
@@ -74,8 +74,6 @@ void	exit_shell(void)
 
 void	shell_exit(t_shell *shell)
 {
-	clear_shell_history(&shell->history);
-	free_basic_memory(shell);
-	free_array_memory(shell);
-	exit_shell();
+	printf("exit\n");
+	ft_free_and_exit(shell, g_exit);
 }

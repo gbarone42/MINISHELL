@@ -1,49 +1,3 @@
-# Define the target executable name
-NAME = build/minishell
-
-# Directories
-SRC_DIR = src
-OBJ_DIR = build
-INCLUDE_DIR = include  # Change this to the appropriate folder for header files
-
-
-# Source files
-SRCS =	${SRC_DIR}/minishell.c	\
-		${SRC_DIR}/utils1.c	\
-		${SRC_DIR}/utils2.c	\
-		${SRC_DIR}/utils3.c	\
-		${SRC_DIR}/test.c	\
-		${SRC_DIR}/simulation.c	\
-		${SRC_DIR}/init.c	\
-		${SRC_DIR}/signal.c	\
-		${SRC_DIR}/valid.c	\
-		${SRC_DIR}/builtins/exit.c	\
-		${SRC_DIR}/builtins/historyh.c	\
-		${SRC_DIR}/builtins/clears.c	\
-		${SRC_DIR}/builtins/pwds.c	\
-		${SRC_DIR}/builtins/lss.c	\
-		${SRC_DIR}/builtins/echos.c	\
-		${SRC_DIR}/builtins/cdd.c	\
-		${SRC_DIR}/builtins/cdd2.c	\
-		${SRC_DIR}/builtins/handlebuiltins.c	\
-		${SRC_DIR}/builtins/envv.c	\
-		${SRC_DIR}/builtins/export_unset.c	\
-		${SRC_DIR}/parsing.c	\
-       # Add other source files as necessary
-
-# Header files
-HDRS = ${wildcard ${INCLUDE_DIR}/*.h}
-
-# Object files
-OBJS = ${patsubst ${SRC_DIR}/%.c,${OBJ_DIR}/%.o,${SRCS}}
-
-# Compiler and flags
-CC = gcc
-RM = rm -rf
-FLAGS = -g -Wall -Wextra -Werror -I${INCLUDE_DIR}
-MAKEFLAGS += --silent
-LIBFLAGS = -lreadline
-
 # Color codes for output messages
 CLR_RMV = \033[0m
 RED = \033[1;31m
@@ -53,46 +7,140 @@ BLUE = \033[1;34m
 CYAN = \033[1;36m
 GOLD = \033[1;33m
 
-# Rule to compile individual source files
-${OBJ_DIR}/%.o: ${SRC_DIR}/%.c ${HDRS}
-	@mkdir -p ${@D}
-	${CC} ${FLAGS} -c $< -o $@
+# Define the target executable name
+NAME			=	$(BUILD_DIR)/minishell
 
-# Build the executable
-${NAME}: ${OBJS}
-	@echo "${GREEN}Compiling ${CLR_RMV} ${GOLD}${NAME} ${CLR_RMV}..."
-	${CC} ${FLAGS} ${OBJS} ${LIBFLAGS} -o ${NAME}
-	@echo "${GOLD}${NAME} created[0m "
+# Directories
+BUILD_DIR		=	build
+INC_DIR			=	$(BUILD_DIR)/inc
+OBJ_DIR			=	$(BUILD_DIR)/obj
+LIBFT_DIR		=	libft
+SRC_DIR			=	src
+EXEC_DIR		=	$(SRC_DIR)/executor
+PARSER_DIR		=	$(SRC_DIR)/parser
+LISTS_DIR		=	$(SRC_DIR)/lists
+BUILTINS_DIR	=	$(SRC_DIR)/builtins
 
-# Build all
-all: ${NAME}
+# Compiler and flags
+CC				=	cc
+CFLAGS			=	-g3
+REQUIRED_CFLAGS	=	$(CFLAGS) -Wall -Wextra -Werror
+CPPFLAGS		=	$(addprefix -I, $(INC_DIR) $(LIBFT_DIR)/$(INC_DIR) /usr/local/include)
+LDFLAGS			=	$(addprefix -L, $(LIBFT_DIR)/$(BUILD_DIR) /usr/local/lib)
+LDLIBS			=	$(addprefix -l, ft readline)
 
-# Clean object files
+RM				=	rm -rf
+
+SRCS			=	$(SRC_DIR)/minishell.c \
+					$(SRC_DIR)/utils1.c \
+					$(SRC_DIR)/utils2.c \
+					$(SRC_DIR)/utils3.c \
+					$(SRC_DIR)/simulation.c \
+					$(SRC_DIR)/init.c \
+					$(SRC_DIR)/init2.c \
+					$(SRC_DIR)/signal.c \
+					$(SRC_DIR)/valid.c \
+					$(BUILTINS_DIR)/exit.c \
+					$(BUILTINS_DIR)/historyh.c \
+					$(BUILTINS_DIR)/pwds.c \
+					$(BUILTINS_DIR)/echos.c \
+					$(BUILTINS_DIR)/cdd.c \
+					$(BUILTINS_DIR)/cdd2.c \
+					$(BUILTINS_DIR)/handlebuiltins.c \
+					$(BUILTINS_DIR)/envv.c \
+					$(BUILTINS_DIR)/export.c \
+					$(BUILTINS_DIR)/export1.c \
+					$(BUILTINS_DIR)/export2.c \
+					$(BUILTINS_DIR)/export3.c \
+					$(BUILTINS_DIR)/export4.c \
+					$(BUILTINS_DIR)/unset.c \
+					$(BUILTINS_DIR)/utils_built.c \
+					$(BUILTINS_DIR)/utils_built2.c \
+					$(EXEC_DIR)/clist_utils.c \
+					$(EXEC_DIR)/exec_starter.c \
+					$(EXEC_DIR)/execution.c \
+					$(EXEC_DIR)/free.c \
+					$(EXEC_DIR)/priority.c \
+					$(EXEC_DIR)/redir_handler.c \
+					$(EXEC_DIR)/redir.c \
+					$(EXEC_DIR)/tools_file.c \
+					$(EXEC_DIR)/priority_execution.c \
+					$(PARSER_DIR)/env.c \
+					$(PARSER_DIR)/free.c \
+					$(PARSER_DIR)/init.c \
+					$(PARSER_DIR)/lexer.c \
+					$(PARSER_DIR)/parser.c \
+					$(PARSER_DIR)/parser_io_lists.c \
+					$(PARSER_DIR)/parser_others.c \
+					$(PARSER_DIR)/string.c \
+					$(PARSER_DIR)/utils.c \
+					$(LISTS_DIR)/clist.c \
+					$(LISTS_DIR)/ilist.c \
+					$(LISTS_DIR)/rlist.c \
+					$(LISTS_DIR)/tlist.c
+
+HEADERS			=	$(INC_DIR)/minishell.h \
+					$(INC_DIR)/executor_p.h \
+					$(INC_DIR)/lexer_p.h \
+					$(INC_DIR)/builtins_p.h \
+					$(INC_DIR)/parser_p.h
+
+OBJS			=	$(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+
+all: $(NAME)
+
+$(NAME): $(LIBFT_DIR)/$(BUILD_DIR)/libft.a $(OBJS)
+	$(CC) $(OBJS) $(REQUIRED_CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(LDLIBS) -o $(NAME)
+
+$(LIBFT_DIR)/$(BUILD_DIR)/libft.a:
+	make -C $(LIBFT_DIR)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS)
+	@mkdir -p $(@D)
+	$(CC) -c $< $(REQUIRED_CFLAGS) $(CPPFLAGS) -o $@
+
 clean:
-	@echo "${RED}Deleting ${LAVENDER}${NAME}'s ${CLR_RMV}objs"
-	@find ${OBJ_DIR} -name "*.o" -type f -delete
+	make -C libft clean
+	$(RM) $(OBJS)
 
-# Clean all files
 fclean: clean
-	@echo "${RED}Deleting ${CYAN}${NAME}'s ${CLR_RMV}objs and executable"
-	@${RM} ${NAME}
+	make -C libft fclean
+	$(RM) $(NAME)
 
-# Clean and rebuild
 re: fclean all
 
-# Custom command 'makex'
-x: fclean all
-
-
-	@echo "${GREEN}Running ${CYAN}${NAME} ${CLR_RMV}..."
-	-@./$(NAME)
-#i've added '-' in front of @./$(NAME) because i wanted to silence this error "make: *** [Makefile:75: x] Error 130".
-#i've havent solved the problem at the root, i just silenced this problem that only happens if im compiling with "make x"
-
 clear:
-		clear
+	clear
 
-mem:clear all
-	valgrind --leak-check=full --show-leak-kinds=all --suppressions=EXTRA/readline.supp ./build/minishell
+run: clear all
+	$(NAME)
 
-.PHONY: all clean fclean re x clear mem
+VALGRIND-TOOL	=	memcheck
+VALGRIND-OPTIONS=	--track-origins=yes --leak-check=full --show-leak-kinds=all --suppressions=resources/readline.supp
+
+mem: clear all
+	valgrind --tool=$(VALGRIND-TOOL) $(VALGRIND-OPTIONS) $(NAME)
+
+vgdb: clear all
+	valgrind --tool=$(VALGRIND-TOOL) $(VALGRIND-OPTIONS) --vgdb-error=0 $(NAME)
+
+gdb: clear all
+	echo "target remote | vgdb\nb main\nc" > .gdbinit
+	gdb $(NAME)
+
+debug: clear all
+	gdb $(NAME)
+
+debugf: clear all
+	vi .gdbinit && gdb $(NAME)
+
+TIME			=	2
+
+arg_norme		?=	src
+norme:
+	while [ 1 ] ; do sleep $(TIME) ; clear ; norminette $(arg_norme) ; done
+
+compile:
+	while [ 1 ] ; do sleep $(TIME) ; clear ; make ; done
+
+.PHONY: all clean fclean re x clear run mem vgdb gdb debug debugf norme compile
