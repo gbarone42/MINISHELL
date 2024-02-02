@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:41:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/28 20:10:31 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/02/02 18:21:45 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,6 @@ void	ft_catchange(t_clist *cmds)
 	}
 }
 
-void	ft_read(t_shell *shell)
-{
-	(void)shell;
-	shell->exit_status = 0;
-}
-
 int	ft_isprio_cmd2(t_clist *cmds)
 {
 	char	*builtins[5];
@@ -70,6 +64,17 @@ int	ft_isprio_cmd2(t_clist *cmds)
 	return (0);
 }
 
+static void	ft_handle_next_prev(t_clist *iter, t_clist **tmp_prev, t_shell *ms)
+{
+	if (!ft_redir_out_exist(iter->redirections) || !iter->next)
+		ft_app_rlist(&iter->redirections, PRIOROUTPUT, ft_strdup(""));
+	(*tmp_prev)->next = NULL;
+	*tmp_prev = ft_last_clist(iter);
+	(*tmp_prev)->next = ms->commands;
+	ft_catchange((*tmp_prev)->next);
+	ms->commands = iter;
+}
+
 void	ft_prio_cmd(t_shell *ms, t_clist **cmds)
 {
 	t_clist	*iter;
@@ -82,15 +87,10 @@ void	ft_prio_cmd(t_shell *ms, t_clist **cmds)
 	while (iter)
 	{
 		if ((is_builtin_command(iter->args[0]) || ft_isprio_cmd(ms, iter) == 0
-				|| ft_isprio_cmd2(iter)) && !isfirst)
+				|| ft_isprio_cmd2(iter)))
 		{
-			if (!ft_redir_out_exist(iter->redirections) || !iter->next)
-				ft_app_rlist(&iter->redirections, PRIOROUTPUT, ft_strdup(""));
-			tmp_prev->next = NULL;
-			tmp_prev = ft_last_clist(iter);
-			tmp_prev ->next = ms->commands;
-			ft_catchange(tmp_prev->next);
-			ms->commands = iter;
+			if (!isfirst)
+				ft_handle_next_prev(iter, &tmp_prev, ms);
 			break ;
 		}
 		tmp_prev = iter;

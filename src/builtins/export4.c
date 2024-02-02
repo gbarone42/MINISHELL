@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/28 19:00:58 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/02/02 18:18:10 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,37 +62,4 @@ int	handle_assignment_present(char *input, t_shell *shell)
 	}
 	free(var);
 	return (-1);
-}
-
-int	handle_no_assignment(char *arg, t_shell *shell)
-{
-	char	*var;
-
-	var = ft_strdup(arg);
-	if (compare_env_vars(var, shell->env_list))
-	{
-		free(var);
-		return (1);
-	}
-	free(var);
-	return (-1);
-}
-
-int	control_exist(char **arg, t_shell *shell)
-{
-	int	result;
-
-	if (!contains_assignment_operator(*arg))
-	{
-		result = handle_no_assignment(*arg, shell);
-	}
-	else
-	{
-		result = handle_assignment_present(shell->input, shell);
-	}
-	if (result != -1)
-	{
-		return (result);
-	}
-	return (0);
 }

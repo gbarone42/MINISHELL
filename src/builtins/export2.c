@@ -6,7 +6,7 @@
 /*   By: naal-jen <naal-jen@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/27 19:55:05 by naal-jen         ###   ########.fr       */
+/*   Updated: 2024/02/02 18:18:22 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ char	*create_envv_variable(const char *name, const char *value)
 		ft_strcat(variable, "=");
 		ft_strcat(variable, value);
 	}
-	// else
-	// 	ft_strcat(variable, "=");
 	return (variable);
 }
 

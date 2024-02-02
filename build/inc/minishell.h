@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:44:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/28 18:30:21 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/02/02 18:24:06 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,9 @@ char		*ft_strjoin_and_free_second(char *first, char *second);
 void		ft_set_prompt(t_shell *shell);
 
 void		remove_env_variable(t_shell *shell, const char *var_name);
+
+int			compare_env_vars(char *var, char **env_list);
+int			contains_assignment_operator(char *arg);
+int			handle_assignment_present(char *input, t_shell *shell);
 
 #endif

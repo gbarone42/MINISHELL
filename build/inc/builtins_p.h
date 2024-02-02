@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:10:43 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/28 18:03:35 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/02/02 18:25:23 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,7 +237,7 @@ int		create_user(char **user);
 int		copy_env_vars(t_shell *shell, char **env);
 char	**ft_get_env_array(char **env);
 void	free_env_array(char **env_array);
-int	control_exist(char **arg, t_shell *shell);
+int		control_exist(char **arg, t_shell *shell);
 void	free_arr(char ***arr);
 
 #endif // MINISHELL_H

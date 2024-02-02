@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/28 19:25:49 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/02/02 18:15:55 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	remove_env_variable(t_shell *shell, const char *var_name)
 	{
 		if (ft_strstr(shell->env_list[j], var_name) == shell->env_list[j])
 		{
-			//printf("Unsetting: %s\n", shell->env_list[j]);
 			free(shell->env_list[j]);
 			k = j;
 			while (shell->env_list[k] != NULL)

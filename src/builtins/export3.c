@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/28 19:25:08 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/02/02 18:16:07 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	handle_name_only(t_shell *shell, char *name)
 	char	*new_name;
 
 	new_name = ft_strjoin(name, "=");
-	//printf("new_name is: %s\n", name);
 	if (new_name != NULL)
 	{
 		if (contains_invalid_characters(new_name))

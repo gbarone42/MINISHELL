@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:01:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/26 19:39:01 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/02/02 18:05:13 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	handle_basic_builtin2(t_shell *shell, char **args)
 	}
 	else if (!ft_strncmp(args[0], "readbuiltin", 4))
 	{
-		ft_read(shell);
+		shell->exit_status = 0;
 	}
 }
 
