@@ -6,18 +6,16 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:34:19 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 19:56:05 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/02/05 18:04:23 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main_1(int argc, char **argv, char **env);
-
 int	is_builtin_command(char *command)
 {
-	const char	*builtins[8];
-	size_t		i;
+	char	*builtins[8];
+	size_t	i;
 
 	i = 0;
 	if (command)
@@ -32,85 +30,75 @@ int	is_builtin_command(char *command)
 		builtins[7] = "readbuiltin";
 		builtins[8] = NULL;
 		while (builtins[i] != NULL)
-			if (strcmp(command, builtins[i++]) == 0)
+			if (ft_strcmp(command, builtins[i++]) == 0)
 				return (1);
 	}
 	return (0);
 }
 
-void	path_finder(t_shell *px)
+static void	ft_path_finder(t_shell *shell)
 {
 	char	**tmp;
-	char	*tofree;
 	int		i;
 
-	i = 0;
-	tmp = px->env_list;
-	if (px->paths)
-	{
-		ft_free_char_p(px->paths);
-		px->paths = NULL;
-	}
+	i = -1;
+	tmp = shell->env;
+	if (shell->paths)
+		shell->paths = ft_free_char_p(shell->paths);
 	while (*tmp && ft_strncmp("PATH=", *tmp, 5))
 		tmp++;
 	if (*tmp)
-		px->paths = ft_split((*tmp) + 5, ':');
-	while (px->paths && px->paths[i])
-	{
-		tofree = px->paths[i];
-		px->paths[i] = ft_strjoin(px->paths[i], "/");
-		ft_free_char(&tofree);
-		i++;
-	}
+		shell->paths = ft_split((*tmp) + 5, ':');
+	while (shell->paths && shell->paths[++i])
+		shell->paths[i] = ft_strjoin_and_free_first(shell->paths[i], "/");
 }
 
-void	ft_check_cmd(t_shell *ms)
+static void	ft_exec_onparent(t_shell *shell)
 {
-	if (ms && ms->commands && ms->commands->redirections
-		&& ms->commands->args == NULL)
-		ms->commands->args = ft_split("", ' ');
-}
+	t_clist	*commands;
 
-void	ft_exec_onparent(t_shell *ms)
-{
-	if (is_builtin_command(ms->commands->args[0]))
-		builtins_call(ms, ms->commands);
+	commands = shell->commands;
+	if (is_builtin_command(commands->args[0]))
+		ft_handle_builtins(shell, commands);
 	else
 	{
-		ms->pid_child = fork();
-		if (ms->pid_child == 0)
+		shell->pid_child = fork();
+		if (shell->pid_child == 0)
 		{
 			signal(SIGINT, SIG_DFL);
 			signal(SIGQUIT, SIG_DFL);
-			command_handler(ms, ms->commands);
+			command_handler(shell, commands);
 		}
 		else
-			parent_handler(ms);
+			parent_handler(shell);
 	}
 }
 
-void	ft_exec_cmd(t_shell *ms)
+void	ft_exec_cmd(t_shell *shell)
 {
-	ft_check_cmd(ms);
-	path_finder(ms);
-	if (ms->commands && ms->commands->next)
+	t_clist	*commands;
+
+	commands = shell->commands;
+	ft_path_finder(shell);
+// da farsi spiegare
+	if (commands->next)
 	{
-		ft_prio_cmd(ms, &ms->commands);
-		pipe(ms->fd_pipe);
-		ft_exec(ms, 0);
+		ft_prio_cmd(shell, &commands);
+		pipe(shell->fd_pipe);
+		ft_exec(shell, 0);
 	}
-	else if (ms->commands)
+	else
 	{
-		if (ms->commands->redirections)
+		if (commands->redirections)
 		{
-			ft_redir(ms, ms->commands);
-			if (ms->commands->in > -1)
-				dup2(ms->commands->in, STDIN_FILENO);
-			if (ms->commands->out > -1)
-				dup2(ms->commands->out, STDOUT_FILENO);
+			ft_redir(shell, commands);
+			if (commands->in > -1)
+				dup2(commands->in, STDIN_FILENO);
+			if (commands->out > -1)
+				dup2(commands->out, STDOUT_FILENO);
 		}
-		ft_exec_onparent(ms);
-		dup2(ms->in, STDIN_FILENO);
-		dup2(ms->out, STDOUT_FILENO);
+		ft_exec_onparent(shell);
+		dup2(shell->in, STDIN_FILENO);
+		dup2(shell->out, STDOUT_FILENO);
 	}
 }

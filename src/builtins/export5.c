@@ -17,7 +17,7 @@ int	handle_no_assignment(char *arg, t_shell *shell)
 	char	*var;
 
 	var = ft_strdup(arg);
-	if (compare_env_vars(var, shell->env_list))
+	if (compare_env_vars(var, shell->env))
 	{
 		free(var);
 		return (1);

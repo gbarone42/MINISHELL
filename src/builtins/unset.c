@@ -47,18 +47,18 @@ void	remove_env_variable(t_shell *shell, const char *var_name)
 	int		k;
 
 	j = 0;
-	while (shell->env_list[j] != NULL)
+	while (shell->env[j] != NULL)
 	{
-		if (ft_strstr(shell->env_list[j], var_name) == shell->env_list[j])
+		if (ft_strstr(shell->env[j], var_name) == shell->env[j])
 		{
-			free(shell->env_list[j]);
+			free(shell->env[j]);
 			k = j;
-			while (shell->env_list[k] != NULL)
+			while (shell->env[k] != NULL)
 			{
-				shell->env_list[k] = shell->env_list[k + 1];
+				shell->env[k] = shell->env[k + 1];
 				k++;
 			}
-			shell->env_list[k - 1] = NULL;
+			shell->env[k - 1] = NULL;
 			break ;
 		}
 		j++;

@@ -6,35 +6,20 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/28 20:15:51 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/02/05 19:50:29 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_handle_cd(t_shell *shell, char **args)
+void	ft__cd(t_shell *shell, char **args)
 {
-	if (args && args[1])
-	{
-		change_directory(shell, args[1]);
-	}
-	else
-	{
-		change_directory(shell, NULL);
-	}
-}
+	char	*path;
 
-void	change_directory(t_shell *shell, char *path)
-{
+	path = args[1];
 	if (path == NULL)
-	{
 		path = getenv("HOME");
-	}
-	if (chdir(path) == 0)
-	{
-		update_prompt(shell);
-	}
-	else
+	if (chdir(path))
 	{
 		shell->exit_status = 1;
 		perror("cd");

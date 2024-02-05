@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:52:44 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/27 19:33:15 by filippo          ###   ########.fr       */
+/*   Updated: 2024/02/05 20:42:24 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_clist	*ft_new_clnode(void)
 {
 	t_clist	*output;
 
-	output = malloc(sizeof(*output));
+	output = ft_calloc(1, sizeof(*output));
 	if (!output)
 		return (NULL);
 	output->args = NULL;
@@ -47,25 +47,4 @@ t_clist	*ft_free_clist(t_clist *head)
 		free(tmp);
 	}
 	return (NULL);
-}
-
-void	ft_print_clist(t_clist *head)
-{
-	int	ncommands;
-
-	ncommands = 0;
-	printf("\n-----PARSER-----\n\n");
-	while (head)
-	{
-		printf("args: ");
-		ft_print_char_p(head->args);
-		printf("in: %d\n", head->in);
-		printf("out: %d\n", head->out);
-		printf("redirections: \n");
-		ft_print_rlist(head->redirections);
-		printf("\n");
-		head = head->next;
-		ncommands++;
-	}
-	printf("ncommands: %d\n", ncommands);
 }

@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:40:40 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 18:55:55 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/02/05 18:08:19 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	excve_core(t_shell *ms, char *paths, char **cmd)
 {
 	if (access(paths, F_OK | X_OK) == 0)
 	{
-		execve(paths, cmd, ms->env_list);
+		execve(paths, cmd, ms->env);
 		ft_free_and_err(ms, "execve", 127);
 	}
 }
@@ -31,7 +31,7 @@ void	command_handler(t_shell *ms, t_clist *cmd)
 	cmd_sp = cmd->args;
 	if (cmd_sp[0][0] == '\0')
 	{
-		execve("/dev/null", cmd_sp, ms->env_list);
+		execve("/dev/null", cmd_sp, ms->env);
 		ft_free_shell(ms);
 		exit(127);
 	}
@@ -74,7 +74,7 @@ void	child_handler(t_shell *ms, t_clist *cmd, int i)
 	redirs_fork(ms, cmd, i);
 	if (is_builtin_command(cmd->args[0]))
 	{
-		builtins_call(ms, cmd);
+		ft_handle_builtins(ms, cmd);
 		ft_free_and_exit(ms, 0);
 	}
 	else

@@ -16,7 +16,7 @@ void	handle_envv(t_shell *shell)
 {
 	char	**env;
 
-	env = shell->env_list;
+	env = shell->env;
 	while (*env)
 	{
 		printf("declare -x %s\n", *env);

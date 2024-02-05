@@ -6,33 +6,21 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:22:16 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/28 19:43:22 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/02/05 18:13:07 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	free_basic_memory(t_shell *shell)
-{
-	if (shell->input)
-	{
-		free(shell->input);
-	}
-	if (shell->prompt)
-	{
-		free(shell->prompt);
-	}
-}
 
 void	free_array_memory(t_shell *shell)
 {
 	int	i;
 
 	i = 0;
-	if (shell->env_list)
+	if (shell->env)
 	{
-		free_env_array(shell->env_list);
-		shell->env_list = NULL;
+		ft_free_env(shell->env);
+		shell->env = NULL;
 	}
 	if (shell->paths)
 	{
@@ -51,28 +39,7 @@ void	free_array_memory(t_shell *shell)
 	}
 }
 
-void	clear_shell_history(t_history *history)
-{
-	int	i;
-
-	i = 0;
-	if (history != NULL)
-	{
-		while (i < history->count)
-		{
-			free(history->entries[i]);
-			i++;
-		}
-		history->count = 0;
-	}
-}
-
-void	exit_shell(void)
-{
-	exit(g_exit);
-}
-
-void	shell_exit(t_shell *shell)
+void	ft__exit(t_shell *shell)
 {
 	printf("exit\n");
 	ft_free_and_exit(shell, g_exit);

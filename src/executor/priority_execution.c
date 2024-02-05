@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 14:40:11 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/02/02 17:41:39 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/02/05 19:07:22 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	excve_core_prio(t_shell *ms, char *paths, char **cmd)
 {
 	if (access(paths, F_OK | X_OK) == 0)
 	{
-		execve(paths, cmd, ms->env_list);
+		execve(paths, cmd, ms->env);
 		perror("execve");
 	}
 }
@@ -63,7 +63,7 @@ void	ft_child_prio(t_shell *ms, t_clist *cmd, int inf, int outf)
 	cmd_sp = cmd->args;
 	if (ft_strcmp(cmd_sp[0], "") == 0)
 	{
-		execve("/dev/null", cmd_sp, ms->env_list);
+		execve("/dev/null", cmd_sp, ms->env);
 		ft_free_shell(ms);
 		exit(1);
 	}

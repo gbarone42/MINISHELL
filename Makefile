@@ -9,6 +9,7 @@ GOLD = \033[1;33m
 
 # Define the target executable name
 NAME			=	$(BUILD_DIR)/minishell
+ARGS			=	
 
 # Directories
 BUILD_DIR		=	build
@@ -31,22 +32,18 @@ LDLIBS			=	$(addprefix -l, ft readline)
 
 RM				=	rm -rf
 
-SRCS			=	$(SRC_DIR)/minishell.c \
-					$(SRC_DIR)/utils1.c \
-					$(SRC_DIR)/utils2.c \
-					$(SRC_DIR)/utils3.c \
-					$(SRC_DIR)/simulation.c \
+SRCS			=	$(SRC_DIR)/main.c \
 					$(SRC_DIR)/init.c \
-					$(SRC_DIR)/init2.c \
 					$(SRC_DIR)/signal.c \
-					$(SRC_DIR)/valid.c \
+					$(SRC_DIR)/free.c \
+					$(SRC_DIR)/utils.c \
 					$(BUILTINS_DIR)/exit.c \
 					$(BUILTINS_DIR)/historyh.c \
 					$(BUILTINS_DIR)/pwds.c \
 					$(BUILTINS_DIR)/echos.c \
 					$(BUILTINS_DIR)/cdd.c \
 					$(BUILTINS_DIR)/cdd2.c \
-					$(BUILTINS_DIR)/handlebuiltins.c \
+					$(BUILTINS_DIR)/builtins.c \
 					$(BUILTINS_DIR)/envv.c \
 					$(BUILTINS_DIR)/export.c \
 					$(BUILTINS_DIR)/export1.c \
@@ -67,8 +64,6 @@ SRCS			=	$(SRC_DIR)/minishell.c \
 					$(EXEC_DIR)/tools_file.c \
 					$(EXEC_DIR)/priority_execution.c \
 					$(PARSER_DIR)/env.c \
-					$(PARSER_DIR)/free.c \
-					$(PARSER_DIR)/init.c \
 					$(PARSER_DIR)/lexer.c \
 					$(PARSER_DIR)/parser.c \
 					$(PARSER_DIR)/parser_io_lists.c \
@@ -114,32 +109,32 @@ clear:
 	clear
 
 run: clear all
-	$(NAME)
+	$(NAME) $(ARGS)
 
 VALGRIND-TOOL	=	memcheck
 VALGRIND-OPTIONS=	--track-origins=yes --leak-check=full --show-leak-kinds=all --suppressions=resources/readline.supp
 
 mem: clear all
-	valgrind --tool=$(VALGRIND-TOOL) $(VALGRIND-OPTIONS) $(NAME)
+	valgrind --tool=$(VALGRIND-TOOL) $(VALGRIND-OPTIONS) $(NAME) $(ARGS)
 
 vgdb: clear all
-	valgrind --tool=$(VALGRIND-TOOL) $(VALGRIND-OPTIONS) --vgdb-error=0 $(NAME)
+	valgrind --tool=$(VALGRIND-TOOL) $(VALGRIND-OPTIONS) --vgdb-error=0 $(NAME) $(ARGS)
 
 gdb: clear all
 	echo "target remote | vgdb\nb main\nc" > .gdbinit
-	gdb $(NAME)
+	gdb --args $(NAME) $(ARGS)
 
 debug: clear all
-	gdb $(NAME)
+	gdb --args $(NAME) $(ARGS)
 
 debugf: clear all
-	vi .gdbinit && gdb $(NAME)
+	vi .gdbinit && gdb $(NAME) $(ARGS)
 
 TIME			=	2
 
-arg_norme		?=	src
+arg_norme		?=	
 norme:
-	while [ 1 ] ; do sleep $(TIME) ; clear ; norminette $(arg_norme) ; done
+	while [ 1 ] ; do clear ; norminette $(arg_norme) | grep Error ; sleep $(TIME) ; done
 
 compile:
 	while [ 1 ] ; do sleep $(TIME) ; clear ; make ; done

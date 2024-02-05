@@ -16,12 +16,12 @@ void	handle_env(t_shell *shell)
 {
 	char	**env;
 
-	if (shell == NULL || shell->env_list == NULL)
+	if (shell == NULL || shell->env == NULL)
 	{
 		printf("shell or shell->env is NULL.\n");
 		return ;
 	}
-	env = shell->env_list;
+	env = shell->env;
 	while (*env)
 	{
 		if (ft_strnstr(*env, "=", ft_strlen(*env)))

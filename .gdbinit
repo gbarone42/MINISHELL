@@ -1,2 +1,2 @@
-b ft_prio_cmd
+b ft_handle_builtins
 r

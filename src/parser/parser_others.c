@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 16:59:57 by fcorri            #+#    #+#             */
-/*   Updated: 2024/01/27 20:44:09 by filippo          ###   ########.fr       */
+/*   Updated: 2024/02/05 20:42:56 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	**ft_args_2(char **old_args, t_tlist **token, t_tlist *save)
 		return (old_args);
 	while (old_args[i_j.y++])
 		i_j.x++;
-	args = malloc(sizeof(char *) * ++i_j.x);
+	args = ft_calloc(1, sizeof(char *) * ++i_j.x);
 	i_j = (t_dsize_t){0, 0};
 	while (old_args[i_j.y])
 		args[i_j.x++] = old_args[i_j.y++];
@@ -68,7 +68,7 @@ char	**ft_args_1(t_tlist **token)
 	*token = save;
 	if (!index)
 		return (NULL);
-	args = malloc(sizeof(char *) * ++index);
+	args = ft_calloc(1, sizeof(char *) * ++index);
 	index = 0;
 	while (ft_term(token, GENERAL_TOKEN, &args[index++]))
 		save = *token;

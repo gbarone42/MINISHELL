@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:44:18 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/02/02 18:24:06 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/02/05 15:45:34 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@
 # define CYAN	"\033[1;36m"
 # define GOLD	"\033[1;94m"
 
-# define SYNTAX_ERROR	"minishell: syntax error near unexpected token "
-
 enum
 {
 	ND = -1,
@@ -79,7 +77,7 @@ typedef struct s_shell
 	pid_t		pid_child;
 	int			fd_pipe[2];
 	int			tmp_fd;
-	t_history	history;
+	t_history	*history;
 	int			in;
 	int			out;
 	char		**env;
@@ -90,44 +88,40 @@ typedef struct s_shell
 	size_t		input_len;
 	t_clist		*commands;
 	int			exit_status;
-	char		**env_list;
 	char		**export;
 }	t_shell;
 
-char		*ft_free(char **ptr);
-void		ft_redir(t_shell *ms, t_clist *cmd);
+void	ft_init_shell(t_shell *shell, char **env);
 
-void		ft_free_shell(t_shell *shell);
-t_shell		*ft_ret_shell(t_shell *p_shell);
-void		ft_err(char *caller, int error);
+t_shell	*ft_ret_shell(t_shell *p_shell);
 
-void		ft_free_and_err(t_shell *shell, char *caller, int error);
-void		ft_free_and_exit(t_shell *shell, int status);
-void		ft_free_char_p(char **first);
+void	ft_err(char *caller, int error);
+void	ft_free_shell(t_shell *shell);
+void	ft_free_and_err(t_shell *shell, char *caller, int error);
+void	ft_free_and_exit(t_shell *shell, int status);
 
-void		ft_init_shell(t_shell *shell, char **env);
-t_clist		*ft_parser(t_shell *shell);
+char	**ft_free_char_p(char **first);
 
-char		*ft_get_value_of(t_shell *shell, char *key, size_t len);
-void		ft_print_char_p(char **p);
+char	*ft_free(char **ptr);
+void	ft_redir(t_shell *ms, t_clist *cmd);
 
-t_rlist		*ft_new_rlnode(int type, char *filename);
-void		ft_app_rlist(t_rlist **p_first, int type, char *filename);
-void		ft_free_rlist(t_rlist *head);
-void		ft_print_rlist(t_rlist *head);
+t_clist	*ft_parser(t_shell *shell);
 
-t_clist		*ft_new_clnode(void);
-t_clist		*ft_free_clist(t_clist *head);
-void		ft_print_clist(t_clist *head);
+char	*ft_get_value_of(t_shell *shell, char *key, size_t len);
+void	ft_print_char_p(char **p);
 
-char		*ft_strjoin_and_free_first(char *first, char *second);
-char		*ft_strjoin_and_free_second(char *first, char *second);
-void		ft_set_prompt(t_shell *shell);
+t_clist	*ft_new_clnode(void);
+t_clist	*ft_free_clist(t_clist *head);
+void	ft_print_clist(t_clist *head);
 
-void		remove_env_variable(t_shell *shell, const char *var_name);
+char	*ft_strjoin_and_free_first(char *first, char *second);
+char	*ft_strjoin_and_free_second(char *first, char *second);
+void	ft_set_prompt(t_shell *shell);
 
-int			compare_env_vars(char *var, char **env_list);
-int			contains_assignment_operator(char *arg);
-int			handle_assignment_present(char *input, t_shell *shell);
+void	remove_env_variable(t_shell *shell, const char *var_name);
+
+int		compare_env_vars(char *var, char **env_list);
+int		contains_assignment_operator(char *arg);
+int		handle_assignment_present(char *input, t_shell *shell);
 
 #endif

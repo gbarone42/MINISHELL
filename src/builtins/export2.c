@@ -6,7 +6,7 @@
 /*   By: naal-jen <naal-jen@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/02/02 18:18:22 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/02/05 20:41:51 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*create_envv_variable(const char *name, const char *value)
 	{
 		size += ft_strlen(value) + 1;
 	}
-	variable = (char *)malloc(size);
+	variable = ft_calloc(1, size);
 	if (!variable)
 	{
 		perror("Memory allocation failed for env variable.\n");
@@ -42,14 +42,14 @@ int	find_envv_variable(t_shell *shell, const char *name, const char *value)
 	int	i;
 
 	i = 0;
-	while (shell->env_list[i] != NULL)
+	while (shell->env[i] != NULL)
 	{
-		if (ft_strncmp(shell->env_list[i], name, ft_strlen(name)) == 0
-			&& (shell->env_list[i][ft_strlen(name)] == '='
-			|| shell->env_list[i][ft_strlen(name)] == '\0'))
+		if (ft_strncmp(shell->env[i], name, ft_strlen(name)) == 0
+			&& (shell->env[i][ft_strlen(name)] == '='
+			|| shell->env[i][ft_strlen(name)] == '\0'))
 		{
-			free(shell->env_list[i]);
-			shell->env_list[i] = create_envv_variable(name, value);
+			free(shell->env[i]);
+			shell->env[i] = create_envv_variable(name, value);
 			return (1);
 		}
 		i++;
@@ -61,24 +61,24 @@ void	add_new_envv_var(t_shell *shell, const char *name, const char *value)
 {
 	int		env_size;
 	char	*new_variable;
-	char	**new_env_list;
+	char	**new_env;
 
 	env_size = 0;
-	while (shell->env_list[env_size] != NULL)
+	while (shell->env[env_size] != NULL)
 	{
 		env_size++;
 	}
 	new_variable = create_envv_variable(name, value);
-	new_env_list = (char **)ft_realloc(shell->env_list,
+	new_env = (char **)ft_realloc(shell->env,
 			env_size * sizeof(char *), (env_size + 2) * sizeof(char *));
-	if (!new_env_list)
+	if (!new_env)
 	{
 		perror("Memory allocation failed for env array.\n");
 		exit(EXIT_FAILURE);
 	}
-	new_env_list[env_size] = new_variable;
-	new_env_list[env_size + 1] = NULL;
-	shell->env_list = new_env_list;
+	new_env[env_size] = new_variable;
+	new_env[env_size + 1] = NULL;
+	shell->env = new_env;
 }
 
 void	add_envv_variable(t_shell *shell, const char *name, const char *value)

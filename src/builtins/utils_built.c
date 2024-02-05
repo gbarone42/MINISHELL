@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/28 18:21:21 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/02/05 20:42:02 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 	size_t		copy_size;
 
 	if (ptr == NULL)
-		return (malloc(new_size));
+		return (ft_calloc(1, new_size));
 	if (new_size == 0)
 	{
 		free(ptr);
 		return (NULL);
 	}
-	new_ptr = malloc(new_size);
+	new_ptr = ft_calloc(1, new_size);
 	if (new_ptr == NULL)
 	{
 		perror("Memory allocation failed for realloc.\n");

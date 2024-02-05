@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:52:44 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/26 18:32:03 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/02/05 20:42:44 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ t_tlist	*ft_new_tlnode(size_t len)
 	char	*value;
 	t_tlist	*output;
 
-	value = ft_malloc_soul(++len * sizeof(char));
+	value = ft_calloc(1, ++len * sizeof(char));
 	if (!value)
 		return (NULL);
-	output = malloc(sizeof(*output));
+	output = ft_calloc(1, sizeof(*output));
 	if (!output)
 	{
 		free(value);

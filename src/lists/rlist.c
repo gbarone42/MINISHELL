@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 11:56:34 by filippo           #+#    #+#             */
-/*   Updated: 2024/01/26 12:21:59 by filippo          ###   ########.fr       */
+/*   Updated: 2024/02/05 20:42:33 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_rlist	*ft_new_rlnode(int type, char *filename)
 {
 	t_rlist	*output;
 
-	output = malloc(sizeof(*output));
+	output = ft_calloc(1, sizeof(*output));
 	if (!output)
 		return (NULL);
 	output->type = type;
@@ -54,18 +54,5 @@ void	ft_free_rlist(t_rlist *head)
 		tmp = head;
 		head = head->next;
 		free(tmp);
-	}
-}
-
-void	ft_print_rlist(t_rlist *head)
-{
-	int		nredirections;
-
-	nredirections = 0;
-	while (head)
-	{
-		printf("\ttype: %d\n\tfilename: %s\n", head->type, head->filename);
-		head = head->next;
-		nredirections++;
 	}
 }

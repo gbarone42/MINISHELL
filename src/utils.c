@@ -1,53 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils3.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fcorri <fcorri@student.42firenze.it>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/25 21:53:34 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/25 21:53:34 by sdel-gra         ###   ########.fr       */
+/*   Created: 2024/02/05 12:32:28 by fcorri            #+#    #+#             */
+/*   Updated: 2024/02/05 17:41:21 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	*ft_memset(void *b, int c, size_t len)
+t_shell	*ft_ret_shell(t_shell *p_shell)
 {
-	unsigned char	*ptr;
-	unsigned char	value;
-	size_t			i;
+	static t_shell	*shell;
 
-	if (b == NULL || len == 0)
-	{
-		return (NULL);
-	}
-	ptr = (unsigned char *)b;
-	value = (unsigned char)c;
-	i = 0;
-	while (i < len)
-	{
-		ptr[i] = value;
-		i++;
-	}
-	return (b);
+	if (!shell)
+		shell = p_shell;
+	return (shell);
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	ft_err(char *caller, int error)
 {
-	size_t		i;
-	char		*s1;
-	const char	*s2;
-
-	i = 0;
-	s1 = (char *)dst;
-	s2 = (const char *)src;
-	while (i < n)
-	{
-		s1[i] = s2[i];
-		i++;
-	}
-	return (dst);
+	perror(caller);
+	exit(error);
 }
 
 int	ft_strcmp(char *s1, char *s2)
@@ -65,4 +42,24 @@ int	ft_strcmp(char *s1, char *s2)
 	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
 		i++;
 	return (s1[i] - s2[i]);
+}
+
+int	ft_isvalid(const char *input)
+{
+	size_t	length;
+	size_t	i;
+	char	c;
+
+	length = ft_strlen(input);
+	if (length > INPUT_SIZE)
+		return (0);
+	i = 0;
+	c = input[i++];
+	while (c)
+	{
+		if (c < 32 || c == 127)
+			return (0);
+		c = input[i++];
+	}
+	return (1);
 }

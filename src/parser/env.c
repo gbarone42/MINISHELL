@@ -18,7 +18,7 @@ char	*ft_get_value_of(t_shell *shell, char *key, size_t len)
 	size_t	index;
 	char	*value;
 
-	env = shell->env_list;
+	env = shell->env;
 	index = 0;
 	value = env[index++];
 	while (value)

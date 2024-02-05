@@ -28,15 +28,15 @@ char	*extract_var_name(char *input)
 	return (var);
 }
 
-int	compare_env_vars(char *var, char **env_list)
+int	compare_env_vars(char *var, char **env)
 {
 	int		i;
 	char	**var_split;
 
 	i = 0;
-	while (env_list[i])
+	while (env[i])
 	{
-		var_split = ft_split(env_list[i], '=');
+		var_split = ft_split(env[i], '=');
 		if (ft_strlen(var_split[0]) == ft_strlen(var)
 			&& ft_strncmp(var, var_split[0], ft_strlen(var)) == 0)
 		{
@@ -54,7 +54,7 @@ int	handle_assignment_present(char *input, t_shell *shell)
 	char	*var;
 
 	var = extract_var_name(input);
-	if (compare_env_vars(var, shell->env_list))
+	if (compare_env_vars(var, shell->env))
 	{
 		remove_env_variable(shell, var);
 		free(var);

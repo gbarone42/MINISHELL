@@ -6,71 +6,88 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 21:53:39 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/26 17:40:58 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/02/05 14:24:49 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	create_prompt2(t_shell *shell, char *user)
+void	ft_free_env(char **env)
 {
-	char	*prompt_suffix;
+	int	index;
 
-	prompt_suffix = "@ASHellKETCHUM" CLR_RMV "$ ";
-	shell->prompt = ft_strjoin(user, prompt_suffix);
-	free(user);
-	if (!shell->prompt)
-	{
-		write(STDERR_FILENO, "Failed to allocate memory for prompt.\n", 38);
-		free_env_array(shell->env_list);
-		return (MEM_ERROR3);
-	}
-	return (0);
+	if (!env)
+		return ;
+	index = 0;
+	while (env[index])
+		free(env[index++]);
+	free(env);
 }
 
-int	ft_innit_user_and_prompt(t_shell *shell, char **env)
+static void	ft_duplicate_std_fds(t_shell *shell)
 {
-	char	*user;
-	int		result;
+	int	fd;
 
-	result = copy_env_vars(shell, env);
-	if (result != 0)
-		return (result);
-	result = create_user(&user);
-	if (result != 0)
-	{
-		free_env_array(shell->env_list);
-		return (result);
-	}
-	return (create_prompt2(shell, user));
+	fd = dup(STDIN_FILENO);
+	if (fd == -1)
+		ft_free_and_err(shell, "DUP", errno);
+	shell->in = fd;
+	fd = dup(STDOUT_FILENO);
+	if (fd == -1)
+		ft_free_and_err(shell, "DUP", errno);
+	shell->out = fd;
 }
 
-int	ft_duplicate_std_fds(t_shell *shell)
+static void	ft_init_env(t_shell *shell, char **env)
 {
-	shell->in = dup(STDIN_FILENO);
-	shell->out = dup(STDOUT_FILENO);
-	if (shell->in == -1 || shell->out == -1)
+	size_t	index;
+	char	**last;
+	char	*value;
+
+	if (!env || !*env)
+		ft_free_and_err(shell, "FT_INIT_ENV", errno = ENOENT);
+	index = 0;
+	while (env[index])
+		index++;
+	last = malloc(sizeof(last) * ++index);
+	if (!last)
+		ft_free_and_err(shell, "FT_INIT_ENV", errno = ENOMEM);
+	shell->env = last;
+	index = 0;
+	value = env[index];
+	while (value)
 	{
-		write(STDERR_FILENO, "Failed to duplicate file descriptors\n", 38);
-		free_env_array(shell->env_list);
-		free(shell->prompt);
-		return (MEM_ERROR);
+		value = ft_strdup(value);
+		if (!value)
+			ft_free_and_err(shell, "INIT_ENV: FT_STRDUP", errno = ENOMEM);
+		last[index++] = value;
+		value = env[index];
 	}
+	last[index] = NULL;
+	shell->last_env = last;
+}
+
+static void	ft_init_history(t_shell *shell)
+{
+	shell->history = malloc(sizeof(t_history));
+	if (!shell->history)
+		ft_free_and_err(shell, "INIT HISTORY: malloc", errno = ENOMEM);
+	memset(shell->history, 0, sizeof(t_history));
+	if (errno)
+		ft_free_and_err(shell, "INIT_HISTORY: memset", errno = ENOMEM);
+}
+
+void	ft_init_shell(t_shell *shell, char **env)
+{
+	ft_ret_shell(shell);
+	errno = 0;
+	memset(shell, 0, sizeof(t_shell));
+	if (errno)
+		ft_free_and_err(shell, "INIT_SHELL: memset", errno);
+	ft_init_history(shell);
+	ft_init_env(shell, env);
+	ft_duplicate_std_fds(shell);
+	shell->pid_child = -1;
 	shell->paths = NULL;
 	shell->export = NULL;
-	return (0);
-}
-
-int	ft_innit_shell(t_shell *shell, char **env)
-{
-	int	result;
-
-	result = ft_innit_user_and_prompt(shell, env);
-	if (result != 0)
-		return (result);
-	result = ft_duplicate_std_fds(shell);
-	if (result != 0)
-		return (result);
-	ft_ret_shell(shell);
-	return (0);
 }

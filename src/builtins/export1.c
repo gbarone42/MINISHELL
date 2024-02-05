@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/26 18:32:26 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/02/05 20:41:42 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*create_new_env_variable(const char *name, const char *value)
 {
 	char	*new_variable;
 
-	new_variable = (char *)malloc(strlen(name) + ft_strlen(value) + 2);
+	new_variable = ft_calloc(1, strlen(name) + ft_strlen(value) + 2);
 	if (!new_variable)
 	{
 		printf("Memory allocation failed for env variable.\n");
@@ -34,13 +34,13 @@ int	update_exist_var(t_shell *shell, const char *name, char *new_variable)
 	int	i;
 
 	i = 0;
-	while (shell->env_list[i] != NULL)
+	while (shell->env[i] != NULL)
 	{
-		if (ft_strncmp(shell->env_list[i], name, ft_strlen(name))
-			== 0 && shell->env_list[i][ft_strlen(name)] == '=')
+		if (ft_strncmp(shell->env[i], name, ft_strlen(name))
+			== 0 && shell->env[i][ft_strlen(name)] == '=')
 		{
-			free(shell->env_list[i]);
-			shell->env_list[i] = new_variable;
+			free(shell->env[i]);
+			shell->env[i] = new_variable;
 			return (1);
 		}
 		i++;
@@ -55,14 +55,14 @@ void	add_new_variable(t_shell *shell, char *new_variable, int env_size)
 
 	old_size = env_size * sizeof(char *);
 	new_size = (env_size + 2) * sizeof(char *);
-	shell->env_list = (char **)ft_realloc(shell->env_list, old_size, new_size);
-	if (!shell->env_list)
+	shell->env = (char **)ft_realloc(shell->env, old_size, new_size);
+	if (!shell->env)
 	{
 		perror("Memory allocation failed for env array.\n");
 		exit(EXIT_FAILURE);
 	}
-	shell->env_list[env_size] = new_variable;
-	shell->env_list[env_size + 1] = NULL;
+	shell->env[env_size] = new_variable;
+	shell->env[env_size + 1] = NULL;
 }
 
 void	add_env_variable(t_shell *shell, const char *name, const char *value)
@@ -77,7 +77,7 @@ void	add_env_variable(t_shell *shell, const char *name, const char *value)
 	if (!found)
 	{
 		env_size = 0;
-		while (shell->env_list[env_size] != NULL)
+		while (shell->env[env_size] != NULL)
 			env_size++;
 		add_new_variable(shell, new_variable, env_size);
 	}

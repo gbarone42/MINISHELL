@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 03:12:42 by badph             #+#    #+#             */
-/*   Updated: 2024/01/28 19:49:39 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/02/05 17:36:58 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	signal_print(int sig)
 	write(STDOUT_FILENO, "\n", 1);
 }
 
+// da farsi spiegare
 int	ft_kill_child(int n)
 {
 	static int	pid = 0;
@@ -33,23 +34,6 @@ int	ft_kill_child(int n)
 	else if (n)
 		pid = n;
 	return (0);
-}
-
-void	ft_ctrld(t_shell *shell)
-{
-	if (errno)
-	{
-		write(STDERR_FILENO, "readline error: ", 17);
-	}
-	printf("\n");
-	ft_free_shell(shell);
-	shell_exit(shell);
-}
-
-void	ft_norm_signal(void)
-{
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, signal_handler);
 }
 
 void	signal_handler(int sig)

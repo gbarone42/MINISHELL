@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 15:33:13 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/01/28 20:05:10 by sdel-gra         ###   ########.fr       */
+/*   Updated: 2024/02/05 20:42:14 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static char	*ft_addone(char *s, int size)
 
 	if (!s || !(*s) || size < 0)
 		return (NULL);
-	new = malloc(size + 1);
+	new = ft_calloc(1, size + 1);
 	if (!new)
 		return (NULL);
 	new[size] = '\0';
@@ -86,7 +86,7 @@ char	*gnl(int fd)
 	if (fd < 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	i = 0;
-	buf = malloc(1);
+	buf = ft_calloc(1, 1);
 	if (!buf)
 		return (NULL);
 	while (1)
