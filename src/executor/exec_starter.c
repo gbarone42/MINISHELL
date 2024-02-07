@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 14:34:19 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/02/05 18:04:23 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/02/07 13:54:08 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,9 @@ void	ft_exec_cmd(t_shell *shell)
 
 	commands = shell->commands;
 	ft_path_finder(shell);
-// da farsi spiegare
 	if (commands->next)
 	{
 		ft_prio_cmd(shell, &commands);
-		pipe(shell->fd_pipe);
 		ft_exec(shell, 0);
 	}
 	else

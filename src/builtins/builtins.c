@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:01:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/02/05 19:44:45 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/02/07 15:25:04 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@ void	ft_handle_builtins(t_shell *shell, t_clist *commands)
 	args = commands->args;
 	command = args[0];
 	if (!ft_strcmp(command, "exit"))
-		ft__exit(shell);
+		ft__exit(shell, args);
 	else if (!ft_strcmp(command, "cd"))
-		ft__cd(shell, args);
+		ft__cd(args);
 	else if (!ft_strcmp(command, "echo"))
-		handle_echo(args);
+		ft__echo(args);
 	else if (!ft_strcmp(command, "pwd"))
-		print_current_directory();
+		ft__pwd();
 	else if (!ft_strcmp(command, "export"))
-		handle_export(shell, args);
+		ft__export(shell, args);
 	else if (!ft_strcmp(command, "unset"))
 		handle_unset(shell, args);
 	else if (!ft_strcmp(command, "env"))
-		handle_env(shell);
+		ft__env(shell, "", 0);
 	else if (!ft_strcmp(command, "readbuiltin"))
-		shell->exit_status = 0;
+		g_exit = 0;
 }

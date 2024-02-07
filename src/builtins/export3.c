@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/02/02 18:16:07 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/02/07 16:08:54 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,7 @@ void	process_env_variable(t_shell *shell, char *arg)
 		return ;
 	parse_arg(arg, &name, &value);
 	if (value == NULL && strchr(shell->input, '='))
-	{
 		handle_name_only(shell, name);
-	}
 	else if (name != NULL)
 	{
 		if (value == NULL)

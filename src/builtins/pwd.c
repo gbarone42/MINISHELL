@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwds.c                                             :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:57 by gbarone           #+#    #+#             */
-/*   Updated: 2024/01/11 18:52:06 by gbarone          ###   ########.fr       */
+/*   Updated: 2024/02/07 14:19:57 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_current_directory(void)
+void	ft__pwd(void)
 {
-	char	current_directory[PATH_MAX];
+	char	*cd;
 
-	if (getcwd(current_directory, sizeof(current_directory)) != NULL)
-		printf("%s\n", current_directory);
+	cd = ft_calloc(sizeof(char), PATH_MAX);
+	if (getcwd(cd, PATH_MAX))
+	{
+		printf("%s\n", cd);
+		g_exit = 0;
+	}
 	else
 	{
-		perror("getcwd");
+		perror("pwd");
+		g_exit = 1;
 	}
+	free(cd);
 }

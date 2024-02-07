@@ -6,16 +6,11 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/02/02 18:18:10 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/02/07 16:15:21 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	contains_assignment_operator(char *arg)
-{
-	return (ft_strchr(arg, '=') != NULL);
-}
 
 char	*extract_var_name(char *input)
 {
@@ -36,6 +31,7 @@ int	compare_env_vars(char *var, char **env)
 	i = 0;
 	while (env[i])
 	{
+		// errato
 		var_split = ft_split(env[i], '=');
 		if (ft_strlen(var_split[0]) == ft_strlen(var)
 			&& ft_strncmp(var, var_split[0], ft_strlen(var)) == 0)

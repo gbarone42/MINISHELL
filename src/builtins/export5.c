@@ -6,7 +6,7 @@
 /*   By: fcorri <fcorri@student.42firenze.it>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 18:17:55 by fcorri            #+#    #+#             */
-/*   Updated: 2024/02/02 18:22:43 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/02/07 16:22:10 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,8 @@ int	handle_no_assignment(char *arg, t_shell *shell)
 
 int	control_exist(char **arg, t_shell *shell)
 {
-	int	result;
-
-	if (!contains_assignment_operator(*arg))
-	{
-		result = handle_no_assignment(*arg, shell);
-	}
+	if (!ft_strchr(arg[1], '='))
+		return (handle_no_assignment(*arg, shell));
 	else
-	{
-		result = handle_assignment_present(shell->input, shell);
-	}
-	if (result != -1)
-	{
-		return (result);
-	}
-	return (0);
+		return (handle_assignment_present(shell->input, shell));
 }

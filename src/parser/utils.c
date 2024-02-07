@@ -6,7 +6,7 @@
 /*   By: gbarone <gbarone@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 20:18:17 by filippo           #+#    #+#             */
-/*   Updated: 2024/02/05 12:37:47 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/02/07 14:16:20 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*ft_get_expd(t_tlist *t, size_t o, size_t *p_i)
 	i = *p_i;
 	if (t->data[i] == '?')
 	{
-		expd = ft_itoa(s->exit_status);
+		expd = ft_itoa(g_exit);
 		(*p_i)++;
 	}
 	else

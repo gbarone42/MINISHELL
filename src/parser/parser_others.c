@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 16:59:57 by fcorri            #+#    #+#             */
-/*   Updated: 2024/02/05 20:42:56 by filippo          ###   ########.fr       */
+/*   Updated: 2024/02/06 13:18:40 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int	ft_check_grammar(t_tlist **first)
 	int		type;
 
 	save = *first;
+	if (save->type == PIPE_TOKEN)
+		return (*first = save, 0);
 	while (save->next)
 	{
 		type = save->type;

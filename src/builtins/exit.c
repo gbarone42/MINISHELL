@@ -6,41 +6,47 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 17:22:16 by gbarone           #+#    #+#             */
-/*   Updated: 2024/02/05 18:13:07 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/02/07 14:17:55 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_array_memory(t_shell *shell)
+static int	ft__exit_with(t_shell *shell, char **args)
 {
-	int	i;
+	int		index;
+	char	*arg;
+	char	c;
 
-	i = 0;
-	if (shell->env)
+	index = 0;
+	arg = args[1];
+	c = arg[index++];
+	while (c && ft_isdigit(c))
+		c = arg[index++];
+	if (c)
 	{
-		ft_free_env(shell->env);
-		shell->env = NULL;
+		errno = EINVAL;
+		ft_free_and_err(shell, "exit", 2);
 	}
-	if (shell->paths)
+	if (args[2])
 	{
-		while (shell->paths[i])
-			free(shell->paths[i++]);
-		free(shell->paths);
-		shell->paths = NULL;
+		errno = E2BIG;
+		perror("exit");
+		g_exit = 1;
+		return (0);
 	}
-	if (shell->export)
-	{
-		i = 0;
-		while (shell->export[i])
-			free(shell->export[i++]);
-		free(shell->export);
-		shell->export = NULL;
-	}
+	ft_free_and_exit(shell, ft_atoi(args[1]) & 0xFF);
+	return (1);
 }
 
-void	ft__exit(t_shell *shell)
+void	ft__exit(t_shell *shell, char **args)
 {
+	int		exit;
+
+	exit = 1;
 	printf("exit\n");
-	ft_free_and_exit(shell, g_exit);
+	if (args && args[1])
+		exit = ft__exit_with(shell, args);
+	if (exit)
+		ft_free_and_exit(shell, g_exit);
 }

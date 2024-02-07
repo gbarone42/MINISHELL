@@ -39,12 +39,11 @@ SRCS			=	$(SRC_DIR)/main.c \
 					$(SRC_DIR)/utils.c \
 					$(BUILTINS_DIR)/exit.c \
 					$(BUILTINS_DIR)/historyh.c \
-					$(BUILTINS_DIR)/pwds.c \
-					$(BUILTINS_DIR)/echos.c \
-					$(BUILTINS_DIR)/cdd.c \
-					$(BUILTINS_DIR)/cdd2.c \
+					$(BUILTINS_DIR)/pwd.c \
+					$(BUILTINS_DIR)/echo.c \
+					$(BUILTINS_DIR)/cd.c \
 					$(BUILTINS_DIR)/builtins.c \
-					$(BUILTINS_DIR)/envv.c \
+					$(BUILTINS_DIR)/env.c \
 					$(BUILTINS_DIR)/export.c \
 					$(BUILTINS_DIR)/export1.c \
 					$(BUILTINS_DIR)/export2.c \
@@ -128,7 +127,7 @@ debug: clear all
 	gdb --args $(NAME) $(ARGS)
 
 debugf: clear all
-	vi .gdbinit && gdb $(NAME) $(ARGS)
+	vi .gdbinit && gdb --args $(NAME) $(ARGS)
 
 TIME			=	2
 
@@ -139,4 +138,8 @@ norme:
 compile:
 	while [ 1 ] ; do sleep $(TIME) ; clear ; make ; done
 
-.PHONY: all clean fclean re x clear run mem vgdb gdb debug debugf norme compile
+test: clear all
+	chmod u+x tester/tests.sh
+	./tester/tests.sh
+
+.PHONY: all clean fclean re x clear run mem vgdb gdb debug debugf norme compile test

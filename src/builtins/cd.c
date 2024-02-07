@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cdd2.c                                             :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:30:19 by gbarone           #+#    #+#             */
-/*   Updated: 2024/02/05 19:50:29 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/02/07 14:22:09 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft__cd(t_shell *shell, char **args)
+void	ft__cd(char **args)
 {
 	char	*path;
 
@@ -21,44 +21,9 @@ void	ft__cd(t_shell *shell, char **args)
 		path = getenv("HOME");
 	if (chdir(path))
 	{
-		shell->exit_status = 1;
+		g_exit = 1;
 		perror("cd");
 	}
-}
-
-void	get_current_directory(char *cwd)
-{
-	if (getcwd(cwd, PATH_MAX) == NULL)
-	{
-		perror("getcwd");
-		printf("Error: Unable to get the current working directory\n");
-		exit(EXIT_FAILURE);
-	}
-}
-
-char	*build_user_string(void)
-{
-	char	*user;
-
-	user = ft_strjoin(PURPLE, getenv("USER"));
-	if (!user)
-	{
-		perror("Error: Unable to allocate memory for user\n");
-		exit(EXIT_FAILURE);
-	}
-	return (user);
-}
-
-char	*build_user_at_string(char *user)
-{
-	char	*user_at;
-
-	user_at = ft_strjoin(user, "@ASHellKETCHUM");
-	if (!user_at)
-	{
-		perror("Error: Unable to allocate memory for user_at\n");
-		free(user);
-		exit(EXIT_FAILURE);
-	}
-	return (user_at);
+	else
+		g_exit = 0;
 }

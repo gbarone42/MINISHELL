@@ -6,7 +6,7 @@
 /*   By: sdel-gra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 21:58:19 by sdel-gra          #+#    #+#             */
-/*   Updated: 2024/02/05 14:17:20 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/02/07 13:53:20 by filippo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	g_exit = 0;
 static void	ft_null_input(t_shell *shell)
 {
 	if (errno)
-		write(STDERR_FILENO, "readline error\n", 15);
-	ft__exit(shell);
+		perror("readline");
+	ft__exit(shell, NULL);
 }
 
 static void	ft_prepare_for_next_input(t_shell *shell)
