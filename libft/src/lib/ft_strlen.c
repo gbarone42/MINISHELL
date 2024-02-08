@@ -6,7 +6,7 @@
 /*   By: fcorri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 18:57:35 by fcorri            #+#    #+#             */
-/*   Updated: 2022/11/09 16:59:59 by fcorri           ###   ########.fr       */
+/*   Updated: 2024/02/08 18:46:05 by fcorri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 size_t	ft_strlen(const char *s)
 {
-	if (!s)
-		return (0);
-	return ((char *)ft_memchr(s, '\0', -1) - s);
+	size_t	len;
+
+	len = 0;
+	while (*s++)
+		len++;
+	return (len);
 }
