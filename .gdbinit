@@ -1,2 +1,3 @@
-b ft__export
-r
+target remote | vgdb
+b main
+c
